@@ -17,20 +17,14 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 }
 
 const categoryLabels: Record<string, string> = {
-  'personal-brands': 'Personal Brand',
-  'business-websites': 'Business Website',
   'ai-programs': 'AI Program',
 }
 
 const categoryRoutes: Record<string, string> = {
-  'personal-brands': '/personal-brands',
-  'business-websites': '/business-websites',
   'ai-programs': '/ai-programs',
 }
 
 const categoryBackLabels: Record<string, string> = {
-  'personal-brands': 'Personal Brands',
-  'business-websites': 'Business Websites',
   'ai-programs': 'AI Programs',
 }
 

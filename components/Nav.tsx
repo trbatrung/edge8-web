@@ -90,8 +90,6 @@ export default function Nav() {
                   Case Studies <span className="dropdown-icon">▾</span>
                 </button>
                 <div className="dropdown">
-                  <Link href="/personal-brands">Personal Brands</Link>
-                  <Link href="/business-websites">Business Website</Link>
                   <Link href="/ai-programs">AI Programs</Link>
                 </div>
               </li>
@@ -134,8 +132,6 @@ export default function Nav() {
         </MobileAccordion>
 
         <MobileAccordion label="Case Studies" id="mobileCaseStudiesAccordion">
-          <Link href="/personal-brands" onClick={() => setMenuOpen(false)}>Personal Brands</Link>
-          <Link href="/business-websites" onClick={() => setMenuOpen(false)}>Business Website</Link>
           <Link href="/ai-programs" onClick={() => setMenuOpen(false)}>AI Programs</Link>
         </MobileAccordion>
 

@@ -37,8 +37,6 @@ export default function Footer() {
           <div>
             <div className="footer-col-title">Case Studies</div>
             <div className="footer-links">
-              <Link href="/personal-brands">Personal Brands</Link>
-              <Link href="/business-websites">Business Website</Link>
               <Link href="/ai-programs">AI Programs</Link>
             </div>
             <div className="footer-col-title" style={{ marginTop: 28 }}>Company</div>

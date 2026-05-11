@@ -435,36 +435,36 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ═══ CASE STUDIES ════════════════════════════════ */}
+      {/* ═══ AI PROGRAMS ════════════════════════════════ */}
       <section className="case-studies section" id="case-studies">
         <div className="container">
           <div className="case-studies-header reveal">
             <div>
-              <span className="section-label">Case Studies</span>
+              <span className="section-label">AI Programs</span>
               <h2 className="section-title">The Path to Tech-Forward</h2>
             </div>
-            <Link href="/business-websites" className="text-link">Full List of Case Studies →</Link>
+            <Link href="/ai-programs" className="text-link">Full List of AI Programs →</Link>
           </div>
           <div className="case-studies-grid">
-            <Link href="/case-studies/pho24" className="case-card reveal">
-              <Image src="/homepage/images/home-page-case studies-PHO24.jpg" alt="PHO24" width={400} height={533} />
+            <Link href="/case-studies/kyungbang-ai-program" className="case-card reveal">
+              <Image src="/case studies/images/case studies-ai programs-Kyungbang.jpeg" alt="Kyungbang" width={400} height={533} />
+              <div className="case-overlay">
+                <span className="case-tag">Manufacturing</span>
+                <div className="case-name">Kyungbang</div>
+              </div>
+            </Link>
+            <Link href="/case-studies/veracity-ai-program" className="case-card reveal">
+              <Image src="/case studies/images/case studies-ai programs-Veracity.jpeg" alt="Veracity" width={400} height={533} />
               <div className="case-overlay">
                 <span className="case-tag">AI Agents</span>
-                <div className="case-name">PHO24</div>
+                <div className="case-name">Veracity</div>
               </div>
             </Link>
-            <Link href="/case-studies/investmigrate" className="case-card reveal">
-              <Image src="/homepage/images/home-page-case studies-InvestMigrate.jpg" alt="InvestMigrate" width={400} height={533} />
+            <Link href="/case-studies/wink-hotels-travel-buddy" className="case-card reveal">
+              <Image src="/case studies/images/case studies-ai programs-Wink Hotels (Travel Buddy).jpeg" alt="Wink Hotels" width={400} height={533} />
               <div className="case-overlay">
-                <span className="case-tag">Featured</span>
-                <div className="case-name">InvestMigrate</div>
-              </div>
-            </Link>
-            <Link href="/case-studies/vespa-adventures" className="case-card reveal">
-              <Image src="/homepage/images/home-page-case studies-Vespa Adventures.jpg" alt="Vespa Adventures" width={400} height={533} />
-              <div className="case-overlay">
-                <span className="case-tag">AI Program</span>
-                <div className="case-name">Vespa Adventures</div>
+                <span className="case-tag">AI Concierge</span>
+                <div className="case-name">Wink Hotels</div>
               </div>
             </Link>
           </div>
