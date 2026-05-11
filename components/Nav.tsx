@@ -7,7 +7,6 @@ import Image from 'next/image'
 export default function Nav() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [servicesOpen, setServicesOpen] = useState(false)
-  const [caseStudiesOpen, setCaseStudiesOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
 
   useEffect(() => {
@@ -18,10 +17,7 @@ export default function Nav() {
 
   // Close dropdowns on outside click
   useEffect(() => {
-    const handler = () => {
-      setServicesOpen(false)
-      setCaseStudiesOpen(false)
-    }
+    const handler = () => setServicesOpen(false)
     document.addEventListener('click', handler)
     return () => document.removeEventListener('click', handler)
   }, [])
@@ -50,7 +46,7 @@ export default function Nav() {
             <ul className="nav-links">
               <li
                 className={servicesOpen ? 'open' : ''}
-                onMouseEnter={() => { setServicesOpen(true); setCaseStudiesOpen(false) }}
+                onMouseEnter={() => setServicesOpen(true)}
                 onMouseLeave={() => setServicesOpen(false)}
               >
                 <button
@@ -59,7 +55,6 @@ export default function Nav() {
                   onClick={(e) => {
                     e.stopPropagation()
                     setServicesOpen((v) => !v)
-                    setCaseStudiesOpen(false)
                   }}
                 >
                   Services <span className="dropdown-icon">▾</span>
@@ -73,27 +68,7 @@ export default function Nav() {
                 </div>
               </li>
 
-              <li
-                className={caseStudiesOpen ? 'open' : ''}
-                onMouseEnter={() => { setCaseStudiesOpen(true); setServicesOpen(false) }}
-                onMouseLeave={() => setCaseStudiesOpen(false)}
-              >
-                <button
-                  className="has-dropdown"
-                  aria-haspopup="true"
-                  onClick={(e) => {
-                    e.stopPropagation()
-                    setCaseStudiesOpen((v) => !v)
-                    setServicesOpen(false)
-                  }}
-                >
-                  Case Studies <span className="dropdown-icon">▾</span>
-                </button>
-                <div className="dropdown">
-                  <Link href="/ai-programs">AI Programs</Link>
-                </div>
-              </li>
-
+              <li><Link href="/ai-programs">AI Programs</Link></li>
               <li><Link href="/blog">Blog</Link></li>
               <li><Link href="/about">About</Link></li>
             </ul>
@@ -131,10 +106,7 @@ export default function Nav() {
           <Link href="/training-and-certification" onClick={() => setMenuOpen(false)}>Training &amp; Certification</Link>
         </MobileAccordion>
 
-        <MobileAccordion label="Case Studies" id="mobileCaseStudiesAccordion">
-          <Link href="/ai-programs" onClick={() => setMenuOpen(false)}>AI Programs</Link>
-        </MobileAccordion>
-
+        <Link href="/ai-programs" onClick={() => setMenuOpen(false)}>AI Programs</Link>
         <Link href="/blog" onClick={() => setMenuOpen(false)}>Blog</Link>
         <Link href="/about" onClick={() => setMenuOpen(false)}>About</Link>
         <a
