@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>National Housing Blueprint · Proposal · Edge 8 AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0B1426;
+    --ink-soft: #1F2A3D;
+    --gray-1: #94A3B8;
+    --gray-2: #64748B;
+    --gray-3: #CBD5E1;
+    --rule: #E2E8F0;
+    --rule-strong: #94A3B8;
+    --blue: #2563EB;
+    --blue-soft: #DBEAFE;
+    --cream: #F2EDE3;
+    --cream-soft: #FAF7F0;
+    --paper: #FFFFFF;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Inter Tight", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-feature-settings: "ss01", "cv11";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 1.55;
+  }
+  .top { padding: 28px 56px 0; max-width: 980px; margin: 0 auto; }
+  .meta-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    color: var(--gray-1);
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .page {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 0 56px 96px;
+  }
+
+  /* Hero */
+  .hero { margin: 64px 0 0; }
+  .hero .kicker {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    color: var(--gray-1);
+    text-transform: uppercase;
+  }
+  .hero h1 {
+    font-size: clamp(38px, 5.5vw, 72px);
+    font-weight: 800;
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+    margin: 14px 0 22px;
+    max-width: 22ch;
+  }
+  .hero .lead {
+    font-size: 1.18em;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    max-width: 64ch;
+  }
+  .hero .prep {
+    margin-top: 28px;
+    padding-top: 20px;
+    border-top: 1px solid var(--rule);
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    gap: 32px;
+  }
+  .hero .prep .item .label {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    color: var(--gray-1);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .hero .prep .item .value {
+    font-size: 0.98rem;
+    color: var(--ink);
+    font-weight: 500;
+  }
+  .hero .prep .item .value a { color: var(--blue); text-decoration: none; }
+  .hero .prep .item .value a:hover { text-decoration: underline; }
+
+  /* Section pattern */
+  .section { margin: 72px 0 0; }
+  .section .head {
+    display: flex;
+    align-items: baseline;
+    gap: 18px;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 14px;
+    margin-bottom: 28px;
+  }
+  .section .head .num {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    color: var(--blue);
+    font-weight: 600;
+  }
+  .section .head h2 {
+    font-size: clamp(28px, 3vw, 38px);
+    font-weight: 700;
+    margin: 0;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+    line-height: 1.1;
+  }
+  .section p {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    margin: 0 0 16px;
+    max-width: 70ch;
+  }
+  .section p strong { color: var(--ink); font-weight: 600; }
+  .section ul {
+    margin: 0 0 16px;
+    padding-left: 24px;
+    max-width: 70ch;
+  }
+  .section ul li {
+    margin-bottom: 10px;
+    color: var(--ink-soft);
+    line-height: 1.6;
+  }
+  .section ul li::marker { color: var(--blue); }
+
+  /* Sub-sections under Scope */
+  .sub {
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid var(--rule);
+  }
+  .sub:first-of-type { padding-top: 0; border-top: none; margin-top: 16px; }
+  .sub h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: 0 0 12px;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+  }
+  .sub h3 .num {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.85rem;
+    color: var(--blue);
+    font-weight: 600;
+    margin-right: 10px;
+    letter-spacing: 0.06em;
+  }
+
+  /* Investment table */
+  .investment-table {
+    margin: 16px 0 24px;
+    width: 100%;
+    border-collapse: collapse;
+    border-top: 2px solid var(--ink);
+    border-bottom: 1px solid var(--rule);
+  }
+  .investment-table th, .investment-table td {
+    text-align: left;
+    padding: 18px 20px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .investment-table th {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    color: var(--gray-1);
+    text-transform: uppercase;
+    font-weight: 500;
+    background: var(--cream-soft);
+  }
+  .investment-table td.item {
+    font-weight: 700;
+    color: var(--ink);
+    font-size: 1.05rem;
+    letter-spacing: -0.01em;
+  }
+  .investment-table td.desc {
+    color: var(--ink-soft);
+    line-height: 1.55;
+    font-size: 0.95rem;
+  }
+  .investment-table td.amount {
+    font-weight: 700;
+    color: var(--ink);
+    font-size: 1.1rem;
+    text-align: right;
+    white-space: nowrap;
+    font-feature-settings: "tnum";
+  }
+
+  /* Callout */
+  .callout {
+    margin: 24px 0;
+    padding: 24px 28px;
+    background: var(--cream);
+    border-left: 3px solid var(--blue);
+  }
+  .callout h4 {
+    font-size: 1rem;
+    margin: 0 0 8px;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+  .callout p {
+    margin: 0 0 8px;
+    font-size: 0.97rem;
+    color: var(--ink-soft);
+    line-height: 1.6;
+  }
+  .callout p:last-child { margin: 0; }
+
+  /* Terms table */
+  .terms-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0 0;
+  }
+  .terms-table td {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+  }
+  .terms-table td.label {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    color: var(--gray-1);
+    text-transform: uppercase;
+    font-weight: 500;
+    width: 36%;
+    padding-right: 24px;
+  }
+  .terms-table td.value {
+    color: var(--ink-soft);
+    line-height: 1.55;
+    font-size: 0.98rem;
+  }
+  .terms-table td.value strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  /* Ordered Next-Steps */
+  .steps {
+    list-style: none;
+    counter-reset: step;
+    padding-left: 0;
+    margin: 20px 0 0;
+    max-width: 70ch;
+  }
+  .steps li {
+    counter-increment: step;
+    position: relative;
+    padding: 14px 0 14px 56px;
+    border-bottom: 1px solid var(--rule);
+    color: var(--ink-soft);
+    line-height: 1.6;
+  }
+  .steps li::before {
+    content: counter(step, decimal-leading-zero);
+    position: absolute;
+    left: 0;
+    top: 14px;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.85rem;
+    color: var(--blue);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+  }
+
+  /* Resources cards */
+  .resources {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    margin-top: 8px;
+  }
+  .resource {
+    border: 1px solid var(--rule);
+    padding: 28px 28px;
+    background: var(--paper);
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    transition: border-color 0.15s, background 0.15s;
+  }
+  .resource:hover {
+    border-color: var(--ink);
+    background: var(--cream-soft);
+  }
+  .resource .label {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    color: var(--gray-1);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .resource .title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: -0.015em;
+    line-height: 1.25;
+    margin-bottom: 8px;
+  }
+  .resource .desc {
+    font-size: 0.95rem;
+    color: var(--gray-2);
+    line-height: 1.55;
+    margin-bottom: 16px;
+    flex: 1;
+  }
+  .resource .link {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.78rem;
+    color: var(--blue);
+    letter-spacing: 0.08em;
+  }
+
+  /* Signoff */
+  .signoff {
+    margin: 80px 0 0;
+    padding-top: 40px;
+    border-top: 2px solid var(--ink);
+  }
+  .signoff h3 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin: 0 0 12px;
+    letter-spacing: -0.02em;
+  }
+  .signoff p {
+    color: var(--ink-soft);
+    line-height: 1.7;
+    max-width: 70ch;
+    margin: 0 0 16px;
+    font-size: 1.02rem;
+  }
+  .signoff .sig {
+    margin-top: 32px;
+    padding-top: 20px;
+    border-top: 1px solid var(--rule);
+  }
+  .signoff .sig .name {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+  .signoff .sig .contact {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.82rem;
+    color: var(--gray-2);
+    margin-top: 4px;
+    letter-spacing: 0.04em;
+  }
+  .signoff .sig .contact a { color: var(--blue); text-decoration: none; }
+
+  @media (max-width: 760px) {
+    .top, .page { padding-left: 24px; padding-right: 24px; }
+    .hero .prep { grid-template-columns: 1fr; gap: 18px; }
+    .resources { grid-template-columns: 1fr; }
+    .investment-table th:nth-child(2),
+    .investment-table td.desc { display: none; }
+    .terms-table td.label { width: 40%; padding-right: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="top">
+  <div class="meta-row">
+    <span>Edge 8 · Proposal</span>
+    <span>May 2026</span>
+  </div>
+</div>
+
+<div class="page">
+
+  <section class="hero">
+    <div class="kicker">Proposal · National Housing Blueprint</div>
+    <h1>Client Portal and Property Dashboard Platform.</h1>
+    <p class="lead">Ellen has proven the concept: her dashboards give nonprofit housing operators clarity they have never had. The work ahead is taking that prototype and making it a stable, secure, production web application her clients can log into from anywhere.</p>
+    <div class="prep">
+      <div class="item">
+        <div class="label">Prepared by</div>
+        <div class="value">Dave Hajdu · Edge 8</div>
+      </div>
+      <div class="item">
+        <div class="label">Contact</div>
+        <div class="value"><a href="mailto:dave@edge8.co">dave@edge8.co</a></div>
+      </div>
+      <div class="item">
+        <div class="label">Date</div>
+        <div class="value">May 2026</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="head">
+      <span class="num">01</span>
+      <h2>Overview</h2>
+    </div>
+    <p>Ellen has developed a suite of property analysis and reporting tools that give her clients (typically nonprofit housing operators) clear visibility into the financial and operational health of their properties. The apps pull together financials, audit history, cash distributions, and backup documents into a single, organized view.</p>
+    <p>Right now these tools live locally and are shared via screen share or PDF printout. The goal of this engagement is to take what Ellen has built and turn it into a secure, stable, production web application that clients can log into directly from anywhere.</p>
+    <p>This proposal covers the initial build, ongoing support, and the terms of the engagement.</p>
+  </section>
+
+  <section class="section">
+    <div class="head">
+      <span class="num">02</span>
+      <h2>The problem we are solving</h2>
+    </div>
+    <p>Ellen has proven the concept. Her clients are stunned by the clarity these dashboards provide. The gap is distribution and stability:</p>
+    <ul>
+      <li>The apps run locally on her machine, not on the web</li>
+      <li>Clients can only access them via screen share or printed PDF</li>
+      <li>There is no login system, so clients cannot self-serve</li>
+      <li>There is no versioning or staging environment, so changes can break things unexpectedly</li>
+      <li>All files live in iCloud, which is not designed for managing code</li>
+    </ul>
+    <p>The fix is moving from a vibe-coded prototype to a production application built on the developer superpower stack: <strong>Claude</strong> as the brain, <strong>GitHub</strong> for code management, <strong>Vercel</strong> for stable hosting, and a <strong>Postgres</strong> database for secure, persistent data.</p>
+  </section>
+
+  <section class="section">
+    <div class="head">
+      <span class="num">03</span>
+      <h2>Scope of work</h2>
+    </div>
+    <p>The initial build covers three layers of the application.</p>
+
+    <div class="sub">
+      <h3><span class="num">3.1</span>Login and user management</h3>
+      <ul>
+        <li>Secure login for Ellen (administrator) and her clients (read-only viewers)</li>
+        <li>Each client accesses only their own property data</li>
+        <li>Row-level security so no client can see another client's information</li>
+        <li>Password reset and basic account management</li>
+      </ul>
+    </div>
+
+    <div class="sub">
+      <h3><span class="num">3.2</span>Administrator tools</h3>
+      <ul>
+        <li>Ellen's admin dashboard to manage clients and properties</li>
+        <li>File and document upload interface so Ellen can update property data without needing Claude Code</li>
+        <li>Ability to attach backup documents (audits, financials, invoices) to each property</li>
+        <li>Controls to publish or hide information from client view</li>
+      </ul>
+    </div>
+
+    <div class="sub">
+      <h3><span class="num">3.3</span>Client-facing application</h3>
+      <ul>
+        <li>Clean, non-technical interface based on Ellen's existing prototypes</li>
+        <li>Dashboard views for financials, cash distributions, and audit history</li>
+        <li>Document library where clients can open and download attached files</li>
+        <li>View-only access; clients cannot modify data</li>
+        <li>PDF export so clients can print or save their reports</li>
+      </ul>
+    </div>
+
+    <p style="margin-top: 28px;">The codebase will be migrated from iCloud into GitHub, connected to Vercel for hosting, and backed by a Supabase (Postgres) database. This is the same stack we teach at our retreats and the one Ellen's son will recognize from his Stanford background.</p>
+  </section>
+
+  <section class="section">
+    <div class="head">
+      <span class="num">04</span>
+      <h2>Investment</h2>
+    </div>
+    <table class="investment-table">
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Description</th>
+          <th style="text-align: right;">Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="item">Initial Build</td>
+          <td class="desc">Production web app: login system, admin tools, client portal, full stack setup</td>
+          <td class="amount">$5,000</td>
+        </tr>
+        <tr>
+          <td class="item">Monthly Human Tokens</td>
+          <td class="desc">40 hours/month of engineering support for improvements, bug fixes, and new features</td>
+          <td class="amount">$2,000/mo</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <h4>How Human Tokens work</h4>
+      <p>Human Tokens are the ongoing support model. Think of them like a bank of 40 engineering hours each month. Need a new feature? Submit it. Found a bug? We fix it. Want to improve the dashboard for a new client type? We build it. Flat rate, no nickel-and-diming, no hourly invoices.</p>
+      <p>Once the app is wired up and stable, many small changes can be made directly through Claude. The Human Token retainer covers the things Claude cannot do alone: anything that requires an engineer to review architecture, deploy changes safely, or build something new from scratch.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="head">
+      <span class="num">05</span>
+      <h2>Terms</h2>
+    </div>
+    <table class="terms-table">
+      <tr>
+        <td class="label">Initial Build</td>
+        <td class="value"><strong>One-time fee of $5,000</strong> due at project kickoff</td>
+      </tr>
+      <tr>
+        <td class="label">Monthly Retainer</td>
+        <td class="value"><strong>$2,000 per month</strong>, billed at the start of each month</td>
+      </tr>
+      <tr>
+        <td class="label">Cancellation</td>
+        <td class="value">30-day written notice required to cancel the monthly retainer</td>
+      </tr>
+      <tr>
+        <td class="label">Contract</td>
+        <td class="value">No long-term contract; month-to-month after the initial build is delivered</td>
+      </tr>
+      <tr>
+        <td class="label">Scope Changes</td>
+        <td class="value">Any changes that materially expand the initial scope will be discussed and agreed before work begins</td>
+      </tr>
+      <tr>
+        <td class="label">Hosting Costs</td>
+        <td class="value">Vercel and Supabase hosting fees (estimated $20–50/month) are separate and billed directly to Ellen, or can be managed by Edge 8</td>
+      </tr>
+    </table>
+  </section>
+
+  <section class="section">
+    <div class="head">
+      <span class="num">06</span>
+      <h2>Next steps</h2>
+    </div>
+    <p>Ellen mentioned she is traveling for about a month soon, and wants to finalize scope based on what her larger property management contact decides. A suggested path forward:</p>
+    <ol class="steps">
+      <li>Ellen confirms scope with her property management contact (small client portal vs. multi-client enterprise platform)</li>
+      <li>Ellen compresses her Claude project folder and sends the zip file to <a href="mailto:dave@edge8.co">dave@edge8.co</a></li>
+      <li>Dave and team review the existing code and confirm the build timeline (estimated 2 weeks)</li>
+      <li>Agreement signed and $5,000 initial build fee is collected</li>
+      <li>Build begins; Ellen does not need to be present or available</li>
+      <li>MVP delivered before or shortly after Ellen returns from travel</li>
+      <li>Monthly Human Token retainer begins once the build is live</li>
+    </ol>
+    <p style="margin-top: 24px;">If the larger property management company wants a platform to support hundreds or thousands of units, that is a different scope conversation and we will put together a separate proposal for that engagement.</p>
+  </section>
+
+  <section class="section">
+    <div class="head">
+      <span class="num">07</span>
+      <h2>Resources</h2>
+    </div>
+    <p>Two references to anchor the work, the team, and the way we run.</p>
+    <div class="resources">
+      <a class="resource" href="https://infiniteleverage-8.com/blueprints" target="_blank" rel="noopener">
+        <div class="label">Reference · the program</div>
+        <div class="title">The Infinite Leverage Blueprint</div>
+        <div class="desc">The full agenda, slide deck, 18 Protocols, and stack reference for the four-day Infinite Leverage retreat. The methodology and operating system behind our builds.</div>
+        <div class="link">infiniteleverage-8.com/blueprints →</div>
+      </a>
+      <a class="resource" href="https://infiniteleverage-8.com/paycompass-status" target="_blank" rel="noopener">
+        <div class="label">Reference · in-flight product</div>
+        <div class="title">PayCompass Product Status</div>
+        <div class="desc">Live project status for PayCompass: a recent build of ours that shows how Edge 8 runs an engagement — epics shipped, what is in flight, what is next.</div>
+        <div class="link">infiniteleverage-8.com/paycompass-status →</div>
+      </a>
+    </div>
+  </section>
+
+  <section class="signoff">
+    <h3>Why Edge 8</h3>
+    <p>Edge 8 is a lean, AI-forward team operating out of Vietnam with engineering and CAIO-level leadership. We work with founders, business operators, and professionals who have a vision and need someone to build it right the first time, without a bloated agency price tag or vibe-coded prototypes that break.</p>
+    <p>You have done something most people cannot: you built working software that solves a real problem for an underserved part of the housing industry. Our job is to take that and make it permanent.</p>
+    <div class="sig">
+      <div class="name">Dave Hajdu</div>
+      <div class="contact"><a href="mailto:dave@edge8.co">dave@edge8.co</a> · <a href="https://edge8.co" target="_blank" rel="noopener">edge8.co</a></div>
+    </div>
+  </section>
+
+</div>
+
+</body>
+</html>
