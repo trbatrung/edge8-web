@@ -78,7 +78,7 @@
   }
   .yoy.positive { color: #16a34a; }
   .yoy.negative { color: #dc2626; }
-  .card.aggressive { border-left: 3px solid #2563eb; }
+  .card.exponential { border-left: 3px solid #2563eb; }
   .card.conservative { border-left: 3px solid #ea580c; }
   .card.actual { border-left: 3px solid #16a34a; }
   .card.baseline { border-left: 3px solid #94a3b8; }
@@ -183,40 +183,32 @@
 <div class="container">
   <header>
     <h1>Talent Edge LLC — 2026 Forecast</h1>
-    <p>Year-over-year context (2025 baseline) plus 2026 actuals and two forward scenarios through year-end.</p>
+    <p>2025 baseline plus two 2026 scenarios: Conservative ($1.5M / 20% margin) and Exponential ($3M / 25% margin).</p>
     <p class="timestamp">Generated 2026-05-15 · Accrual basis · USD</p>
   </header>
 
   <div class="summary-grid">
     <div class="card baseline">
-      <div class="label">2025 Full-Year Revenue</div>
+      <div class="label">2025 Full-Year</div>
       <div class="value">$789K</div>
-      <div class="sublabel">Avg $65.8K/mo · grew 0.8%/mo</div>
+      <div class="sublabel">$1.8K net · ~breakeven</div>
     </div>
     <div class="card actual">
       <div class="label">2026 YTD (Jan–May est.)</div>
       <div class="value">$368K</div>
       <div class="yoy positive">+10% vs same period 2025</div>
     </div>
-    <div class="card aggressive">
-      <div class="label">Aggressive FY 2026 Revenue</div>
-      <div class="value">$1.51M</div>
+    <div class="card conservative">
+      <div class="label">Conservative FY 2026</div>
+      <div class="value">$1.5M</div>
       <div class="yoy positive">+92% vs 2025</div>
+      <div class="sublabel">20% margin → $300K net</div>
     </div>
-    <div class="card conservative">
-      <div class="label">Conservative FY 2026 Revenue</div>
-      <div class="value">$1.02M</div>
-      <div class="yoy positive">+29% vs 2025</div>
-    </div>
-    <div class="card aggressive">
-      <div class="label">Aggressive Net Income</div>
-      <div class="value">$533K</div>
-      <div class="sublabel">35% margin · vs 2025 $1.8K net</div>
-    </div>
-    <div class="card conservative">
-      <div class="label">Conservative Net Income</div>
-      <div class="value">$179K</div>
-      <div class="sublabel">20% margin floor · vs 2025 $1.8K net</div>
+    <div class="card exponential">
+      <div class="label">Exponential FY 2026</div>
+      <div class="value">$3.0M</div>
+      <div class="yoy positive">+280% vs 2025</div>
+      <div class="sublabel">25% margin → $750K net</div>
     </div>
   </div>
 
@@ -231,15 +223,15 @@
     <div class="legend-note">
       <span class="item"><span class="dash" style="background:#94a3b8"></span> 2025 actual</span>
       <span class="item"><span class="dash" style="background:#16a34a"></span> 2026 actual/booked</span>
-      <span class="item"><span class="dash dashed" style="background:#2563eb"></span> Aggressive (15% MoM)</span>
-      <span class="item"><span class="dash dashed" style="background:#ea580c"></span> Conservative (match 2025 growth)</span>
+      <span class="item"><span class="dash dashed" style="background:#ea580c"></span> Conservative — $1.5M / 20% margin</span>
+      <span class="item"><span class="dash dashed" style="background:#2563eb"></span> Exponential — $3M / 25% margin</span>
     </div>
   </div>
 
   <div class="chart-card">
     <div class="chart-header">
-      <h2>Monthly Net Income — Three Scenarios</h2>
-      <div class="subtitle">2026 only — operating income before other income/JE adjustments</div>
+      <h2>Monthly Net Income — Three Lines</h2>
+      <div class="subtitle">2026 only — actual booked vs scenario forecasts</div>
     </div>
     <div class="chart-container tall">
       <canvas id="netIncomeChart"></canvas>
@@ -279,13 +271,12 @@
   <div class="footnote">
     <h3>Methodology & Caveats</h3>
     <ul>
-      <li><strong>2025 baseline:</strong> $789K revenue, $788K expenses, $1.8K net. Monthly avg $65.8K. Year-over-year MoM growth ~0.8% (Jan 2025 → Dec 2025).</li>
+      <li><strong>2025 baseline:</strong> $789K revenue, $788K expenses, $1.8K net. Monthly avg $65.8K.</li>
       <li><strong>2026 actuals:</strong> Jan–Apr booked. May $90K is a full-month estimate from $87.7K booked through 5/14.</li>
-      <li><strong>Aggressive scenario expenses:</strong> $17.5K fixed + 47% of revenue variable (contractor costs scale with staffing revenue). Yields ~35% net margin at scale.</li>
-      <li><strong>Aggressive scenario:</strong> 15% MoM revenue growth from May $90K → Dec $239K. Operating leverage as fixed costs spread.</li>
-      <li><strong>Conservative scenario:</strong> Continue growing from May $90K at 2025's MoM rate (0.8%). Reaches $95K by December. The Apr–May surge is treated as the new floor — no mean reversion. <strong>Expenses set to give a 20% net margin floor</strong> (even more conservative than the aggressive expense model). Says "even if our expense cuts don't hold as well as we hope, here's the floor."</li>
-      <li><strong>Not modeled:</strong> Other Income line ($8K April, $4K May post-JE) — would add $30–50K to full year. AI Program build cost restart would add $15–20K/mo to expenses.</li>
-      <li><strong>April/May expenses are estimated</strong> — actuals are missing pending bookkeeper catch-up.</li>
+      <li><strong>Conservative scenario ($1.5M / 20% margin):</strong> Revenue grows 15% MoM from May $90K, reaching $239K by December. Expenses set to deliver a blended 20% FY net margin ($300K net income).</li>
+      <li><strong>Exponential scenario ($3M / 25% margin):</strong> Revenue grows ~37% MoM from May $90K, reaching $815K by December. Expenses set to deliver a blended 25% FY net margin ($750K net income). Implies a hyper-growth ramp — landing major new contracts or scaling an existing book aggressively.</li>
+      <li><strong>Not modeled:</strong> Other Income ($8K April, $4K May post-JE) — would add $30–50K full year. AI Program build cost restart would add $15–20K/mo to expenses.</li>
+      <li><strong>April/May expenses are estimated</strong> — actuals pending bookkeeper catch-up.</li>
     </ul>
   </div>
 </div>
@@ -293,36 +284,25 @@
 <script>
   const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-  // 2025 actual revenue (Jan-Dec)
+  // 2025 actual revenue
   const rev2025 = [61326, 62450, 65437, 72836, 71413, 66763, 66213, 68230, 67961, 60924, 58868, 66964];
 
-  // 2026 actuals (Jan-Mar booked, Apr-May revenue booked + expenses projected)
+  // 2026 actuals (Jan-Mar booked; Apr-May revenue booked + expenses projected)
   const actualRevenue = [60287, 63640, 76444, 77796, 90000, null, null, null, null, null, null, null];
   const actualExpenses = [65291, 68019, 69177, 57371, 59800, null, null, null, null, null, null, null];
   const actualNet = [-5004, -4379, 7267, 20425, 30200, null, null, null, null, null, null, null];
 
-  // Aggressive forecast (Jun-Dec) — 15% MoM growth, expenses = $17.5K + 47% revenue
-  const aggRevenue = [null, null, null, null, 90000, 103500, 119025, 136879, 157411, 181023, 208176, 239402];
-  const aggExpenses = [null, null, null, null, 59800, 66145, 73442, 81833, 91483, 102581, 115343, 130019];
-  const aggNet = [null, null, null, null, 30200, 37355, 45583, 55046, 65927, 78442, 92833, 109383];
+  // Conservative ($1.5M FY, 20% blended margin) — 15% MoM revenue growth
+  const conRevenue = [null, null, null, null, 90000, 103500, 119025, 136879, 157411, 181023, 208176, 239402];
+  const conExpenses = [null, null, null, null, 59800, 80523, 92621, 106524, 122505, 140896, 161961, 186255];
+  const conNet = [null, null, null, null, 30200, 22977, 26404, 30355, 34906, 40127, 46215, 53147];
 
-  // Conservative forecast — 0.8% MoM growth from May $90K (matches 2025's growth rate)
-  // June onwards: 20% net margin floor (expenses = 80% of revenue)
-  // May: keep projected $59,800 expense (actuals-in-progress, gives ~34% margin)
-  const conRevenue = [null, null, null, null, 90000, 90720, 91446, 92177, 92914, 93658, 94407, 95162];
-  const conExpenses = [null, null, null, null, 59800, 72576, 73157, 73742, 74331, 74926, 75526, 76130];
-  const conNet = [null, null, null, null, 30200, 18144, 18289, 18435, 18583, 18732, 18881, 19032];
+  // Exponential ($3M FY, 25% blended margin) — 37% MoM revenue growth
+  const expRevenue = [null, null, null, null, 90000, 123300, 168921, 231422, 317049, 434357, 595069, 815245];
+  const expExpenses = [null, null, null, null, 59800, 90502, 123988, 169864, 232714, 318818, 436781, 598390];
+  const expNet = [null, null, null, null, 30200, 32798, 44933, 61558, 84335, 115539, 158288, 216855];
 
   // Cumulative net income (2026 only)
-  function cumulative(arr) {
-    let sum = 0;
-    return arr.map(v => {
-      if (v === null) return null;
-      sum += v;
-      return sum;
-    });
-  }
-  const cumActual = cumulative(actualNet);
   const buildCum = (forecastNet) => {
     const result = [];
     let sum = 0;
@@ -334,8 +314,8 @@
     }
     return result;
   };
-  const cumAgg = buildCum(aggNet);
   const cumCon = buildCum(conNet);
+  const cumExp = buildCum(expNet);
 
   const fmt = v => v === null ? '' : '$' + (v / 1000).toFixed(0) + 'K';
   const fmtFull = v => v === null ? '' : '$' + v.toLocaleString('en-US', { maximumFractionDigits: 0 });
@@ -376,7 +356,7 @@
     }
   };
 
-  // Revenue chart — YoY + forecast
+  // Revenue chart
   new Chart(document.getElementById('revenueChart'), {
     type: 'line',
     data: {
@@ -406,19 +386,7 @@
           spanGaps: false
         },
         {
-          label: 'Aggressive — 15% MoM',
-          data: aggRevenue,
-          borderColor: '#2563eb',
-          backgroundColor: 'rgba(37, 99, 235, 0.05)',
-          borderWidth: 2.5,
-          borderDash: [6, 4],
-          tension: 0.3,
-          pointRadius: 4,
-          pointBackgroundColor: '#2563eb',
-          fill: false
-        },
-        {
-          label: 'Conservative — match 2025 growth',
+          label: 'Conservative — $1.5M / 20% margin',
           data: conRevenue,
           borderColor: '#ea580c',
           backgroundColor: 'rgba(234, 88, 12, 0.05)',
@@ -427,6 +395,18 @@
           tension: 0.3,
           pointRadius: 4,
           pointBackgroundColor: '#ea580c',
+          fill: false
+        },
+        {
+          label: 'Exponential — $3M / 25% margin',
+          data: expRevenue,
+          borderColor: '#2563eb',
+          backgroundColor: 'rgba(37, 99, 235, 0.05)',
+          borderWidth: 2.5,
+          borderDash: [6, 4],
+          tension: 0.3,
+          pointRadius: 4,
+          pointBackgroundColor: '#2563eb',
           fill: false
         }
       ]
@@ -447,15 +427,15 @@
           borderRadius: 4
         },
         {
-          label: 'Aggressive',
-          data: aggNet.map((v, i) => i < 5 ? null : v),
-          backgroundColor: '#2563eb',
-          borderRadius: 4
-        },
-        {
           label: 'Conservative',
           data: conNet.map((v, i) => i < 5 ? null : v),
           backgroundColor: '#ea580c',
+          borderRadius: 4
+        },
+        {
+          label: 'Exponential',
+          data: expNet.map((v, i) => i < 5 ? null : v),
+          backgroundColor: '#2563eb',
           borderRadius: 4
         }
       ]
@@ -470,8 +450,8 @@
       labels: months,
       datasets: [
         {
-          label: 'Cumulative — Aggressive',
-          data: cumAgg,
+          label: 'Cumulative — Exponential',
+          data: cumExp,
           borderColor: '#2563eb',
           backgroundColor: 'rgba(37, 99, 235, 0.12)',
           borderWidth: 2.5,
@@ -496,7 +476,7 @@
 
   // Detail table
   const rows = [];
-  // 2025 row (summary)
+  // 2025 baseline row
   const r2025total = rev2025.reduce((a, b) => a + b, 0);
   rows.push(`<tr class="baseline"><td>2025 FY (baseline)</td><td>${fmtFull(r2025total)}</td><td>${fmtFull(787540)}</td><td>${fmtFull(1846)}</td><td>0%</td><td>Actual</td></tr>`);
 
@@ -511,21 +491,23 @@
       const margin = ((net / rev) * 100).toFixed(0) + '%';
       rows.push(`<tr class="forecast"><td>${month} 2026</td><td>${fmtFull(rev)}</td><td>${fmtFull(exp)}</td><td>${fmtFull(net)}</td><td>${margin}</td><td>Rev actual / Exp projected</td></tr>`);
     } else {
-      const aRev = aggRevenue[i], aExp = aggExpenses[i], aNet = aggNet[i];
       const cRev = conRevenue[i], cExp = conExpenses[i], cNet = conNet[i];
-      rows.push(`<tr class="forecast"><td>${month} 2026</td><td>${fmtFull(aRev)}</td><td>${fmtFull(aExp)}</td><td>${fmtFull(aNet)}</td><td>${((aNet/aRev)*100).toFixed(0)}%</td><td>Aggressive</td></tr>`);
+      const eRev = expRevenue[i], eExp = expExpenses[i], eNet = expNet[i];
       rows.push(`<tr class="forecast"><td>${month} 2026</td><td>${fmtFull(cRev)}</td><td>${fmtFull(cExp)}</td><td>${fmtFull(cNet)}</td><td>${((cNet/cRev)*100).toFixed(0)}%</td><td>Conservative</td></tr>`);
+      rows.push(`<tr class="forecast"><td>${month} 2026</td><td>${fmtFull(eRev)}</td><td>${fmtFull(eExp)}</td><td>${fmtFull(eNet)}</td><td>${((eNet/eRev)*100).toFixed(0)}%</td><td>Exponential</td></tr>`);
     }
   }
-  // Totals
-  const aggTotalRev = aggRevenue.slice(5).reduce((a, b) => a + (b || 0), 0) + actualRevenue.slice(0, 5).reduce((a, b) => a + (b || 0), 0);
-  const aggTotalExp = aggExpenses.slice(5).reduce((a, b) => a + (b || 0), 0) + actualExpenses.slice(0, 5).reduce((a, b) => a + (b || 0), 0);
-  const aggTotalNet = aggTotalRev - aggTotalExp;
-  const conTotalRev = conRevenue.slice(5).reduce((a, b) => a + (b || 0), 0) + actualRevenue.slice(0, 5).reduce((a, b) => a + (b || 0), 0);
-  const conTotalExp = conExpenses.slice(5).reduce((a, b) => a + (b || 0), 0) + actualExpenses.slice(0, 5).reduce((a, b) => a + (b || 0), 0);
+
+  const sum = (a) => a.reduce((x, y) => x + (y || 0), 0);
+  const conTotalRev = sum(actualRevenue.slice(0, 5)) + sum(conRevenue.slice(5));
+  const conTotalExp = sum(actualExpenses.slice(0, 5)) + sum(conExpenses.slice(5));
   const conTotalNet = conTotalRev - conTotalExp;
-  rows.push(`<tr class="totals"><td>FY 2026 Aggressive</td><td>${fmtFull(aggTotalRev)}</td><td>${fmtFull(aggTotalExp)}</td><td>${fmtFull(aggTotalNet)}</td><td>${((aggTotalNet/aggTotalRev)*100).toFixed(0)}%</td><td>—</td></tr>`);
+  const expTotalRev = sum(actualRevenue.slice(0, 5)) + sum(expRevenue.slice(5));
+  const expTotalExp = sum(actualExpenses.slice(0, 5)) + sum(expExpenses.slice(5));
+  const expTotalNet = expTotalRev - expTotalExp;
+
   rows.push(`<tr class="totals"><td>FY 2026 Conservative</td><td>${fmtFull(conTotalRev)}</td><td>${fmtFull(conTotalExp)}</td><td>${fmtFull(conTotalNet)}</td><td>${((conTotalNet/conTotalRev)*100).toFixed(0)}%</td><td>—</td></tr>`);
+  rows.push(`<tr class="totals"><td>FY 2026 Exponential</td><td>${fmtFull(expTotalRev)}</td><td>${fmtFull(expTotalExp)}</td><td>${fmtFull(expTotalNet)}</td><td>${((expTotalNet/expTotalRev)*100).toFixed(0)}%</td><td>—</td></tr>`);
   document.getElementById('detailTable').innerHTML = rows.join('');
 </script>
 </body>
