@@ -211,12 +211,12 @@
     <div class="card aggressive">
       <div class="label">Aggressive Net Income</div>
       <div class="value">$533K</div>
-      <div class="sublabel">vs 2025 net of $1.8K</div>
+      <div class="sublabel">35% margin · vs 2025 $1.8K net</div>
     </div>
     <div class="card conservative">
       <div class="label">Conservative Net Income</div>
-      <div class="value">$271K</div>
-      <div class="sublabel">vs 2025 net of $1.8K</div>
+      <div class="value">$179K</div>
+      <div class="sublabel">20% margin floor · vs 2025 $1.8K net</div>
     </div>
   </div>
 
@@ -281,9 +281,9 @@
     <ul>
       <li><strong>2025 baseline:</strong> $789K revenue, $788K expenses, $1.8K net. Monthly avg $65.8K. Year-over-year MoM growth ~0.8% (Jan 2025 → Dec 2025).</li>
       <li><strong>2026 actuals:</strong> Jan–Apr booked. May $90K is a full-month estimate from $87.7K booked through 5/14.</li>
-      <li><strong>Expense model:</strong> 27.5% reduction (your 25–30% estimate) applied as $17.5K fixed + 47% of revenue variable (contractor costs scale with staffing revenue).</li>
+      <li><strong>Aggressive scenario expenses:</strong> $17.5K fixed + 47% of revenue variable (contractor costs scale with staffing revenue). Yields ~35% net margin at scale.</li>
       <li><strong>Aggressive scenario:</strong> 15% MoM revenue growth from May $90K → Dec $239K. Operating leverage as fixed costs spread.</li>
-      <li><strong>Conservative scenario (revised):</strong> Continue growing from May $90K at 2025's MoM rate (0.8%). Reaches $95K by December. The Apr–May surge is treated as the new floor — no mean reversion.</li>
+      <li><strong>Conservative scenario:</strong> Continue growing from May $90K at 2025's MoM rate (0.8%). Reaches $95K by December. The Apr–May surge is treated as the new floor — no mean reversion. <strong>Expenses set to give a 20% net margin floor</strong> (even more conservative than the aggressive expense model). Says "even if our expense cuts don't hold as well as we hope, here's the floor."</li>
       <li><strong>Not modeled:</strong> Other Income line ($8K April, $4K May post-JE) — would add $30–50K to full year. AI Program build cost restart would add $15–20K/mo to expenses.</li>
       <li><strong>April/May expenses are estimated</strong> — actuals are missing pending bookkeeper catch-up.</li>
     </ul>
@@ -306,10 +306,12 @@
   const aggExpenses = [null, null, null, null, 59800, 66145, 73442, 81833, 91483, 102581, 115343, 130019];
   const aggNet = [null, null, null, null, 30200, 37355, 45583, 55046, 65927, 78442, 92833, 109383];
 
-  // Conservative forecast (REVISED) — 0.8% MoM growth from May $90K (matches 2025's growth rate)
+  // Conservative forecast — 0.8% MoM growth from May $90K (matches 2025's growth rate)
+  // June onwards: 20% net margin floor (expenses = 80% of revenue)
+  // May: keep projected $59,800 expense (actuals-in-progress, gives ~34% margin)
   const conRevenue = [null, null, null, null, 90000, 90720, 91446, 92177, 92914, 93658, 94407, 95162];
-  const conExpenses = [null, null, null, null, 59800, 60138, 60480, 60823, 61170, 61519, 61871, 62226];
-  const conNet = [null, null, null, null, 30200, 30582, 30966, 31354, 31744, 32139, 32536, 32936];
+  const conExpenses = [null, null, null, null, 59800, 72576, 73157, 73742, 74331, 74926, 75526, 76130];
+  const conNet = [null, null, null, null, 30200, 18144, 18289, 18435, 18583, 18732, 18881, 19032];
 
   // Cumulative net income (2026 only)
   function cumulative(arr) {
