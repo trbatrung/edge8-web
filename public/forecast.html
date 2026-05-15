@@ -71,9 +71,17 @@
     color: #8892a6;
     margin-top: 4px;
   }
+  .card .yoy {
+    font-size: 12px;
+    font-weight: 600;
+    margin-top: 6px;
+  }
+  .yoy.positive { color: #16a34a; }
+  .yoy.negative { color: #dc2626; }
   .card.aggressive { border-left: 3px solid #2563eb; }
   .card.conservative { border-left: 3px solid #ea580c; }
   .card.actual { border-left: 3px solid #16a34a; }
+  .card.baseline { border-left: 3px solid #94a3b8; }
   .chart-card {
     background: white;
     border-radius: 14px;
@@ -146,6 +154,7 @@
   }
   tbody tr.actual td { color: #16a34a; font-weight: 500; }
   tbody tr.forecast td { color: #1a2332; }
+  tbody tr.baseline td { color: #6b7587; }
   tbody tr.totals {
     background: #f8fafc;
     font-weight: 700;
@@ -174,56 +183,63 @@
 <div class="container">
   <header>
     <h1>Talent Edge LLC — 2026 Forecast</h1>
-    <p>Revenue, expenses, and net income — actuals through May, scenarios through year-end.</p>
-    <p class="timestamp">Generated 2026-05-14 · Accrual basis · USD</p>
+    <p>Year-over-year context (2025 baseline) plus 2026 actuals and two forward scenarios through year-end.</p>
+    <p class="timestamp">Generated 2026-05-15 · Accrual basis · USD</p>
   </header>
 
   <div class="summary-grid">
+    <div class="card baseline">
+      <div class="label">2025 Full-Year Revenue</div>
+      <div class="value">$789K</div>
+      <div class="sublabel">Avg $65.8K/mo · grew 0.8%/mo</div>
+    </div>
     <div class="card actual">
-      <div class="label">YTD Revenue (Jan–May est.)</div>
-      <div class="value">$378K</div>
-      <div class="sublabel">Q1 actual + Apr/May projected</div>
+      <div class="label">2026 YTD (Jan–May est.)</div>
+      <div class="value">$368K</div>
+      <div class="yoy positive">+10% vs same period 2025</div>
     </div>
     <div class="card aggressive">
-      <div class="label">Aggressive YE Total Revenue</div>
-      <div class="value">$1.52M</div>
-      <div class="sublabel">15% MoM growth holds</div>
+      <div class="label">Aggressive FY 2026 Revenue</div>
+      <div class="value">$1.51M</div>
+      <div class="yoy positive">+92% vs 2025</div>
     </div>
     <div class="card conservative">
-      <div class="label">Conservative YE Total Revenue</div>
-      <div class="value">$888K</div>
-      <div class="sublabel">Reverts to Q1 baseline + 3% growth</div>
+      <div class="label">Conservative FY 2026 Revenue</div>
+      <div class="value">$1.02M</div>
+      <div class="yoy positive">+29% vs 2025</div>
     </div>
     <div class="card aggressive">
       <div class="label">Aggressive Net Income</div>
-      <div class="value">$598K</div>
-      <div class="sublabel">Full year (post-reduction)</div>
+      <div class="value">$533K</div>
+      <div class="sublabel">vs 2025 net of $1.8K</div>
     </div>
     <div class="card conservative">
       <div class="label">Conservative Net Income</div>
-      <div class="value">$262K</div>
-      <div class="sublabel">Full year (post-reduction)</div>
+      <div class="value">$271K</div>
+      <div class="sublabel">vs 2025 net of $1.8K</div>
     </div>
   </div>
 
   <div class="chart-card">
     <div class="chart-header">
-      <h2>Monthly Revenue — Actuals & Forecast</h2>
-      <div class="subtitle">Jan 2026 → Dec 2026</div>
+      <h2>Monthly Revenue — Year-over-Year & Forecast</h2>
+      <div class="subtitle">2025 actual vs 2026 actual + scenarios</div>
     </div>
     <div class="chart-container tall">
       <canvas id="revenueChart"></canvas>
     </div>
     <div class="legend-note">
-      <span class="item"><span class="dash"></span> Solid = actuals/booked</span>
-      <span class="item"><span class="dash dashed"></span> Dashed = forecast</span>
+      <span class="item"><span class="dash" style="background:#94a3b8"></span> 2025 actual</span>
+      <span class="item"><span class="dash" style="background:#16a34a"></span> 2026 actual/booked</span>
+      <span class="item"><span class="dash dashed" style="background:#2563eb"></span> Aggressive (15% MoM)</span>
+      <span class="item"><span class="dash dashed" style="background:#ea580c"></span> Conservative (match 2025 growth)</span>
     </div>
   </div>
 
   <div class="chart-card">
     <div class="chart-header">
       <h2>Monthly Net Income — Three Scenarios</h2>
-      <div class="subtitle">Operating income before other income/JE adjustments</div>
+      <div class="subtitle">2026 only — operating income before other income/JE adjustments</div>
     </div>
     <div class="chart-container tall">
       <canvas id="netIncomeChart"></canvas>
@@ -233,7 +249,7 @@
   <div class="chart-card">
     <div class="chart-header">
       <h2>Cumulative Net Income — Path to Year-End</h2>
-      <div class="subtitle">Compounding effect of growth/expense assumptions</div>
+      <div class="subtitle">2026 compounded view</div>
     </div>
     <div class="chart-container">
       <canvas id="cumulativeChart"></canvas>
@@ -263,12 +279,13 @@
   <div class="footnote">
     <h3>Methodology & Caveats</h3>
     <ul>
-      <li><strong>Q1 baseline:</strong> $66,790/mo revenue, $67,495/mo expenses → essentially breakeven.</li>
-      <li><strong>Expense model:</strong> 27.5% reduction (midpoint of your 25–30% estimate) applied as fixed $17.5K/mo + 47% of revenue variable (driven by contractor costs scaling with staffing revenue).</li>
+      <li><strong>2025 baseline:</strong> $789K revenue, $788K expenses, $1.8K net. Monthly avg $65.8K. Year-over-year MoM growth ~0.8% (Jan 2025 → Dec 2025).</li>
+      <li><strong>2026 actuals:</strong> Jan–Apr booked. May $90K is a full-month estimate from $87.7K booked through 5/14.</li>
+      <li><strong>Expense model:</strong> 27.5% reduction (your 25–30% estimate) applied as $17.5K fixed + 47% of revenue variable (contractor costs scale with staffing revenue).</li>
       <li><strong>Aggressive scenario:</strong> 15% MoM revenue growth from May $90K → Dec $239K. Operating leverage as fixed costs spread.</li>
-      <li><strong>Conservative scenario:</strong> Revenue mean-reverts to Q1 baseline by August, then grows 3% MoM.</li>
-      <li><strong>Not modeled:</strong> Other Income line ($8K April, $4K May post-JE) — would add $30–50K full year. AI Program build cost restart would add $15–20K/mo to expenses.</li>
-      <li><strong>April/May expenses are estimated</strong> — actuals are missing pending new bookkeeper catch-up.</li>
+      <li><strong>Conservative scenario (revised):</strong> Continue growing from May $90K at 2025's MoM rate (0.8%). Reaches $95K by December. The Apr–May surge is treated as the new floor — no mean reversion.</li>
+      <li><strong>Not modeled:</strong> Other Income line ($8K April, $4K May post-JE) — would add $30–50K to full year. AI Program build cost restart would add $15–20K/mo to expenses.</li>
+      <li><strong>April/May expenses are estimated</strong> — actuals are missing pending bookkeeper catch-up.</li>
     </ul>
   </div>
 </div>
@@ -276,22 +293,25 @@
 <script>
   const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-  // Actuals (Jan-Mar booked, Apr-May revenue booked + expenses projected)
-  const actualRevenue = [60287, 63640, 76444, 77796, 90000, null, null, null, null, null, null, null];
-  const actualExpenses = [65291, 68019, 69177, 57371, 57371, null, null, null, null, null, null, null];
-  const actualNet = [-5004, -4379, 7267, 20425, 32629, null, null, null, null, null, null, null];
+  // 2025 actual revenue (Jan-Dec)
+  const rev2025 = [61326, 62450, 65437, 72836, 71413, 66763, 66213, 68230, 67961, 60924, 58868, 66964];
 
-  // Aggressive forecast (Jun-Dec) — 15% MoM growth, expenses scale at 47% + $17.5K fixed
+  // 2026 actuals (Jan-Mar booked, Apr-May revenue booked + expenses projected)
+  const actualRevenue = [60287, 63640, 76444, 77796, 90000, null, null, null, null, null, null, null];
+  const actualExpenses = [65291, 68019, 69177, 57371, 59800, null, null, null, null, null, null, null];
+  const actualNet = [-5004, -4379, 7267, 20425, 30200, null, null, null, null, null, null, null];
+
+  // Aggressive forecast (Jun-Dec) — 15% MoM growth, expenses = $17.5K + 47% revenue
   const aggRevenue = [null, null, null, null, 90000, 103500, 119025, 136879, 157411, 181023, 208176, 239402];
   const aggExpenses = [null, null, null, null, 59800, 66145, 73442, 81833, 91483, 102581, 115343, 130019];
   const aggNet = [null, null, null, null, 30200, 37355, 45583, 55046, 65927, 78442, 92833, 109383];
 
-  // Conservative forecast (Jun-Dec) — mean reversion to $67K, then 3% MoM
-  const conRevenue = [null, null, null, null, 90000, 82000, 74000, 67000, 69010, 71080, 73213, 75409];
-  const conExpenses = [null, null, null, null, 59800, 56040, 52280, 48990, 49935, 50908, 51910, 52942];
-  const conNet = [null, null, null, null, 30200, 25960, 21720, 18010, 19075, 20172, 21303, 22467];
+  // Conservative forecast (REVISED) — 0.8% MoM growth from May $90K (matches 2025's growth rate)
+  const conRevenue = [null, null, null, null, 90000, 90720, 91446, 92177, 92914, 93658, 94407, 95162];
+  const conExpenses = [null, null, null, null, 59800, 60138, 60480, 60823, 61170, 61519, 61871, 62226];
+  const conNet = [null, null, null, null, 30200, 30582, 30966, 31354, 31744, 32139, 32536, 32936];
 
-  // Cumulative net income
+  // Cumulative net income (2026 only)
   function cumulative(arr) {
     let sum = 0;
     return arr.map(v => {
@@ -301,24 +321,19 @@
     });
   }
   const cumActual = cumulative(actualNet);
-  const cumAgg = (() => {
-    let sum = cumActual[3]; // Apr cumulative (last full actual before forecast branches)
-    return aggNet.map((v, i) => {
-      if (v === null) return cumActual[i];
-      if (i === 4) return cumActual[3] + v; // May
-      sum = (i === 5) ? cumActual[4] + v : sum + v;
-      return sum;
-    });
-  })();
-  const cumCon = (() => {
-    let sum = cumActual[3];
-    return conNet.map((v, i) => {
-      if (v === null) return cumActual[i];
-      if (i === 4) return cumActual[3] + v; // May
-      sum = (i === 5) ? cumActual[4] + v : sum + v;
-      return sum;
-    });
-  })();
+  const buildCum = (forecastNet) => {
+    const result = [];
+    let sum = 0;
+    for (let i = 0; i < 12; i++) {
+      const v = actualNet[i] !== null ? actualNet[i] : forecastNet[i];
+      if (v === null) { result.push(null); continue; }
+      sum += v;
+      result.push(sum);
+    }
+    return result;
+  };
+  const cumAgg = buildCum(aggNet);
+  const cumCon = buildCum(conNet);
 
   const fmt = v => v === null ? '' : '$' + (v / 1000).toFixed(0) + 'K';
   const fmtFull = v => v === null ? '' : '$' + v.toLocaleString('en-US', { maximumFractionDigits: 0 });
@@ -359,14 +374,25 @@
     }
   };
 
-  // Revenue chart
+  // Revenue chart — YoY + forecast
   new Chart(document.getElementById('revenueChart'), {
     type: 'line',
     data: {
       labels: months,
       datasets: [
         {
-          label: 'Revenue — Actual/Booked',
+          label: '2025 Actual',
+          data: rev2025,
+          borderColor: '#94a3b8',
+          backgroundColor: 'rgba(148, 163, 184, 0.08)',
+          borderWidth: 2,
+          tension: 0.3,
+          pointRadius: 3,
+          pointBackgroundColor: '#94a3b8',
+          fill: false
+        },
+        {
+          label: '2026 Actual / Booked',
           data: actualRevenue,
           borderColor: '#16a34a',
           backgroundColor: 'rgba(22, 163, 74, 0.08)',
@@ -390,7 +416,7 @@
           fill: false
         },
         {
-          label: 'Conservative — mean revert + 3%',
+          label: 'Conservative — match 2025 growth',
           data: conRevenue,
           borderColor: '#ea580c',
           backgroundColor: 'rgba(234, 88, 12, 0.05)',
@@ -468,24 +494,25 @@
 
   // Detail table
   const rows = [];
+  // 2025 row (summary)
+  const r2025total = rev2025.reduce((a, b) => a + b, 0);
+  rows.push(`<tr class="baseline"><td>2025 FY (baseline)</td><td>${fmtFull(r2025total)}</td><td>${fmtFull(787540)}</td><td>${fmtFull(1846)}</td><td>0%</td><td>Actual</td></tr>`);
+
   for (let i = 0; i < 12; i++) {
     const month = months[i];
     if (i < 3) {
-      // Q1 actuals
       const rev = actualRevenue[i], exp = actualExpenses[i], net = actualNet[i];
       const margin = ((net / rev) * 100).toFixed(0) + '%';
-      rows.push(`<tr class="actual"><td>${month}</td><td>${fmtFull(rev)}</td><td>${fmtFull(exp)}</td><td>${fmtFull(net)}</td><td>${margin}</td><td>Actual</td></tr>`);
+      rows.push(`<tr class="actual"><td>${month} 2026</td><td>${fmtFull(rev)}</td><td>${fmtFull(exp)}</td><td>${fmtFull(net)}</td><td>${margin}</td><td>Actual</td></tr>`);
     } else if (i < 5) {
-      // Apr/May — revenue actual, expenses projected
       const rev = actualRevenue[i], exp = actualExpenses[i], net = actualNet[i];
       const margin = ((net / rev) * 100).toFixed(0) + '%';
-      rows.push(`<tr class="forecast"><td>${month}</td><td>${fmtFull(rev)}</td><td>${fmtFull(exp)}</td><td>${fmtFull(net)}</td><td>${margin}</td><td>Rev actual / Exp projected</td></tr>`);
+      rows.push(`<tr class="forecast"><td>${month} 2026</td><td>${fmtFull(rev)}</td><td>${fmtFull(exp)}</td><td>${fmtFull(net)}</td><td>${margin}</td><td>Rev actual / Exp projected</td></tr>`);
     } else {
-      // Jun-Dec — both scenarios
       const aRev = aggRevenue[i], aExp = aggExpenses[i], aNet = aggNet[i];
       const cRev = conRevenue[i], cExp = conExpenses[i], cNet = conNet[i];
-      rows.push(`<tr class="forecast"><td>${month}</td><td>${fmtFull(aRev)}</td><td>${fmtFull(aExp)}</td><td>${fmtFull(aNet)}</td><td>${((aNet/aRev)*100).toFixed(0)}%</td><td>Aggressive</td></tr>`);
-      rows.push(`<tr class="forecast"><td>${month}</td><td>${fmtFull(cRev)}</td><td>${fmtFull(cExp)}</td><td>${fmtFull(cNet)}</td><td>${((cNet/cRev)*100).toFixed(0)}%</td><td>Conservative</td></tr>`);
+      rows.push(`<tr class="forecast"><td>${month} 2026</td><td>${fmtFull(aRev)}</td><td>${fmtFull(aExp)}</td><td>${fmtFull(aNet)}</td><td>${((aNet/aRev)*100).toFixed(0)}%</td><td>Aggressive</td></tr>`);
+      rows.push(`<tr class="forecast"><td>${month} 2026</td><td>${fmtFull(cRev)}</td><td>${fmtFull(cExp)}</td><td>${fmtFull(cNet)}</td><td>${((cNet/cRev)*100).toFixed(0)}%</td><td>Conservative</td></tr>`);
     }
   }
   // Totals
@@ -495,8 +522,8 @@
   const conTotalRev = conRevenue.slice(5).reduce((a, b) => a + (b || 0), 0) + actualRevenue.slice(0, 5).reduce((a, b) => a + (b || 0), 0);
   const conTotalExp = conExpenses.slice(5).reduce((a, b) => a + (b || 0), 0) + actualExpenses.slice(0, 5).reduce((a, b) => a + (b || 0), 0);
   const conTotalNet = conTotalRev - conTotalExp;
-  rows.push(`<tr class="totals"><td>FY Aggressive</td><td>${fmtFull(aggTotalRev)}</td><td>${fmtFull(aggTotalExp)}</td><td>${fmtFull(aggTotalNet)}</td><td>${((aggTotalNet/aggTotalRev)*100).toFixed(0)}%</td><td>—</td></tr>`);
-  rows.push(`<tr class="totals"><td>FY Conservative</td><td>${fmtFull(conTotalRev)}</td><td>${fmtFull(conTotalExp)}</td><td>${fmtFull(conTotalNet)}</td><td>${((conTotalNet/conTotalRev)*100).toFixed(0)}%</td><td>—</td></tr>`);
+  rows.push(`<tr class="totals"><td>FY 2026 Aggressive</td><td>${fmtFull(aggTotalRev)}</td><td>${fmtFull(aggTotalExp)}</td><td>${fmtFull(aggTotalNet)}</td><td>${((aggTotalNet/aggTotalRev)*100).toFixed(0)}%</td><td>—</td></tr>`);
+  rows.push(`<tr class="totals"><td>FY 2026 Conservative</td><td>${fmtFull(conTotalRev)}</td><td>${fmtFull(conTotalExp)}</td><td>${fmtFull(conTotalNet)}</td><td>${((conTotalNet/conTotalRev)*100).toFixed(0)}%</td><td>—</td></tr>`);
   document.getElementById('detailTable').innerHTML = rows.join('');
 </script>
 </body>
