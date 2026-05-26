@@ -416,37 +416,6 @@ export default function HomePage() {
       {/* ═══ PARTNERS ════════════════════════════════════ */}
       <PartnerMarquee />
 
-      {/* ═══ IMPACT METRICS ═══════════════════════════════ */}
-      <section className="metrics section" id="metrics">
-        <div className="container">
-          <div className="metrics-header reveal">
-            <span className="section-label">Real Results</span>
-            <h2 className="section-title">Real Results for Real Businesses</h2>
-            <p className="section-sub" style={{ marginTop: 16 }}>Discover how Edge8 helps companies Be Tech-Forward through Global Talent Staffing, AI Programs and AI Officer Leadership.</p>
-          </div>
-          <div className="metrics-grid">
-            <div className="metric-card reveal">
-              <h3 className="metric-multiplier"><span>2</span>x</h3>
-              <h4 className="metric-area">AI Officer Leadership</h4>
-              <p className="metric-desc">Established the leadership needed to effectively run an AI Program within 10+ organizations</p>
-            </div>
-            <div className="metric-card reveal">
-              <h3 className="metric-multiplier"><span>5</span>x</h3>
-              <h4 className="metric-area">Global Talent Staffing</h4>
-              <p className="metric-desc">Helping a leading healthcare provider build a tech-forward team, doubling productivity while cutting costs dramatically</p>
-            </div>
-            <div className="metric-card reveal">
-              <h3 className="metric-multiplier"><span>8</span>x</h3>
-              <h4 className="metric-area">AI Programs</h4>
-              <p className="metric-desc">Eliminated 100% of data entry tasks, enriched entrepreneur submissions, and enhanced deal flow analysis for a Venture Capital firm</p>
-            </div>
-          </div>
-          <div style={{ textAlign: 'center', marginTop: 48 }} className="reveal">
-            <a href="#case-studies" className="btn btn-primary">View Our Success Case Studies</a>
-          </div>
-        </div>
-      </section>
-
       {/* ═══ CORE SOLUTIONS ══════════════════════════════ */}
       <section className="solutions section" id="solutions">
         <div className="container">
@@ -514,52 +483,30 @@ export default function HomePage() {
               </div>
             </Link>
           </div>
+          <div style={{ textAlign: 'center', marginTop: 48 }} className="reveal">
+            <Link href="/ai-programs" className="btn btn-primary">View Our Success Case Studies</Link>
+          </div>
         </div>
       </section>
 
-      {/* ═══ SOLUTIONS DETAIL ════════════════════════════ */}
-      <section className="solutions-detail section" id="solutions-detail">
+      {/* ═══ MENTAL MODELS ════════════════════════════════ */}
+      <section className="mental section" id="mental">
         <div className="container">
-          <div className="solutions-detail-header reveal">
-            <span className="section-label">What We Do</span>
-            <h2 className="section-title">AI Automation Designed to Elevate Your Business</h2>
+          <div className="mental-header reveal">
+            <span className="section-label mental-label">Mental Models</span>
+            <h2 className="section-title mental-title">How We Think About Building With AI</h2>
+            <p className="section-sub mental-sub">Two ideas shape how we design every engagement. They are how we differ from the consultants who just talk about AI.</p>
           </div>
-          <div className="solutions-detail-grid">
-            <div className="sol-tile reveal">
-              <div className="sol-icon">✦</div>
-              <div className="sol-title">Personal Branding with AI</div>
-              <p className="sol-desc">Build your brands similar to leaders like Rich Pham, Angi Hurt, and Steve Mueller. Develop a powerful personal presence that drives business.</p>
-              <a href="https://ai-officer.typeform.com/letstalk" className="sol-link" target="_blank" rel="noopener noreferrer">Book a Free AI Audit →</a>
+          <div className="mental-grid">
+            <div className="mental-card reveal">
+              <div className="mental-tag">Mental Model 01</div>
+              <div className="mental-claim">The Folder Is the Agent.</div>
+              <p className="mental-body">We obsess over the Claude environment. How agents and sub-agents are structured. How information is organized. How workflows are designed. What guardrails are in place. When the structure is right, the agent is right. When the structure is wrong, no prompt can save you. Most companies try to bolt AI onto chaos. We help you build the structure first, so the agent has somewhere to stand.</p>
             </div>
-            <div className="sol-tile reveal">
-              <div className="sol-icon">◈</div>
-              <div className="sol-title">Private &amp; Public Workshops</div>
-              <p className="sol-desc">Get your team aligned with an interactive session where we break down AI fundamentals, dive into real case studies, and leave you with practical tools.</p>
-              <a href="https://www.ai-officer.com/ai-in-business-events" className="sol-link" target="_blank" rel="noopener noreferrer">Join a Workshop →</a>
-            </div>
-            <div className="sol-tile reveal">
-              <div className="sol-icon">⬡</div>
-              <div className="sol-title">AI in HR Workflows &amp; Recruitment</div>
-              <p className="sol-desc">Optimize talent acquisition, onboarding, and coaching with intelligent AI Agents that streamline every step of the HR process.</p>
-              <a href="https://ai-officer.typeform.com/letstalk" className="sol-link" target="_blank" rel="noopener noreferrer">Book a Free AI Audit →</a>
-            </div>
-            <div className="sol-tile reveal">
-              <div className="sol-icon">▲</div>
-              <div className="sol-title">Revolutionizing Sales with AI</div>
-              <p className="sol-desc">Transform your sales process with your own chatbot, CRM and nurture campaigns. Turn every prospect interaction into a revenue opportunity.</p>
-              <a href="https://ai-officer.typeform.com/letstalk" className="sol-link" target="_blank" rel="noopener noreferrer">Book a Free AI Audit →</a>
-            </div>
-            <div className="sol-tile reveal">
-              <div className="sol-icon">◎</div>
-              <div className="sol-title">AI for Social Media &amp; Content</div>
-              <p className="sol-desc">Stay ahead with AI-driven content for improved engagement and visibility. Try it out at Thoughtflow.life, your AI content engine.</p>
-              <a href="https://www.ai-officer.com/ai-in-business-events" className="sol-link" target="_blank" rel="noopener noreferrer">Join a Workshop →</a>
-            </div>
-            <div className="sol-tile reveal">
-              <div className="sol-icon">⬢</div>
-              <div className="sol-title">Global Talent Solutions</div>
-              <p className="sol-desc">Find, train, and scale with AI-empowered professionals located in Vietnam. Build the team that powers your AI ambitions.</p>
-              <Link href="/global-staffing" className="sol-link">Explore Global Talent →</Link>
+            <div className="mental-card reveal">
+              <div className="mental-tag">Mental Model 02</div>
+              <div className="mental-claim">CMS Is Dead. Claude Is the CMS.</div>
+              <p className="mental-body">Stop building inside the CMS. Start building inside the AI. For twenty years your content, your workflows, your knowledge sat trapped inside whatever CMS you happened to license. Every change required a developer. Every new use case required a new tool. We flip the relationship. Claude becomes the system of record, the content engine, and the workflow runner. The website is just the output. Your team stops working inside the tool and starts operating above it.</p>
             </div>
           </div>
         </div>
@@ -621,7 +568,7 @@ export default function HomePage() {
         <div className="container">
           <div className="contact-blue-inner">
             <div className="reveal">
-              <h2 className="section-title" style={{ marginBottom: 16 }}>Let&apos;s Be Tech-Forward Together</h2>
+              <h2 className="section-title" style={{ marginBottom: 16 }}>Let&apos;s Lead AI Together</h2>
               <p className="section-sub">Start with a free 30-minute audit. We will map your highest-ROI use case before you spend a dollar.</p>
             </div>
             <div className="contact-blue-cta reveal">
