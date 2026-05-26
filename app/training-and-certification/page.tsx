@@ -23,8 +23,8 @@ export default function TrainingAndCertificationPage() {
         <div className="container">
           <div className="svc-hero-inner">
             <div className="svc-hero-text">
-              <h1>Build AI Leadership Across Your Organization</h1>
-              <p className="svc-hero-sub">The AI Officer Certification Program — the proven curriculum that turns managers into AI leaders and experiments into programs.</p>
+              <h1>Turn Your Managers Into AI Leaders. 500+ Certified, 12 Months, 3 Hrs Per Week.</h1>
+              <p className="svc-hero-sub">The AI Officer Certification Program is the proven curriculum that turns managers into AI leaders and experiments into programs your team can run without us.</p>
               <a href="https://www.ai-officer.com" className="btn btn-contact" target="_blank" rel="noopener noreferrer">Explore the Program →</a>
             </div>
             <div className="svc-hero-img">

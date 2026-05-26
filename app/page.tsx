@@ -13,14 +13,14 @@ const stepsData = [
   { pct: '50%',  title: 'Hire AI-Driven Talent',  desc: 'Leverage local and global talent and onboard AI-empowered people to enhance your workforce' },
   { pct: '60%',  title: 'Scale AI-Orchestration', desc: 'Implement AI Programs across your organization and start generating revenue, increasing operational efficiency, and developing your talent' },
   { pct: '80%',  title: 'Full System Integration',desc: 'Replace antiquated systems and processes with a new AI-Driven approach, led by AI Officers who understand your business and your technology' },
-  { pct: '100%', title: 'Tech-Forward ✦',         desc: 'Reclaim Your Time. With AI automating repetitive work, focus on what truly matters—growing your business while achieving 8x efficiency.' },
+  { pct: '100%', title: 'Tech-Forward ✦',         desc: 'Reclaim Your Time. With AI automating repetitive work, focus on what truly matters: growing your business while achieving 8x efficiency.' },
 ]
 
 const testimonials = [
   {
     text: "I invited Dave to speak at the AI Summit in Sabah, and he was a natural on stage, bringing a fresh style the audience loved. We are looking forward to collaborating with the AI Officer Institute and Edge8 to bring their AI Certification Program to Malaysia and have signed an MOU to broaden the reach of our organization.",
     name: 'Dato George Lim',
-    role: 'Founder & CEO — G&A GROUP & GA SPACE',
+    role: 'Founder & CEO, G&A GROUP & GA SPACE',
     avatar: '/homepage/images/home-page-testimonials-Dato.jpg',
   },
   {
@@ -220,16 +220,54 @@ export default function HomePage() {
           <div className="hero-stats-grid">
             <div className="hero-stat reveal">
               <div className="hero-stat-number">182</div>
-              <div className="hero-stat-label">Agents Deployed</div>
+              <div className="hero-stat-label">Workflows Automated</div>
+              <div className="hero-stat-sub">running across our client base</div>
             </div>
             <div className="hero-stat reveal">
               <div className="hero-stat-number">12</div>
-              <div className="hero-stat-label">Teams Certified</div>
+              <div className="hero-stat-label">Leadership Teams</div>
+              <div className="hero-stat-sub">certified to run AI on their own</div>
             </div>
             <div className="hero-stat reveal">
               <div className="hero-stat-number">29</div>
-              <div className="hero-stat-label">Innovations Shipped</div>
+              <div className="hero-stat-label">New Revenue Streams</div>
+              <div className="hero-stat-sub">launched by 7 clients in the last 3 months</div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ THE SHIFT ════════════════════════════════════════ */}
+      <section className="shift section" id="shift">
+        <div className="container">
+          <div className="shift-header reveal">
+            <span className="section-label">What Changes</span>
+            <h2 className="section-title">What Happens When AI Agents Start Joining Your Team</h2>
+            <p className="section-sub" style={{ marginTop: 16 }}>
+              Adding ChatGPT to your tools is not the change. Hiring an AI agent that does a real job, every day, sitting next to your people, is the change. Here is what we have seen happen inside every company that crosses that line.
+            </p>
+          </div>
+          <div className="shift-grid">
+            <div className="shift-card reveal">
+              <div className="shift-num">01</div>
+              <div className="shift-card-title">Leadership Has to Level Up</div>
+              <p className="shift-card-desc">Managing humans is one skill. Orchestrating humans and AI agents is another. The leaders who adapt fastest become the most valuable people in the company. The ones who do not get routed around.</p>
+            </div>
+            <div className="shift-card reveal">
+              <div className="shift-num">02</div>
+              <div className="shift-card-title">Everything Speeds Up</div>
+              <p className="shift-card-desc">Cycles that took weeks compress into days. Days compress into hours. Meetings, reporting, planning, all of it has to be rebuilt for the new pace.</p>
+            </div>
+            <div className="shift-card reveal">
+              <div className="shift-num">03</div>
+              <div className="shift-card-title">Hidden Mess Surfaces</div>
+              <p className="shift-card-desc">AI agents do not tolerate the workarounds your team has been quietly carrying for years. Bad data, broken handoffs, undocumented processes, all of it gets exposed. The cleanup is the real work.</p>
+            </div>
+          </div>
+          <div className="shift-payoff reveal">
+            <div className="shift-payoff-eyebrow">And Then</div>
+            <h3 className="shift-payoff-title">The magic happens.</h3>
+            <p className="shift-payoff-body">Your people get their time back. They stop chasing inboxes and start building the things only humans can build. Innovation becomes the default, not the exception. The company grows with fewer hires, smaller teams, and bigger output. That is what Tech-Forward looks like.</p>
           </div>
         </div>
       </section>
@@ -244,7 +282,7 @@ export default function HomePage() {
             </div>
             <div className="why-right reveal">
               <p><strong>Ad-hoc usage of AI is limiting you to minimal gains.</strong></p>
-              <p style={{ marginTop: 16 }}>Lack of focus traps your business in mediocrity—keeping you stuck in repetitive tasks, wasted resources, and missed opportunities. Without a structured AI Program, competitors will outpace you, innovation stalls, costs balloon, and growth suffers.</p>
+              <p style={{ marginTop: 16 }}>Lack of focus traps your business in mediocrity, keeping you stuck in repetitive tasks, wasted resources, and missed opportunities. Without a structured AI Program, competitors will outpace you, innovation stalls, costs balloon, and growth suffers.</p>
             </div>
           </div>
         </div>
@@ -369,8 +407,8 @@ export default function HomePage() {
             </div>
           </div>
           <div style={{ textAlign: 'center', marginTop: 48 }} className="reveal">
-            <p style={{ color: 'var(--grey-mid)', marginBottom: 20, fontSize: 15 }}>Book your free consultation today and take the first step toward an AI-driven future.</p>
-            <a href="https://ai-officer.typeform.com/letstalk" className="btn btn-primary" target="_blank" rel="noopener noreferrer">Schedule A Consultation</a>
+            <p style={{ color: 'var(--grey-mid)', marginBottom: 20, fontSize: 15 }}>Start with a free AI audit. We will map your highest-ROI use case in 30 minutes.</p>
+            <a href="https://ai-officer.typeform.com/letstalk" className="btn btn-primary" target="_blank" rel="noopener noreferrer">Book a Free AI Audit</a>
           </div>
         </div>
       </section>
@@ -422,14 +460,14 @@ export default function HomePage() {
               <Image src="/homepage/images/home-page-solutions-AI Programs.jpg" alt="AI Programs" width={400} height={220} className="solution-img" />
               <div className="solution-body">
                 <h3 className="solution-title">AI Programs</h3>
-                <p className="solution-desc">From Strategy to Implementation, We Build not Pitch. We don&apos;t just talk AI—we build with it. From CRM flows to marketing automation, our AI solutions power content creation, sales engagement, and customer journeys.</p>
+                <p className="solution-desc">From Strategy to Implementation, We Build not Pitch. We don&apos;t just talk AI, we build with it. From CRM flows to marketing automation, our AI solutions power content creation, sales engagement, and customer journeys.</p>
               </div>
             </div>
             <div className="solution-card reveal">
               <Image src="/homepage/images/home-page-solutions-Global Talent Network.jpg" alt="Global Talent Network" width={400} height={220} className="solution-img" />
               <div className="solution-body">
                 <h3 className="solution-title">Global Talent Network</h3>
-                <p className="solution-desc">Scale Smarter with AI-Empowered Teams. Access Vietnam&apos;s top AI-trained professionals to accelerate your initiatives—without compromising on quality or speed.</p>
+                <p className="solution-desc">Scale Smarter with AI-Empowered Teams. Access Vietnam&apos;s top AI-trained professionals to accelerate your initiatives, without compromising on quality or speed.</p>
               </div>
             </div>
             <div className="solution-card reveal">
@@ -491,7 +529,7 @@ export default function HomePage() {
               <div className="sol-icon">✦</div>
               <div className="sol-title">Personal Branding with AI</div>
               <p className="sol-desc">Build your brands similar to leaders like Rich Pham, Angi Hurt, and Steve Mueller. Develop a powerful personal presence that drives business.</p>
-              <a href="https://ai-officer.typeform.com/letstalk" className="sol-link" target="_blank" rel="noopener noreferrer">Schedule a Consultation →</a>
+              <a href="https://ai-officer.typeform.com/letstalk" className="sol-link" target="_blank" rel="noopener noreferrer">Book a Free AI Audit →</a>
             </div>
             <div className="sol-tile reveal">
               <div className="sol-icon">◈</div>
@@ -503,25 +541,25 @@ export default function HomePage() {
               <div className="sol-icon">⬡</div>
               <div className="sol-title">AI in HR Workflows &amp; Recruitment</div>
               <p className="sol-desc">Optimize talent acquisition, onboarding, and coaching with intelligent AI Agents that streamline every step of the HR process.</p>
-              <a href="https://ai-officer.typeform.com/letstalk" className="sol-link" target="_blank" rel="noopener noreferrer">Schedule a Consultation →</a>
+              <a href="https://ai-officer.typeform.com/letstalk" className="sol-link" target="_blank" rel="noopener noreferrer">Book a Free AI Audit →</a>
             </div>
             <div className="sol-tile reveal">
               <div className="sol-icon">▲</div>
               <div className="sol-title">Revolutionizing Sales with AI</div>
               <p className="sol-desc">Transform your sales process with your own chatbot, CRM and nurture campaigns. Turn every prospect interaction into a revenue opportunity.</p>
-              <a href="https://ai-officer.typeform.com/letstalk" className="sol-link" target="_blank" rel="noopener noreferrer">Schedule a Consultation →</a>
+              <a href="https://ai-officer.typeform.com/letstalk" className="sol-link" target="_blank" rel="noopener noreferrer">Book a Free AI Audit →</a>
             </div>
             <div className="sol-tile reveal">
               <div className="sol-icon">◎</div>
               <div className="sol-title">AI for Social Media &amp; Content</div>
-              <p className="sol-desc">Stay ahead with AI-driven content for improved engagement and visibility. Try it out at Thoughtflow.life — your AI content engine.</p>
+              <p className="sol-desc">Stay ahead with AI-driven content for improved engagement and visibility. Try it out at Thoughtflow.life, your AI content engine.</p>
               <a href="https://www.ai-officer.com/ai-in-business-events" className="sol-link" target="_blank" rel="noopener noreferrer">Join a Workshop →</a>
             </div>
             <div className="sol-tile reveal">
               <div className="sol-icon">⬢</div>
               <div className="sol-title">Global Talent Solutions</div>
               <p className="sol-desc">Find, train, and scale with AI-empowered professionals located in Vietnam. Build the team that powers your AI ambitions.</p>
-              <Link href="/global-staffing" className="sol-link">Schedule a Consultation →</Link>
+              <Link href="/global-staffing" className="sol-link">Explore Global Talent →</Link>
             </div>
           </div>
         </div>
@@ -544,7 +582,7 @@ export default function HomePage() {
               </div>
               <div className="blog-featured-body">
                 <h3 className="blog-featured-title">2026 AI Trends: 5 Game-Changing Shifts That Will Define Business Success</h3>
-                <p className="blog-excerpt">The companies that will win in 2026 aren&apos;t the ones with the best AI tools — they&apos;re the ones with the best data. Five trends that will define the next year.</p>
+                <p className="blog-excerpt">The companies that will win in 2026 are not the ones with the best AI tools. They are the ones with the best data. Five trends that will define the next year.</p>
                 <span className="blog-more">Read Article →</span>
               </div>
             </Link>
@@ -561,7 +599,7 @@ export default function HomePage() {
                 <Image src="/homepage/images/blog-posts/Why Smart Founders Are Already Planning for Meta Ray-Ban Glasses (Even When Demos Fail).jpg" alt="Meta Ray-Ban Glasses" width={80} height={80} className="blog-item-thumb" />
                 <div className="blog-item-body">
                   <h4 className="blog-item-title">Why Smart Founders Are Already Planning for Meta Ray-Ban Glasses</h4>
-                  <p className="blog-item-excerpt">Technology always catches up—the question is whether you&apos;re truly ready when it does.</p>
+                  <p className="blog-item-excerpt">Technology always catches up. The question is whether you&apos;re truly ready when it does.</p>
                 </div>
                 <span className="blog-item-arrow">→</span>
               </Link>
@@ -569,7 +607,7 @@ export default function HomePage() {
                 <Image src="/homepage/images/blog-posts/AI in Data Migration- Why Your AI Program Is Really a Data Problem.jpg" alt="AI in Data Migration" width={80} height={80} className="blog-item-thumb" />
                 <div className="blog-item-body">
                   <h4 className="blog-item-title">AI in Data Migration: Why Your AI Program Is Really a Data Problem</h4>
-                  <p className="blog-item-excerpt">AI in Data Migration isn&apos;t a technology problem—it&apos;s a data strategy challenge.</p>
+                  <p className="blog-item-excerpt">AI in Data Migration isn&apos;t a technology problem. It&apos;s a data strategy challenge.</p>
                 </div>
                 <span className="blog-item-arrow">→</span>
               </Link>
@@ -584,7 +622,7 @@ export default function HomePage() {
           <div className="contact-blue-inner">
             <div className="reveal">
               <h2 className="section-title" style={{ marginBottom: 16 }}>Let&apos;s Be Tech-Forward Together</h2>
-              <p className="section-sub">Connect with Edge8&apos;s experts to explore AI Programs for your organization.</p>
+              <p className="section-sub">Start with a free 30-minute audit. We will map your highest-ROI use case before you spend a dollar.</p>
             </div>
             <div className="contact-blue-cta reveal">
               <a
@@ -593,7 +631,7 @@ export default function HomePage() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Bring AI to Your Organization
+                Book a Free AI Audit
               </a>
             </div>
           </div>
