@@ -309,12 +309,12 @@ nav {
 /* ─── HERO ────────────────────────────────────────── */
 .hero {
   position: relative;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   overflow: hidden;
   background: var(--white);
+  padding-bottom: 64px;
 }
 .hero-bg {
   position: absolute;
@@ -362,22 +362,25 @@ nav {
 }
 .hero-headline {
   font-family: var(--font-display);
-  font-size: clamp(72px, 14vw, 140px);
+  font-size: clamp(40px, 7vw, 88px);
   font-weight: 600;
-  line-height: 0.9;
+  line-height: 1.05;
   color: var(--dark);
   margin-bottom: 12px;
+  letter-spacing: -0.01em;
 }
 .hero-headline .x { color: var(--blue); }
 .hero-headline .num { color: var(--dark); }
+.hero-headline .accent { color: var(--blue); }
 .hero-sub {
-  font-size: clamp(17px, 2.2vw, 21px);
+  font-size: clamp(17px, 2.2vw, 22px);
   color: var(--body-text);
   line-height: 1.55;
-  max-width: 640px;
-  margin: 24px 0 40px;
+  max-width: 680px;
+  margin: 24px 0 8px;
   text-align: center;
 }
+.hero-sub .accent { color: var(--blue); font-weight: 500; }
 .hero-actions { display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap; }
 .hero-actions .btn { padding: 16px 32px; font-size: 15px; }
 .hero-scroll {
@@ -400,6 +403,44 @@ nav {
 .scroll-line {
   width: 1px; height: 40px;
   background: linear-gradient(to bottom, var(--blue), transparent);
+}
+
+/* ─── HERO STATS STRIP ────────────────────────────── */
+.hero-stats {
+  background: var(--white);
+  padding: 48px 0 96px;
+  position: relative;
+  z-index: 2;
+}
+.hero-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  border-top: 1px solid var(--card-border);
+  border-bottom: 1px solid var(--card-border);
+  padding: 48px 0;
+}
+.hero-stat {
+  text-align: center;
+  padding: 8px 24px;
+  border-right: 1px solid var(--card-border);
+}
+.hero-stat:last-child { border-right: none; }
+.hero-stat-number {
+  font-family: var(--font-display);
+  font-size: clamp(56px, 8vw, 88px);
+  font-weight: 600;
+  line-height: 1;
+  color: var(--blue);
+  letter-spacing: -0.02em;
+  margin-bottom: 12px;
+}
+.hero-stat-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--body-text);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 /* ─── WHY AI ────────────────────────────────────────── */
@@ -1693,6 +1734,10 @@ footer {
   .contact-inner { gap: 32px; }
   .solutions-detail-grid { grid-template-columns: 1fr; }
   .hero-actions { flex-direction: column; align-items: center; }
+  .hero-stats { padding: 32px 0 64px; }
+  .hero-stats-grid { grid-template-columns: 1fr; gap: 0; padding: 24px 0; }
+  .hero-stat { border-right: none; border-bottom: 1px solid var(--card-border); padding: 24px; }
+  .hero-stat:last-child { border-bottom: none; }
   .contact-blue-inner { grid-template-columns: 1fr; gap: 40px; text-align: center; }
   .contact-blue-cta { justify-content: center; }
   .contact-blue-inner .section-title,
@@ -1723,7 +1768,8 @@ footer {
   .svc-hero-img { display: none; }
 }
 @media (max-width: 480px) {
-  .hero-headline { font-size: 64px; }
+  .hero-headline { font-size: 40px; }
+  .hero-stat-number { font-size: 56px; }
   .testimonial-card { flex: 0 0 300px; }
   .case-studies-header { flex-direction: column; align-items: flex-start; }
   .blog-item { padding: 18px 20px; }

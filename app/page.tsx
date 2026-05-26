@@ -204,25 +204,33 @@ export default function HomePage() {
           <div className="hero-content">
             <div className="hero-eyebrow">Be Tech-Forward</div>
             <h1 className="hero-headline">
-              <span className="num">8</span><span className="x">x</span> IMPACT
+              It&apos;s Time to Stop Using AI<br />
+              and Start <span className="accent">Leading It</span>
             </h1>
-            <p className="hero-sub">Stop overthinking AI—Start implementing your AI Programs</p>
-            <div className="hero-actions">
-              <a href="https://ai-officer.typeform.com/letstalk" className="btn btn-primary" target="_blank" rel="noopener noreferrer">Schedule A Consultation</a>
+            <p className="hero-sub">
+              Founders who <span className="accent">Lead AI</span> Build faster. Hire smarter. Ship more.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ HERO STATS STRIP ═══════════════════════════════ */}
+      <section className="hero-stats" aria-label="Edge8 program results to date">
+        <div className="container">
+          <div className="hero-stats-grid">
+            <div className="hero-stat reveal">
+              <div className="hero-stat-number">182</div>
+              <div className="hero-stat-label">Agents Deployed</div>
+            </div>
+            <div className="hero-stat reveal">
+              <div className="hero-stat-number">12</div>
+              <div className="hero-stat-label">Teams Certified</div>
+            </div>
+            <div className="hero-stat reveal">
+              <div className="hero-stat-number">29</div>
+              <div className="hero-stat-label">Innovations Shipped</div>
             </div>
           </div>
-        </div>
-        <div className="hero-video-wrap">
-          <div className="hero-video-frame">
-            <video autoPlay muted loop playsInline className="hero-video">
-              <source src="/homepage/images/home-page-hero.mp4" type="video/mp4" />
-            </video>
-            <div className="hero-video-overlay" />
-          </div>
-        </div>
-        <div className="hero-scroll">
-          <div className="scroll-line" />
-          <span>Scroll</span>
         </div>
       </section>
 
