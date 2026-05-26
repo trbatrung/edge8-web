@@ -188,7 +188,7 @@ export default function HomePage() {
             <div className="hero-stat reveal">
               <div className="hero-stat-number">182</div>
               <div className="hero-stat-label">Workflows Automated</div>
-              <div className="hero-stat-sub">running across our client base</div>
+              <div className="hero-stat-sub">with AI Agents running across our client base</div>
             </div>
             <div className="hero-stat reveal">
               <div className="hero-stat-number">12</div>
@@ -325,29 +325,29 @@ export default function HomePage() {
         <div className="container">
           <div className="solutions-header reveal">
             <span className="section-label">Core Solutions</span>
-            <h2 className="section-title">Businesses who have learned to <span className="accent">Lead AI</span> as a part of their teams</h2>
+            <h2 className="section-title">We Empower Founders to <span className="accent">Lead AI</span></h2>
             <p className="section-sub" style={{ marginTop: 16 }}>Empowering Organizations to use AI effectively through clear leadership, thoughtful implementation and strong global talent.</p>
           </div>
           <div className="solutions-grid">
             <div className="solution-card reveal">
-              <Image src="/homepage/images/home-page-solutions-AI Programs.jpg" alt="AI Programs" width={400} height={220} className="solution-img" />
+              <Image src="/homepage/images/home-page-solutions-AI Programs.jpg" alt="Lead AI Agent Teams" width={400} height={220} className="solution-img" />
               <div className="solution-body">
-                <h3 className="solution-title">AI Programs</h3>
-                <p className="solution-desc">From Strategy to Implementation, We Build not Pitch. We don&apos;t just talk AI, we build with it. From CRM flows to marketing automation, our AI solutions power content creation, sales engagement, and customer journeys.</p>
+                <h3 className="solution-title">Lead AI Agent Teams</h3>
+                <p className="solution-desc">We design, build, and deploy the AI agents that take repetitive work off your team. You become the manager of a workforce that does not sleep, does not forget, and does not quit.</p>
               </div>
             </div>
             <div className="solution-card reveal">
-              <Image src="/homepage/images/home-page-solutions-Global Talent Network.jpg" alt="Global Talent Network" width={400} height={220} className="solution-img" />
+              <Image src="/homepage/images/home-page-solutions-AI Officer Certification & Workshops.jpg" alt="Certify Your Human AI Talent" width={400} height={220} className="solution-img" />
               <div className="solution-body">
-                <h3 className="solution-title">Global Talent Network</h3>
-                <p className="solution-desc">Scale Smarter with AI-Empowered Teams. Access Vietnam&apos;s top AI-trained professionals to accelerate your initiatives, without compromising on quality or speed.</p>
+                <h3 className="solution-title">Certify your Human AI Talent</h3>
+                <p className="solution-desc">The AI Officer Certification turns your managers into AI leaders. 500+ certified across Fortune 500s and SMEs. 12 months, 3 hours per week, every function in your business.</p>
               </div>
             </div>
             <div className="solution-card reveal">
-              <Image src="/homepage/images/home-page-solutions-AI Officer Certification & Workshops.jpg" alt="AI Officer Certification" width={400} height={220} className="solution-img" />
+              <Image src="/homepage/images/home-page-solutions-Global Talent Network.jpg" alt="Innovate like an Engineer" width={400} height={220} className="solution-img" />
               <div className="solution-body">
-                <h3 className="solution-title">AI Officer Certification &amp; Workshops</h3>
-                <p className="solution-desc">Make Your Team AI-Literate and Leadership-Ready. We equip founders and teams to lead with confidence through our AI Officer certification and hands-on workshops.</p>
+                <h3 className="solution-title">Innovate like an Engineer</h3>
+                <p className="solution-desc">Stop ideating in slides. Start prototyping in code. We teach founders and teams to ship, test, and iterate the way modern engineering teams do, with AI as the accelerant.</p>
               </div>
             </div>
           </div>
@@ -360,7 +360,7 @@ export default function HomePage() {
           <div className="case-studies-header reveal">
             <div>
               <span className="section-label">AI Programs</span>
-              <h2 className="section-title">The Path to Tech-Forward</h2>
+              <h2 className="section-title">Businesses who have learned to <span className="accent">Lead AI</span> as a part of their teams</h2>
             </div>
             <Link href="/ai-programs" className="text-link">Full List of AI Programs →</Link>
           </div>
