@@ -5,17 +5,6 @@ import Link from 'next/link'
 import Image from 'next/image'
 import Script from 'next/script'
 
-const stepsData = [
-  { pct: '10%',  title: 'Get Started',           desc: 'Join a community to learn how your peers and experts are using AI' },
-  { pct: '20%',  title: 'Company Alignment',      desc: 'Ensure leadership and employees are aligned on the strategic potential of AI. Assign a dedicated AI Officer to lead implementation.' },
-  { pct: '30%',  title: 'Organize Your Data',     desc: 'Create your company database, starting with just the right amount of data for your first program' },
-  { pct: '40%',  title: 'Build AI Agents',        desc: 'Develop intelligent AI agents that assist with tasks, improving decision-making and efficiency' },
-  { pct: '50%',  title: 'Hire AI-Driven Talent',  desc: 'Leverage local and global talent and onboard AI-empowered people to enhance your workforce' },
-  { pct: '60%',  title: 'Scale AI-Orchestration', desc: 'Implement AI Programs across your organization and start generating revenue, increasing operational efficiency, and developing your talent' },
-  { pct: '80%',  title: 'Full System Integration',desc: 'Replace antiquated systems and processes with a new AI-Driven approach, led by AI Officers who understand your business and your technology' },
-  { pct: '100%', title: 'Tech-Forward ✦',         desc: 'Reclaim Your Time. With AI automating repetitive work, focus on what truly matters: growing your business while achieving 8x efficiency.' },
-]
-
 const testimonials = [
   {
     text: "I invited Dave to speak at the AI Summit in Sabah, and he was a natural on stage, bringing a fresh style the audience loved. We are looking forward to collaborating with the AI Officer Institute and Edge8 to bring their AI Certification Program to Malaysia and have signed an MOU to broaden the reach of our organization.",
@@ -61,11 +50,9 @@ const T_REAL_OFFSET = T_COUNT
 const extTestimonials = [...testimonials, ...testimonials, ...testimonials]
 
 export default function HomePage() {
-  const [activeStep, setActiveStep] = useState(0)
   const [activeExtIdx, setActiveExtIdx] = useState(T_REAL_OFFSET)
   // formStatus kept for potential reuse on other pages
   const [formStatus, setFormStatus] = useState<'idle' | 'sending' | 'sent'>('idle')
-  const stepsTimelineRef = useRef<HTMLDivElement>(null)
   const viewportRef = useRef<HTMLDivElement>(null)
   const trackRef = useRef<HTMLDivElement>(null)
   const snapTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
@@ -89,24 +76,6 @@ export default function HomePage() {
     )
     document.querySelectorAll('.reveal').forEach((el) => observer.observe(el))
     return () => observer.disconnect()
-  }, [])
-
-  // Steps auto-init on scroll
-  useEffect(() => {
-    if (!stepsTimelineRef.current) return
-    const obs = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setTimeout(() => setActiveStep(0), 300)
-            obs.unobserve(entry.target)
-          }
-        })
-      },
-      { threshold: 0.3 }
-    )
-    obs.observe(stepsTimelineRef.current)
-    return () => obs.disconnect()
   }, [])
 
   // Testimonials scroll sync (infinite loop)
@@ -181,8 +150,6 @@ export default function HomePage() {
       viewport.scrollTo({ left: cards[extIdx].offsetLeft - pad, behavior: 'smooth' })
     }
   }, [currentTestimonial])
-
-  const progressPositions = [0, 100/7, 200/7, 300/7, 400/7, 500/7, 600/7, 100]
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -359,56 +326,6 @@ export default function HomePage() {
             <p className="definition-text">
               Describing an organization or individual with the capability to strategically orchestrate AI resources to drive measurable value within their department or business.
             </p>
-          </div>
-        </div>
-      </section>
-
-      {/* ═══ 8 STEPS ══════════════════════════════════════ */}
-      <section className="steps section" id="steps">
-        <div className="container">
-          <div className="steps-header reveal">
-            <span className="section-label">The Framework</span>
-            <h2 className="section-title">8 Steps to Becoming Tech-Forward</h2>
-            <p className="section-sub">Orchestrate AI Resources for Maximum Impact, and you will unlock new levels of efficiency, automation, and decision-making in your business.</p>
-          </div>
-          <div className="steps-timeline reveal" ref={stepsTimelineRef}>
-            <div className="steps-track-container">
-              <div className="steps-progress-bar">
-                <div
-                  className="steps-progress-fill"
-                  style={{ width: `${progressPositions[activeStep]}%` }}
-                />
-              </div>
-              <div className="steps-milestones">
-                {stepsData.map((s, i) => (
-                  <button
-                    key={i}
-                    className={`step-milestone${i === activeStep ? ' active' : ''}${i < activeStep ? ' completed' : ''}${i === 7 ? ' final' : ''}`}
-                    onClick={() => setActiveStep(i)}
-                  >
-                    <div className="step-dot">{String(i + 1).padStart(2, '0')}</div>
-                    <div className="step-dot-label">
-                      {['Get\nStarted', 'Company\nAlignment', 'Organize\nData', 'Build AI\nAgents', 'Hire\nTalent', 'Scale AI\nOrch.', 'Full\nIntegration', 'Tech-\nForward'][i]}
-                    </div>
-                  </button>
-                ))}
-              </div>
-            </div>
-            <div className="steps-panel">
-              <div className={`steps-panel-inner${activeStep === 7 ? ' final' : ''}`}>
-                <div className="steps-panel-num">{String(activeStep + 1).padStart(2, '0')}</div>
-                <div className="steps-panel-body">
-                  <div className="steps-panel-step">Step {String(activeStep + 1).padStart(2, '0')}</div>
-                  <div className="steps-panel-pct">{stepsData[activeStep].pct}</div>
-                  <div className="steps-panel-title">{stepsData[activeStep].title}</div>
-                  <div className="steps-panel-desc">{stepsData[activeStep].desc}</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div style={{ textAlign: 'center', marginTop: 48 }} className="reveal">
-            <p style={{ color: 'var(--grey-mid)', marginBottom: 20, fontSize: 15 }}>Start with a free AI audit. We will map your highest-ROI use case in 30 minutes.</p>
-            <a href="https://ai-officer.typeform.com/letstalk" className="btn btn-primary" target="_blank" rel="noopener noreferrer">Book a Free AI Audit</a>
           </div>
         </div>
       </section>
