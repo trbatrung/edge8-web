@@ -317,19 +317,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ═══ TECH-FORWARD DEFINITION ═══════════════════════ */}
-      <section className="definition section">
-        <div className="container">
-          <div className="definition-inner reveal">
-            <div className="definition-word">Tech-Forward</div>
-            <div className="definition-phonetic">/ˈtɛk ˈfɔrwərd/ &nbsp;·&nbsp; <em>adjective</em></div>
-            <p className="definition-text">
-              Describing an organization or individual with the capability to strategically orchestrate AI resources to drive measurable value within their department or business.
-            </p>
-          </div>
-        </div>
-      </section>
-
       {/* ═══ PARTNERS ════════════════════════════════════ */}
       <PartnerMarquee />
 
