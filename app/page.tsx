@@ -489,6 +489,29 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ═══ MENTAL MODELS ════════════════════════════════ */}
+      <section className="mental section" id="mental">
+        <div className="container">
+          <div className="mental-header reveal">
+            <span className="section-label mental-label">Mental Models</span>
+            <h2 className="section-title mental-title">How We Think About Building With AI</h2>
+            <p className="section-sub mental-sub">Two ideas shape how we design every engagement. They are how we differ from the consultants who just talk about AI.</p>
+          </div>
+          <div className="mental-grid">
+            <div className="mental-card reveal">
+              <div className="mental-tag">Mental Model 01</div>
+              <div className="mental-claim">The Folder Is the Agent.</div>
+              <p className="mental-body">We obsess over the Claude environment. How agents and sub-agents are structured. How information is organized. How workflows are designed. What guardrails are in place. When the structure is right, the agent is right. When the structure is wrong, no prompt can save you. Most companies try to bolt AI onto chaos. We help you build the structure first, so the agent has somewhere to stand.</p>
+            </div>
+            <div className="mental-card reveal">
+              <div className="mental-tag">Mental Model 02</div>
+              <div className="mental-claim">CMS Is Dead. Claude Is the CMS.</div>
+              <p className="mental-body">Stop building inside the CMS. Start building inside the AI. For twenty years your content, your workflows, your knowledge sat trapped inside whatever CMS you happened to license. Every change required a developer. Every new use case required a new tool. We flip the relationship. Claude becomes the system of record, the content engine, and the workflow runner. The website is just the output. Your team stops working inside the tool and starts operating above it.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ═══ BLOG ════════════════════════════════════════ */}
       <section className="blog section" id="blog">
         <div className="container">
