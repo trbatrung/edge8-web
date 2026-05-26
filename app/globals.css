@@ -1527,7 +1527,7 @@ footer {
 
 /* ─── PAGE HERO (services/case studies) ───────────── */
 .page-hero {
-  background: linear-gradient(180deg, var(--mint) 0%, var(--white) 100%);
+  background: var(--white);
   position: relative; overflow: hidden; padding: 140px 0 80px;
 }
 .page-hero-inner { position: relative; z-index: 1; max-width: 800px; text-align: center; margin: 0 auto; }
