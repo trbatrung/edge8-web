@@ -421,7 +421,7 @@ export default function HomePage() {
         <div className="container">
           <div className="solutions-header reveal">
             <span className="section-label">Core Solutions</span>
-            <h2 className="section-title">AI-Powered Solutions for a Tech-Forward Future</h2>
+            <h2 className="section-title">Businesses who have learned to <span className="accent">Lead AI</span> as a part of their teams</h2>
             <p className="section-sub" style={{ marginTop: 16 }}>Empowering Organizations to use AI effectively through clear leadership, thoughtful implementation and strong global talent.</p>
           </div>
           <div className="solutions-grid">

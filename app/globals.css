@@ -381,6 +381,7 @@ nav {
   text-align: center;
 }
 .hero-sub .accent { color: var(--blue); font-weight: 500; }
+.section-title .accent { color: var(--blue); }
 .hero-actions { display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap; }
 .hero-actions .btn { padding: 16px 32px; font-size: 15px; }
 .hero-scroll {
