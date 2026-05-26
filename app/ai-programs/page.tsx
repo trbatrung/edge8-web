@@ -23,8 +23,8 @@ export default function AiProgramsPage() {
       <section className="page-hero">
         <div className="container">
           <div className="page-hero-inner">
-            <h1 className="section-title">We Build Your Team of AI Agents</h1>
-            <p className="page-hero-sub">AI Programs are the operating system of the modern business. We design, build, and deploy yours — then train your team to run it.</p>
+            <h1 className="section-title">Ship 3 AI Agents a Quarter. Without Hiring a CTO.</h1>
+            <p className="page-hero-sub">We design, build, and deploy AI agents that take the highest-volume work off your team. Most clients see their first agent in production inside 30 days, with the next two close behind.</p>
           </div>
         </div>
       </section>
@@ -36,7 +36,7 @@ export default function AiProgramsPage() {
             <span className="section-label">What Is an AI Program</span>
             <h2 className="section-title">More Than Tools. A System of AI Agents.</h2>
             <p style={{ fontSize: 17, color: 'var(--grey-mid)', lineHeight: 1.75, marginTop: 16, maxWidth: 760 }}>
-              An AI Program is a coordinated system of AI agents that work together to automate your business processes, analyze your data, and execute your marketing — running 24/7 without human intervention. Think of it as building a team of AI employees, each trained for a specific function.
+              An AI Program is a coordinated system of AI agents that work together to automate your business processes, analyze your data, and execute your marketing, running 24/7 without human intervention. Think of it as building a team of AI employees, each trained for a specific function.
             </p>
           </div>
           <div className="ai-program-stats" style={{ marginTop: 48 }}>
@@ -50,7 +50,7 @@ export default function AiProgramsPage() {
             </div>
             <div className="ai-stat-card reveal">
               <div className="ai-stat-num">Execute</div>
-              <p className="ai-stat-label">Marketing, sales, and operations tasks automatically — so your team focuses on strategy, not execution</p>
+              <p className="ai-stat-label">Marketing, sales, and operations tasks automatically, so your team focuses on strategy, not execution</p>
             </div>
           </div>
         </div>

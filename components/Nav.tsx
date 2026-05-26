@@ -79,7 +79,7 @@ export default function Nav() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              Schedule A Consultation
+              Book a Free AI Audit
             </a>
 
             <button
@@ -115,7 +115,7 @@ export default function Nav() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Schedule A Consultation
+          Book a Free AI Audit
         </a>
       </div>
     </>

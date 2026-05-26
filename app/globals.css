@@ -442,6 +442,100 @@ nav {
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
+.hero-stat-sub {
+  margin-top: 8px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--grey-mid);
+  max-width: 260px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ─── THE SHIFT (AI AGENTS JOIN THE TEAM) ─────────── */
+.shift { background: var(--white); }
+.shift-header { max-width: 760px; }
+.shift-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 56px;
+}
+.shift-card {
+  background: var(--white);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  padding: 36px 32px;
+  transition: var(--transition);
+}
+.shift-card:hover {
+  border-color: var(--blue);
+  box-shadow: 0 4px 16px rgba(16,16,20,0.06);
+  transform: translateY(-2px);
+}
+.shift-num {
+  font-family: var(--font-display);
+  font-size: 56px;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--blue);
+  margin-bottom: 20px;
+}
+.shift-card-title {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--dark);
+  margin-bottom: 14px;
+  line-height: 1.25;
+}
+.shift-card-desc {
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--body-text);
+}
+.shift-payoff {
+  margin-top: 64px;
+  background: var(--dark);
+  color: var(--white);
+  border-radius: var(--radius);
+  padding: 56px 48px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.shift-payoff::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 70% 50% at 50% 0%, rgba(40,123,232,0.18) 0%, transparent 70%);
+  pointer-events: none;
+}
+.shift-payoff > * { position: relative; z-index: 1; }
+.shift-payoff-eyebrow {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--mint);
+  margin-bottom: 16px;
+}
+.shift-payoff-title {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 5vw, 52px);
+  font-weight: 600;
+  line-height: 1.1;
+  color: var(--white);
+  margin: 0 0 20px;
+}
+.shift-payoff-body {
+  font-size: 17px;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.78);
+  max-width: 720px;
+  margin: 0 auto;
+}
 
 /* ─── WHY AI ────────────────────────────────────────── */
 .why-ai { background: var(--white); }
@@ -1738,6 +1832,8 @@ footer {
   .hero-stats-grid { grid-template-columns: 1fr; gap: 0; padding: 24px 0; }
   .hero-stat { border-right: none; border-bottom: 1px solid var(--card-border); padding: 24px; }
   .hero-stat:last-child { border-bottom: none; }
+  .shift-grid { grid-template-columns: 1fr; }
+  .shift-payoff { padding: 40px 24px; margin-top: 48px; }
   .contact-blue-inner { grid-template-columns: 1fr; gap: 40px; text-align: center; }
   .contact-blue-cta { justify-content: center; }
   .contact-blue-inner .section-title,

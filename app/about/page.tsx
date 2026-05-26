@@ -39,15 +39,19 @@ export default function AboutPage() {
         <div className="container">
           <div className="about-hero-inner">
             <div className="reveal">
-              <h1 className="section-title" style={{ marginBottom: 20 }}>Leading the AI Revolution for Tech-Forward Founders</h1>
-              <p style={{ fontSize: 18, fontStyle: 'italic', lineHeight: 1.6 }}>
-                &ldquo;It&apos;s not an AI problem. It&apos;s the data.&rdquo; — Dave Hajdu
+              <span className="section-label" style={{ marginBottom: 16, display: 'inline-block' }}>The Founder POV</span>
+              <h1 className="section-title" style={{ marginBottom: 24 }}>We&apos;ve Run AI Programs in 30+ Companies. We Built Ours First.</h1>
+              <blockquote style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(22px, 2.8vw, 30px)', fontWeight: 500, lineHeight: 1.3, color: 'var(--dark)', borderLeft: '3px solid var(--blue)', paddingLeft: 20, margin: '0 0 16px' }}>
+                &ldquo;It&apos;s not an AI problem. It&apos;s the data.&rdquo;
+              </blockquote>
+              <p style={{ fontSize: 14, fontWeight: 500, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--grey-mid)' }}>
+                Dave Hajdu, Founder
               </p>
             </div>
             <div className="about-hero-img-wrap reveal">
               <Image
                 src="/about/images/about-Dave Hajdu.jpeg"
-                alt="Dave Hajdu — Founder, Edge8"
+                alt="Dave Hajdu, Founder, Edge8"
                 width={400}
                 height={600}
                 style={{ width: '100%', borderRadius: 'var(--radius)', objectFit: 'cover' }}
@@ -91,7 +95,7 @@ export default function AboutPage() {
                 </svg>
               </div>
               <div className="problem-card-title">Employee Engagement Solutions</div>
-              <p className="problem-card-desc">Designed engagement programs for Fidelity, Sands Casino, and the Red Sox through TINYpulse — acquired by WebMD.</p>
+              <p className="problem-card-desc">Designed engagement programs for Fidelity, Sands Casino, and the Red Sox through TINYpulse, acquired by WebMD.</p>
             </div>
             <div className="problem-card reveal">
               <div className="problem-card-icon">
@@ -130,7 +134,7 @@ export default function AboutPage() {
             <span className="section-label">The Mission</span>
             <h2 className="section-title">The Greatest Evolution in Productivity</h2>
             <p style={{ fontSize: 17, color: 'var(--grey-mid)', lineHeight: 1.75, marginTop: 20 }}>
-              All these experiences have led to this pivotal moment — the greatest evolution in productivity our generation will witness: automated AI agents. Edge8 is dedicated to helping founders and their teams orchestrate these resources so they too can become tech-forward.
+              All these experiences have led to this pivotal moment: the greatest evolution in productivity our generation will witness. Automated AI agents. Edge8 is dedicated to helping founders and their teams orchestrate these resources so they too can become tech-forward.
             </p>
             <div className="mission-pull-quote">
               This journey is the most significant one we will undertake in our careers. Together with our founders&apos; and builders&apos; communities, we will navigate this new landscape, reach for limitless productivity, and become tech-forward.
@@ -225,8 +229,7 @@ export default function AboutPage() {
               <p>Ready to transform your business with AI automation? Schedule a free, no-obligation process review with our AI experts.</p>
             </div>
             <div className="audit-cta-btn reveal">
-              <Link href="/ai-capabilities-audit" className="btn btn-primary">Book Your AI Capabilities Audit</Link>
-              <a href="https://ai-officer.typeform.com/letstalk" className="btn btn-ghost" target="_blank" rel="noopener noreferrer">Schedule A Consultation</a>
+              <a href="https://ai-officer.typeform.com/letstalk" className="btn btn-primary" target="_blank" rel="noopener noreferrer">Book a Free AI Audit</a>
             </div>
           </div>
         </div>

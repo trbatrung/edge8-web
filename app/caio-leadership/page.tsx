@@ -23,9 +23,10 @@ export default function CaioLeadershipPage() {
         <div className="container">
           <div className="svc-hero-inner">
             <div className="svc-hero-text">
+              <div className="page-hero-urgency" style={{ marginBottom: 20 }}>For founders whose boards just asked about AI strategy.</div>
               <h1>Get C-Level AI Leadership Without the $300K Mistake</h1>
-              <p className="svc-hero-sub">Most companies don&apos;t need a $300K full-time CAIO. They need strategic AI leadership that drives real results — without the risk of the wrong hire.</p>
-              <a href="https://ai-officer.typeform.com/letstalk" className="btn btn-contact" target="_blank" rel="noopener noreferrer">Start with a Free Consultation →</a>
+              <p className="svc-hero-sub">Most companies don&apos;t need a $300K full-time CAIO. They need strategic AI leadership that drives real results, without the risk of the wrong hire.</p>
+              <a href="https://ai-officer.typeform.com/letstalk" className="btn btn-contact" target="_blank" rel="noopener noreferrer">Book a Free AI Audit →</a>
             </div>
             <div className="svc-hero-img">
               <Image src="/services/images/services-caio-leadership-hero.jpg" alt="CAIO Leadership" width={640} height={480} priority />
@@ -123,13 +124,13 @@ export default function CaioLeadershipPage() {
             <div className="choice-card reveal">
               <div className="choice-label">Option A</div>
               <div className="choice-title">Strategic Advisory</div>
-              <p className="choice-desc">Dave Hajdu serves as your advisory CAIO — attending key meetings, guiding AI strategy, and helping you build internal capability over time.</p>
+              <p className="choice-desc">Dave Hajdu serves as your advisory CAIO, attending key meetings, guiding AI strategy, and helping you build internal capability over time.</p>
               <div className="choice-outcome">Best for: Companies beginning their AI journey</div>
             </div>
             <div className="choice-card featured reveal">
               <div className="choice-label">Option B · Most Popular</div>
               <div className="choice-title">Fractional CAIO</div>
-              <p className="choice-desc">Dedicated part-time AI leadership embedded in your organization. We own the AI program, manage the team, and drive results — just like a full-time executive.</p>
+              <p className="choice-desc">Dedicated part-time AI leadership embedded in your organization. We own the AI program, manage the team, and drive results, just like a full-time executive.</p>
               <div className="choice-outcome">Best for: Companies scaling AI programs</div>
             </div>
             <div className="choice-card reveal">
@@ -219,7 +220,7 @@ export default function CaioLeadershipPage() {
               <p className="section-sub">Schedule a free consultation to find the right CAIO model for your organization.</p>
             </div>
             <div className="contact-blue-cta reveal">
-              <a href="https://ai-officer.typeform.com/letstalk" className="btn btn-contact" target="_blank" rel="noopener noreferrer">Schedule A Consultation →</a>
+              <a href="https://ai-officer.typeform.com/letstalk" className="btn btn-contact" target="_blank" rel="noopener noreferrer">Start Your AI Program →</a>
             </div>
           </div>
         </div>

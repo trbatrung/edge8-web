@@ -5,7 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 const testimonials = [
-  { text: "I invited Dave to speak at the AI Summit in Sabah, and he was a natural on stage, bringing a fresh style the audience loved.", name: 'Dato George Lim', role: 'Founder & CEO — G&A GROUP & GA SPACE', avatar: '/services/images/services-ai-capabilities-audit-testimonials-Dato.jpg' },
+  { text: "I invited Dave to speak at the AI Summit in Sabah, and he was a natural on stage, bringing a fresh style the audience loved.", name: 'Dato George Lim', role: 'Founder & CEO, G&A GROUP & GA SPACE', avatar: '/services/images/services-ai-capabilities-audit-testimonials-Dato.jpg' },
   { text: "Dave was able to greatly expand our general knowledge of AI and demystify the challenges of implementation. I highly recommend Edge8.ai as a YPO resource.", name: 'John VanNewkirk', role: 'YPO Gold Seattle, Forum 6', avatar: '/homepage/images/home-page-testimonials-John.jpg' },
   { text: "He was extremely knowledgeable and engaging. Real-world experiences complemented our class discussions perfectly.", name: 'Dr. Brooks Holtom', role: 'Professor of Management, Georgetown', avatar: '/homepage/images/home-page-testimonials-Dr Holtom.jpg' },
   { text: "Love the new look and branding. The website looks so good. I'm deeply grateful.", name: 'Dao Nguyen', role: 'Founder, DN Legal', avatar: '/homepage/images/home-page-testimonials-Dao Nguyen.jpg' },
@@ -103,8 +103,8 @@ export default function AiCapabilitiesAuditPage() {
           <div className="svc-hero-inner">
             <div className="svc-hero-text">
               <h1>Turn Your AI Experiments Into ROI-Driving Systems</h1>
-              <p className="svc-hero-sub">Stop guessing about AI. Get a clear roadmap from experts who&apos;ve built real AI programs — not just consultants who theorize about them.</p>
-              <a href="https://ai-officer.typeform.com/letstalk" className="btn btn-contact" target="_blank" rel="noopener noreferrer">Book Your Free Audit →</a>
+              <p className="svc-hero-sub">Stop guessing about AI. Get a clear roadmap from experts who&apos;ve built real AI programs, not from consultants who only theorize about them.</p>
+              <a href="https://ai-officer.typeform.com/letstalk" className="btn btn-contact" target="_blank" rel="noopener noreferrer">Book a Free AI Audit →</a>
             </div>
             <div className="svc-hero-img">
               <Image src="/services/images/services-ai-capabilities-audit-hero.jpg" alt="AI Capabilities Audit" width={640} height={480} priority />
@@ -122,7 +122,7 @@ export default function AiCapabilitiesAuditPage() {
           </div>
           <div className="stat-pullquote reveal" style={{ marginTop: 48 }}>
             <div className="stat-num">95%</div>
-            <p>of companies report ZERO return on investment despite massive AI investment — MIT Sloan Research</p>
+            <p>of companies report ZERO return on investment despite massive AI investment. Source: MIT Sloan Research.</p>
           </div>
           <div className="problem-cards" style={{ marginTop: 48 }}>
             <div className="problem-card reveal">
@@ -151,7 +151,7 @@ export default function AiCapabilitiesAuditPage() {
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
               </div>
               <div className="problem-card-title">Wrong Metrics</div>
-              <p className="problem-card-desc">Teams measure AI by adoption, not by business impact — so they never know if it&apos;s working.</p>
+              <p className="problem-card-desc">Teams measure AI by adoption, not by business impact, so they never know if it&apos;s working.</p>
             </div>
           </div>
         </div>
@@ -279,7 +279,7 @@ export default function AiCapabilitiesAuditPage() {
               <p className="section-sub">Join the companies already seeing real ROI from structured AI programs.</p>
             </div>
             <div className="contact-blue-cta reveal">
-              <a href="https://ai-officer.typeform.com/letstalk" className="btn btn-contact" target="_blank" rel="noopener noreferrer">Schedule A Consultation →</a>
+              <a href="https://ai-officer.typeform.com/letstalk" className="btn btn-contact" target="_blank" rel="noopener noreferrer">Start Your AI Program →</a>
             </div>
           </div>
         </div>
