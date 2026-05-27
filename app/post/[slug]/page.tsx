@@ -11,9 +11,29 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: { params: { slug: string } }) {
   const post = allPosts.find((p) => p.slug === params.slug)
   if (!post) return {}
+  const title = `${post.title} | Edge8 Blog`
+  // Prefer real excerpt; fall back to a short generated line so Google never sees "8 min read · Innovation"
+  const description = (post.excerpt && post.excerpt.length > 30)
+    ? post.excerpt.slice(0, 160)
+    : `${post.title}. ${post.readTime} on AI and business by Edge8.`
+  const canonical = `/post/${post.slug}`
   return {
-    title: `${post.title} | Edge8 Blog`,
-    description: `${post.readTime} · ${post.category}`,
+    title,
+    description,
+    alternates: { canonical },
+    openGraph: {
+      title,
+      description,
+      url: canonical,
+      type: 'article',
+      images: post.image ? [{ url: post.image }] : undefined,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: post.image ? [post.image] : undefined,
+    },
   }
 }
 

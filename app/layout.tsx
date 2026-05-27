@@ -23,6 +23,28 @@ export const metadata: Metadata = {
   },
 }
 
+const organizationJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'Edge8',
+  alternateName: 'Edge8 AI',
+  url: 'https://www.edge8.ai',
+  logo: 'https://www.edge8.ai/logo.png',
+  description:
+    'Edge8 helps founders be Tech-Forward through AI Programs, fractional CAIO leadership, AI Officer Certification, and global AI talent staffing.',
+  founder: { '@type': 'Person', name: 'Dave Hajdu' },
+  sameAs: ['https://www.linkedin.com/company/edge8ai/'],
+  contactPoint: [
+    {
+      '@type': 'ContactPoint',
+      contactType: 'sales',
+      email: 'hello@edge8.ai',
+      areaServed: ['US', 'VN', 'SG', 'MY'],
+      availableLanguage: ['English'],
+    },
+  ],
+}
+
 export default function RootLayout({
   children,
 }: {
@@ -31,6 +53,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+        />
         <Nav />
         {children}
         <Footer />
