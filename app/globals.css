@@ -765,6 +765,66 @@ nav {
   margin-top: 4px;
 }
 
+/* ─── WHY CLAUDE ─────────────────────────────────── */
+.claude { background: var(--tint); }
+.claude-header { max-width: 800px; }
+.claude-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 40px 0 56px;
+}
+.claude-stack-chip {
+  display: inline-flex;
+  align-items: center;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--blue);
+  background: var(--white);
+  border: 1px solid rgba(40,123,232,0.20);
+  padding: 8px 16px;
+  border-radius: 100px;
+  letter-spacing: 0.01em;
+}
+.claude-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.claude-card {
+  background: var(--white);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  padding: 40px 32px;
+  transition: var(--transition);
+}
+.claude-card:hover {
+  border-color: var(--blue);
+  box-shadow: 0 4px 16px rgba(16,16,20,0.06);
+  transform: translateY(-2px);
+}
+.claude-card-num {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  color: var(--blue);
+  margin-bottom: 20px;
+}
+.claude-card-title {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--dark);
+  line-height: 1.25;
+  margin-bottom: 16px;
+}
+.claude-card-body {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--body-text);
+}
+
 /* ─── WHY AI ────────────────────────────────────────── */
 .why-ai { background: var(--white); }
 .why-ai-inner {
@@ -2159,6 +2219,10 @@ footer {
   .engage-price { padding: 28px 24px; }
   .engage-transparency { padding: 32px 24px; }
   .engage-transparency-list { grid-template-columns: 1fr; gap: 20px; }
+  .claude-grid { grid-template-columns: 1fr; gap: 16px; }
+  .claude-card { padding: 32px 24px; }
+  .claude-stack { margin: 32px 0 40px; gap: 8px; }
+  .claude-stack-chip { font-size: 12px; padding: 6px 12px; }
   .contact-blue-inner { grid-template-columns: 1fr; gap: 40px; text-align: center; }
   .contact-blue-cta { justify-content: center; }
   .contact-blue-inner .section-title,

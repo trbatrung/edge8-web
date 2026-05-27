@@ -610,6 +610,43 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ═══ WHY CLAUDE ═══════════════════════════════════ */}
+      <section className="claude section" id="claude">
+        <div className="container">
+          <div className="claude-header reveal">
+            <span className="section-label">Built on Claude</span>
+            <h2 className="section-title">Why Claude Is Our Tool of Choice</h2>
+            <p className="section-sub" style={{ marginTop: 16 }}>We are an Anthropic shop, top to bottom. Claude Code, Claude Co-Work, team accounts, shared projects. Every client engagement runs on the same stack we use ourselves, with the same transparency: Claude tokens, human tokens, and every pull request tracked in GitHub.</p>
+          </div>
+
+          <div className="claude-stack reveal">
+            <span className="claude-stack-chip">Claude Code</span>
+            <span className="claude-stack-chip">Claude Co-Work</span>
+            <span className="claude-stack-chip">Team Accounts</span>
+            <span className="claude-stack-chip">Shared Projects</span>
+            <span className="claude-stack-chip">Claude Tokens</span>
+          </div>
+
+          <div className="claude-grid">
+            <div className="claude-card reveal">
+              <div className="claude-card-num">01</div>
+              <div className="claude-card-title">It is the best coder we have ever used.</div>
+              <p className="claude-card-body">We have tried every model. Claude ships production code without babysitting. Claude Code with sub-agents handles full features in a single session. That is the difference between a tool and a teammate.</p>
+            </div>
+            <div className="claude-card reveal">
+              <div className="claude-card-num">02</div>
+              <div className="claude-card-title">It refuses to fake it.</div>
+              <p className="claude-card-body">Other models hallucinate confidently when they do not know. Claude says &ldquo;I do not know&rdquo; and asks for context. For client work, where wrong answers cost real money, that one trait beats any benchmark on a leaderboard.</p>
+            </div>
+            <div className="claude-card reveal">
+              <div className="claude-card-num">03</div>
+              <div className="claude-card-title">Anthropic ships responsibly.</div>
+              <p className="claude-card-body">Constitutional AI is not a slogan. When Claude updates, the agents we shipped last month still work the same way. We can promise clients that the system we build today is still working in six months. Most foundation labs cannot say that.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ═══ CONTACT — TYPEFORM ══════════════════════════ */}
       <section className="contact-blue section" id="contact">
         <div className="container">
