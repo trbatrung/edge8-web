@@ -2,8 +2,7 @@ import { Resend } from 'resend'
 import { createClient } from '@supabase/supabase-js'
 import { NextRequest, NextResponse } from 'next/server'
 
-const TO   = process.env.CONTACT_EMAIL   ?? 'anh.pham@edge8.ai'
-const FROM = 'Edge8 Contact <contact@edge8.ai>'
+const FROM  = 'Edge8 <contact@edge8.ai>'
 const TABLE = process.env.SUPABASE_CONTACT_TABLE ?? 'contacts'
 
 export async function POST(req: NextRequest) {
@@ -18,10 +17,14 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 })
     }
 
+    // Recipients — split ADMIN_EMAILS CSV or fall back
+    const to = (process.env.ADMIN_EMAILS ?? 'dave@edge8.ai')
+      .split(',').map((e: string) => e.trim()).filter(Boolean)
+
     // 1️⃣ Save to Supabase
     const supabase = createClient(
       process.env.SUPABASE_URL!,
-      process.env.SUPABASE_SERVICE_KEY!
+      process.env.SUPABASE_SECRET_KEY!
     )
     const { error: dbError } = await supabase.from(TABLE).insert({
       name,
@@ -40,7 +43,7 @@ export async function POST(req: NextRequest) {
     const resend = new Resend(process.env.RESEND_API_KEY)
     await resend.emails.send({
       from: FROM,
-      to:   TO,
+      to,
       replyTo: email,
       subject: `New AI Audit Request — ${name} at ${company}`,
       html: `
