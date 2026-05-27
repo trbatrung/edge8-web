@@ -2,8 +2,7 @@ import { Resend } from 'resend'
 import { createClient } from '@supabase/supabase-js'
 import { NextRequest, NextResponse } from 'next/server'
 
-const FROM  = 'Edge8 <contact@edge8.ai>'
-const TABLE = process.env.SUPABASE_CONTACT_TABLE ?? 'contacts'
+const FROM = 'Edge8 <contact@edge8.ai>'
 
 export async function POST(req: NextRequest) {
   try {
@@ -21,23 +20,31 @@ export async function POST(req: NextRequest) {
     const to = (process.env.ADMIN_EMAILS ?? 'dave@edge8.ai')
       .split(',').map((e: string) => e.trim()).filter(Boolean)
 
-    // 1️⃣ Save to Supabase
+    // 1️⃣ Save to Supabase — same schema as AIO (people + inquiries)
     const supabase = createClient(
       process.env.SUPABASE_URL!,
       process.env.SUPABASE_SECRET_KEY!
     )
-    const { error: dbError } = await supabase.from(TABLE).insert({
-      name,
-      email,
-      company,
-      team_size: teamSize || null,
-      message:   message  || null,
-      source:    'edge8.ai',
-    })
-    if (dbError) {
-      console.error('Supabase insert error:', dbError)
-      // Still attempt email even if DB write fails
-    }
+
+    const { data: person, error: peopleError } = await supabase
+      .from('people')
+      .insert({ name, email, company, source: 'edge8.ai' })
+      .select('id')
+      .single()
+    if (peopleError) console.error('Supabase people error:', peopleError)
+
+    const { error: inquiryError } = await supabase
+      .from('inquiries')
+      .insert({
+        person_id:  person?.id ?? null,
+        name,
+        email,
+        company,
+        team_size:  teamSize || null,
+        message:    message  || null,
+        source:     'edge8.ai',
+      })
+    if (inquiryError) console.error('Supabase inquiries error:', inquiryError)
 
     // 2️⃣ Send email via Resend
     const resend = new Resend(process.env.RESEND_API_KEY)
