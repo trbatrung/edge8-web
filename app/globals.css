@@ -621,16 +621,16 @@ nav {
 .why-right p strong { color: var(--dark); font-weight: 500; }
 
 /* ─── PHOTO GALLERY ─────────────────────────────────── */
-.photo-gallery { width: 100%; overflow: hidden; }
+.photo-gallery { width: 100%; overflow: hidden; line-height: 0; }
 .photo-gallery-track {
   display: flex;
-  width: max-content;
-  animation: gallery-scroll 20s linear infinite;
+  width: calc(50vw * 8);
+  animation: gallery-scroll 22s linear infinite;
 }
 .photo-gallery-track:hover { animation-play-state: paused; }
 .photo-gallery-slide {
   width: 50vw;
-  height: 420px;
+  height: 440px;
   flex-shrink: 0;
   overflow: hidden;
 }
@@ -642,7 +642,7 @@ nav {
 }
 @keyframes gallery-scroll {
   0%   { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  100% { transform: translateX(calc(-50vw * 4)); }
 }
 
 /* ─── YOUTUBE SLIDER ─────────────────────────────────── */
