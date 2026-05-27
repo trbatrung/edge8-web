@@ -295,7 +295,7 @@ export default function HomePage() {
           {[1, 2, 3, 4, 1, 2, 3, 4].map((n, i) => (
             <div key={i} className="photo-gallery-slide">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={`/homepage/${n}.jpg`} alt={`Edge8 ${n}`} />
+              <img src={`/homepage/images/${n}.jpg`} alt={`Edge8 ${n}`} />
             </div>
           ))}
         </div>
