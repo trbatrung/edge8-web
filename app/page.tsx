@@ -5,11 +5,22 @@ import Link from 'next/link'
 import Image from 'next/image'
 import Script from 'next/script'
 
+const stepsData = [
+  { pct: '10%',  title: 'Get Started',           desc: 'Join a community to learn how your peers and experts are using AI' },
+  { pct: '20%',  title: 'Company Alignment',      desc: 'Ensure leadership and employees are aligned on the strategic potential of AI. Assign a dedicated AI Officer to lead implementation.' },
+  { pct: '30%',  title: 'Organize Your Data',     desc: 'Create your company database, starting with just the right amount of data for your first program' },
+  { pct: '40%',  title: 'Build AI Agents',        desc: 'Develop intelligent AI agents that assist with tasks, improving decision-making and efficiency' },
+  { pct: '50%',  title: 'Hire AI-Driven Talent',  desc: 'Leverage local and global talent and onboard AI-empowered people to enhance your workforce' },
+  { pct: '60%',  title: 'Scale AI-Orchestration', desc: 'Implement AI Programs across your organization and start generating revenue, increasing operational efficiency, and developing your talent' },
+  { pct: '80%',  title: 'Full System Integration',desc: 'Replace antiquated systems and processes with a new AI-Driven approach, led by AI Officers who understand your business and your technology' },
+  { pct: '100%', title: 'Tech-Forward ✦',         desc: 'Reclaim Your Time. With AI automating repetitive work, focus on what truly matters—growing your business while achieving 8x efficiency.' },
+]
+
 const testimonials = [
   {
     text: "I invited Dave to speak at the AI Summit in Sabah, and he was a natural on stage, bringing a fresh style the audience loved. We are looking forward to collaborating with the AI Officer Institute and Edge8 to bring their AI Certification Program to Malaysia and have signed an MOU to broaden the reach of our organization.",
     name: 'Dato George Lim',
-    role: 'Founder & CEO, G&A GROUP & GA SPACE',
+    role: 'Founder & CEO — G&A GROUP & GA SPACE',
     avatar: '/homepage/images/home-page-testimonials-Dato.jpg',
   },
   {
@@ -50,9 +61,15 @@ const T_REAL_OFFSET = T_COUNT
 const extTestimonials = [...testimonials, ...testimonials, ...testimonials]
 
 export default function HomePage() {
+  const [activeStep, setActiveStep] = useState(0)
   const [activeExtIdx, setActiveExtIdx] = useState(T_REAL_OFFSET)
   // formStatus kept for potential reuse on other pages
   const [formStatus, setFormStatus] = useState<'idle' | 'sending' | 'sent'>('idle')
+  const [statsVisible, setStatsVisible] = useState(false)
+  const [statCounts, setStatCounts] = useState([0, 0, 0])
+  const [photoIdx, setPhotoIdx] = useState(0)
+  const statsRef = useRef<HTMLDivElement>(null)
+  const stepsTimelineRef = useRef<HTMLDivElement>(null)
   const viewportRef = useRef<HTMLDivElement>(null)
   const trackRef = useRef<HTMLDivElement>(null)
   const snapTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
@@ -76,6 +93,24 @@ export default function HomePage() {
     )
     document.querySelectorAll('.reveal').forEach((el) => observer.observe(el))
     return () => observer.disconnect()
+  }, [])
+
+  // Steps auto-init on scroll
+  useEffect(() => {
+    if (!stepsTimelineRef.current) return
+    const obs = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setTimeout(() => setActiveStep(0), 300)
+            obs.unobserve(entry.target)
+          }
+        })
+      },
+      { threshold: 0.3 }
+    )
+    obs.observe(stepsTimelineRef.current)
+    return () => obs.disconnect()
   }, [])
 
   // Testimonials scroll sync (infinite loop)
@@ -137,6 +172,36 @@ export default function HomePage() {
     }
   }, [])
 
+  // Stats counter — trigger on scroll into view
+  useEffect(() => {
+    if (!statsRef.current) return
+    const obs = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting) { setStatsVisible(true); obs.disconnect() }
+    }, { threshold: 0.4 })
+    obs.observe(statsRef.current)
+    return () => obs.disconnect()
+  }, [])
+
+  useEffect(() => {
+    if (!statsVisible) return
+    const targets = [182, 12, 29]
+    const duration = 1800
+    const start = Date.now()
+    const tick = () => {
+      const t = Math.min((Date.now() - start) / duration, 1)
+      const ease = 1 - Math.pow(1 - t, 3)
+      setStatCounts(targets.map(v => Math.round(v * ease)))
+      if (t < 1) requestAnimationFrame(tick)
+    }
+    requestAnimationFrame(tick)
+  }, [statsVisible])
+
+  // Photo slider auto-advance
+  useEffect(() => {
+    const id = setInterval(() => setPhotoIdx(p => (p + 1) % 4), 4000)
+    return () => clearInterval(id)
+  }, [])
+
   const scrollToTestimonial = useCallback((realIdx: number) => {
     const viewport = viewportRef.current
     const track = trackRef.current
@@ -150,6 +215,8 @@ export default function HomePage() {
       viewport.scrollTo({ left: cards[extIdx].offsetLeft - pad, behavior: 'smooth' })
     }
   }, [currentTestimonial])
+
+  const progressPositions = [0, 100/7, 200/7, 300/7, 400/7, 500/7, 600/7, 100]
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -171,70 +238,82 @@ export default function HomePage() {
           <div className="hero-content">
             <div className="hero-eyebrow">Be Tech-Forward</div>
             <h1 className="hero-headline">
-              It&apos;s Time to Stop Using AI<br />
-              and Start <span className="accent">Leading It</span>
+              <span className="num">8</span><span className="x">x</span> IMPACT
             </h1>
-            <p className="hero-sub">
-              Founders who <span className="accent">Lead AI</span> Build faster. Hire smarter. Ship more.
-            </p>
+            <p className="hero-sub">Stop overthinking AI—Start implementing your AI Programs</p>
+            <div className="hero-actions">
+              <a href="https://ai-officer.typeform.com/letstalk" className="btn btn-primary" target="_blank" rel="noopener noreferrer">Schedule A Consultation</a>
+            </div>
+          </div>
+        </div>
+        <div className="hero-video-wrap">
+          <div className="hero-video-frame">
+            <video autoPlay muted loop playsInline className="hero-video">
+              <source src="/homepage/images/home-page-hero.mp4" type="video/mp4" />
+            </video>
+            <div className="hero-video-overlay" />
+          </div>
+        </div>
+        <div className="hero-scroll">
+          <div className="scroll-line" />
+          <span>Scroll</span>
+        </div>
+      </section>
+
+      {/* ═══ STATS ═══════════════════════════════════════════ */}
+      <section className="stats-section" ref={statsRef as React.RefObject<HTMLElement>}>
+        <div className="container">
+          <div className="stats-grid">
+            {[
+              { num: statCounts[0], label: 'Workflows Automated', desc: 'with AI Agents running across our client base' },
+              { num: statCounts[1], label: 'Leadership Teams', desc: 'certified to run AI on their own' },
+              { num: statCounts[2], label: 'New Revenue Streams', desc: 'launched by 7 clients in the last 3 months' },
+            ].map((s, i) => (
+              <div key={i} className="stat-item reveal">
+                <div className="stat-num">{s.num}</div>
+                <div className="stat-label">{s.label}</div>
+                <div className="stat-desc">{s.desc}</div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* ═══ HERO STATS STRIP ═══════════════════════════════ */}
-      <section className="hero-stats" aria-label="Edge8 program results to date">
+      {/* ═══ WHAT CHANGES ════════════════════════════════════ */}
+      <section className="what-changes section">
         <div className="container">
-          <div className="hero-stats-grid">
-            <div className="hero-stat reveal">
-              <div className="hero-stat-number">182</div>
-              <div className="hero-stat-label">Workflows Automated</div>
-              <div className="hero-stat-sub">with AI Agents running across our client base</div>
-            </div>
-            <div className="hero-stat reveal">
-              <div className="hero-stat-number">12</div>
-              <div className="hero-stat-label">Leadership Teams</div>
-              <div className="hero-stat-sub">certified to run AI on their own</div>
-            </div>
-            <div className="hero-stat reveal">
-              <div className="hero-stat-number">29</div>
-              <div className="hero-stat-label">New Revenue Streams</div>
-              <div className="hero-stat-sub">launched by 7 clients in the last 3 months</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ═══ THE SHIFT ════════════════════════════════════════ */}
-      <section className="shift section" id="shift">
-        <div className="container">
-          <div className="shift-header reveal">
+          <div className="what-changes-header reveal">
             <span className="section-label">What Changes</span>
             <h2 className="section-title">What Happens When AI Agents Start Joining Your Team</h2>
-            <p className="section-sub" style={{ marginTop: 16 }}>
-              Adding ChatGPT to your tools is not the change. Hiring an AI agent that does a real job, every day, sitting next to your people, is the change. Here is what we have seen happen inside every company that crosses that line.
-            </p>
+            <p className="section-sub" style={{ marginTop: 20 }}>Adding ChatGPT to your tools is not the change. Hiring an AI agent that does a real job, every day, sitting next to your people, is the change. Here is what we have seen happen inside every company that crosses that line.</p>
           </div>
-          <div className="shift-grid">
-            <div className="shift-card reveal">
-              <div className="shift-num">01</div>
-              <div className="shift-card-title">Leadership Has to Level Up</div>
-              <p className="shift-card-desc">Managing humans is one skill. Orchestrating humans and AI agents is another. The leaders who adapt fastest become the most valuable people in the company. The ones who do not get routed around.</p>
+          <div className="what-changes-grid">
+            <div className="change-item reveal">
+              <div className="change-icon">
+                <svg viewBox="0 0 24 24" fill="#287be8" width="28" height="28"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+              </div>
+              <h3 className="change-title">Leadership Has to Level Up</h3>
+              <p className="change-desc">Managing humans is one skill. Orchestrating humans and AI agents is another. The leaders who adapt fastest become the most valuable people in the company. The ones who do not get routed around.</p>
             </div>
-            <div className="shift-card reveal">
-              <div className="shift-num">02</div>
-              <div className="shift-card-title">Everything Speeds Up</div>
-              <p className="shift-card-desc">Cycles that took weeks compress into days. Days compress into hours. Meetings, reporting, planning, all of it has to be rebuilt for the new pace.</p>
+            <div className="change-item reveal">
+              <div className="change-icon">
+                <svg viewBox="0 0 24 24" fill="#287be8" width="28" height="28"><path d="M11 21h-1l1-7H7.5c-.58 0-.57-.32-.38-.66.19-.34.05-.08.07-.12C8.48 10.94 10.42 7.54 13 3h1l-1 7h3.5c.49 0 .56.33.47.51l-.07.15C12.96 17.55 11 21 11 21z"/></svg>
+              </div>
+              <h3 className="change-title">Everything Speeds Up</h3>
+              <p className="change-desc">Cycles that took weeks compress into days. Days compress into hours. Meetings, reporting, planning, all of it has to be rebuilt for the new pace.</p>
             </div>
-            <div className="shift-card reveal">
-              <div className="shift-num">03</div>
-              <div className="shift-card-title">Hidden Mess Surfaces</div>
-              <p className="shift-card-desc">AI agents do not tolerate the workarounds your team has been quietly carrying for years. Bad data, broken handoffs, undocumented processes, all of it gets exposed. The cleanup is the real work.</p>
+            <div className="change-item reveal">
+              <div className="change-icon">
+                <svg viewBox="0 0 24 24" fill="#287be8" width="28" height="28"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+              </div>
+              <h3 className="change-title">Hidden Mess Surfaces</h3>
+              <p className="change-desc">AI agents do not tolerate the workarounds your team has been quietly carrying for years. Bad data, broken handoffs, undocumented processes, all of it gets exposed. The cleanup is the real work.</p>
             </div>
           </div>
-          <div className="shift-payoff reveal">
-            <div className="shift-payoff-eyebrow">And Then</div>
-            <h3 className="shift-payoff-title">The magic happens.</h3>
-            <p className="shift-payoff-body">Your people get their time back. They stop chasing inboxes and start building the things only humans can build. Innovation becomes the default, not the exception. The company grows with fewer hires, smaller teams, and bigger output. That is what Tech-Forward looks like.</p>
+          <div className="change-coda reveal">
+            <div className="change-coda-label">And Then</div>
+            <h3 className="change-coda-title">The magic happens.</h3>
+            <p className="change-coda-text">Your people get their time back. They stop chasing inboxes and start building the things only humans can build. Innovation becomes the default, not the exception. The company grows with fewer hires, smaller teams, and bigger output. That is what Tech-Forward looks like.</p>
           </div>
         </div>
       </section>
@@ -249,9 +328,39 @@ export default function HomePage() {
             </div>
             <div className="why-right reveal">
               <p><strong>Ad-hoc usage of AI is limiting you to minimal gains.</strong></p>
-              <p style={{ marginTop: 16 }}>Lack of focus traps your business in mediocrity, keeping you stuck in repetitive tasks, wasted resources, and missed opportunities. Without a structured AI Program, competitors will outpace you, innovation stalls, costs balloon, and growth suffers.</p>
+              <p style={{ marginTop: 16 }}>Lack of focus traps your business in mediocrity—keeping you stuck in repetitive tasks, wasted resources, and missed opportunities. Without a structured AI Program, competitors will outpace you, innovation stalls, costs balloon, and growth suffers.</p>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* ═══ PHOTO SLIDER ════════════════════════════════════ */}
+      <section className="photo-slider">
+        <div
+          className="photo-slider-track"
+          style={{ transform: `translateX(-${photoIdx * 25}%)` }}
+        >
+          {[1, 2, 3, 4].map(n => (
+            <div key={n} className="photo-slider-slide">
+              <Image
+                src={`/homepage/${n}.jpg`}
+                alt={`Edge8 team ${n}`}
+                fill
+                style={{ objectFit: 'cover' }}
+                priority={n === 1}
+              />
+            </div>
+          ))}
+        </div>
+        <div className="photo-slider-dots">
+          {[0, 1, 2, 3].map(i => (
+            <button
+              key={i}
+              className={`photo-dot${i === photoIdx ? ' active' : ''}`}
+              onClick={() => setPhotoIdx(i)}
+              aria-label={`Go to slide ${i + 1}`}
+            />
+          ))}
         </div>
       </section>
 
@@ -314,103 +423,255 @@ export default function HomePage() {
               </button>
             </div>
           </div>
+          {/* YouTube video slider */}
+          <div className="yt-slider-wrap">
+            <div className="yt-viewport">
+              <div className="yt-track">
+                {[
+                  'rDBdMsdRTRY','DbhyzpSFr1w','aIlclgK1nug','0-sIvgjdiT0',
+                  'alum53SduUQ','a37EulY41-8','HvEqBCwOKrE','_TgbAOyOsCY',
+                ].map((id) => (
+                  <div key={id} className="yt-card">
+                    <iframe
+                      src={`https://www.youtube.com/embed/${id}`}
+                      title={`Edge8 video`}
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      loading="lazy"
+                      className="yt-iframe"
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="yt-nav">
+              <button className="testimonials-arrow" aria-label="Previous videos" onClick={() => {
+                const vp = document.querySelector('.yt-viewport') as HTMLElement
+                if (vp) vp.scrollBy({ left: -440, behavior: 'smooth' })
+              }}>
+                <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6" /></svg>
+              </button>
+              <button className="testimonials-arrow" aria-label="Next videos" onClick={() => {
+                const vp = document.querySelector('.yt-viewport') as HTMLElement
+                if (vp) vp.scrollBy({ left: 440, behavior: 'smooth' })
+              }}>
+                <svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18" /></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ TECH-FORWARD DEFINITION ═══════════════════════ */}
+      <section className="definition section">
+        <div className="container">
+          <div className="definition-inner reveal">
+            <div className="definition-word">Tech-Forward</div>
+            <div className="definition-phonetic">/ˈtɛk ˈfɔrwərd/ &nbsp;·&nbsp; <em>adjective</em></div>
+            <p className="definition-text">
+              Describing an organization or individual with the capability to strategically orchestrate AI resources to drive measurable value within their department or business.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ 8 STEPS ══════════════════════════════════════ */}
+      <section className="steps section" id="steps">
+        <div className="container">
+          <div className="steps-header reveal">
+            <span className="section-label">The Framework</span>
+            <h2 className="section-title">8 Steps to Becoming Tech-Forward</h2>
+            <p className="section-sub">Orchestrate AI Resources for Maximum Impact, and you will unlock new levels of efficiency, automation, and decision-making in your business.</p>
+          </div>
+          <div className="steps-timeline reveal" ref={stepsTimelineRef}>
+            <div className="steps-track-container">
+              <div className="steps-progress-bar">
+                <div
+                  className="steps-progress-fill"
+                  style={{ width: `${progressPositions[activeStep]}%` }}
+                />
+              </div>
+              <div className="steps-milestones">
+                {stepsData.map((s, i) => (
+                  <button
+                    key={i}
+                    className={`step-milestone${i === activeStep ? ' active' : ''}${i < activeStep ? ' completed' : ''}${i === 7 ? ' final' : ''}`}
+                    onClick={() => setActiveStep(i)}
+                  >
+                    <div className="step-dot">{String(i + 1).padStart(2, '0')}</div>
+                    <div className="step-dot-label">
+                      {['Get\nStarted', 'Company\nAlignment', 'Organize\nData', 'Build AI\nAgents', 'Hire\nTalent', 'Scale AI\nOrch.', 'Full\nIntegration', 'Tech-\nForward'][i]}
+                    </div>
+                  </button>
+                ))}
+              </div>
+            </div>
+            <div className="steps-panel">
+              <div className={`steps-panel-inner${activeStep === 7 ? ' final' : ''}`}>
+                <div className="steps-panel-num">{String(activeStep + 1).padStart(2, '0')}</div>
+                <div className="steps-panel-body">
+                  <div className="steps-panel-step">Step {String(activeStep + 1).padStart(2, '0')}</div>
+                  <div className="steps-panel-pct">{stepsData[activeStep].pct}</div>
+                  <div className="steps-panel-title">{stepsData[activeStep].title}</div>
+                  <div className="steps-panel-desc">{stepsData[activeStep].desc}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div style={{ textAlign: 'center', marginTop: 48 }} className="reveal">
+            <p style={{ color: 'var(--grey-mid)', marginBottom: 20, fontSize: 15 }}>Book your free consultation today and take the first step toward an AI-driven future.</p>
+            <a href="https://ai-officer.typeform.com/letstalk" className="btn btn-primary" target="_blank" rel="noopener noreferrer">Schedule A Consultation</a>
+          </div>
         </div>
       </section>
 
       {/* ═══ PARTNERS ════════════════════════════════════ */}
       <PartnerMarquee />
 
+      {/* ═══ IMPACT METRICS ═══════════════════════════════ */}
+      <section className="metrics section" id="metrics">
+        <div className="container">
+          <div className="metrics-header reveal">
+            <span className="section-label">Real Results</span>
+            <h2 className="section-title">Real Results for Real Businesses</h2>
+            <p className="section-sub" style={{ marginTop: 16 }}>Discover how Edge8 helps companies Be Tech-Forward through Global Talent Staffing, AI Programs and AI Officer Leadership.</p>
+          </div>
+          <div className="metrics-grid">
+            <div className="metric-card reveal">
+              <h3 className="metric-multiplier"><span>2</span>x</h3>
+              <h4 className="metric-area">AI Officer Leadership</h4>
+              <p className="metric-desc">Established the leadership needed to effectively run an AI Program within 10+ organizations</p>
+            </div>
+            <div className="metric-card reveal">
+              <h3 className="metric-multiplier"><span>5</span>x</h3>
+              <h4 className="metric-area">Global Talent Staffing</h4>
+              <p className="metric-desc">Helping a leading healthcare provider build a tech-forward team, doubling productivity while cutting costs dramatically</p>
+            </div>
+            <div className="metric-card reveal">
+              <h3 className="metric-multiplier"><span>8</span>x</h3>
+              <h4 className="metric-area">AI Programs</h4>
+              <p className="metric-desc">Eliminated 100% of data entry tasks, enriched entrepreneur submissions, and enhanced deal flow analysis for a Venture Capital firm</p>
+            </div>
+          </div>
+          <div style={{ textAlign: 'center', marginTop: 48 }} className="reveal">
+            <a href="#case-studies" className="btn btn-primary">View Our Success Case Studies</a>
+          </div>
+        </div>
+      </section>
+
       {/* ═══ CORE SOLUTIONS ══════════════════════════════ */}
       <section className="solutions section" id="solutions">
         <div className="container">
           <div className="solutions-header reveal">
             <span className="section-label">Core Solutions</span>
-            <h2 className="section-title">We Empower Founders to <span className="accent">Lead AI</span></h2>
+            <h2 className="section-title">AI-Powered Solutions for a Tech-Forward Future</h2>
             <p className="section-sub" style={{ marginTop: 16 }}>Empowering Organizations to use AI effectively through clear leadership, thoughtful implementation and strong global talent.</p>
           </div>
           <div className="solutions-grid">
             <div className="solution-card reveal">
-              <Image src="/homepage/images/home-page-solutions-AI Programs.jpg" alt="Lead AI Agent Teams" width={400} height={220} className="solution-img" />
+              <Image src="/homepage/images/home-page-solutions-AI Programs.jpg" alt="AI Programs" width={400} height={220} className="solution-img" />
               <div className="solution-body">
-                <h3 className="solution-title">Lead AI Agent Teams</h3>
-                <p className="solution-desc">We design, build, and deploy the AI agents that take repetitive work off your team. You become the manager of a workforce that does not sleep, does not forget, and does not quit.</p>
+                <h3 className="solution-title">AI Programs</h3>
+                <p className="solution-desc">From Strategy to Implementation, We Build not Pitch. We don&apos;t just talk AI—we build with it. From CRM flows to marketing automation, our AI solutions power content creation, sales engagement, and customer journeys.</p>
               </div>
             </div>
             <div className="solution-card reveal">
-              <Image src="/homepage/images/home-page-solutions-AI Officer Certification & Workshops.jpg" alt="Certify Your Human AI Talent" width={400} height={220} className="solution-img" />
+              <Image src="/homepage/images/home-page-solutions-Global Talent Network.jpg" alt="Global Talent Network" width={400} height={220} className="solution-img" />
               <div className="solution-body">
-                <h3 className="solution-title">Certify your Human AI Talent</h3>
-                <p className="solution-desc">The AI Officer Certification turns your managers into AI leaders. 500+ certified across Fortune 500s and SMEs. 12 months, 3 hours per week, every function in your business.</p>
+                <h3 className="solution-title">Global Talent Network</h3>
+                <p className="solution-desc">Scale Smarter with AI-Empowered Teams. Access Vietnam&apos;s top AI-trained professionals to accelerate your initiatives—without compromising on quality or speed.</p>
               </div>
             </div>
             <div className="solution-card reveal">
-              <Image src="/homepage/images/home-page-solutions-Global Talent Network.jpg" alt="Innovate like an Engineer" width={400} height={220} className="solution-img" />
+              <Image src="/homepage/images/home-page-solutions-AI Officer Certification & Workshops.jpg" alt="AI Officer Certification" width={400} height={220} className="solution-img" />
               <div className="solution-body">
-                <h3 className="solution-title">Innovate like an Engineer</h3>
-                <p className="solution-desc">Stop ideating in slides. Start prototyping in code. We teach founders and teams to ship, test, and iterate the way modern engineering teams do, with AI as the accelerant.</p>
+                <h3 className="solution-title">AI Officer Certification &amp; Workshops</h3>
+                <p className="solution-desc">Make Your Team AI-Literate and Leadership-Ready. We equip founders and teams to lead with confidence through our AI Officer certification and hands-on workshops.</p>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ═══ AI PROGRAMS ════════════════════════════════ */}
+      {/* ═══ CASE STUDIES ════════════════════════════════ */}
       <section className="case-studies section" id="case-studies">
         <div className="container">
           <div className="case-studies-header reveal">
             <div>
-              <span className="section-label">AI Programs</span>
-              <h2 className="section-title">Businesses who have learned to <span className="accent">Lead AI</span> as a part of their teams</h2>
+              <span className="section-label">Case Studies</span>
+              <h2 className="section-title">The Path to Tech-Forward</h2>
             </div>
-            <Link href="/ai-programs" className="text-link">Full List of AI Programs →</Link>
+            <Link href="/business-websites" className="text-link">Full List of Case Studies →</Link>
           </div>
           <div className="case-studies-grid">
-            <Link href="/case-studies/kyungbang-ai-program" className="case-card reveal">
-              <Image src="/case studies/images/case studies-ai programs-Kyungbang.jpeg" alt="Kyungbang" width={400} height={533} />
-              <div className="case-overlay">
-                <span className="case-tag">Manufacturing</span>
-                <div className="case-name">Kyungbang</div>
-              </div>
-            </Link>
-            <Link href="/case-studies/veracity-ai-program" className="case-card reveal">
-              <Image src="/case studies/images/case studies-ai programs-Veracity.jpeg" alt="Veracity" width={400} height={533} />
+            <Link href="/case-studies/pho24" className="case-card reveal">
+              <Image src="/homepage/images/home-page-case studies-PHO24.jpg" alt="PHO24" width={400} height={533} />
               <div className="case-overlay">
                 <span className="case-tag">AI Agents</span>
-                <div className="case-name">Veracity</div>
+                <div className="case-name">PHO24</div>
               </div>
             </Link>
-            <Link href="/case-studies/wink-hotels-travel-buddy" className="case-card reveal">
-              <Image src="/case studies/images/case studies-ai programs-Wink Hotels (Travel Buddy).jpeg" alt="Wink Hotels" width={400} height={533} />
+            <Link href="/case-studies/investmigrate" className="case-card reveal">
+              <Image src="/homepage/images/home-page-case studies-InvestMigrate.jpg" alt="InvestMigrate" width={400} height={533} />
               <div className="case-overlay">
-                <span className="case-tag">AI Concierge</span>
-                <div className="case-name">Wink Hotels</div>
+                <span className="case-tag">Featured</span>
+                <div className="case-name">InvestMigrate</div>
               </div>
             </Link>
-          </div>
-          <div style={{ textAlign: 'center', marginTop: 48 }} className="reveal">
-            <Link href="/ai-programs" className="btn btn-primary">View Our Success Case Studies</Link>
+            <Link href="/case-studies/vespa-adventures" className="case-card reveal">
+              <Image src="/homepage/images/home-page-case studies-Vespa Adventures.jpg" alt="Vespa Adventures" width={400} height={533} />
+              <div className="case-overlay">
+                <span className="case-tag">AI Program</span>
+                <div className="case-name">Vespa Adventures</div>
+              </div>
+            </Link>
           </div>
         </div>
       </section>
 
-      {/* ═══ MENTAL MODELS ════════════════════════════════ */}
-      <section className="mental section" id="mental">
+      {/* ═══ SOLUTIONS DETAIL ════════════════════════════ */}
+      <section className="solutions-detail section" id="solutions-detail">
         <div className="container">
-          <div className="mental-header reveal">
-            <span className="section-label mental-label">Mental Models</span>
-            <h2 className="section-title mental-title">How We Think About Building With AI</h2>
-            <p className="section-sub mental-sub">Two ideas shape how we design every engagement. They are how we differ from the consultants who just talk about AI.</p>
+          <div className="solutions-detail-header reveal">
+            <span className="section-label">What We Do</span>
+            <h2 className="section-title">AI Automation Designed to Elevate Your Business</h2>
           </div>
-          <div className="mental-grid">
-            <div className="mental-card reveal">
-              <div className="mental-tag">Mental Model 01</div>
-              <div className="mental-claim">The Folder Is the Agent.</div>
-              <p className="mental-body">We obsess over the Claude environment. How agents and sub-agents are structured. How information is organized. How workflows are designed. What guardrails are in place. When the structure is right, the agent is right. When the structure is wrong, no prompt can save you. Most companies try to bolt AI onto chaos. We help you build the structure first, so the agent has somewhere to stand.</p>
+          <div className="solutions-detail-grid">
+            <div className="sol-tile reveal">
+              <div className="sol-icon">✦</div>
+              <div className="sol-title">Personal Branding with AI</div>
+              <p className="sol-desc">Build your brands similar to leaders like Rich Pham, Angi Hurt, and Steve Mueller. Develop a powerful personal presence that drives business.</p>
+              <a href="https://ai-officer.typeform.com/letstalk" className="sol-link" target="_blank" rel="noopener noreferrer">Schedule a Consultation →</a>
             </div>
-            <div className="mental-card reveal">
-              <div className="mental-tag">Mental Model 02</div>
-              <div className="mental-claim">CMS Is Dead. Claude Is the CMS.</div>
-              <p className="mental-body">Stop building inside the CMS. Start building inside the AI. For twenty years your content, your workflows, your knowledge sat trapped inside whatever CMS you happened to license. Every change required a developer. Every new use case required a new tool. We flip the relationship. Claude becomes the system of record, the content engine, and the workflow runner. The website is just the output. Your team stops working inside the tool and starts operating above it.</p>
+            <div className="sol-tile reveal">
+              <div className="sol-icon">◈</div>
+              <div className="sol-title">Private &amp; Public Workshops</div>
+              <p className="sol-desc">Get your team aligned with an interactive session where we break down AI fundamentals, dive into real case studies, and leave you with practical tools.</p>
+              <a href="https://www.ai-officer.com/ai-in-business-events" className="sol-link" target="_blank" rel="noopener noreferrer">Join a Workshop →</a>
+            </div>
+            <div className="sol-tile reveal">
+              <div className="sol-icon">⬡</div>
+              <div className="sol-title">AI in HR Workflows &amp; Recruitment</div>
+              <p className="sol-desc">Optimize talent acquisition, onboarding, and coaching with intelligent AI Agents that streamline every step of the HR process.</p>
+              <a href="https://ai-officer.typeform.com/letstalk" className="sol-link" target="_blank" rel="noopener noreferrer">Schedule a Consultation →</a>
+            </div>
+            <div className="sol-tile reveal">
+              <div className="sol-icon">▲</div>
+              <div className="sol-title">Revolutionizing Sales with AI</div>
+              <p className="sol-desc">Transform your sales process with your own chatbot, CRM and nurture campaigns. Turn every prospect interaction into a revenue opportunity.</p>
+              <a href="https://ai-officer.typeform.com/letstalk" className="sol-link" target="_blank" rel="noopener noreferrer">Schedule a Consultation →</a>
+            </div>
+            <div className="sol-tile reveal">
+              <div className="sol-icon">◎</div>
+              <div className="sol-title">AI for Social Media &amp; Content</div>
+              <p className="sol-desc">Stay ahead with AI-driven content for improved engagement and visibility. Try it out at Thoughtflow.life — your AI content engine.</p>
+              <a href="https://www.ai-officer.com/ai-in-business-events" className="sol-link" target="_blank" rel="noopener noreferrer">Join a Workshop →</a>
+            </div>
+            <div className="sol-tile reveal">
+              <div className="sol-icon">⬢</div>
+              <div className="sol-title">Global Talent Solutions</div>
+              <p className="sol-desc">Find, train, and scale with AI-empowered professionals located in Vietnam. Build the team that powers your AI ambitions.</p>
+              <Link href="/global-staffing" className="sol-link">Schedule a Consultation →</Link>
             </div>
           </div>
         </div>
@@ -433,7 +694,7 @@ export default function HomePage() {
               </div>
               <div className="blog-featured-body">
                 <h3 className="blog-featured-title">2026 AI Trends: 5 Game-Changing Shifts That Will Define Business Success</h3>
-                <p className="blog-excerpt">The companies that will win in 2026 are not the ones with the best AI tools. They are the ones with the best data. Five trends that will define the next year.</p>
+                <p className="blog-excerpt">The companies that will win in 2026 aren&apos;t the ones with the best AI tools — they&apos;re the ones with the best data. Five trends that will define the next year.</p>
                 <span className="blog-more">Read Article →</span>
               </div>
             </Link>
@@ -450,7 +711,7 @@ export default function HomePage() {
                 <Image src="/homepage/images/blog-posts/Why Smart Founders Are Already Planning for Meta Ray-Ban Glasses (Even When Demos Fail).jpg" alt="Meta Ray-Ban Glasses" width={80} height={80} className="blog-item-thumb" />
                 <div className="blog-item-body">
                   <h4 className="blog-item-title">Why Smart Founders Are Already Planning for Meta Ray-Ban Glasses</h4>
-                  <p className="blog-item-excerpt">Technology always catches up. The question is whether you&apos;re truly ready when it does.</p>
+                  <p className="blog-item-excerpt">Technology always catches up—the question is whether you&apos;re truly ready when it does.</p>
                 </div>
                 <span className="blog-item-arrow">→</span>
               </Link>
@@ -458,7 +719,7 @@ export default function HomePage() {
                 <Image src="/homepage/images/blog-posts/AI in Data Migration- Why Your AI Program Is Really a Data Problem.jpg" alt="AI in Data Migration" width={80} height={80} className="blog-item-thumb" />
                 <div className="blog-item-body">
                   <h4 className="blog-item-title">AI in Data Migration: Why Your AI Program Is Really a Data Problem</h4>
-                  <p className="blog-item-excerpt">AI in Data Migration isn&apos;t a technology problem. It&apos;s a data strategy challenge.</p>
+                  <p className="blog-item-excerpt">AI in Data Migration isn&apos;t a technology problem—it&apos;s a data strategy challenge.</p>
                 </div>
                 <span className="blog-item-arrow">→</span>
               </Link>
@@ -472,8 +733,8 @@ export default function HomePage() {
         <div className="container">
           <div className="contact-blue-inner">
             <div className="reveal">
-              <h2 className="section-title" style={{ marginBottom: 16 }}>Let&apos;s Lead AI Together</h2>
-              <p className="section-sub">Start with a free 30-minute audit. We will map your highest-ROI use case before you spend a dollar.</p>
+              <h2 className="section-title" style={{ marginBottom: 16 }}>Let&apos;s Be Tech-Forward Together</h2>
+              <p className="section-sub">Connect with Edge8&apos;s experts to explore AI Programs for your organization.</p>
             </div>
             <div className="contact-blue-cta reveal">
               <a
@@ -482,7 +743,7 @@ export default function HomePage() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Book a Free AI Audit
+                Bring AI to Your Organization
               </a>
             </div>
           </div>
