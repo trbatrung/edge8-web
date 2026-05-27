@@ -104,7 +104,7 @@ export default function AiCapabilitiesAuditPage() {
             <div className="svc-hero-text">
               <h1>Turn Your AI Experiments Into ROI-Driving Systems</h1>
               <p className="svc-hero-sub">Stop guessing about AI. Get a clear roadmap from experts who&apos;ve built real AI programs, not from consultants who only theorize about them.</p>
-              <a href="https://ai-officer.typeform.com/letstalk" className="btn btn-contact" target="_blank" rel="noopener noreferrer">Book a Free AI Audit →</a>
+              <a href="/contact" className="btn btn-contact">Book a Free AI Audit →</a>
             </div>
             <div className="svc-hero-img">
               <Image src="/services/images/services-ai-capabilities-audit-hero.jpg" alt="AI Capabilities Audit" width={640} height={480} priority />

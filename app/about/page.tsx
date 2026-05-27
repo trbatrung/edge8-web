@@ -229,7 +229,7 @@ export default function AboutPage() {
               <p>Ready to transform your business with AI automation? Schedule a free, no-obligation process review with our AI experts.</p>
             </div>
             <div className="audit-cta-btn reveal">
-              <a href="https://ai-officer.typeform.com/letstalk" className="btn btn-primary" target="_blank" rel="noopener noreferrer">Book a Free AI Audit</a>
+              <a href="/contact" className="btn btn-primary">Book a Free AI Audit</a>
             </div>
           </div>
         </div>

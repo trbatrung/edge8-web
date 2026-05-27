@@ -102,7 +102,7 @@ export default function GlobalStaffingPage() {
             <div className="svc-hero-text">
               <h1>Hire AI-Trained Engineers in Vietnam. 75% Less Than US Rates, Deployed in 3 Weeks.</h1>
               <p className="svc-hero-sub">Stop waiting six months to hire. Every engineer we place is trained in our AI Officer methodology before day one, so they ship work, not learn the basics.</p>
-              <a href="https://ai-officer.typeform.com/letstalk" className="btn btn-contact" target="_blank" rel="noopener noreferrer">Book a Free AI Audit →</a>
+              <a href="/contact" className="btn btn-contact">Book a Free AI Audit →</a>
             </div>
             <div className="svc-hero-img">
               <Image src="/services/images/services-global-staffing-hero.jpeg" alt="Global Staffing" width={640} height={480} priority />
@@ -241,7 +241,7 @@ export default function GlobalStaffingPage() {
               <p className="section-sub">Start with a free consultation to find the right global talent for your needs.</p>
             </div>
             <div className="contact-blue-cta reveal">
-              <a href="https://ai-officer.typeform.com/letstalk" className="btn btn-contact" target="_blank" rel="noopener noreferrer">Book a Free AI Audit →</a>
+              <a href="/contact" className="btn btn-contact">Book a Free AI Audit →</a>
             </div>
           </div>
         </div>

@@ -656,12 +656,7 @@ export default function HomePage() {
               <p className="section-sub">Start with a free 30-minute audit. We will map your highest-ROI use case before you spend a dollar.</p>
             </div>
             <div className="contact-blue-cta reveal">
-              <a
-                href="https://ai-officer.typeform.com/letstalk"
-                className="btn btn-contact"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <a href="/contact" className="btn btn-contact">
                 Book a Free AI Audit
               </a>
             </div>
