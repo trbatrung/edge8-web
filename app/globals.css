@@ -974,6 +974,10 @@ nav {
 .solution-row-img {
   position: relative;
   overflow: hidden;
+  border-radius: var(--radius) 0 0 var(--radius);
+}
+.solution-row--reverse .solution-row-img {
+  border-radius: 0 var(--radius) var(--radius) 0;
 }
 .solution-row-img img {
   width: 100%;
