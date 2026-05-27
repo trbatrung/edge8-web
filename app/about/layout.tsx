@@ -6,8 +6,8 @@ const description = 'Dave Hajdu founded Edge8 after 25 years in enterprise tech,
 export const metadata: Metadata = {
   title,
   description,
-  alternates: { canonical: '/about' },
-  openGraph: { title, description, url: '/about', type: 'website' },
+  alternates: { canonical: '/about/' },
+  openGraph: { title, description, url: '/about/', type: 'website' },
   twitter: { card: 'summary_large_image', title, description },
 }
 

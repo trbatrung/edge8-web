@@ -6,8 +6,8 @@ const description = 'Practical writing on AI Programs, fractional CAIO work, age
 export const metadata: Metadata = {
   title,
   description,
-  alternates: { canonical: '/blog' },
-  openGraph: { title, description, url: '/blog', type: 'website' },
+  alternates: { canonical: '/blog/' },
+  openGraph: { title, description, url: '/blog/', type: 'website' },
   twitter: { card: 'summary_large_image', title, description },
 }
 

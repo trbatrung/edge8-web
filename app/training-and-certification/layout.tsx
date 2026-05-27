@@ -6,8 +6,8 @@ const description = 'The AI Officer Certification turns managers into AI leaders
 export const metadata: Metadata = {
   title,
   description,
-  alternates: { canonical: '/training-and-certification' },
-  openGraph: { title, description, url: '/training-and-certification', type: 'website' },
+  alternates: { canonical: '/training-and-certification/' },
+  openGraph: { title, description, url: '/training-and-certification/', type: 'website' },
   twitter: { card: 'summary_large_image', title, description },
 }
 

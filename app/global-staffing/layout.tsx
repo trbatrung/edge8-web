@@ -6,8 +6,8 @@ const description = 'Access AI-trained engineers in Vietnam at 75% less than US 
 export const metadata: Metadata = {
   title,
   description,
-  alternates: { canonical: '/global-staffing' },
-  openGraph: { title, description, url: '/global-staffing', type: 'website' },
+  alternates: { canonical: '/global-staffing/' },
+  openGraph: { title, description, url: '/global-staffing/', type: 'website' },
   twitter: { card: 'summary_large_image', title, description },
 }
 

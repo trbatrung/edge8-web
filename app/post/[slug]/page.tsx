@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   const description = (post.excerpt && post.excerpt.length > 30)
     ? post.excerpt.slice(0, 160)
     : `${post.title}. ${post.readTime} on AI and business by Edge8.`
-  const canonical = `/post/${post.slug}`
+  const canonical = `/post/${post.slug}/`
   return {
     title,
     description,

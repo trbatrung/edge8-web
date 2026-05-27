@@ -6,8 +6,8 @@ const description = 'Get strategic AI leadership without hiring a $300K full-tim
 export const metadata: Metadata = {
   title,
   description,
-  alternates: { canonical: '/caio-leadership' },
-  openGraph: { title, description, url: '/caio-leadership', type: 'website' },
+  alternates: { canonical: '/caio-leadership/' },
+  openGraph: { title, description, url: '/caio-leadership/', type: 'website' },
   twitter: { card: 'summary_large_image', title, description },
 }
 

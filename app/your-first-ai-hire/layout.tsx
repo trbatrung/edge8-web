@@ -6,8 +6,8 @@ const description = 'Get your first AI Officer in 30 days for $5,400 over 3 mont
 export const metadata: Metadata = {
   title,
   description,
-  alternates: { canonical: '/your-first-ai-hire' },
-  openGraph: { title, description, url: '/your-first-ai-hire', type: 'website' },
+  alternates: { canonical: '/your-first-ai-hire/' },
+  openGraph: { title, description, url: '/your-first-ai-hire/', type: 'website' },
   twitter: { card: 'summary_large_image', title, description },
 }
 

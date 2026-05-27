@@ -6,8 +6,8 @@ const description = 'Book a 30-minute call with Edge8. We email your first AI Pr
 export const metadata: Metadata = {
   title,
   description,
-  alternates: { canonical: '/contact' },
-  openGraph: { title, description, url: '/contact', type: 'website' },
+  alternates: { canonical: '/contact/' },
+  openGraph: { title, description, url: '/contact/', type: 'website' },
   twitter: { card: 'summary_large_image', title, description },
 }
 

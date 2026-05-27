@@ -6,8 +6,8 @@ const description = 'We design, build, and deploy AI agents that take the highes
 export const metadata: Metadata = {
   title,
   description,
-  alternates: { canonical: '/ai-programs' },
-  openGraph: { title, description, url: '/ai-programs', type: 'website' },
+  alternates: { canonical: '/ai-programs/' },
+  openGraph: { title, description, url: '/ai-programs/', type: 'website' },
   twitter: { card: 'summary_large_image', title, description },
 }
 
