@@ -27,7 +27,6 @@ export default function Footer() {
             <div className="footer-col-title">Services</div>
             <div className="footer-links">
               <Link href="/your-first-ai-hire">Your First AI Hire</Link>
-              <Link href="/ai-capabilities-audit">AI Capabilities Audit</Link>
               <Link href="/caio-leadership">CAIO Leadership</Link>
               <Link href="/global-staffing">Global Staffing</Link>
               <Link href="/training-and-certification">Training &amp; Certification</Link>

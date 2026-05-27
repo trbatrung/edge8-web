@@ -61,7 +61,6 @@ export default function Nav() {
                 </button>
                 <div className="dropdown">
                   <Link href="/your-first-ai-hire">Your First AI Hire</Link>
-                  <Link href="/ai-capabilities-audit">AI Capabilities Audit</Link>
                   <Link href="/caio-leadership">CAIO Leadership</Link>
                   <Link href="/global-staffing">Global Staffing</Link>
                   <Link href="/training-and-certification">Training &amp; Certification</Link>
@@ -95,7 +94,6 @@ export default function Nav() {
       <div className={`mobile-menu${menuOpen ? ' open' : ''}`} id="mobileMenu">
         <MobileAccordion label="Services" id="mobileServicesAccordion">
           <Link href="/your-first-ai-hire" onClick={() => setMenuOpen(false)}>Your First AI Hire</Link>
-          <Link href="/ai-capabilities-audit" onClick={() => setMenuOpen(false)}>AI Capabilities Audit</Link>
           <Link href="/caio-leadership" onClick={() => setMenuOpen(false)}>CAIO Leadership</Link>
           <Link href="/global-staffing" onClick={() => setMenuOpen(false)}>Global Staffing</Link>
           <Link href="/training-and-certification" onClick={() => setMenuOpen(false)}>Training &amp; Certification</Link>

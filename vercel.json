@@ -1,0 +1,14 @@
+{
+  "redirects": [
+    {
+      "source": "/ai-capabilities-audit",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/ai-capabilities-audit/",
+      "destination": "/contact",
+      "permanent": true
+    }
+  ]
+}
