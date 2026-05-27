@@ -82,8 +82,6 @@ export default function ContactPage() {
                 </div>
               ) : (
                 <form className="contact-form" onSubmit={handleSubmit} noValidate>
-                  <p className="contact-form-eyebrow">30-minute consultation · With the Edge8 team</p>
-
                   <div className="contact-field-row">
                     <div className="contact-field">
                       <label htmlFor="name">Full name <span aria-hidden>*</span></label>
