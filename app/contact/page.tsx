@@ -41,14 +41,14 @@ export default function ContactPage() {
             <div className="contact-hero-left">
               <h1 className="contact-hero-title">Let&rsquo;s Lead AI Together.</h1>
               <p className="contact-hero-sub">
-                Start with a free 30-minute audit. We&rsquo;ll map your highest-ROI use case before you spend a dollar.
+                A 30-minute conversation about your business and how AI gives you the leverage to 8x what your team ships.
               </p>
 
               <div className="contact-checklist">
                 <p className="contact-checklist-label">You leave with</p>
                 <ul>
-                  <li>A clear read on where your business actually stands on AI</li>
-                  <li>Your highest-ROI use case — mapped and prioritised</li>
+                  <li>A clear read on where AI can give your business real leverage</li>
+                  <li>Your highest-ROI use case, mapped and prioritised</li>
                   <li>A concrete next step, or an honest reason not to take one</li>
                 </ul>
               </div>
@@ -58,7 +58,7 @@ export default function ContactPage() {
                 <ul>
                   <li>A founder or executive ready to lead AI across your organisation</li>
                   <li>A team leader expected to deliver AI results without burning people out</li>
-                  <li>A business owner who wants real efficiency gains — not just hype</li>
+                  <li>A business owner who wants real efficiency gains, not just hype</li>
                 </ul>
               </div>
 
@@ -119,11 +119,11 @@ export default function ContactPage() {
                   <input type="text" name="website" value={form.website} onChange={handleChange} tabIndex={-1} aria-hidden style={{ display: 'none' }} />
 
                   {status === 'error' && (
-                    <p className="contact-error">Something went wrong — please try again or email us directly at <a href="mailto:hello@edge8.ai">hello@edge8.ai</a>.</p>
+                    <p className="contact-error">Something went wrong. Please try again or email us directly at <a href="mailto:hello@edge8.ai">hello@edge8.ai</a>.</p>
                   )}
 
                   <button type="submit" className="btn btn-primary contact-submit" disabled={status === 'sending'}>
-                    {status === 'sending' ? 'Sending…' : 'Book the Audit →'}
+                    {status === 'sending' ? 'Sending…' : 'Book the Conversation →'}
                   </button>
 
                   <p className="contact-form-note">Reply within 1 business day</p>

@@ -225,11 +225,11 @@ export default function AboutPage() {
         <div className="container">
           <div className="audit-inner">
             <div className="audit-text reveal">
-              <h2 className="section-title">Schedule a Free AI<br />Automation Review</h2>
-              <p>Ready to transform your business with AI automation? Schedule a free, no-obligation process review with our AI experts.</p>
+              <h2 className="section-title">Let&apos;s Talk About Your<br />AI Leverage</h2>
+              <p>A real conversation, not a sales call. We will walk through your business and show you where AI gives you the leverage to 8x what your team ships.</p>
             </div>
             <div className="audit-cta-btn reveal">
-              <a href="/contact" className="btn btn-primary">Book a Free AI Audit</a>
+              <a href="/contact" className="btn btn-primary">Book a Conversation</a>
             </div>
           </div>
         </div>

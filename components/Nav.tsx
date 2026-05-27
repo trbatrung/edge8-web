@@ -74,7 +74,7 @@ export default function Nav() {
             </ul>
 
             <Link href="/contact" className="btn btn-primary nav-cta">
-              Book a Free AI Audit
+              Book a Conversation
             </Link>
 
             <button
@@ -105,7 +105,7 @@ export default function Nav() {
         <Link href="/blog" onClick={() => setMenuOpen(false)}>Blog</Link>
         <Link href="/about" onClick={() => setMenuOpen(false)}>About</Link>
         <Link href="/contact" className="btn btn-primary" onClick={() => setMenuOpen(false)}>
-          Book a Free AI Audit
+          Book a Conversation
         </Link>
       </div>
     </>

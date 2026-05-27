@@ -26,7 +26,7 @@ export default function CaioLeadershipPage() {
               <div className="page-hero-urgency" style={{ marginBottom: 20 }}>For founders whose boards just asked about AI strategy.</div>
               <h1>Get C-Level AI Leadership Without the $300K Mistake</h1>
               <p className="svc-hero-sub">Most companies don&apos;t need a $300K full-time CAIO. They need strategic AI leadership that drives real results, without the risk of the wrong hire.</p>
-              <a href="/contact" className="btn btn-contact">Book a Free AI Audit →</a>
+              <a href="/contact" className="btn btn-contact">Book a Conversation →</a>
             </div>
             <div className="svc-hero-img">
               <Image src="/services/images/services-caio-leadership-hero.jpg" alt="CAIO Leadership" width={640} height={480} priority />
