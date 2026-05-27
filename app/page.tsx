@@ -551,6 +551,66 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ═══ HOW TO ENGAGE ═══════════════════════════════ */}
+      <section className="engage section" id="engage">
+        <div className="container">
+          <div className="engage-header reveal">
+            <span className="section-label">Engagement</span>
+            <h2 className="section-title">How to Engage With Us</h2>
+            <p className="section-sub" style={{ marginTop: 16 }}>Three ways to work with us. One pricing model. Transparent reporting every Friday.</p>
+          </div>
+          <div className="engage-grid">
+            <div className="engage-card reveal">
+              <div className="engage-tag">Coach</div>
+              <div className="engage-title">Tell You How to Do It</div>
+              <p className="engage-desc">We map your highest-ROI AI use case, design the system, and hand you the blueprint. Your team builds it. We answer questions when they get stuck.</p>
+              <div className="engage-fit"><strong>Best for:</strong> teams with strong engineers who need direction, not labor.</div>
+            </div>
+            <div className="engage-card featured reveal">
+              <div className="engage-tag">Co-Build &middot; Most Popular</div>
+              <div className="engage-title">Do It With You</div>
+              <p className="engage-desc">We sit next to your team in the same repo, the same Slack, the same standup. You ship faster, and you keep the muscle in-house when we leave.</p>
+              <div className="engage-fit"><strong>Best for:</strong> founders who want to build the muscle while the work gets done.</div>
+            </div>
+            <div className="engage-card reveal">
+              <div className="engage-tag">Build</div>
+              <div className="engage-title">Do It For You</div>
+              <p className="engage-desc">We design, build, and run the AI program end to end. You stay focused on customers and revenue. We hand you the keys when it is shipped and working.</p>
+              <div className="engage-fit"><strong>Best for:</strong> founders who need it shipped. Yesterday.</div>
+            </div>
+          </div>
+
+          <div className="engage-pricing reveal">
+            <div className="engage-pricing-header">
+              <span className="section-label">Pricing</span>
+              <h3 className="engage-pricing-title">Simple. By the day, then by the hour.</h3>
+            </div>
+            <div className="engage-pricing-grid">
+              <div className="engage-price">
+                <div className="engage-price-num">$1,000</div>
+                <div className="engage-price-unit">per day</div>
+                <div className="engage-price-desc">Sprints run 3, 4, or 5 days. Pick the length that fits the scope. $3,000 to $5,000 total.</div>
+              </div>
+              <div className="engage-price">
+                <div className="engage-price-num">$2,000</div>
+                <div className="engage-price-unit">= 40 human tokens</div>
+                <div className="engage-price-desc">After the sprint, buy a token pack when you need ongoing support. 1 human token = 1 hour of human work.</div>
+              </div>
+            </div>
+
+            <div className="engage-transparency">
+              <div className="engage-transparency-eyebrow">Every Friday you see</div>
+              <div className="engage-transparency-list">
+                <div className="engage-transparency-item"><strong>Pull Requests Shipped</strong><span>Every change pushed to your codebase.</span></div>
+                <div className="engage-transparency-item"><strong>Claude Tokens Used</strong><span>Exact AI compute consumed on your work.</span></div>
+                <div className="engage-transparency-item"><strong>Human Tokens Spent</strong><span>Exact hours your team paid for.</span></div>
+              </div>
+              <p className="engage-transparency-line">No mystery invoices. No surprise bills. The same transparency we ask of our AI agents, we hold ourselves to.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ═══ CONTACT — TYPEFORM ══════════════════════════ */}
       <section className="contact-blue section" id="contact">
         <div className="container">
