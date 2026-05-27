@@ -394,26 +394,44 @@ export default function HomePage() {
             <h2 className="section-title">We Empower Founders to <span className="accent">Lead AI</span></h2>
             <p className="section-sub" style={{ marginTop: 16 }}>Empowering Organizations to use AI effectively through clear leadership, thoughtful implementation and strong global talent.</p>
           </div>
-          <div className="solutions-grid">
-            <div className="solution-card reveal">
-              <Image src="/homepage/images/home-page-solutions-AI Programs.jpg" alt="Lead AI Agent Teams" width={400} height={220} className="solution-img" />
-              <div className="solution-body">
-                <h3 className="solution-title">Lead AI Agent Teams</h3>
-                <p className="solution-desc">We design, build, and deploy the AI agents that take repetitive work off your team. You become the manager of a workforce that does not sleep, does not forget, and does not quit.</p>
+          <div className="solutions-rows">
+            {/* Row 1: image left, text right */}
+            <div className="solution-row reveal">
+              <div className="solution-row-img">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/homepage/images/home-page-solutions-AI Programs.jpg" alt="Lead AI Agent Teams" />
+              </div>
+              <div className="solution-row-text">
+                <span className="solution-row-label">AI Agent Teams</span>
+                <h3 className="solution-row-title">Lead AI Agent Teams</h3>
+                <p className="solution-row-desc">We design, build, and deploy the AI agents that take repetitive work off your team. You become the manager of a workforce that does not sleep, does not forget, and does not quit.</p>
+                <a href="/ai-programs" className="solution-row-link">Learn more →</a>
               </div>
             </div>
-            <div className="solution-card reveal">
-              <Image src="/homepage/images/home-page-solutions-AI Officer Certification & Workshops.jpg" alt="Certify Your Human AI Talent" width={400} height={220} className="solution-img" />
-              <div className="solution-body">
-                <h3 className="solution-title">Certify your Human AI Talent</h3>
-                <p className="solution-desc">The AI Officer Certification turns your managers into AI leaders. 500+ certified across Fortune 500s and SMEs. 12 months, 3 hours per week, every function in your business.</p>
+            {/* Row 2: text left, image right */}
+            <div className="solution-row solution-row--reverse reveal">
+              <div className="solution-row-img">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/homepage/images/home-page-solutions-AI Officer Certification & Workshops.jpg" alt="Certify Your Human AI Talent" />
+              </div>
+              <div className="solution-row-text">
+                <span className="solution-row-label">AI Officer Certification</span>
+                <h3 className="solution-row-title">Certify your Human AI Talent</h3>
+                <p className="solution-row-desc">The AI Officer Certification turns your managers into AI leaders. 500+ certified across Fortune 500s and SMEs. 12 months, 3 hours per week, every function in your business.</p>
+                <a href="/caio-leadership" className="solution-row-link">Learn more →</a>
               </div>
             </div>
-            <div className="solution-card reveal">
-              <Image src="/homepage/images/home-page-solutions-Global Talent Network.jpg" alt="Innovate like an Engineer" width={400} height={220} className="solution-img" />
-              <div className="solution-body">
-                <h3 className="solution-title">Innovate like an Engineer</h3>
-                <p className="solution-desc">Stop ideating in slides. Start prototyping in code. We teach founders and teams to ship, test, and iterate the way modern engineering teams do, with AI as the accelerant.</p>
+            {/* Row 3: image left, text right */}
+            <div className="solution-row reveal">
+              <div className="solution-row-img">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/homepage/images/home-page-solutions-Global Talent Network.jpg" alt="Innovate like an Engineer" />
+              </div>
+              <div className="solution-row-text">
+                <span className="solution-row-label">Global Talent Network</span>
+                <h3 className="solution-row-title">Innovate like an Engineer</h3>
+                <p className="solution-row-desc">Stop ideating in slides. Start prototyping in code. We teach founders and teams to ship, test, and iterate the way modern engineering teams do, with AI as the accelerant.</p>
+                <a href="/global-staffing" className="solution-row-link">Learn more →</a>
               </div>
             </div>
           </div>

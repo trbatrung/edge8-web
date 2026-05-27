@@ -459,7 +459,7 @@ nav {
 .shift-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+  gap: 40px;
   margin-top: 56px;
 }
 .shift-card {
@@ -469,6 +469,7 @@ nav {
   padding: 36px 32px;
   transition: var(--transition);
 }
+.shift-card:first-child { padding-left: 0; }
 .shift-card:hover {
   border-color: var(--blue);
   box-shadow: 0 4px 16px rgba(16,16,20,0.06);
@@ -621,14 +622,16 @@ nav {
 .why-right p strong { color: var(--dark); font-weight: 500; }
 
 /* ─── PHOTO GALLERY ─────────────────────────────────── */
-.photo-gallery { width: 100%; overflow: hidden; line-height: 0; }
+.photo-gallery { width: 100%; overflow: hidden; }
 .photo-gallery-track {
   display: flex;
-  width: calc(50vw * 8);
+  flex-wrap: nowrap;
   animation: gallery-scroll 22s linear infinite;
+  will-change: transform;
 }
 .photo-gallery-track:hover { animation-play-state: paused; }
 .photo-gallery-slide {
+  min-width: 50vw;
   width: 50vw;
   height: 440px;
   flex-shrink: 0;
@@ -642,7 +645,7 @@ nav {
 }
 @keyframes gallery-scroll {
   0%   { transform: translateX(0); }
-  100% { transform: translateX(calc(-50vw * 4)); }
+  100% { transform: translateX(-200vw); }
 }
 
 /* ─── YOUTUBE SLIDER ─────────────────────────────────── */
@@ -961,22 +964,65 @@ nav {
 /* ─── CORE SOLUTIONS ──────────────────────────────── */
 .solutions { background: var(--white); }
 .solutions-header { margin-bottom: 56px; }
-.solutions-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-.solution-card {
-  background: var(--white);
-  border: 1px solid var(--card-border);
-  border-radius: var(--radius);
+.solutions-rows { display: flex; flex-direction: column; }
+.solution-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 440px;
   overflow: hidden;
-  transition: var(--transition);
+}
+.solution-row-img {
+  position: relative;
+  overflow: hidden;
+}
+.solution-row-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s ease;
+}
+.solution-row:hover .solution-row-img img { transform: scale(1.04); }
+.solution-row-text {
+  padding: 64px 56px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  background: var(--white);
 }
-.solution-card:hover { border-color: var(--blue); box-shadow: 0 4px 16px rgba(16,16,20,0.08); }
-.solution-img { width: 100%; height: 220px; object-fit: cover; display: block; transition: transform 0.5s ease; }
-.solution-card:hover .solution-img { transform: scale(1.04); }
-.solution-body { padding: 28px; flex: 1; display: flex; flex-direction: column; }
-.solution-title { font-weight: 500; font-size: 18px; color: var(--dark); margin-bottom: 12px; line-height: 1.2; }
-.solution-desc { font-size: 14px; color: var(--body-text); line-height: 1.65; flex: 1; margin-bottom: 20px; }
+.solution-row--reverse .solution-row-img { order: 2; }
+.solution-row--reverse .solution-row-text { order: 1; }
+.solution-row-label {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 16px;
+}
+.solution-row-title {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--dark);
+  line-height: 1.2;
+  margin-bottom: 20px;
+}
+.solution-row-desc {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--body-text);
+  margin-bottom: 32px;
+}
+.solution-row-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--blue);
+  text-decoration: none;
+}
 
 /* ─── CASE STUDIES ────────────────────────────────── */
 .case-studies { background: var(--white); }
@@ -1918,6 +1964,10 @@ footer {
   .why-ai-inner { grid-template-columns: 1fr; gap: 36px; }
   .metrics-grid { grid-template-columns: 1fr; }
   .solutions-grid { grid-template-columns: 1fr; }
+  .solution-row { grid-template-columns: 1fr; }
+  .solution-row--reverse .solution-row-img { order: 0; }
+  .solution-row--reverse .solution-row-text { order: 1; }
+  .solution-row-text { padding: 40px 24px; }
   .case-studies-grid { grid-template-columns: 1fr; }
   .case-card { aspect-ratio: 16/9; }
   .blog-layout { grid-template-columns: 1fr; }
