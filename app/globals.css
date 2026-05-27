@@ -777,32 +777,6 @@ nav {
 .why-right p { font-size: 17px; line-height: 1.75; color: var(--body-text); }
 .why-right p strong { color: var(--dark); font-weight: 500; }
 
-/* ─── PHOTO GALLERY ─────────────────────────────────── */
-.photo-gallery { width: 100%; overflow: hidden; }
-.photo-gallery-track {
-  display: flex;
-  flex-wrap: nowrap;
-  animation: gallery-scroll 28s linear infinite;
-  will-change: transform;
-}
-.photo-gallery-track:hover { animation-play-state: paused; }
-.photo-gallery-slide {
-  min-width: 50vw;
-  width: 50vw;
-  height: 440px;
-  flex-shrink: 0;
-  overflow: hidden;
-}
-.photo-gallery-slide img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-@keyframes gallery-scroll {
-  0%   { transform: translateX(0); }
-  100% { transform: translateX(-200vw); }
-}
 
 /* ─── YOUTUBE SLIDER ─────────────────────────────────── */
 .yt-slider-wrap { margin-top: 48px; }
