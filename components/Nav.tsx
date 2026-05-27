@@ -73,14 +73,9 @@ export default function Nav() {
               <li><Link href="/about">About</Link></li>
             </ul>
 
-            <a
-              href="https://ai-officer.typeform.com/letstalk"
-              className="btn btn-primary nav-cta"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <Link href="/contact" className="btn btn-primary nav-cta">
               Book a Free AI Audit
-            </a>
+            </Link>
 
             <button
               className="nav-hamburger"
@@ -109,14 +104,9 @@ export default function Nav() {
         <Link href="/ai-programs" onClick={() => setMenuOpen(false)}>AI Programs</Link>
         <Link href="/blog" onClick={() => setMenuOpen(false)}>Blog</Link>
         <Link href="/about" onClick={() => setMenuOpen(false)}>About</Link>
-        <a
-          href="https://ai-officer.typeform.com/letstalk"
-          className="btn btn-primary"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <Link href="/contact" className="btn btn-primary" onClick={() => setMenuOpen(false)}>
           Book a Free AI Audit
-        </a>
+        </Link>
       </div>
     </>
   )

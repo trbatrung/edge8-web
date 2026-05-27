@@ -39,27 +39,26 @@ export default function ContactPage() {
 
             {/* ── Left: copy ── */}
             <div className="contact-hero-left">
-              <span className="section-label">Free AI Audit</span>
-              <h1 className="contact-hero-title">Map Your AI Opportunity.</h1>
+              <h1 className="contact-hero-title">Let&rsquo;s Lead AI Together.</h1>
               <p className="contact-hero-sub">
-                Thirty minutes with our team. You leave with a plan — what to automate, where to lead, and what to do first. Or an honest &ldquo;not yet&rdquo; — whichever is true.
+                Start with a free 30-minute audit. We&rsquo;ll map your highest-ROI use case before you spend a dollar.
               </p>
 
               <div className="contact-checklist">
                 <p className="contact-checklist-label">You leave with</p>
                 <ul>
                   <li>A clear read on where your business actually stands on AI</li>
-                  <li>A prioritised list of your highest-ROI use cases</li>
-                  <li>A concrete next step — or an honest reason not to take one</li>
+                  <li>Your highest-ROI use case — mapped and prioritised</li>
+                  <li>A concrete next step, or an honest reason not to take one</li>
                 </ul>
               </div>
 
               <div className="contact-checklist">
                 <p className="contact-checklist-label">Right fit if you&rsquo;re</p>
                 <ul>
-                  <li>A founder or executive ready to lead AI adoption across your org</li>
+                  <li>A founder or executive ready to lead AI across your organisation</li>
                   <li>A team leader expected to deliver AI results without burning people out</li>
-                  <li>A business owner who wants efficiency gains without the hype</li>
+                  <li>A business owner who wants real efficiency gains — not just hype</li>
                 </ul>
               </div>
 
