@@ -1,25 +1,46 @@
 import { Resend } from 'resend'
+import { createClient } from '@supabase/supabase-js'
 import { NextRequest, NextResponse } from 'next/server'
 
-const TO = process.env.CONTACT_EMAIL ?? 'anh.pham@edge8.ai'
+const TO   = process.env.CONTACT_EMAIL   ?? 'anh.pham@edge8.ai'
 const FROM = 'Edge8 Contact <contact@edge8.ai>'
+const TABLE = process.env.SUPABASE_CONTACT_TABLE ?? 'contacts'
 
 export async function POST(req: NextRequest) {
   try {
-    const resend = new Resend(process.env.RESEND_API_KEY)
     const body = await req.json()
     const { name, email, company, teamSize, message, website } = body
 
-    // Honeypot check
+    // Honeypot
     if (website) return NextResponse.json({ ok: true })
 
     if (!name || !email || !company) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 })
     }
 
+    // 1️⃣ Save to Supabase
+    const supabase = createClient(
+      process.env.SUPABASE_URL!,
+      process.env.SUPABASE_SERVICE_KEY!
+    )
+    const { error: dbError } = await supabase.from(TABLE).insert({
+      name,
+      email,
+      company,
+      team_size: teamSize || null,
+      message:   message  || null,
+      source:    'edge8.ai',
+    })
+    if (dbError) {
+      console.error('Supabase insert error:', dbError)
+      // Still attempt email even if DB write fails
+    }
+
+    // 2️⃣ Send email via Resend
+    const resend = new Resend(process.env.RESEND_API_KEY)
     await resend.emails.send({
       from: FROM,
-      to: TO,
+      to:   TO,
       replyTo: email,
       subject: `New AI Audit Request — ${name} at ${company}`,
       html: `
