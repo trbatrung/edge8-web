@@ -614,9 +614,9 @@ export default function HomePage() {
       <section className="claude section" id="claude">
         <div className="container">
           <div className="claude-header reveal">
-            <span className="section-label">Built on Claude</span>
-            <h2 className="section-title">Why Claude Is Our Tool of Choice</h2>
-            <p className="section-sub" style={{ marginTop: 16 }}>We are an Anthropic shop, top to bottom. Claude Code, Claude Co-Work, team accounts, shared projects. Every client engagement runs on the same stack we use ourselves, with the same transparency: Claude tokens, human tokens, and every pull request tracked in GitHub.</p>
+            <span className="section-label">We Chose One</span>
+            <h2 className="section-title">Stop Chasing Tools. We Did.</h2>
+            <p className="section-sub" style={{ marginTop: 16 }}>You can spend all your time chasing models, framing it as research, and stay stuck on the hamster wheel. Just like you probably are right now. We chose Claude. We built our entire ecosystem around it. We have not looked back. Same stack on every client engagement. Same transparency every week: Claude tokens, human tokens, and every pull request tracked in GitHub.</p>
           </div>
 
           <div className="claude-stack reveal">
@@ -630,18 +630,18 @@ export default function HomePage() {
           <div className="claude-grid">
             <div className="claude-card reveal">
               <div className="claude-card-num">01</div>
-              <div className="claude-card-title">It is the best coder we have ever used.</div>
-              <p className="claude-card-body">We have tried every model. Claude ships production code without babysitting. Claude Code with sub-agents handles full features in a single session. That is the difference between a tool and a teammate.</p>
+              <div className="claude-card-title">It writes production code without babysitting.</div>
+              <p className="claude-card-body">We tested everything. GPT, Gemini, the open-source flavor of the month. Claude is the only model that ships features we can put in front of clients without rewriting. Stop comparing benchmarks. Open Claude Code. Watch what happens.</p>
             </div>
             <div className="claude-card reveal">
               <div className="claude-card-num">02</div>
-              <div className="claude-card-title">It refuses to fake it.</div>
-              <p className="claude-card-body">Other models hallucinate confidently when they do not know. Claude says &ldquo;I do not know&rdquo; and asks for context. For client work, where wrong answers cost real money, that one trait beats any benchmark on a leaderboard.</p>
+              <div className="claude-card-title">It tells you when it does not know.</div>
+              <p className="claude-card-body">Every other model lies to your face with full confidence. Claude refuses to make things up. That one trait has saved us from a hundred client embarrassments. Every benchmark on a leaderboard is downstream of this one behavior.</p>
             </div>
             <div className="claude-card reveal">
               <div className="claude-card-num">03</div>
-              <div className="claude-card-title">Anthropic ships responsibly.</div>
-              <p className="claude-card-body">Constitutional AI is not a slogan. When Claude updates, the agents we shipped last month still work the same way. We can promise clients that the system we build today is still working in six months. Most foundation labs cannot say that.</p>
+              <div className="claude-card-title">Anthropic does not ship to chase headlines.</div>
+              <p className="claude-card-body">Most labs push a new model every 8 weeks and break everything you built. Anthropic ships when the work is done. The agent we shipped six months ago still runs the same way today. That is the difference between a vendor and a platform.</p>
             </div>
           </div>
         </div>
