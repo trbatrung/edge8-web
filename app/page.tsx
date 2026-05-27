@@ -424,7 +424,7 @@ export default function HomePage() {
             <div className="solution-row reveal">
               <div className="solution-row-img">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/homepage/images/home-page-solutions-network.jpg" alt="Innovate like an Engineer" />
+                <img src="/homepage/images/home-page-solutions-network-2.jpg" alt="Innovate like an Engineer" />
               </div>
               <div className="solution-row-text">
                 <span className="solution-row-label">Global Talent Network</span>
