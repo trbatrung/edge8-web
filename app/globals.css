@@ -626,7 +626,7 @@ nav {
 .photo-gallery-track {
   display: flex;
   flex-wrap: nowrap;
-  animation: gallery-scroll 22s linear infinite;
+  animation: gallery-scroll 28s linear infinite;
   will-change: transform;
 }
 .photo-gallery-track:hover { animation-play-state: paused; }
