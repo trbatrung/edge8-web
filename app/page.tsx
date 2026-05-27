@@ -398,7 +398,7 @@ export default function HomePage() {
             <div className="solution-row reveal">
               <div className="solution-row-img">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/homepage/images/home-page-solutions-AI Programs.jpg" alt="Lead AI Agent Teams" />
+                <img src="/homepage/images/home-page-solutions-teams.jpg" alt="Lead AI Agent Teams" />
               </div>
               <div className="solution-row-text">
                 <span className="solution-row-label">AI Agent Teams</span>
@@ -411,7 +411,7 @@ export default function HomePage() {
             <div className="solution-row solution-row--reverse reveal">
               <div className="solution-row-img">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/homepage/images/home-page-solutions-AI Officer Certification & Workshops.jpg" alt="Certify Your Human AI Talent" />
+                <img src="/homepage/images/home-page-solutions-certification.jpg" alt="Certify Your Human AI Talent" />
               </div>
               <div className="solution-row-text">
                 <span className="solution-row-label">AI Officer Certification</span>
@@ -424,7 +424,7 @@ export default function HomePage() {
             <div className="solution-row reveal">
               <div className="solution-row-img">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/homepage/images/home-page-solutions-Global Talent Network.jpg" alt="Innovate like an Engineer" />
+                <img src="/homepage/images/home-page-solutions-network.jpg" alt="Innovate like an Engineer" />
               </div>
               <div className="solution-row-text">
                 <span className="solution-row-label">Global Talent Network</span>
