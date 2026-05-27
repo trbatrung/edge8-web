@@ -51,8 +51,11 @@ const extTestimonials = [...testimonials, ...testimonials, ...testimonials]
 
 export default function HomePage() {
   const [activeExtIdx, setActiveExtIdx] = useState(T_REAL_OFFSET)
-  // formStatus kept for potential reuse on other pages
   const [formStatus, setFormStatus] = useState<'idle' | 'sending' | 'sent'>('idle')
+  const [statsVisible, setStatsVisible] = useState(false)
+  const [statCounts, setStatCounts] = useState([0, 0, 0])
+  const [photoIdx, setPhotoIdx] = useState(0)
+  const statsRef = useRef<HTMLDivElement>(null)
   const viewportRef = useRef<HTMLDivElement>(null)
   const trackRef = useRef<HTMLDivElement>(null)
   const snapTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
@@ -76,6 +79,36 @@ export default function HomePage() {
     )
     document.querySelectorAll('.reveal').forEach((el) => observer.observe(el))
     return () => observer.disconnect()
+  }, [])
+
+  // Stats counter — animates on scroll into view
+  useEffect(() => {
+    if (!statsRef.current) return
+    const obs = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting) { setStatsVisible(true); obs.disconnect() }
+    }, { threshold: 0.4 })
+    obs.observe(statsRef.current)
+    return () => obs.disconnect()
+  }, [])
+
+  useEffect(() => {
+    if (!statsVisible) return
+    const targets = [182, 12, 29]
+    const duration = 1800
+    const start = Date.now()
+    const tick = () => {
+      const t = Math.min((Date.now() - start) / duration, 1)
+      const ease = 1 - Math.pow(1 - t, 3)
+      setStatCounts(targets.map(v => Math.round(v * ease)))
+      if (t < 1) requestAnimationFrame(tick)
+    }
+    requestAnimationFrame(tick)
+  }, [statsVisible])
+
+  // Photo slider auto-advance
+  useEffect(() => {
+    const id = setInterval(() => setPhotoIdx(p => (p + 1) % 4), 4500)
+    return () => clearInterval(id)
   }, [])
 
   // Testimonials scroll sync (infinite loop)
@@ -182,21 +215,21 @@ export default function HomePage() {
       </section>
 
       {/* ═══ HERO STATS STRIP ═══════════════════════════════ */}
-      <section className="hero-stats" aria-label="Edge8 program results to date">
+      <section className="hero-stats" aria-label="Edge8 program results to date" ref={statsRef}>
         <div className="container">
           <div className="hero-stats-grid">
             <div className="hero-stat reveal">
-              <div className="hero-stat-number">182</div>
+              <div className="hero-stat-number">{statCounts[0]}</div>
               <div className="hero-stat-label">Workflows Automated</div>
               <div className="hero-stat-sub">with AI Agents running across our client base</div>
             </div>
             <div className="hero-stat reveal">
-              <div className="hero-stat-number">12</div>
+              <div className="hero-stat-number">{statCounts[1]}</div>
               <div className="hero-stat-label">Leadership Teams</div>
               <div className="hero-stat-sub">certified to run AI on their own</div>
             </div>
             <div className="hero-stat reveal">
-              <div className="hero-stat-number">29</div>
+              <div className="hero-stat-number">{statCounts[2]}</div>
               <div className="hero-stat-label">New Revenue Streams</div>
               <div className="hero-stat-sub">launched by 7 clients in the last 3 months</div>
             </div>
@@ -216,17 +249,23 @@ export default function HomePage() {
           </div>
           <div className="shift-grid">
             <div className="shift-card reveal">
-              <div className="shift-num">01</div>
+              <div className="shift-icon">
+                <svg viewBox="0 0 24 24" fill="#287be8" width="36" height="36"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+              </div>
               <div className="shift-card-title">Leadership Has to Level Up</div>
               <p className="shift-card-desc">Managing humans is one skill. Orchestrating humans and AI agents is another. The leaders who adapt fastest become the most valuable people in the company. The ones who do not get routed around.</p>
             </div>
             <div className="shift-card reveal">
-              <div className="shift-num">02</div>
+              <div className="shift-icon">
+                <svg viewBox="0 0 24 24" fill="#287be8" width="36" height="36"><path d="M11 21h-1l1-7H7.5c-.58 0-.57-.32-.38-.66.19-.34.05-.08.07-.12C8.48 10.94 10.42 7.54 13 3h1l-1 7h3.5c.49 0 .56.33.47.51l-.07.15C12.96 17.55 11 21 11 21z"/></svg>
+              </div>
               <div className="shift-card-title">Everything Speeds Up</div>
               <p className="shift-card-desc">Cycles that took weeks compress into days. Days compress into hours. Meetings, reporting, planning, all of it has to be rebuilt for the new pace.</p>
             </div>
             <div className="shift-card reveal">
-              <div className="shift-num">03</div>
+              <div className="shift-icon">
+                <svg viewBox="0 0 24 24" fill="#287be8" width="36" height="36"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+              </div>
               <div className="shift-card-title">Hidden Mess Surfaces</div>
               <p className="shift-card-desc">AI agents do not tolerate the workarounds your team has been quietly carrying for years. Bad data, broken handoffs, undocumented processes, all of it gets exposed. The cleanup is the real work.</p>
             </div>
@@ -254,6 +293,22 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* ═══ PHOTO SLIDER ════════════════════════════════════ */}
+      <div className="photo-slider">
+        <div className="photo-slider-track" style={{ transform: `translateX(-${photoIdx * 25}%)` }}>
+          {[1, 2, 3, 4].map(n => (
+            <div key={n} className="photo-slider-slide">
+              <Image src={`/homepage/${n}.jpg`} alt={`Edge8 ${n}`} fill style={{ objectFit: 'cover' }} priority={n === 1} />
+            </div>
+          ))}
+        </div>
+        <div className="photo-slider-dots">
+          {[0, 1, 2, 3].map(i => (
+            <button key={i} className={`photo-dot${i === photoIdx ? ' active' : ''}`} onClick={() => setPhotoIdx(i)} aria-label={`Slide ${i + 1}`} />
+          ))}
+        </div>
+      </div>
 
       {/* ═══ TESTIMONIALS ═══════════════════════════════════ */}
       <section className="testimonials section" id="testimonials">
@@ -310,6 +365,26 @@ export default function HomePage() {
                 aria-label="Next"
                 onClick={() => scrollToTestimonial((currentTestimonial + 1) % T_COUNT)}
               >
+                <svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18" /></svg>
+              </button>
+            </div>
+          </div>
+          {/* ─── YouTube video slider ─── */}
+          <div className="yt-slider-wrap">
+            <div className="yt-viewport">
+              <div className="yt-track">
+                {['rDBdMsdRTRY','DbhyzpSFr1w','aIlclgK1nug','0-sIvgjdiT0','alum53SduUQ','a37EulY41-8','HvEqBCwOKrE','_TgbAOyOsCY'].map(id => (
+                  <div key={id} className="yt-card">
+                    <iframe src={`https://www.youtube.com/embed/${id}`} title="Edge8 video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen loading="lazy" className="yt-iframe" />
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="yt-nav">
+              <button className="testimonials-arrow" aria-label="Previous" onClick={() => { const v = document.querySelector('.yt-viewport') as HTMLElement; v?.scrollBy({ left: -440, behavior: 'smooth' }) }}>
+                <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6" /></svg>
+              </button>
+              <button className="testimonials-arrow" aria-label="Next" onClick={() => { const v = document.querySelector('.yt-viewport') as HTMLElement; v?.scrollBy({ left: 440, behavior: 'smooth' }) }}>
                 <svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18" /></svg>
               </button>
             </div>
