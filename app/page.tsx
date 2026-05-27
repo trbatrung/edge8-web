@@ -54,7 +54,6 @@ export default function HomePage() {
   const [formStatus, setFormStatus] = useState<'idle' | 'sending' | 'sent'>('idle')
   const [statsVisible, setStatsVisible] = useState(false)
   const [statCounts, setStatCounts] = useState([0, 0, 0])
-  const [photoIdx, setPhotoIdx] = useState(0)
   const statsRef = useRef<HTMLDivElement>(null)
   const viewportRef = useRef<HTMLDivElement>(null)
   const trackRef = useRef<HTMLDivElement>(null)
@@ -105,11 +104,6 @@ export default function HomePage() {
     requestAnimationFrame(tick)
   }, [statsVisible])
 
-  // Photo slider auto-advance
-  useEffect(() => {
-    const id = setInterval(() => setPhotoIdx(p => (p + 1) % 4), 4500)
-    return () => clearInterval(id)
-  }, [])
 
   // Testimonials scroll sync (infinite loop)
   useEffect(() => {
@@ -294,18 +288,15 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ═══ PHOTO SLIDER ════════════════════════════════════ */}
-      <div className="photo-slider">
-        <div className="photo-slider-track" style={{ transform: `translateX(-${photoIdx * 25}%)` }}>
-          {[1, 2, 3, 4].map(n => (
-            <div key={n} className="photo-slider-slide">
-              <Image src={`/homepage/${n}.jpg`} alt={`Edge8 ${n}`} fill style={{ objectFit: 'cover' }} priority={n === 1} />
+      {/* ═══ PHOTO GALLERY ════════════════════════════════════ */}
+      <div className="photo-gallery">
+        {/* Duplicate set for seamless loop: 1 2 3 4 1 2 3 4 */}
+        <div className="photo-gallery-track">
+          {[1, 2, 3, 4, 1, 2, 3, 4].map((n, i) => (
+            <div key={i} className="photo-gallery-slide">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={`/homepage/${n}.jpg`} alt={`Edge8 ${n}`} />
             </div>
-          ))}
-        </div>
-        <div className="photo-slider-dots">
-          {[0, 1, 2, 3].map(i => (
-            <button key={i} className={`photo-dot${i === photoIdx ? ' active' : ''}`} onClick={() => setPhotoIdx(i)} aria-label={`Slide ${i + 1}`} />
           ))}
         </div>
       </div>
