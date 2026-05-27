@@ -84,30 +84,32 @@ export default function ContactPage() {
                 <form className="contact-form" onSubmit={handleSubmit} noValidate>
                   <p className="contact-form-eyebrow">30-minute consultation · With the Edge8 team</p>
 
-                  <div className="contact-field">
-                    <label htmlFor="name">Full name <span aria-hidden>*</span></label>
-                    <input id="name" name="name" type="text" required autoComplete="name" value={form.name} onChange={handleChange} />
+                  <div className="contact-field-row">
+                    <div className="contact-field">
+                      <label htmlFor="name">Full name <span aria-hidden>*</span></label>
+                      <input id="name" name="name" type="text" required autoComplete="name" value={form.name} onChange={handleChange} />
+                    </div>
+                    <div className="contact-field">
+                      <label htmlFor="email">Work email <span aria-hidden>*</span></label>
+                      <input id="email" name="email" type="email" required autoComplete="email" value={form.email} onChange={handleChange} />
+                    </div>
                   </div>
 
-                  <div className="contact-field">
-                    <label htmlFor="email">Work email <span aria-hidden>*</span></label>
-                    <input id="email" name="email" type="email" required autoComplete="email" value={form.email} onChange={handleChange} />
-                  </div>
-
-                  <div className="contact-field">
-                    <label htmlFor="company">Company <span aria-hidden>*</span></label>
-                    <input id="company" name="company" type="text" required autoComplete="organization" value={form.company} onChange={handleChange} />
-                  </div>
-
-                  <div className="contact-field">
-                    <label htmlFor="teamSize">Team size <span aria-hidden>*</span></label>
-                    <select id="teamSize" name="teamSize" required value={form.teamSize} onChange={handleChange}>
-                      <option value="" disabled>Select one…</option>
-                      <option value="1 - 10">1 – 10</option>
-                      <option value="11 - 50">11 – 50</option>
-                      <option value="51 - 200">51 – 200</option>
-                      <option value="200+">200+</option>
-                    </select>
+                  <div className="contact-field-row">
+                    <div className="contact-field">
+                      <label htmlFor="company">Company <span aria-hidden>*</span></label>
+                      <input id="company" name="company" type="text" required autoComplete="organization" value={form.company} onChange={handleChange} />
+                    </div>
+                    <div className="contact-field">
+                      <label htmlFor="teamSize">Team size <span aria-hidden>*</span></label>
+                      <select id="teamSize" name="teamSize" required value={form.teamSize} onChange={handleChange}>
+                        <option value="" disabled>Select one…</option>
+                        <option value="1 - 10">1 – 10</option>
+                        <option value="11 - 50">11 – 50</option>
+                        <option value="51 - 200">51 – 200</option>
+                        <option value="200+">200+</option>
+                      </select>
+                    </div>
                   </div>
 
                   <div className="contact-field">
