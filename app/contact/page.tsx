@@ -39,16 +39,16 @@ export default function ContactPage() {
 
             {/* ── Left: copy ── */}
             <div className="contact-hero-left">
-              <h1 className="contact-hero-title">Let&rsquo;s Lead AI Together.</h1>
+              <h1 className="contact-hero-title">Get Your First AI Program Plan. Free.</h1>
               <p className="contact-hero-sub">
-                A 30-minute conversation about your business and how AI gives you the leverage to 8x what your team ships.
+                Book a 30-minute conversation. We will talk through your business and where AI gives you the leverage to 8x. Your first AI Program plan lands in your inbox within 88 minutes of the call ending. No slides, no pitch deck, just the plan.
               </p>
 
               <div className="contact-checklist">
                 <p className="contact-checklist-label">You leave with</p>
                 <ul>
+                  <li>Your first AI Program plan, in your inbox within 88 minutes of the call</li>
                   <li>A clear read on where AI can give your business real leverage</li>
-                  <li>Your highest-ROI use case, mapped and prioritised</li>
                   <li>A concrete next step, or an honest reason not to take one</li>
                 </ul>
               </div>

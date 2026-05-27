@@ -653,7 +653,7 @@ export default function HomePage() {
           <div className="contact-blue-inner">
             <div className="reveal">
               <h2 className="section-title" style={{ marginBottom: 16 }}>Let&apos;s Lead AI Together</h2>
-              <p className="section-sub">Let&apos;s talk through your business and show you where AI gives you the leverage to 8x what you ship.</p>
+              <p className="section-sub">Book a 30-minute call. We will talk through your business and email you your first AI Program plan within 88 minutes. Free, no pitch.</p>
             </div>
             <div className="contact-blue-cta reveal">
               <a href="/contact" className="btn btn-contact">
