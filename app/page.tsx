@@ -288,6 +288,18 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ═══ PHOTO GALLERY ════════════════════════════════════ */}
+      <div className="photo-gallery">
+        <div className="photo-gallery-track">
+          {[1, 2, 3, 4, 1, 2, 3, 4].map((n, i) => (
+            <div key={i} className="photo-gallery-slide">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={`/homepage/images/${n}.jpg`} alt={`Edge8 ${n}`} />
+            </div>
+          ))}
+        </div>
+      </div>
+
 {/* ═══ TESTIMONIALS ═══════════════════════════════════ */}
       <section className="testimonials section" id="testimonials">
         <div className="container">
