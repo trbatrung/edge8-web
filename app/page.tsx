@@ -363,7 +363,7 @@ export default function HomePage() {
           <div className="yt-slider-wrap">
             <div className="yt-viewport">
               <div className="yt-track">
-                {['YSP6Xt0UEyk','jRwrSYlaO4Q','NmvVPdsLsn4','9g6bhTIJeKA','wlJNxiEbYVA','fXCe3vSkzVo'].map(id => (
+                {['jRwrSYlaO4Q','NmvVPdsLsn4','9g6bhTIJeKA'].map(id => (
                   <div key={id} className="yt-card">
                     <iframe src={`https://www.youtube.com/embed/${id}`} title="Edge8 video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen loading="lazy" className="yt-iframe" />
                   </div>
