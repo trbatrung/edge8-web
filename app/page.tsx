@@ -363,7 +363,7 @@ export default function HomePage() {
           <div className="yt-slider-wrap">
             <div className="yt-viewport">
               <div className="yt-track">
-                {['rDBdMsdRTRY','DbhyzpSFr1w','aIlclgK1nug','0-sIvgjdiT0','alum53SduUQ','a37EulY41-8','HvEqBCwOKrE','_TgbAOyOsCY'].map(id => (
+                {['YSP6Xt0UEyk','jRwrSYlaO4Q','NmvVPdsLsn4','9g6bhTIJeKA','wlJNxiEbYVA','fXCe3vSkzVo'].map(id => (
                   <div key={id} className="yt-card">
                     <iframe src={`https://www.youtube.com/embed/${id}`} title="Edge8 video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen loading="lazy" className="yt-iframe" />
                   </div>
