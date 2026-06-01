@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import './globals.css'
-import Nav from '@/components/Nav'
-import Footer from '@/components/Footer'
+import SiteFrame from '@/components/SiteFrame'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.edge8.ai'),
@@ -57,9 +56,7 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
         />
-        <Nav />
-        {children}
-        <Footer />
+        <SiteFrame>{children}</SiteFrame>
       </body>
     </html>
   )
