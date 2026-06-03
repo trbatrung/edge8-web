@@ -6,6 +6,7 @@ type: Full-time
 posted: 2026-06-03
 excerpt: Build and optimize AI-powered automation systems, design data architectures, and turn business processes into scalable AI solutions that actually ship.
 applyEmail: mai@edge8.ai
+supabase_job_id: cdfb56a0-1749-471b-ae7d-53d06f380018
 featured: true
 active: true
 ---

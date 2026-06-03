@@ -10,6 +10,7 @@ type Job = {
   type: string
   excerpt: string
   applyEmail: string
+  supabaseJobId: string | null
   featured: boolean
   contentHtml: string
 }
@@ -22,9 +23,9 @@ export default function JobCard({ job }: { job: Job }) {
     .replace(/\s+/g, '-')
     .replace(/[^a-z0-9-]/g, '')
 
-  const mailtoHref = `mailto:${job.applyEmail}?subject=${encodeURIComponent(
-    `Application: ${job.title}`
-  )}`
+  const applyHref = job.supabaseJobId
+    ? `/careers/${job.slug}/apply`
+    : `mailto:${job.applyEmail}?subject=${encodeURIComponent(`Application: ${job.title}`)}`
 
   return (
     <div className={`job-card reveal${job.featured ? ' featured' : ''}`}>
@@ -57,7 +58,7 @@ export default function JobCard({ job }: { job: Job }) {
         >
           {expanded ? 'Hide Details' : 'View Role Details'}
         </button>
-        <a href={mailtoHref} className="btn btn-primary job-apply-btn">
+        <a href={applyHref} className="btn btn-primary job-apply-btn">
           Apply Now →
         </a>
       </div>

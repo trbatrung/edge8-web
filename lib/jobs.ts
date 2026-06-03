@@ -15,6 +15,7 @@ export type JobPost = {
   posted: string
   excerpt: string
   applyEmail: string
+  supabaseJobId: string | null
   featured: boolean
   active: boolean
   contentHtml: string
@@ -48,6 +49,7 @@ export async function getActiveJobs(): Promise<JobPost[]> {
         posted: data.posted ?? '',
         excerpt: data.excerpt ?? '',
         applyEmail: data.applyEmail ?? 'hello@edge8.ai',
+        supabaseJobId: data.supabase_job_id ?? null,
         featured: data.featured ?? false,
         active: data.active ?? true,
         contentHtml,

@@ -6,6 +6,7 @@ type: Full-time
 posted: 2026-06-03
 excerpt: Run social media, create content, support events, and use AI to move faster — for a community of entrepreneurs who expect high standards.
 applyEmail: mai@edge8.ai
+supabase_job_id: 7d44b015-f636-4bf5-9a54-e5a18945dbdf
 featured: false
 active: true
 ---
