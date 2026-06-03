@@ -1,0 +1,66 @@
+'use client'
+
+import { useState } from 'react'
+
+type Job = {
+  slug: string
+  title: string
+  department: string
+  location: string
+  type: string
+  excerpt: string
+  applyEmail: string
+  featured: boolean
+  contentHtml: string
+}
+
+export default function JobCard({ job }: { job: Job }) {
+  const [expanded, setExpanded] = useState(false)
+
+  const deptSlug = job.department
+    .toLowerCase()
+    .replace(/\s+/g, '-')
+    .replace(/[^a-z0-9-]/g, '')
+
+  const mailtoHref = `mailto:${job.applyEmail}?subject=${encodeURIComponent(
+    `Application: ${job.title}`
+  )}`
+
+  return (
+    <div className={`job-card reveal${job.featured ? ' featured' : ''}`}>
+      <div className="job-card-tags">
+        <span className={`job-dept dept-${deptSlug}`}>{job.department}</span>
+        {job.featured && <span className="job-badge-featured">Featured</span>}
+      </div>
+
+      <h3 className="job-title">{job.title}</h3>
+
+      <div className="job-meta">
+        <span className="job-meta-item">{job.location}</span>
+        <span className="job-meta-sep">·</span>
+        <span className="job-meta-item">{job.type}</span>
+      </div>
+
+      <p className="job-excerpt">{job.excerpt}</p>
+
+      {expanded && (
+        <div
+          className="job-body"
+          dangerouslySetInnerHTML={{ __html: job.contentHtml }}
+        />
+      )}
+
+      <div className="job-card-actions">
+        <button
+          className="btn btn-outline job-toggle-btn"
+          onClick={() => setExpanded((v) => !v)}
+        >
+          {expanded ? 'Hide Details' : 'View Role Details'}
+        </button>
+        <a href={mailtoHref} className="btn btn-primary job-apply-btn">
+          Apply Now →
+        </a>
+      </div>
+    </div>
+  )
+}

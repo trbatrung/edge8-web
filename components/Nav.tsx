@@ -70,6 +70,7 @@ export default function Nav() {
               <li><Link href="/ai-programs">AI Programs</Link></li>
               <li><Link href="/blog">Blog</Link></li>
               <li><Link href="/about">About</Link></li>
+              <li><Link href="/careers">Careers</Link></li>
             </ul>
 
             <Link href="/contact" className="btn btn-primary nav-cta">
@@ -102,6 +103,7 @@ export default function Nav() {
         <Link href="/ai-programs" onClick={() => setMenuOpen(false)}>AI Programs</Link>
         <Link href="/blog" onClick={() => setMenuOpen(false)}>Blog</Link>
         <Link href="/about" onClick={() => setMenuOpen(false)}>About</Link>
+        <Link href="/careers" onClick={() => setMenuOpen(false)}>Careers</Link>
         <Link href="/contact" className="btn btn-primary" onClick={() => setMenuOpen(false)}>
           Book a Conversation
         </Link>
