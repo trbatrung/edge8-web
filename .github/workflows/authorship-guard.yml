@@ -1,0 +1,66 @@
+name: Authorship guard (warn-only)
+
+# Reminds authors to fill in the human-token attribution block. This NEVER blocks
+# a merge during the pilot — it only posts/refreshes a single advisory comment.
+# Contract: docs/architecture/authorship-contract.md in the human-token-tracker repo.
+
+on:
+  pull_request:
+    types: [opened, edited, reopened, synchronize]
+
+permissions:
+  pull-requests: write
+
+jobs:
+  check-authorship:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check for a resolvable author block
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const body = context.payload.pull_request.body || '';
+            // Mirrors the sync parser: /<!--\s*author:\s*(\S+)\s+(\S+)\s*-->/i
+            const m = body.match(/<!--\s*author:\s*(\S+)\s+(\S+)\s*-->/i);
+            const email = m && m[2];
+            const looksReal = !!email && email.includes('@') && !email.includes('<');
+            const marker = '<!-- authorship-guard -->';
+
+            const { owner, repo } = context.repo;
+            const issue_number = context.payload.pull_request.number;
+            const { data: comments } = await github.rest.issues.listComments({ owner, repo, issue_number });
+            const existing = comments.find(c => c.body && c.body.includes(marker));
+
+            if (looksReal) {
+              core.info(`Author block OK → ${email}`);
+              if (existing) {
+                await github.rest.issues.deleteComment({ owner, repo, comment_id: existing.id });
+              }
+              return;
+            }
+
+            const reason = m
+              ? `the author block is present but the email \`${email}\` is not filled in`
+              : `no author block was found`;
+            const msg = [
+              marker,
+              '⚠️ **Human-token attribution reminder** (warn-only — this does not block merge).',
+              '',
+              `This PR will be recorded as **unattributed** because ${reason}.`,
+              '',
+              'Add a line like this to the PR description (use the git email registered as your edge8 team member):',
+              '',
+              '```',
+              '<!-- author: <handle> <your-git-email> -->',
+              '```',
+              '',
+              'See the PR template for the full format (co-authors are optional).',
+            ].join('\n');
+
+            if (existing) {
+              await github.rest.issues.updateComment({ owner, repo, comment_id: existing.id, body: msg });
+            } else {
+              await github.rest.issues.createComment({ owner, repo, issue_number, body: msg });
+            }
+            // warn-only: succeed regardless
+            core.info('Posted authorship reminder (non-blocking).');
