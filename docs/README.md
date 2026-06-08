@@ -42,6 +42,7 @@ Operational engineering material — sprint handoffs, change records, gap analys
 | Document | Contents |
 |---|---|
 | [Engineering Index](./engineering/README.md) | Conventions for changes, sprints, prompts, gap analyses |
+| [Human-token tracking](./engineering/human-token-tracking.md) | Per-engineer setup: set local git `user.email` to your Edge8 email so Claude Code sessions are attributed. |
 | [`engineering/changes/`](./engineering/changes/) | Per-change subfolders (PLAN, CHANGELOG, QA_REPORT, EXEC_SUMMARY) |
 | [`engineering/sprints/`](./engineering/sprints/) | Sprint handoffs |
 | [`engineering/prompts/`](./engineering/prompts/) | Setup prompts |
