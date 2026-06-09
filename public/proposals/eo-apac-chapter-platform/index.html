@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>EO APAC · Chapter Operating Platform · Quote</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --eo-blue:#3D46F2; --base-blue:#0C0C31; --eo-blue-light:#A3A7E4;
+    --pink:#FF346E; --orange:#FA653C; --yellow:#EFB82E; --green:#1EA691; --gray:#5E617D;
+    --ink-100:#ECEDF2; --ink-300:#B7B8C3; --paper:#FFFFFF; --warm:#F2F1FA; --line:#E2E2EF;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:Roboto,Arial,sans-serif;color:var(--base-blue);background:var(--ink-100);line-height:1.5;-webkit-font-smoothing:antialiased}
+  .page{max-width:880px;margin:0 auto;background:var(--paper)}
+  .pad{padding:clamp(28px,6vw,72px)}
+
+  /* Cover */
+  .cover{background:var(--base-blue);color:#fff;padding:clamp(40px,7vw,90px) clamp(28px,6vw,72px)}
+  .mark{display:flex;align-items:center;gap:10px;margin-bottom:54px}
+  .ring{width:22px;height:22px;border-radius:50%;background:var(--eo-blue);border:3px solid #fff;box-shadow:0 0 0 1px var(--eo-blue)}
+  .wm{font-family:"Roboto Mono",monospace;font-size:12px;letter-spacing:.2em;font-weight:500}
+  .eyebrow{font-family:"Roboto Mono",monospace;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--eo-blue-light);margin-bottom:22px}
+  .cover h1{font-weight:900;line-height:1.0;letter-spacing:-.02em;font-size:clamp(34px,6vw,64px)}
+  .cover .sub{font-weight:300;font-size:clamp(17px,2.2vw,24px);color:#E7E8F4;margin-top:22px;max-width:54ch}
+  .meta{display:flex;flex-wrap:wrap;gap:30px 56px;margin-top:48px;font-size:14px}
+  .meta .lbl{font-family:"Roboto Mono",monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--eo-blue-light);margin-bottom:6px}
+  .meta .val{font-weight:500;color:#fff}
+
+  h2{font-weight:900;font-size:clamp(24px,3.4vw,36px);letter-spacing:-.015em;line-height:1.05;margin-bottom:10px}
+  .sec-k{font-family:"Roboto Mono",monospace;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--eo-blue);font-weight:500;margin-bottom:14px}
+  p{font-size:16px;color:#2A2A45;margin-bottom:16px}
+  p.lead{font-weight:300;font-size:clamp(17px,2vw,21px);color:var(--gray);margin-bottom:22px}
+  strong{font-weight:700;color:var(--base-blue)}
+  .sec + .sec{border-top:1px solid var(--line)}
+
+  .cards{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:24px}
+  .card{border-radius:14px;padding:24px;background:var(--warm);border:1px solid var(--line);border-top:4px solid var(--c)}
+  .card .k{font-family:"Roboto Mono",monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--c);font-weight:500}
+  .card h3{font-weight:900;font-size:19px;margin:8px 0 8px;letter-spacing:-.01em}
+  .card p{font-size:14.5px;color:var(--gray);margin:0}
+
+  .flow{display:flex;align-items:stretch;gap:12px;margin:26px 0 6px;flex-wrap:wrap}
+  .node{border-radius:12px;padding:18px 20px;flex:1;min-width:170px;border:1px solid var(--line);background:var(--warm)}
+  .node.platform{background:var(--eo-blue);color:#fff;border-color:var(--eo-blue)}
+  .node.hub{border-style:dashed;background:#fff}
+  .node .nl{font-family:"Roboto Mono",monospace;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;opacity:.85}
+  .node .nt{font-weight:700;font-size:16px;margin-top:6px;line-height:1.2}
+  .arrow{align-self:center;font-size:22px;color:var(--eo-blue-light);font-weight:700}
+
+  .stack{display:grid;grid-template-columns:repeat(2,1fr);gap:0;border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-top:22px}
+  .stack .row{display:flex;gap:16px;padding:18px 22px;border-bottom:1px solid var(--line);align-items:baseline}
+  .stack .row:nth-child(odd){border-right:1px solid var(--line)}
+  .stack .row .name{font-weight:700;font-size:15px;min-width:90px}
+  .stack .row .desc{font-size:14px;color:var(--gray)}
+
+  /* Pricing */
+  .ptable{width:100%;border-collapse:collapse;margin-top:22px;font-size:15px}
+  .ptable th{text-align:left;font-family:"Roboto Mono",monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--gray);font-weight:500;padding:0 14px 12px;border-bottom:2px solid var(--base-blue)}
+  .ptable td{padding:16px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+  .ptable .item{font-weight:700}
+  .ptable .note{font-size:13px;color:var(--gray);margin-top:4px}
+  .ptable .price{font-weight:700;white-space:nowrap;text-align:right;font-size:16px}
+  .ptable .price.open{color:var(--eo-blue)}
+  .total{display:flex;justify-content:space-between;align-items:baseline;gap:20px;margin-top:26px;padding:22px 24px;background:var(--base-blue);color:#fff;border-radius:14px;flex-wrap:wrap}
+  .total .lab{font-weight:300;font-size:16px;color:#E7E8F4}
+  .total .lab strong{color:#fff}
+  .total .fig{font-weight:900;font-size:clamp(22px,3vw,30px);letter-spacing:-.01em}
+
+  .callout{background:var(--warm);border:1px solid var(--line);border-left:4px solid var(--green);border-radius:12px;padding:20px 24px;margin-top:24px}
+  .callout p{margin:0;font-size:15px;color:#2A2A45}
+
+  ul.clean{list-style:none;margin:8px 0 0}
+  ul.clean li{position:relative;padding-left:24px;margin-bottom:12px;font-size:15.5px;color:#2A2A45}
+  ul.clean li::before{content:"";position:absolute;left:0;top:9px;width:9px;height:9px;border-radius:2px;background:var(--eo-blue)}
+
+  /* Risk */
+  .risk{border-radius:14px;padding:22px 24px;background:var(--warm);border:1px solid var(--line);border-left:4px solid var(--c);margin-top:18px}
+  .risk .rk{font-family:"Roboto Mono",monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--c);font-weight:500}
+  .risk h3{font-weight:900;font-size:19px;margin:7px 0 8px;letter-spacing:-.01em}
+  .risk p{font-size:15px;color:#2A2A45;margin:0 0 10px}
+  .risk p:last-child{margin-bottom:0}
+  .risk .mit{font-size:14.5px;color:var(--gray)}
+  .risk .mit b{color:var(--green);font-weight:700}
+  .rtable{width:100%;border-collapse:collapse;margin:14px 0 4px;font-size:14px}
+  .rtable th{text-align:left;font-family:"Roboto Mono",monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--gray);font-weight:500;padding:0 12px 9px;border-bottom:2px solid var(--base-blue)}
+  .rtable td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+  .rtable .co{font-weight:700;white-space:nowrap}
+  .rtable .yes{color:var(--green);font-weight:700}
+  .rtable .prev{color:var(--orange);font-weight:700}
+  .rtable .no{color:var(--pink);font-weight:700}
+  .rtable .nt{color:var(--gray);font-size:13.5px}
+
+  .foot{background:var(--base-blue);color:#fff;padding:clamp(32px,6vw,56px) clamp(28px,6vw,72px)}
+  .foot .eyebrow{color:var(--eo-blue-light)}
+  .foot h2{color:#fff}
+  .foot p{color:#C9CBE0;font-size:15.5px}
+  .sign{display:flex;flex-wrap:wrap;gap:28px 56px;margin-top:30px;font-size:14px}
+  .sign .lbl{font-family:"Roboto Mono",monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--eo-blue-light);margin-bottom:6px}
+  .sign .val{font-weight:500}
+  .fineprint{font-size:12.5px;color:var(--ink-300);margin-top:36px;line-height:1.6}
+
+  @media(max-width:680px){.cards,.stack{grid-template-columns:1fr}.stack .row:nth-child(odd){border-right:none}.flow{flex-direction:column}.arrow{transform:rotate(90deg)}}
+  @media print{body{background:#fff}.page{max-width:none}}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- COVER -->
+  <div class="cover">
+    <div class="mark"><span class="ring"></span><span class="wm">EO APAC × EDGE8</span></div>
+    <div class="eyebrow">Quote · Chapter Operating Platform</div>
+    <h1>One platform<br>for the region.</h1>
+    <p class="sub">A proposal to deploy the AI-run chapter operating platform across EO APAC, with a regional rollup for reporting and a dedicated AI engineer to execute.</p>
+    <div class="meta">
+      <div><div class="lbl">Prepared for</div><div class="val">EO APAC Regional Council</div></div>
+      <div><div class="lbl">Prepared by</div><div class="val">Dave Hajdu · Edge8 AI</div></div>
+      <div><div class="lbl">Date</div><div class="val">June 9, 2026</div></div>
+      <div><div class="lbl">Scope</div><div class="val">Up to 17 chapters · opt-in</div></div>
+    </div>
+  </div>
+
+  <!-- VISION -->
+  <div class="sec pad">
+    <div class="sec-k">01 · Vision</div>
+    <h2>The CMS is dead. Claude is the operating system.</h2>
+    <p class="lead">Every chapter runs on a database it owns, operated in plain English. Events, content, membership, the board and the data all live in one source of truth, with no per-seat tool sprawl.</p>
+    <p>The North Star for the region this fiscal year is a single, well-designed database that every chapter deploys against, with a regional rollup on top. Once the data structure is aligned and in one place, everything else built on top of it is just flavor. This is not a software purchase. It is a shared data structure plus the code that operates it, owned by EO.</p>
+    <div class="callout" style="border-left-color:var(--eo-blue)"><p><strong>Infinite Leverage.</strong> The whole model runs on one idea: the people who understand the business should be the ones building. Infinite Leverage is the ratio of human tokens to Claude tokens to pull requests, how much shipped value comes out of every hour of human attention. A trained chapter manager directing Claude, backed by one AI engineer who multiplies the whole region, produces output that used to take a full tech team. That leverage is what makes a regional platform affordable in the first place.</p></div>
+    <div class="callout"><p><strong>What this replaces:</strong> the per-chapter cost of CMS and admin tools. Where a chapter once paid hundreds a month for software, it now contributes a small share of token and hosting cost and operates the whole chapter from one place.</p></div>
+  </div>
+
+  <!-- MENTAL MODEL -->
+  <div class="sec pad">
+    <div class="sec-k">02 · Mental model</div>
+    <h2>Chapters operate. The region reports. Global stays in sync.</h2>
+    <p class="lead">Each chapter runs its own platform. Prospects, events and feedback flow upward to a regional rollup. From there, the design syncs into EO Global so no chapter ever logs into HubSpot, once that sync is Global-approved and in production.</p>
+    <div class="flow">
+      <div class="node"><div class="nl">APAC chapters</div><div class="nt">Operate here</div></div>
+      <div class="arrow">→</div>
+      <div class="node platform"><div class="nl">EO Platform</div><div class="nt">Claude + chapter DB</div></div>
+      <div class="arrow">→</div>
+      <div class="node"><div class="nl">Region</div><div class="nt">Rollup database</div></div>
+      <div class="arrow">→</div>
+      <div class="node hub"><div class="nl">EO Global</div><div class="nt">HubSpot / Dynamics</div></div>
+    </div>
+    <p style="margin-top:18px">It rests on three things, and only three: <strong>workflow design</strong> (knowing how the job is actually done), <strong>database design</strong> (storing it consistently), and <strong>instructions</strong> (the code). Get the data structure right and aligned, and the rest follows.</p>
+  </div>
+
+  <!-- DATABASE MODELS -->
+  <div class="sec pad">
+    <div class="sec-k">03 · Architecture</div>
+    <h2>Decentralized chapters, centralized reporting.</h2>
+    <p class="lead">To respect data privacy and residency, chapters keep their own databases. The region receives a synced rollup, not direct control of chapter data.</p>
+    <div class="cards">
+      <div class="card" style="--c:var(--orange)">
+        <div class="k">Per chapter</div>
+        <h3>Decentralized chapter database</h3>
+        <p>Each chapter owns its own repo, Vercel deployment and Supabase database. It runs independently off a shared, standard data structure that it can extend if it wants to.</p>
+      </div>
+      <div class="card" style="--c:var(--green)">
+        <div class="k">Region</div>
+        <h3>Centralized regional database</h3>
+        <p>A regional rollup database receives the data the region needs through API sync. Shared-services staff (for example marketing) can operate across chapters, and the region gets reporting across all 17.</p>
+      </div>
+    </div>
+    <div class="callout"><p><strong>Why this way:</strong> a single shared database for all chapters runs into data privacy and residency issues. Letting each chapter own its database and syncing rollup data to the region avoids that, and still gives the region full visibility.</p></div>
+  </div>
+
+  <!-- THE STACK -->
+  <div class="sec pad">
+    <div class="sec-k">04 · The stack</div>
+    <h2>Owned infrastructure. No platform lock-in.</h2>
+    <p class="lead">There is no platform vendor to pay. The chapter owns the database and the code. Ongoing cost is just hosting.</p>
+    <div class="stack">
+      <div class="row"><span class="name">Claude</span><span class="desc">The interface and operator. Reads and writes the database, builds features, answers questions in plain English.</span></div>
+      <div class="row"><span class="name">GitHub</span><span class="desc">Source of the front end and schema. Forkable per chapter; nothing private in the repo.</span></div>
+      <div class="row"><span class="name">Vercel</span><span class="desc">Publishes the chapter site to the web. Fast, native code, no CMS bloat.</span></div>
+      <div class="row"><span class="name">Supabase</span><span class="desc">The database (hosted on AWS). The single source of truth the chapter owns.</span></div>
+    </div>
+    <p style="margin-top:20px">Already built and ready to deploy: the events module (modeled on Eventbrite), content and blog, members, board, forum administration, the transformational growth pulse, learning hub with crawlable materials, dashboards, and a members / financial / public chatbot layer so board members never need to touch Claude directly.</p>
+    <div class="callout" style="border-left-color:var(--yellow)"><p><strong>Sync to Global is prototyped, not yet in production.</strong> The Hivebrite event sync and the HubSpot / Dynamics sync exist as working prototypes. Both still need EO Global approval and a production deployment before they go live. This is an active EO Global project owned by Edge8, which is the fastest path to getting it approved and shipped.</p></div>
+  </div>
+
+  <!-- CHAPTER MANAGER EMPOWERMENT -->
+  <div class="sec pad">
+    <div class="sec-k">05 · Chapter manager empowerment</div>
+    <h2>The chapter manager runs the whole chapter.</h2>
+    <p class="lead">One trained operator manages events, content, members and the board from a single conversation. No engineers in the day-to-day loop.</p>
+    <ul class="clean">
+      <li><strong>Operate in plain English or in the admin tools.</strong> The manager can ask Claude to create an event, set pricing into Stripe, publish a blog, or move a member, or do the same through built-in admin screens.</li>
+      <li><strong>Build, with guardrails.</strong> Trained managers can draft small features themselves; technical review and publishing of pull requests stays gated to the engineer for safety.</li>
+      <li><strong>Training, not a manual.</strong> Roughly a half-day of hands-on training gets a manager productive, with a short ramp on a few core habits afterward.</li>
+      <li><strong>An engineer in the loop when it matters.</strong> Managers run the day to day on their own, but they are never stranded. When a chapter inevitably gets stuck, the region's dedicated AI engineer is the escalation point: reviewing and publishing pull requests, handling anything technical, and keeping every chapter unblocked.</li>
+      <li><strong>A new hiring profile.</strong> The platform supports a younger, AI-native chapter staffer and reduces dependence on heavy tooling. This is part of the value, not a side effect.</li>
+    </ul>
+  </div>
+
+  <!-- MEMBER EMPOWERMENT -->
+  <div class="sec pad">
+    <div class="sec-k">06 · Member empowerment</div>
+    <h2>Turn your technical members loose.</h2>
+    <p class="lead">Every chapter is blessed with members who are technical. Opening the stack to them, at the chapter's discretion, lets them customize their own solution while the core database stays intact.</p>
+    <p>This is Infinite Leverage applied to the membership itself. A founder or engineer in the chapter can fork the repo, build a feature their chapter actually wants, and contribute it back, without waiting on anyone. The chapter decides who gets access and how far it goes, so empowerment never comes at the cost of control.</p>
+    <ul class="clean">
+      <li><strong>Access is the chapter's call.</strong> Each chapter chooses whether to open its stack to members, and to whom. Nothing is exposed by default.</li>
+      <li><strong>Members build, the core stays protected.</strong> Technical members customize through additive features and their own extensions; the canonical core schema is gated and reviewed, so the regional rollup and Global sync are never put at risk.</li>
+      <li><strong>Good ideas spread.</strong> A feature one member builds can be shared back to the standard and offered to every chapter, so the whole region compounds on local innovation.</li>
+      <li><strong>A pipeline of contributors.</strong> Engaging technical members in building the platform deepens their involvement and creates a bench of people who understand the system, beyond the single dedicated engineer.</li>
+    </ul>
+  </div>
+
+  <!-- COMMERCIALS -->
+  <div class="sec pad">
+    <div class="sec-k">07 · Commercials</div>
+    <h2>What it costs.</h2>
+    <p class="lead">A simple, transparent model: one dedicated engineer for the fiscal year, hosting at cost, and a fee for leadership and training that the region sets to match its budget and sense of ROI.</p>
+
+    <table class="ptable">
+      <thead><tr><th>Item</th><th>Basis</th><th style="text-align:right">Cost</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>
+            <div class="item">Dedicated AI engineer</div>
+            <div class="note">One full-time AI engineer for the fiscal year, executing rollout and chapter deployments under Dave's direction. Vietnam-based, EO-cleared.</div>
+          </td>
+          <td>Blended monthly rate<span class="note">All-in: fully loaded cost plus standard fee</span></td>
+          <td class="price">~$3,000&nbsp;/mo<div class="note" style="text-align:right">~$36,000 / year*</div></td>
+        </tr>
+        <tr>
+          <td>
+            <div class="item">Hosting (per chapter)</div>
+            <div class="note">Vercel + Supabase, billed at cost. Transaction volume is minimal; no platform fee. Region or chapter covers a small share of tokens and hosting.</div>
+          </td>
+          <td>Pass-through, at cost</td>
+          <td class="price">At cost</td>
+        </tr>
+        <tr>
+          <td>
+            <div class="item">Dave's time + specialist team support</div>
+            <div class="note">Leadership of the program plus auxiliary time from Edge8 specialists for various skills as needed. As an EO member, structured so the region clearly gets ROI.</div>
+          </td>
+          <td>Fixed fee, region's choice</td>
+          <td class="price open">You decide</td>
+        </tr>
+        <tr>
+          <td>
+            <div class="item">Chapter manager training</div>
+            <div class="note">Hands-on training to get each chapter's operator productive on the platform.</div>
+          </td>
+          <td>Region's choice</td>
+          <td class="price open">You decide</td>
+        </tr>
+        <tr>
+          <td>
+            <div class="item">Optional: data migration</div>
+            <div class="note">Opt-in per chapter. Every chapter starts from a different data situation. We do it for a flat fee, or the chapter does it itself using the GitHub repo and our Claude skills.</div>
+          </td>
+          <td>Flat fee, or do-it-yourself</td>
+          <td class="price">$1,000&nbsp;/ chapter<div class="note" style="text-align:right">or DIY, free</div></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="total">
+      <div class="lab">Indicative annual baseline <strong>(1 engineer + hosting at cost)</strong>, before the region's chosen fees</div>
+      <div class="fig">~$36,000 / yr</div>
+    </div>
+
+    <div class="callout" style="border-left-color:var(--eo-blue)">
+      <p><strong>The recommendation:</strong> the region hires one full-time AI engineer for the fiscal year. That single resource is the Infinite Leverage multiplier for all of APAC: it deploys the platform to bought-in chapters, builds the regional rollup, is the escalation point when chapters get stuck, and removes the bandwidth bottleneck that has stalled this idea before. Hosting stays at cost. Everything else, Dave's time and training, the region sets at whatever feels fair and ROI-positive.</p>
+    </div>
+
+    <p class="fineprint">* The ~$3,000/mo blended engineer rate is indicative and depends on the salary of the specific person hired. Fully loaded engineer cost runs roughly $2,500 to $3,000/mo; the blended figure includes the standard Edge8 fee. A formal cost-plus breakdown (engineer cost + 25% fee), consistent with the existing EO Global vendor model, is available on request. IP belongs to EO. The platform code and schema are forkable and EO-owned; there is no platform lock-in.</p>
+  </div>
+
+  <!-- RISK -->
+  <div class="sec pad">
+    <div class="sec-k">08 · Risk &amp; what to watch</div>
+    <h2>What could slow this down.</h2>
+    <p class="lead">The technology is the easy part. The real risks are payments, a Global decision outside our control, people, and keeping the data clean and legal across borders. Each is manageable, and naming them up front is how we plan around them.</p>
+
+    <div class="risk" style="--c:var(--orange)">
+      <div class="rk">Risk 01 · Payments</div>
+      <h3>Stripe is not available in every APAC country.</h3>
+      <p>The platform handles ticketing and payments through Stripe. Stripe self-registration is not available in every country in the region, so payment setup will differ chapter to chapter, and a few chapters will need a workaround entity or an alternative processor.</p>
+      <table class="rtable">
+        <thead><tr><th>Country</th><th>Stripe</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td class="co">Singapore</td><td class="yes">Yes</td><td class="nt">Full support. Self-register, all products including Connect.</td></tr>
+          <tr><td class="co">Malaysia</td><td class="yes">Yes</td><td class="nt">Full support. Self-register.</td></tr>
+          <tr><td class="co">Thailand</td><td class="yes">Yes</td><td class="nt">Full support. Self-register.</td></tr>
+          <tr><td class="co">Indonesia</td><td class="prev">Preview</td><td class="nt">Limited. Contact Stripe sales, cannot self-register.</td></tr>
+          <tr><td class="co">Vietnam</td><td class="no">No</td><td class="nt">Not supported. Use US (Atlas / LLC) or Singapore entity.</td></tr>
+          <tr><td class="co">Philippines</td><td class="no">No</td><td class="nt">Not supported.</td></tr>
+          <tr><td class="co">Australia</td><td class="yes">Yes</td><td class="nt">Full support. Self-register.</td></tr>
+          <tr><td class="co">New Zealand</td><td class="yes">Yes</td><td class="nt">Full support. Self-register.</td></tr>
+        </tbody>
+      </table>
+      <p class="mit"><b>Mitigation:</b> start the rollout with self-register countries; scope a payment workaround per chapter where Stripe is unavailable, the same way Edge8 already handles it for Vietnam.</p>
+    </div>
+
+    <div class="risk" style="--c:var(--eo-blue)">
+      <div class="rk">Risk 02 · Global API</div>
+      <h3>The Global sync is still a Global staff decision.</h3>
+      <p>The HubSpot / Dynamics sync is prototyped, but moving it into production depends on EO Global approval. That timeline is not fully in the region's hands, and Global has historically been slow to move.</p>
+      <p class="mit"><b>Mitigation:</b> Edge8 owns the Global API and MCP project, which is the shortest path to approval. The regional platform delivers full value without the Global sync; the sync is upside layered on once approved, not a blocker for the rollout.</p>
+    </div>
+
+    <div class="risk" style="--c:var(--pink)">
+      <div class="rk">Risk 03 · Chapter adoption</div>
+      <h3>Region-wide rollout can die on the vine.</h3>
+      <p>Simply offering chapters a repo to fork tends not to land. Most chapters will not have the bandwidth or appetite to self-deploy, and a broad opt-in can stall.</p>
+      <p class="mit"><b>Mitigation:</b> start with one or two genuinely bought-in chapters, run them well, and let the proof drive demand. The dedicated engineer and managed hosting remove the self-deploy burden that kills voluntary adoption.</p>
+    </div>
+
+    <div class="risk" style="--c:var(--green)">
+      <div class="rk">Risk 04 · Chapter manager fit</div>
+      <h3>Not every chapter manager is tech-forward.</h3>
+      <p>The platform assumes a manager willing to operate in a new, AI-first way. Some will take to it quickly; others may resist or struggle, and adoption lives or dies on that person.</p>
+      <p class="mit"><b>Mitigation:</b> hands-on training plus an engineer on call as the escalation point lowers the bar. Where a manager is not a fit, the platform also supports a younger, AI-native hire, and the chatbot layer lets the board and members self-serve without the manager in the loop.</p>
+    </div>
+
+    <div class="risk" style="--c:var(--eo-blue)">
+      <div class="rk">Risk 05 · Schema integrity</div>
+      <h3>Keeping the core database structure intact across chapters.</h3>
+      <p>The regional rollup only works if every chapter shares the same core data structure. As chapters extend and customize their own databases, schemas can drift, and divergence breaks reporting and the Global sync. This is the single most important thing to protect, because the aligned data structure is the whole North Star.</p>
+      <p class="mit"><b>Mitigation:</b> a versioned core schema as the canonical source, owned centrally. Chapters extend through additive fields only, never by changing core tables; the dedicated engineer reviews and gates schema changes, and a validation check flags any chapter that drifts from the standard.</p>
+    </div>
+
+    <div class="risk" style="--c:var(--orange)">
+      <div class="rk">Risk 06 · Data sharing</div>
+      <h3>Chapters may be unwilling to share data with the region.</h3>
+      <p>The rollup depends on chapters agreeing to sync data upward. Some chapters will be protective of member information and may resist sending data to the region, which limits the reporting value of the whole model.</p>
+      <p class="mit"><b>Mitigation:</b> chapters keep ownership and control of their own database; only the agreed rollup fields sync, not full member records. Make the value reciprocal so chapters get regional benchmarks and shared-services support in return, and let participation be opt-in with a clear data-sharing agreement.</p>
+    </div>
+
+    <div class="risk" style="--c:var(--pink)">
+      <div class="rk">Risk 07 · Data residency</div>
+      <h3>Data residency and privacy laws vary across the region.</h3>
+      <p>APAC countries have different data privacy and residency requirements. Centralizing member data in one place, or moving it across borders, can run into local law, which is a real constraint on how the regional database is built.</p>
+      <p class="mit"><b>Mitigation:</b> the decentralized architecture is the answer here. Each chapter owns its own database in an appropriate region, and only rollup data syncs to the region, which keeps sensitive records local by design. Confirm residency requirements per country before onboarding, and store rollup data accordingly.</p>
+    </div>
+  </div>
+
+  <!-- HOW WE START -->
+  <div class="sec pad">
+    <div class="sec-k">09 · How we start</div>
+    <h2>Start small, prove it, scale.</h2>
+    <p class="lead">Forking the repo region-wide tends to die on the vine. The realistic path is one or two bought-in chapters, run well, then expansion.</p>
+    <ul class="clean">
+      <li><strong>Phase 1, Pilot.</strong> Stand up 1 to 2 committed chapters on the platform. Edge8 covers hosting setup; build the API calls that feed the regional rollup so the region sees exactly what is happening.</li>
+      <li><strong>Phase 2, Regional rollup.</strong> Build the regional database and reporting across pilot chapters. Move the Global HubSpot / Dynamics sync from prototype into production, subject to EO Global approval.</li>
+      <li><strong>Phase 3, Roll out.</strong> Extend to the remaining chapters as an opt-in, with optional migration per chapter. Ready for all 17.</li>
+    </ul>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="foot">
+    <div class="eyebrow">Next step</div>
+    <h2>A vision memo into a scoped requirement.</h2>
+    <p>This quote pairs with a short vision and end-state memo that the region can turn into a requirement and fund. The platform, the stack and most modules already exist. The gap has always been AI engineering and deployment bandwidth, and that is exactly what this proposal staffs.</p>
+    <div class="sign">
+      <div><div class="lbl">Contact</div><div class="val">Dave Hajdu</div></div>
+      <div><div class="lbl">Email</div><div class="val">dave@edge8.co</div></div>
+      <div><div class="lbl">Company</div><div class="val">Edge8 AI · Ho Chi Minh City</div></div>
+      <div><div class="lbl">Status</div><div class="val">EO Global cleared vendor</div></div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
