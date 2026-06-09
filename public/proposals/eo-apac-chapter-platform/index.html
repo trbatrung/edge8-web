@@ -120,7 +120,7 @@
       <div><div class="lbl">Prepared for</div><div class="val">EO APAC Regional Council</div></div>
       <div><div class="lbl">Prepared by</div><div class="val">Dave Hajdu · Edge8 AI</div></div>
       <div><div class="lbl">Date</div><div class="val">June 9, 2026</div></div>
-      <div><div class="lbl">Scope</div><div class="val">Up to 17 chapters · opt-in</div></div>
+      <div><div class="lbl">Scope</div><div class="val">Up to 18 chapters · opt-in</div></div>
     </div>
   </div>
 
@@ -165,7 +165,7 @@
       <div class="card" style="--c:var(--green)">
         <div class="k">Region</div>
         <h3>Centralized regional database</h3>
-        <p>A regional rollup database receives the data the region needs through API sync. Shared-services staff (for example marketing) can operate across chapters, and the region gets reporting across all 17.</p>
+        <p>A regional rollup database receives the data the region needs through API sync. Shared-services staff (for example marketing) can operate across chapters, and the region gets reporting across all 18.</p>
       </div>
     </div>
     <div class="callout"><p><strong>Why this way:</strong> a single shared database for all chapters runs into data privacy and residency issues. Letting each chapter own its database and syncing rollup data to the region avoids that, and still gives the region full visibility.</p></div>
@@ -183,7 +183,7 @@
       <div class="row"><span class="name">Supabase</span><span class="desc">The database (hosted on AWS). The single source of truth the chapter owns.</span></div>
     </div>
     <p style="margin-top:20px">Already built and ready to deploy: the events module (modeled on Eventbrite), content and blog, members, board, forum administration, the transformational growth pulse, learning hub with crawlable materials, dashboards, and a members / financial / public chatbot layer so board members never need to touch Claude directly.</p>
-    <div class="callout" style="border-left-color:var(--yellow)"><p><strong>Sync to Global is prototyped, not yet in production.</strong> The Hivebrite event sync and the HubSpot / Dynamics sync exist as working prototypes. Both still need EO Global approval and a production deployment before they go live. This is an active EO Global project owned by Edge8, which is the fastest path to getting it approved and shipped.</p></div>
+    <div class="callout" style="border-left-color:var(--yellow)"><p><strong>Sync to Global is prototyped, not yet in production.</strong> The Hivebrite event sync and the HubSpot / Dynamics sync exist as working prototypes. Both still need EO Global approval and a production deployment before they go live. This is an active EO Global project Edge8 is currently working on, which is the fastest path to getting it approved and shipped.</p></div>
   </div>
 
   <!-- CHAPTER MANAGER EMPOWERMENT -->
@@ -308,14 +308,14 @@
       <div class="rk">Risk 02 · Global API</div>
       <h3>The Global sync is still a Global staff decision.</h3>
       <p>The HubSpot / Dynamics sync is prototyped, but moving it into production depends on EO Global approval. That timeline is not fully in the region's hands, and Global has historically been slow to move.</p>
-      <p class="mit"><b>Mitigation:</b> Edge8 owns the Global API and MCP project, which is the shortest path to approval. The regional platform delivers full value without the Global sync; the sync is upside layered on once approved, not a blocker for the rollout.</p>
+      <p class="mit"><b>Mitigation:</b> Edge8 is the vendor currently building the Global API and MCP project, which is the shortest path to approval. The regional platform delivers full value without the Global sync; the sync is upside layered on once approved, not a blocker for the rollout.</p>
     </div>
 
     <div class="risk" style="--c:var(--pink)">
       <div class="rk">Risk 03 · Chapter adoption</div>
       <h3>Region-wide rollout can die on the vine.</h3>
       <p>Simply offering chapters a repo to fork tends not to land. Most chapters will not have the bandwidth or appetite to self-deploy, and a broad opt-in can stall.</p>
-      <p class="mit"><b>Mitigation:</b> start with one or two genuinely bought-in chapters, run them well, and let the proof drive demand. The dedicated engineer and managed hosting remove the self-deploy burden that kills voluntary adoption.</p>
+      <p class="mit"><b>Mitigation:</b> chapters do not deploy anything themselves. Each chapter <i>receives</i> a forked repo that the region's centralized AI engineer stands up and manages for them; doing it yourself is optional, for the rare advanced chapter that wants to. Start with one or two genuinely bought-in chapters, run them well, and let the proof drive demand. The dedicated engineer and managed hosting remove the self-deploy burden that kills voluntary adoption.</p>
     </div>
 
     <div class="risk" style="--c:var(--green)">
@@ -351,11 +351,11 @@
   <div class="sec pad">
     <div class="sec-k">09 · How we start</div>
     <h2>Start small, prove it, scale.</h2>
-    <p class="lead">Forking the repo region-wide tends to die on the vine. The realistic path is one or two bought-in chapters, run well, then expansion.</p>
+    <p class="lead">Asking chapters to fork the repo and deploy it themselves tends to die on the vine. The realistic path is a managed rollout: the dedicated engineer stands the platform up for one or two bought-in chapters, runs them well, then expands.</p>
     <ul class="clean">
-      <li><strong>Phase 1, Pilot.</strong> Stand up 1 to 2 committed chapters on the platform. Edge8 covers hosting setup; build the API calls that feed the regional rollup so the region sees exactly what is happening.</li>
+      <li><strong>Phase 1, Pilot.</strong> The dedicated engineer stands up 1 to 2 committed chapters on the platform for them. Edge8 covers hosting setup and builds the API calls that feed the regional rollup so the region sees exactly what is happening.</li>
       <li><strong>Phase 2, Regional rollup.</strong> Build the regional database and reporting across pilot chapters. Move the Global HubSpot / Dynamics sync from prototype into production, subject to EO Global approval.</li>
-      <li><strong>Phase 3, Roll out.</strong> Extend to the remaining chapters as an opt-in, with optional migration per chapter. Ready for all 17.</li>
+      <li><strong>Phase 3, Roll out.</strong> The engineer deploys the platform for the remaining chapters as an opt-in, managing each one for them, with migration handled per chapter. Ready for all 18.</li>
     </ul>
   </div>
 
