@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Accord Plumbing — AI & Data Proposal | Edge8</title>
+<style>
+  :root{
+    --navy:#04102D;
+    --mist:#EAEEF2;
+    --white:#FFFFFF;
+    --blue:#287BE8;
+    --pink:#D1458B;
+    --mint:#6FF2C1;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    color:var(--navy);
+    background:var(--mist);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .page{
+    max-width:840px;
+    margin:0 auto;
+    background:var(--white);
+  }
+  header{
+    background:var(--navy);
+    color:var(--white);
+    padding:56px 56px 48px;
+  }
+  .eyebrow{
+    font-size:13px;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    color:var(--mint);
+    font-weight:600;
+    margin-bottom:18px;
+  }
+  header h1{
+    font-size:34px;
+    line-height:1.2;
+    font-weight:700;
+    margin-bottom:14px;
+  }
+  header p.sub{
+    font-size:17px;
+    color:var(--mist);
+    max-width:620px;
+  }
+  .meta{
+    margin-top:30px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:28px;
+    font-size:13px;
+    color:var(--mist);
+  }
+  .meta div span{
+    display:block;
+    color:var(--mint);
+    font-size:11px;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    margin-bottom:3px;
+  }
+  section{padding:44px 56px;}
+  section + section{border-top:1px solid var(--mist);}
+  h2{
+    font-size:13px;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--blue);
+    font-weight:700;
+    margin-bottom:8px;
+  }
+  h3{
+    font-size:24px;
+    font-weight:700;
+    margin-bottom:18px;
+    color:var(--navy);
+  }
+  p{margin-bottom:16px;font-size:16px;}
+  p:last-child{margin-bottom:0;}
+  strong{font-weight:650;}
+  ul{margin:0 0 16px 0;padding-left:0;list-style:none;}
+  ul li{
+    position:relative;
+    padding-left:24px;
+    margin-bottom:10px;
+    font-size:16px;
+  }
+  ul li::before{
+    content:"";
+    position:absolute;
+    left:0;top:11px;
+    width:8px;height:8px;
+    background:var(--mint);
+    border-radius:50%;
+  }
+  .cost-table{
+    width:100%;
+    border-collapse:collapse;
+    margin:8px 0 4px;
+    font-size:15px;
+  }
+  .cost-table th{
+    text-align:left;
+    font-size:12px;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:var(--blue);
+    padding:0 0 12px;
+    border-bottom:2px solid var(--mist);
+  }
+  .cost-table th.num,.cost-table td.num{text-align:right;}
+  .cost-table td{
+    padding:14px 0;
+    border-bottom:1px solid var(--mist);
+    vertical-align:top;
+  }
+  .cost-table td .label{font-weight:600;}
+  .cost-table td .note{display:block;font-size:13px;color:#5a6478;margin-top:2px;}
+  .cost-table tr.total td{
+    border-bottom:none;
+    border-top:2px solid var(--navy);
+    font-weight:700;
+    font-size:17px;
+    padding-top:16px;
+  }
+  .callout{
+    background:var(--navy);
+    color:var(--white);
+    padding:34px 36px;
+    border-radius:10px;
+    margin:6px 0;
+  }
+  .callout .q{
+    font-size:22px;
+    font-weight:600;
+    line-height:1.4;
+  }
+  .callout .q .hl{color:var(--mint);}
+  .callout .tag{
+    font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--mint);font-weight:600;margin-bottom:14px;display:block;
+  }
+  .phase{
+    display:flex;
+    gap:22px;
+    padding:24px 0;
+    border-bottom:1px solid var(--mist);
+  }
+  .phase:last-child{border-bottom:none;}
+  .phase .num{
+    flex:0 0 52px;
+    height:52px;
+    background:var(--mist);
+    color:var(--navy);
+    border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-size:20px;font-weight:700;
+  }
+  .phase .body h4{font-size:19px;font-weight:700;margin-bottom:6px;}
+  .phase .body .role{
+    font-size:12px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--pink);font-weight:700;margin-bottom:8px;
+  }
+  .phase .body p{margin-bottom:0;font-size:15px;}
+  .options{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+    margin-top:6px;
+  }
+  .opt{
+    border:1px solid var(--mist);
+    border-radius:10px;
+    padding:24px;
+  }
+  .opt h4{font-size:17px;font-weight:700;margin-bottom:6px;}
+  .opt .price{font-size:26px;font-weight:700;color:var(--blue);margin-bottom:8px;}
+  .opt .price small{font-size:14px;color:#5a6478;font-weight:500;}
+  .opt p{font-size:14px;margin-bottom:0;}
+  .next-step{
+    background:var(--mint);
+    color:var(--navy);
+    padding:30px 36px;
+    border-radius:10px;
+  }
+  .next-step h3{margin-bottom:8px;}
+  .next-step p{margin-bottom:0;font-size:16px;}
+  footer{
+    background:var(--navy);
+    color:var(--mist);
+    padding:30px 56px;
+    font-size:13px;
+  }
+  footer strong{color:var(--white);}
+  .disclaimer{font-size:13px;color:#5a6478;margin-top:10px;}
+  @media (max-width:620px){
+    header,section,footer{padding-left:28px;padding-right:28px;}
+    .options{grid-template-columns:1fr;}
+    header h1{font-size:27px;}
+  }
+  @media print{
+    body{background:var(--white);}
+    .page{max-width:100%;}
+    .callout,.next-step,.opt,.phase .num{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <div class="eyebrow">Edge8 &nbsp;·&nbsp; Proposal</div>
+    <h1>From Scattered Tools to One Company Database</h1>
+    <p class="sub">A staged plan to consolidate Accord Plumbing's data, automate reporting, and reduce what you spend on software and manual work, year over year.</p>
+    <div class="meta">
+      <div><span>Prepared for</span>Ian — Accord Plumbing</div>
+      <div><span>Prepared by</span>David Hajdu &amp; Quan, Edge8</div>
+      <div><span>Date</span>10 June 2026</div>
+      <div><span>Status</span>For confirmation</div>
+    </div>
+  </header>
+
+  <section>
+    <h2>What we heard</h2>
+    <h3>Your current setup</h3>
+    <p>You run a 50-person commercial plumbing business on a stack of separate tools that don't share one source of truth:</p>
+    <ul>
+      <li><strong>Simpro</strong> for operations: scheduling, labour and material cost capture, job budgets, and invoicing (plus the new "Lightning" AI add-on you're trialling).</li>
+      <li><strong>Xero</strong> for financials, overheads, and wages, fed from Simpro.</li>
+      <li><strong>Easy Bills</strong> to read supplier invoices from your accounts inbox, which still misreads enough that a part-time staffer matches them to jobs by hand.</li>
+      <li><strong>SharePoint</strong> for files. No central company database tying it together.</li>
+    </ul>
+    <p>The sharpest pain is reporting. Your financial controller and bookkeeper each spend roughly a week a month pulling data from Xero and Simpro to produce the P&amp;L and operations reports, and a monthly subcontractor spends about a week turning Simpro data into labour forecasts and a board report. The information exists, but it lives in too many places to answer a simple question quickly.</p>
+  </section>
+
+  <section>
+    <h2>The cost of today</h2>
+    <h3>What we believe this is costing you</h3>
+    <p>Before we talk about any solution, we want to agree on the baseline. Here is our estimate of your current annual spend. <strong>Please confirm or correct these figures</strong> — the whole proposal is built on getting this right.</p>
+    <table class="cost-table">
+      <thead>
+        <tr><th>Current cost</th><th class="num">Estimated / year (AUD)</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="label">Simpro licences + AI add-on</span><span class="note">~15 app licences + ~7 office licences + the AI integration</span></td>
+          <td class="num">$35,000 – $40,000</td>
+        </tr>
+        <tr>
+          <td><span class="label">Internal reporting labour</span><span class="note">Controller + bookkeeper, ~40+ hrs/month compiling reports by hand</span></td>
+          <td class="num">~$36,000</td>
+        </tr>
+        <tr>
+          <td><span class="label">Subcontractor board report</span><span class="note">Monthly labour-forecast and project board pack</span></td>
+          <td class="num">$15,000 – $18,000</td>
+        </tr>
+        <tr class="total">
+          <td>Estimated total carried every year</td>
+          <td class="num">~$75,000 – $90,000</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="disclaimer">Figures are our best estimate from our conversation and use a conservative blended labour rate. We expect you to tighten these with us.</p>
+  </section>
+
+  <section>
+    <h2>The opportunity</h2>
+    <div class="callout">
+      <span class="tag">The question worth answering</span>
+      <p class="q">If we could deliver this for roughly <span class="hl">half of what you spend today</span>, and structure it so the difference lands <span class="hl">in your pocket year after year</span> — is that a project worth doing?</p>
+    </div>
+    <p style="margin-top:24px;">If the answer is yes, the rest is a matter of sequencing. Below is how we'd stage the work so each step pays for itself before the next one begins. We don't price the build until we've confirmed the numbers above together, because the savings story has to be honest to be worth anything.</p>
+  </section>
+
+  <section>
+    <h2>The path</h2>
+    <h3>Three phases, each a standalone win</h3>
+
+    <div class="phase">
+      <div class="num">1</div>
+      <div class="body">
+        <div class="role">The foundation</div>
+        <h4>Consolidate the data &amp; automate reporting</h4>
+        <p>We build pipes from Simpro and Xero (via their APIs) into your first central company database — projects, people, tools, materials, financials, all in one clean place. In parallel, we rebuild the reports your team produces by hand today, so a board pack or a P&amp;L becomes a question answered in minutes instead of a week of compiling. This is the hardest and most valuable step. On its own it removes the reporting drain.</p>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="num">2</div>
+      <div class="body">
+        <div class="role">The rebuild</div>
+        <h4>Recreate your workflows off the database</h4>
+        <p>With clean data in place, we rebuild the workflows you actually use — cost capture, scheduling, invoicing — running straight from your own database instead of inside Simpro or in spreadsheets. We replace one component at a time, in the order that gives you the most relief first, so nothing breaks and you stay in control of the pace.</p>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="num">3</div>
+      <div class="body">
+        <div class="role">The replacement</div>
+        <h4>Retire Simpro</h4>
+        <p>Once the workflows you rely on are running on your own system and proven, we decommission Simpro and its licences. The recurring software fee comes off your books, and what remains is a small hosting cost. From here, your system is yours — tailored exactly how you want it, and cheap to run.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Ongoing, optional</h2>
+    <h3>Keep building capability in-house</h3>
+    <p>Two ongoing options are available whenever you want them. Neither is required to start.</p>
+    <div class="options">
+      <div class="opt">
+        <h4>AI Officer Certification</h4>
+        <div class="price">$99<small> / month per person</small></div>
+        <p>Put your most tech-forward people through our certification so they can build and maintain these systems themselves, and bring the AI Officer mindset into the business.</p>
+      </div>
+      <div class="opt">
+        <h4>Fractional or full-time engineer</h4>
+        <div class="price">$2,000 – $4,000<small> / month</small></div>
+        <p>An Edge8 engineer who supports your system and keeps improving it — learning your business over time, automating more as you go. Part-time or full-time.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="next-step">
+      <h3>Next step</h3>
+      <p>One working session to confirm the cost figures above and scope Phase 1 together. You bring roughly five reports you'd most want to run on demand; we map how to pull the data and build them. From there we can put real numbers and a phased schedule in front of you.</p>
+    </div>
+  </section>
+
+  <footer>
+    <p><strong>A note on EO.</strong> As fellow EO members, we are mutually waiving the EO non-solicitation guideline so we're free to propose business to one another. This is an acknowledgement between members, not a restriction on Accord Plumbing.</p>
+    <p style="margin-top:14px;"><strong>Edge8</strong> &nbsp;·&nbsp; AI consulting &amp; staffing &nbsp;·&nbsp; David Hajdu &amp; Quan</p>
+  </footer>
+
+</div>
+</body>
+</html>
