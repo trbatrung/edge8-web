@@ -29,17 +29,16 @@ export async function GET(req: NextRequest) {
 
   const supabase = createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_SECRET_KEY!)
 
-  // Collect every stored passport path, delete the objects, then null the columns.
+  // Collect every stored passport path, delete the objects, then delete the rows.
   const { data: rows, error: selErr } = await supabase
-    .from('trip_members')
-    .select('id, passport_path')
-    .not('passport_path', 'is', null)
+    .from('trip_passports')
+    .select('id, path')
   if (selErr) {
     console.error('Cleanup select error:', selErr)
-    return NextResponse.json({ error: 'Failed to read members' }, { status: 500 })
+    return NextResponse.json({ error: 'Failed to read passports' }, { status: 500 })
   }
 
-  const paths = (rows ?? []).map((r) => r.passport_path as string)
+  const paths = (rows ?? []).map((r) => r.path as string)
   if (paths.length === 0) {
     return NextResponse.json({ ok: true, deleted: 0 })
   }
@@ -50,13 +49,13 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: 'Failed to delete passport files' }, { status: 500 })
   }
 
-  const { error: updErr } = await supabase
-    .from('trip_members')
-    .update({ passport_path: null })
-    .not('passport_path', 'is', null)
-  if (updErr) {
-    console.error('Cleanup update error:', updErr)
-    return NextResponse.json({ error: 'Files deleted but failed to clear paths' }, { status: 500 })
+  const { error: delErr } = await supabase
+    .from('trip_passports')
+    .delete()
+    .in('id', (rows ?? []).map((r) => r.id))
+  if (delErr) {
+    console.error('Cleanup row delete error:', delErr)
+    return NextResponse.json({ error: 'Files deleted but failed to clear rows' }, { status: 500 })
   }
 
   return NextResponse.json({ ok: true, deleted: paths.length })

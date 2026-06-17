@@ -2810,39 +2810,42 @@ footer {
   .apply-title { font-size: 36px; }
 }
 
-/* Vietnam Adventure info form — member cards + privacy box */
+/* Vietnam Adventure info form — member cards + privacy box (light card context) */
 .trip-member {
-  border: 1px solid rgba(255,255,255,0.14);
+  border: 1px solid var(--card-border);
   border-radius: 12px;
   padding: 18px;
   display: flex;
   flex-direction: column;
   gap: 14px;
-  background: rgba(255,255,255,0.03);
+  background: var(--tint);
 }
 .trip-member-head { display: flex; align-items: center; justify-content: space-between; }
-.trip-member-label { font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--mint); }
+.trip-member-label { font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--blue); font-weight: 600; }
 .trip-member-remove {
   background: none; border: none; cursor: pointer;
-  color: rgba(255,255,255,0.6); font-size: 13px; text-decoration: underline; padding: 0;
+  color: var(--grey-mid); font-size: 13px; text-decoration: underline; padding: 0;
 }
-.trip-member-remove:hover { color: #fff; }
+.trip-member-remove:hover { color: var(--dark); }
 .trip-add {
   align-self: flex-start;
-  background: transparent;
-  border: 1px solid rgba(255,255,255,0.25);
-  color: #fff;
+  background: var(--blue-glow);
+  border: 1.5px dashed var(--blue);
+  color: var(--blue);
+  font-weight: 600;
 }
-.trip-add:hover { background: rgba(255,255,255,0.08); }
+.trip-add:hover { background: var(--blue); color: #fff; }
+.trip-files { display: flex; flex-direction: column; gap: 4px; margin: 8px 0 0; }
+.trip-file-name { font-size: 13px; color: var(--grey-mid); }
 .trip-privacy {
-  border: 1px solid rgba(111,242,193,0.3);
-  background: rgba(111,242,193,0.06);
+  border: 1px solid var(--card-border);
+  background: var(--tint);
   border-radius: 12px;
   padding: 16px 18px;
   font-size: 14px;
   line-height: 1.55;
-  color: rgba(255,255,255,0.85);
+  color: var(--dark);
 }
-.trip-privacy strong { display: block; color: var(--mint); margin-bottom: 4px; font-size: 13px; }
-.trip-privacy p { margin: 0 0 12px; }
+.trip-privacy strong { display: block; color: var(--blue); margin-bottom: 4px; font-size: 13px; }
+.trip-privacy p { margin: 0 0 12px; color: var(--grey-dark, #44444c); }
 .trip-privacy p:last-child { margin-bottom: 0; }

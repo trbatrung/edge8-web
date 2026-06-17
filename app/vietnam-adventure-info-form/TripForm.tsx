@@ -8,17 +8,16 @@ const MAX_PASSPORT_MB = 10
 type Member = {
   full_name: string
   tshirt_size: string
-  passport: File | null
+  passports: File[]
 }
 
-const emptyMember = (): Member => ({ full_name: '', tshirt_size: '', passport: null })
+const emptyMember = (): Member => ({ full_name: '', tshirt_size: '', passports: [] })
 
 export default function TripForm() {
   const [family, setFamily] = useState({
     family_name: '',
     contact_name: '',
     contact_email: '',
-    contact_phone: '',
     website: '', // honeypot
   })
   const [members, setMembers] = useState<Member[]>([emptyMember()])
@@ -34,16 +33,16 @@ export default function TripForm() {
   const addMember = () => setMembers([...members, emptyMember()])
   const removeMember = (i: number) => setMembers(members.filter((_, idx) => idx !== i))
 
-  const handlePassport = (i: number, e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0] ?? null
-    if (file && file.size > MAX_PASSPORT_MB * 1024 * 1024) {
-      setError(`Passport photo must be under ${MAX_PASSPORT_MB} MB`)
-      updateMember(i, { passport: null })
+  const handlePassports = (i: number, e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = Array.from(e.target.files ?? [])
+    const tooBig = files.find((f) => f.size > MAX_PASSPORT_MB * 1024 * 1024)
+    if (tooBig) {
+      setError(`Each passport photo must be under ${MAX_PASSPORT_MB} MB`)
       e.target.value = ''
       return
     }
     setError(null)
-    updateMember(i, { passport: file })
+    updateMember(i, { passports: files })
   }
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -61,13 +60,12 @@ export default function TripForm() {
       fd.append('family_name', family.family_name)
       fd.append('contact_name', family.contact_name)
       fd.append('contact_email', family.contact_email)
-      fd.append('contact_phone', family.contact_phone)
       fd.append('website', family.website)
       fd.append('member_count', String(members.length))
       members.forEach((m, i) => {
         fd.append(`member_name_${i}`, m.full_name)
         fd.append(`member_size_${i}`, m.tshirt_size)
-        if (m.passport) fd.append(`member_passport_${i}`, m.passport)
+        m.passports.forEach((file) => fd.append(`member_passport_${i}`, file))
       })
 
       const res = await fetch('/api/vietnam-adventure-info-form', { method: 'POST', body: fd })
@@ -135,18 +133,6 @@ export default function TripForm() {
         </div>
       </div>
 
-      <div className="contact-field">
-        <label htmlFor="contact_phone">Phone</label>
-        <input
-          id="contact_phone"
-          name="contact_phone"
-          type="tel"
-          autoComplete="tel"
-          value={family.contact_phone}
-          onChange={handleFamily}
-        />
-      </div>
-
       <p className="contact-form-eyebrow" style={{ marginTop: 12 }}>
         Family members &amp; t-shirt sizes
       </p>
@@ -192,17 +178,24 @@ export default function TripForm() {
             </div>
           </div>
           <div className="contact-field">
-            <label htmlFor={`passport_${i}`}>Passport photo (optional, max {MAX_PASSPORT_MB} MB)</label>
+            <label htmlFor={`passport_${i}`}>
+              Passport photo(s) — optional, you can add more than one (max {MAX_PASSPORT_MB} MB each)
+            </label>
             <input
               id={`passport_${i}`}
               type="file"
+              multiple
               accept="image/jpeg,image/png,image/webp,application/pdf"
-              onChange={(e) => handlePassport(i, e)}
+              onChange={(e) => handlePassports(i, e)}
             />
-            {m.passport && (
-              <p className="apply-file-name">
-                Selected: {m.passport.name} ({Math.round(m.passport.size / 1024)} KB)
-              </p>
+            {m.passports.length > 0 && (
+              <div className="trip-files">
+                {m.passports.map((f, fi) => (
+                  <span key={fi} className="trip-file-name">
+                    {f.name} ({Math.round(f.size / 1024)} KB)
+                  </span>
+                ))}
+              </div>
             )}
           </div>
         </div>
@@ -213,10 +206,11 @@ export default function TripForm() {
       </button>
 
       <div className="trip-privacy">
-        <strong>Why we ask for passports</strong>
+        <strong>Passports — only if you haven&apos;t sent one yet</strong>
         <p>
-          Vietnamese regulation treats the boat as a hotel, and a passport (your official ID) is
-          required to check in. We need each traveler&apos;s passport to complete check-in.
+          Most travelers have already sent their passports — if you have, you can skip this. For
+          anyone who still needs to: Vietnamese regulation treats the boat as a hotel, and a
+          passport (your official ID) is required to check in.
         </p>
         <strong>How we protect it</strong>
         <p>
@@ -242,9 +236,7 @@ export default function TripForm() {
         {status === 'sending' ? 'Submitting…' : 'Submit'}
       </button>
 
-      <p className="contact-form-note">
-        We&apos;ll only use these details to organize the trip.
-      </p>
+      <p className="contact-form-note">We&apos;ll only use these details to organize the trip.</p>
     </form>
   )
 }
