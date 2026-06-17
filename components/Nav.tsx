@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
 
@@ -8,6 +9,13 @@ export default function Nav() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [servicesOpen, setServicesOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const pathname = usePathname()
+
+  // On the retreat funnel, the persistent nav CTA feeds the checkout instead of
+  // competing with it (Book a Conversation → a different destination).
+  const onRetreatFunnel = pathname?.startsWith('/saigon-private') ?? false
+  const ctaHref = onRetreatFunnel ? '/reserve/saigon-private' : '/contact'
+  const ctaLabel = onRetreatFunnel ? 'Reserve a retreat' : 'Book a Conversation'
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50)
@@ -74,8 +82,8 @@ export default function Nav() {
               <li><Link href="/careers">Careers</Link></li>
             </ul>
 
-            <Link href="/contact" className="btn btn-primary nav-cta">
-              Book a Conversation
+            <Link href={ctaHref} className="btn btn-primary nav-cta">
+              {ctaLabel}
             </Link>
 
             <button
@@ -106,8 +114,8 @@ export default function Nav() {
         <Link href="/blog" onClick={() => setMenuOpen(false)}>Blog</Link>
         <Link href="/about" onClick={() => setMenuOpen(false)}>About</Link>
         <Link href="/careers" onClick={() => setMenuOpen(false)}>Careers</Link>
-        <Link href="/contact" className="btn btn-primary" onClick={() => setMenuOpen(false)}>
-          Book a Conversation
+        <Link href={ctaHref} className="btn btn-primary" onClick={() => setMenuOpen(false)}>
+          {ctaLabel}
         </Link>
       </div>
     </>

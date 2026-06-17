@@ -157,6 +157,9 @@ export default function SaigonPrivatePage() {
               </div>
             ))}
           </div>
+          <div className="reveal" style={{ marginTop: 40 }}>
+            <Link href="/reserve/saigon-private" className="btn btn-primary">Reserve a retreat →</Link>
+          </div>
         </div>
       </section>
 
@@ -238,7 +241,6 @@ export default function SaigonPrivatePage() {
             </p>
             <div className="hero-actions" style={{ justifyContent: "center", marginTop: 28 }}>
               <Link href="/reserve/saigon-private" className="btn btn-primary">Reserve a retreat →</Link>
-              <a href="mailto:quan@edge8.ai" className="btn btn-ghost-light">Email us first</a>
             </div>
           </div>
         </div>
@@ -275,6 +277,9 @@ export default function SaigonPrivatePage() {
           <div className="rt-incl-cols reveal">
             <IncludeCard label="Included" lines={INCLUDED} positive />
             <IncludeCard label="Not included" lines={NOT_INCLUDED} positive={false} />
+          </div>
+          <div className="reveal" style={{ marginTop: 40 }}>
+            <Link href="/reserve/saigon-private" className="btn btn-primary">Reserve a retreat →</Link>
           </div>
         </div>
       </section>
@@ -418,7 +423,6 @@ export default function SaigonPrivatePage() {
             </div>
             <div className="audit-cta-btn reveal">
               <Link href="/reserve/saigon-private" className="btn btn-primary">Reserve a retreat →</Link>
-              <a href="mailto:quan@edge8.ai" className="btn btn-ghost">Email us first</a>
             </div>
           </div>
         </div>
