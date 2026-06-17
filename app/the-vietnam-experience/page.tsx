@@ -2,10 +2,11 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
+import RevealObserver from "@/app/careers/RevealObserver";
 import { ExperienceSlider } from "@/components/experience/ExperienceSlider";
 
 export const metadata: Metadata = {
-  title: "The Vietnam Experience",
+  title: "The Vietnam Experience · Edge8",
   description:
     "You came for an AI Retreat. You will leave with a new way to live. The people, the place, and the idea behind your week in Saigon.",
   alternates: { canonical: "/the-vietnam-experience" },
@@ -22,35 +23,46 @@ const CHAPTERS = [
 
 export default function VietnamExperiencePage() {
   return (
-    <div className="xp-page">
+    <main className="xp-page">
+      <RevealObserver />
       <Nav />
 
       {/* Hero */}
-      <section className="xp-hero">
-        <div className="wrap">
-          <p className="eyebrow">An AI retreat in Saigon</p>
-          <h1 className="h-display">The Vietnam Experience</h1>
-          <p className="xp-hero-lead">
-            You came for an AI Retreat. You will leave with a new way to live.
-          </p>
+      <section className="hero" id="hero">
+        <div className="hero-bg" />
+        <div className="hero-grid" />
+        <div className="container">
+          <div className="hero-content">
+            <div className="hero-eyebrow">An AI retreat in Saigon</div>
+            <h1 className="hero-headline">
+              The <span className="accent">Vietnam Experience</span>
+            </h1>
+            <p className="hero-sub">
+              You came for an AI Retreat. You will leave with a new way to live.
+            </p>
+          </div>
         </div>
       </section>
 
       {/* The slider */}
-      <div className="xp-stage">
-        <ExperienceSlider />
-      </div>
+      <section className="section" style={{ paddingTop: 0 }}>
+        <div className="container">
+          <div className="xp-stage reveal">
+            <ExperienceSlider />
+          </div>
+        </div>
+      </section>
 
       {/* Explore the chapters → sub-pages */}
-      <section>
-        <div className="wrap">
-          <p className="eyebrow" style={{ marginBottom: 16 }}>The chapters</p>
-          <h2 className="h-section">Explore the <em>experience</em></h2>
-          <p className="lead" style={{ marginTop: 18, marginBottom: 48 }}>
-            Step into any part of the week.
-          </p>
+      <section className="section" style={{ background: "var(--white)" }}>
+        <div className="container">
+          <div className="reveal" style={{ maxWidth: 760 }}>
+            <span className="section-label">The chapters</span>
+            <h2 className="section-title">Explore the <span className="accent">experience.</span></h2>
+            <p className="section-sub" style={{ marginTop: 16 }}>Step into any part of the week.</p>
+          </div>
 
-          <div className="xp-chapters">
+          <div className="xp-chapters reveal">
             {CHAPTERS.map((c) => (
               <Link key={c.href} href={c.href} className="xp-card">
                 <div className="xp-card-top">
@@ -62,8 +74,8 @@ export default function VietnamExperiencePage() {
             ))}
           </div>
 
-          <div style={{ marginTop: 48 }}>
-            <Link href="/saigon" className="btn btn-primary">
+          <div className="reveal" style={{ marginTop: 48 }}>
+            <Link href="/saigon-private" className="btn btn-primary">
               Explore the retreat <span className="arrow" aria-hidden>→</span>
             </Link>
           </div>
@@ -71,6 +83,6 @@ export default function VietnamExperiencePage() {
       </section>
 
       <Footer />
-    </div>
+    </main>
   );
 }

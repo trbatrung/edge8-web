@@ -23,7 +23,7 @@ function usePrefersReducedMotion(): boolean {
 // The retreat IS this site, so "Explore the retreat" points inward at the
 // Saigon retreat page. AIO Pad is the external apartment site. Travel Buddy
 // stays its own live product.
-const RETREAT_HREF = "/saigon";
+const RETREAT_HREF = "/saigon-private";
 const AIO_PAD_URL = "https://www.aio-pad.com";
 const TRAVEL_BUDDY_URL = "https://travelbuddy8.com";
 const BASE = "/the-vietnam-experience";
