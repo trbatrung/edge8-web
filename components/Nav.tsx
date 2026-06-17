@@ -64,6 +64,7 @@ export default function Nav() {
                   <Link href="/caio-leadership">CAIO Leadership</Link>
                   <Link href="/global-staffing">Global Staffing</Link>
                   <Link href="/training-and-certification">Training &amp; Certification</Link>
+                  <Link href="/travel-buddy">Travel Buddy</Link>
                 </div>
               </li>
 
@@ -98,6 +99,7 @@ export default function Nav() {
           <Link href="/caio-leadership" onClick={() => setMenuOpen(false)}>CAIO Leadership</Link>
           <Link href="/global-staffing" onClick={() => setMenuOpen(false)}>Global Staffing</Link>
           <Link href="/training-and-certification" onClick={() => setMenuOpen(false)}>Training &amp; Certification</Link>
+          <Link href="/travel-buddy" onClick={() => setMenuOpen(false)}>Travel Buddy</Link>
         </MobileAccordion>
 
         <Link href="/ai-programs" onClick={() => setMenuOpen(false)}>AI Programs</Link>

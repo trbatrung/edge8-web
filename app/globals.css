@@ -2809,3 +2809,85 @@ footer {
   .apply-hero { padding: 64px 0 24px; }
   .apply-title { font-size: 36px; }
 }
+
+/* ═══ TRAVEL BUDDY PAGE ════════════════════════════════════════════════ */
+.tb-handles-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 48px;
+}
+.tb-handle-card {
+  background: var(--white);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  padding: 32px;
+  transition: box-shadow var(--transition), transform var(--transition);
+}
+.tb-handle-card:hover {
+  box-shadow: 0 8px 32px rgba(0,0,0,0.07);
+  transform: translateY(-3px);
+}
+.tb-handle-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: var(--blue-glow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+.tb-handle-icon svg {
+  width: 22px;
+  height: 22px;
+  stroke: var(--blue);
+}
+.tb-handle-title {
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--dark);
+  margin-bottom: 10px;
+}
+.tb-handle-desc {
+  font-size: 14px;
+  color: var(--body-text);
+  line-height: 1.7;
+}
+.tb-form-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+.tb-form-left { padding-top: 8px; }
+.tb-form-promise {
+  list-style: none;
+  padding: 0;
+  margin-top: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.tb-form-promise li {
+  font-size: 15px;
+  color: var(--body-text);
+  padding-left: 24px;
+  position: relative;
+  line-height: 1.5;
+}
+.tb-form-promise li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--blue);
+  font-weight: 600;
+}
+@media (max-width: 1024px) {
+  .tb-handles-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 768px) {
+  .tb-handles-grid { grid-template-columns: 1fr; }
+  .tb-form-wrap { grid-template-columns: 1fr; gap: 40px; }
+}

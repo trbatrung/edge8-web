@@ -22,6 +22,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/your-first-ai-hire/', priority: 0.9, changeFrequency: 'monthly' },
     { path: '/blog/', priority: 0.8, changeFrequency: 'daily' },
     { path: '/careers/', priority: 0.7, changeFrequency: 'weekly' },
+    { path: '/travel-buddy/', priority: 0.8, changeFrequency: 'monthly' },
   ]
 
   const staticEntries: MetadataRoute.Sitemap = staticRoutes.map(({ path, priority, changeFrequency }) => ({
