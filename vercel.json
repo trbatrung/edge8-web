@@ -1,4 +1,7 @@
 {
+  "crons": [
+    { "path": "/api/trip-passport-cleanup", "schedule": "0 3 * * *" }
+  ],
   "redirects": [
     {
       "source": "/ai-capabilities-audit",
