@@ -3390,3 +3390,14 @@ footer {
   .reserve-grid { grid-template-columns: 1fr; gap: 36px; }
   .reserve-form-col { position: static; order: -1; }
 }
+
+/* Vietnam Experience teaser band (on /saigon-private) */
+.rt-xp-teaser {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center;
+}
+.rt-xp-teaser-media { border-radius: var(--radius); overflow: hidden; border: 1px solid var(--card-border); }
+.rt-xp-teaser-media img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block; }
+@media (max-width: 900px) {
+  .rt-xp-teaser { grid-template-columns: 1fr; gap: 28px; }
+  .rt-xp-teaser-media { order: -1; }
+}

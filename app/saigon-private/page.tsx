@@ -70,6 +70,11 @@ export default function SaigonPrivatePage() {
               <Link href="/reserve/saigon-private" className="btn btn-primary">Reserve a retreat →</Link>
               <a href="#value" className="btn btn-ghost-light">See what you get</a>
             </div>
+            <p style={{ marginTop: 18 }}>
+              <Link href="/the-vietnam-experience" className="text-link" style={{ display: "inline-flex" }}>
+                Or see what a week in Saigon is like →
+              </Link>
+            </p>
           </div>
         </div>
       </section>
@@ -295,15 +300,44 @@ export default function SaigonPrivatePage() {
               of Saigon. Riverside views, a private car and driver, and the Travel Buddy app for
               everything else. 20 minutes to District 1.
             </p>
-            <a href="https://www.aio-pad.com" target="_blank" rel="noopener noreferrer" className="btn btn-ghost-light" style={{ marginTop: 24 }}>
-              See the apartments at aio-pad.com →
-            </a>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 12, marginTop: 24 }}>
+              <Link href="/the-vietnam-experience/place" className="btn btn-ghost-light">
+                Explore the neighborhood →
+              </Link>
+              <a href="https://www.aio-pad.com" target="_blank" rel="noopener noreferrer" className="btn btn-ghost-light">
+                See the apartments at aio-pad.com →
+              </a>
+            </div>
           </div>
           <div className="rt-stay-grid reveal">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/images/saigon-private/apartment.jpg" alt="Two-bedroom apartment at the AIO-pad in Lumiere Riverside" />
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/images/saigon-private/pool.avif" alt="The 50-metre rooftop pool at Lumiere Riverside" />
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ THE VIETNAM EXPERIENCE TEASER ═══ */}
+      <section className="section" style={{ background: "var(--tint)" }}>
+        <div className="container">
+          <div className="rt-xp-teaser reveal">
+            <div className="rt-xp-teaser-media">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/experience/welcome.jpg" alt="The Saigon riverside at first light" />
+            </div>
+            <div className="rt-xp-teaser-copy">
+              <span className="section-label">The Vietnam Experience</span>
+              <h2 className="section-title">The week is more than <span className="accent">the build.</span></h2>
+              <p className="section-sub" style={{ marginTop: 16 }}>
+                9am to 6pm you build. Every evening, Saigon is yours, the food, the river, the city.
+                VIP arrival, a private driver, and the AIO-pad in Thao Dien. See what a week here is
+                really like.
+              </p>
+              <Link href="/the-vietnam-experience" className="btn btn-ghost-light" style={{ marginTop: 24 }}>
+                Explore The Vietnam Experience →
+              </Link>
+            </div>
           </div>
         </div>
       </section>
