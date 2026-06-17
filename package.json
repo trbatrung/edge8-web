@@ -16,7 +16,8 @@
     "react-dom": "^18",
     "remark": "^15.0.1",
     "remark-html": "^16.0.1",
-    "resend": "^6.12.4"
+    "resend": "^6.12.4",
+    "stripe": "^22.2.1"
   },
   "devDependencies": {
     "@types/node": "^20",
