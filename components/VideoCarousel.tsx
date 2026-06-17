@@ -1,5 +1,5 @@
 "use client";
-import { useState, useMemo } from "react";
+import { useState, useEffect } from "react";
 
 interface Video {
   id: string;
@@ -17,8 +17,15 @@ function shuffle<T>(arr: T[]): T[] {
 }
 
 export function VideoCarousel({ videos }: { videos: Video[] }) {
-  const shuffled = useMemo(() => shuffle(videos), [videos.length]);
+  // Render the source order on the server and first client paint so hydration
+  // matches, then shuffle after mount for variety.
+  const [shuffled, setShuffled] = useState<Video[]>(videos);
   const [current, setCurrent] = useState(0);
+  useEffect(() => {
+    setShuffled(shuffle(videos));
+    setCurrent(0);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [videos.length]);
 
   const prev = () => setCurrent((current - 1 + shuffled.length) % shuffled.length);
   const next = () => setCurrent((current + 1) % shuffled.length);
