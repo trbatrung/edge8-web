@@ -698,6 +698,8 @@ nav {
   border-radius: var(--radius);
   padding: 36px 32px;
 }
+.engage-price--link { display: block; text-decoration: none; color: inherit; transition: border-color 0.18s, box-shadow 0.18s; }
+.engage-price--link:hover { border-color: var(--blue); box-shadow: 0 4px 16px rgba(40,123,232,0.1); }
 .engage-price-num {
   font-family: var(--font-display);
   font-size: clamp(48px, 6vw, 64px);

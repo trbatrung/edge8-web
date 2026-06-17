@@ -585,11 +585,11 @@ export default function HomePage() {
               <h3 className="engage-pricing-title">Simple. By the day, then by the hour.</h3>
             </div>
             <div className="engage-pricing-grid">
-              <div className="engage-price">
+              <Link href="/saigon-private" className="engage-price engage-price--link">
                 <div className="engage-price-num">$1,000</div>
                 <div className="engage-price-unit">per day</div>
                 <div className="engage-price-desc">Sprints run 3, 4, or 5 days. Pick the length that fits the scope. $3,000 to $5,000 total.</div>
-              </div>
+              </Link>
               <div className="engage-price">
                 <div className="engage-price-num">$2,000</div>
                 <div className="engage-price-unit">= 40 human tokens</div>
