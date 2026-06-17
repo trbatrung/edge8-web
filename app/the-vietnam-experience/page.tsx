@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Nav from "@/components/Nav";
-import Footer from "@/components/Footer";
 import RevealObserver from "@/app/careers/RevealObserver";
 import { ExperienceSlider } from "@/components/experience/ExperienceSlider";
 
@@ -25,8 +23,6 @@ export default function VietnamExperiencePage() {
   return (
     <main className="xp-page">
       <RevealObserver />
-      <Nav />
-
       {/* Hero */}
       <section className="hero" id="hero">
         <div className="hero-bg" />
@@ -81,8 +77,6 @@ export default function VietnamExperiencePage() {
           </div>
         </div>
       </section>
-
-      <Footer />
     </main>
   );
 }

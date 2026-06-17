@@ -3327,3 +3327,66 @@ footer {
   .xp-slide-media { aspect-ratio: 16 / 10; }
   .xp-controls { position: static; margin-top: 16px; }
 }
+
+/* ═══════════════════════════════════════════════════════════
+   RESERVE / CHECKOUT (/reserve/saigon-private) — edge8
+   ═══════════════════════════════════════════════════════════ */
+.reserve-shell { min-height: 100vh; background: var(--tint); }
+.reserve-header {
+  position: sticky; top: 0; z-index: 50;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 64px; padding: 0 24px;
+  background: rgba(255,255,255,0.97); backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--card-border);
+}
+.reserve-logo { display: inline-flex; align-items: center; }
+.reserve-back {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 13px; font-weight: 600; color: var(--grey-mid); text-decoration: none;
+  transition: color 0.2s ease;
+}
+.reserve-back:hover { color: var(--blue); }
+
+.reserve-page { background: var(--tint); }
+.reserve-container { max-width: 1040px; margin: 0 auto; padding: 0 24px; }
+
+.reserve-hero { background: var(--white); border-bottom: 1px solid var(--card-border); }
+.reserve-hero .reserve-container { padding-top: 48px; padding-bottom: 48px; }
+.reserve-title {
+  font-family: var(--font-display); font-weight: 600;
+  font-size: clamp(32px, 5vw, 52px); line-height: 1.05; letter-spacing: -0.02em;
+  color: var(--dark); margin-top: 4px;
+}
+.reserve-subtitle { margin-top: 14px; font-size: 16px; line-height: 1.6; color: var(--grey-mid); max-width: 580px; }
+.reserve-inline-link { color: var(--blue); text-decoration: underline; text-underline-offset: 2px; }
+
+.reserve-body .reserve-container { padding-top: 48px; padding-bottom: 80px; }
+.reserve-grid { display: grid; grid-template-columns: 1fr 460px; gap: 56px; align-items: start; }
+.reserve-recap { display: flex; flex-direction: column; gap: 36px; }
+.reserve-recap-label {
+  display: inline-block; font-size: 12px; font-weight: 600;
+  letter-spacing: 0.16em; text-transform: uppercase; color: var(--blue); margin-bottom: 16px;
+}
+.reserve-incl, .reserve-steps { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 16px; }
+.reserve-incl li, .reserve-steps li { display: flex; gap: 12px; align-items: flex-start; }
+.reserve-incl-check { color: var(--blue); font-weight: 700; flex-shrink: 0; line-height: 1.5; }
+.reserve-incl-head { display: block; font-size: 15px; font-weight: 600; color: var(--dark); }
+.reserve-incl-sub { display: block; font-size: 13px; color: var(--grey-mid); margin-top: 2px; line-height: 1.5; }
+.reserve-risk {
+  border-left: 3px solid var(--blue); background: var(--blue-glow);
+  border-radius: 0 12px 12px 0; padding: 18px 22px;
+}
+.reserve-risk-head { font-size: 14px; font-weight: 600; color: var(--dark); margin: 0; }
+.reserve-risk-body { font-size: 13px; color: var(--grey-mid); margin: 8px 0 0; line-height: 1.6; }
+.reserve-step-num {
+  flex-shrink: 0; width: 28px; height: 28px; border-radius: 999px;
+  border: 1px solid var(--card-border); background: var(--white);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 600; color: var(--dark);
+}
+.reserve-form-col { position: sticky; top: 88px; }
+
+@media (max-width: 900px) {
+  .reserve-grid { grid-template-columns: 1fr; gap: 36px; }
+  .reserve-form-col { position: static; order: -1; }
+}

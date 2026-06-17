@@ -1,6 +1,4 @@
 import Link from "next/link";
-import Nav from "@/components/Nav";
-import Footer from "@/components/Footer";
 
 type LinkRef = { href: string; label: string };
 
@@ -10,8 +8,8 @@ const DEFAULT_BACK: LinkRef = {
 };
 
 /**
- * Shared shell for every Vietnam Experience sub-page: the site Nav, a back
- * link, the article body, an onward "next" link, and the site Footer.
+ * Shared shell for every Vietnam Experience sub-page: a back link, the article
+ * body, and an onward "next" link. The site Nav/Footer come from SiteFrame.
  */
 export function SubpageFrame({
   children,
@@ -24,8 +22,6 @@ export function SubpageFrame({
 }) {
   return (
     <div className="xp-page">
-      <Nav />
-
       <article className="xp-article">
         <Link href={back.href} className="xp-backlink">
           ← {back.label}
@@ -45,8 +41,6 @@ export function SubpageFrame({
           )}
         </nav>
       </article>
-
-      <Footer />
     </div>
   );
 }

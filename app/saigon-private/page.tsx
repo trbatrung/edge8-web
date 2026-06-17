@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
-import Nav from "@/components/Nav";
-import Footer from "@/components/Footer";
 import RevealObserver from "@/app/careers/RevealObserver";
-import { PrivateSessionReserve } from "@/components/PrivateSessionReserve";
+import Link from "next/link";
 import { VideoCarousel } from "@/components/VideoCarousel";
 import {
   FAQS,
@@ -51,8 +49,6 @@ export default function SaigonPrivatePage() {
         dangerouslySetInnerHTML={jsonLd(faqPageSchema(FAQS.map((f) => ({ q: f.q, a: f.a }))))}
       />
       <RevealObserver />
-      <Nav />
-
       {/* ═══ HERO ═══ */}
       <section className="hero" id="hero">
         <div className="hero-bg" />
@@ -71,7 +67,7 @@ export default function SaigonPrivatePage() {
               forever. The flights aside, everything is handled. You just build.
             </p>
             <div className="hero-actions" style={{ marginTop: 32 }}>
-              <a href="#reserve" className="btn btn-primary">Reserve a retreat →</a>
+              <Link href="/reserve/saigon-private" className="btn btn-primary">Reserve a retreat →</Link>
               <a href="#value" className="btn btn-ghost-light">See what you get</a>
             </div>
           </div>
@@ -205,7 +201,7 @@ export default function SaigonPrivatePage() {
               price most people pay to learn about AI, then keep building after you land.
             </p>
             <div style={{ marginTop: 28 }}>
-              <a href="#reserve" className="btn btn-primary">Reserve a retreat →</a>
+              <Link href="/reserve/saigon-private" className="btn btn-primary">Reserve a retreat →</Link>
             </div>
           </div>
         </div>
@@ -230,19 +226,20 @@ export default function SaigonPrivatePage() {
         </div>
       </section>
 
-      {/* ═══ RESERVE ═══ */}
+      {/* ═══ RESERVE CTA ═══ */}
       <section className="section" id="reserve" style={{ background: "var(--tint)", scrollMarginTop: 80 }}>
         <div className="container">
-          <div className="reveal" style={{ textAlign: "center", maxWidth: 620, margin: "0 auto 40px" }}>
+          <div className="reveal" style={{ textAlign: "center", maxWidth: 620, margin: "0 auto" }}>
             <span className="section-label">Reserve a private retreat</span>
             <h2 className="section-title">Pick your days and team, then reserve.</h2>
             <p className="section-sub" style={{ marginTop: 16, marginLeft: "auto", marginRight: "auto" }}>
               The total updates live as you adjust. Pay by card via Stripe and your dates lock in
               immediately.
             </p>
-          </div>
-          <div className="reveal" style={{ maxWidth: 720, margin: "0 auto" }}>
-            <PrivateSessionReserve />
+            <div className="hero-actions" style={{ justifyContent: "center", marginTop: 28 }}>
+              <Link href="/reserve/saigon-private" className="btn btn-primary">Reserve a retreat →</Link>
+              <a href="mailto:quan@edge8.ai" className="btn btn-ghost-light">Email us first</a>
+            </div>
           </div>
         </div>
       </section>
@@ -420,14 +417,12 @@ export default function SaigonPrivatePage() {
               <p>Fly to Saigon. Fly home with the software your business runs on. From $7,000.</p>
             </div>
             <div className="audit-cta-btn reveal">
-              <a href="#reserve" className="btn btn-primary">Reserve a retreat →</a>
+              <Link href="/reserve/saigon-private" className="btn btn-primary">Reserve a retreat →</Link>
               <a href="mailto:quan@edge8.ai" className="btn btn-ghost">Email us first</a>
             </div>
           </div>
         </div>
       </section>
-
-      <Footer />
     </main>
   );
 }
