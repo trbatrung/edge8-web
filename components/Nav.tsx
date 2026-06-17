@@ -68,6 +68,7 @@ export default function Nav() {
               </li>
 
               <li><Link href="/ai-programs">AI Programs</Link></li>
+              <li><Link href="/saigon-private">Retreat</Link></li>
               <li><Link href="/blog">Blog</Link></li>
               <li><Link href="/about">About</Link></li>
               <li><Link href="/careers">Careers</Link></li>
@@ -101,6 +102,7 @@ export default function Nav() {
         </MobileAccordion>
 
         <Link href="/ai-programs" onClick={() => setMenuOpen(false)}>AI Programs</Link>
+        <Link href="/saigon-private" onClick={() => setMenuOpen(false)}>Retreat</Link>
         <Link href="/blog" onClick={() => setMenuOpen(false)}>Blog</Link>
         <Link href="/about" onClick={() => setMenuOpen(false)}>About</Link>
         <Link href="/careers" onClick={() => setMenuOpen(false)}>Careers</Link>
