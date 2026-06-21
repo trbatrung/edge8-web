@@ -411,7 +411,7 @@ export default function HomePage() {
             <div className="solution-row solution-row--reverse reveal">
               <div className="solution-row-img">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/homepage/images/home-page-solutions-Global Talent Network.jpg" alt="Hire AI-Trained Global Talent" />
+                <img src="/homepage/images/home-page-solutions-global-talent.jpg" alt="Hire AI-Trained Global Talent" />
               </div>
               <div className="solution-row-text">
                 <span className="solution-row-label">Global Talent Network</span>
