@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import RevealObserver from "@/app/careers/RevealObserver";
 import Link from "next/link";
 import { VideoCarousel } from "@/components/VideoCarousel";
+import { PhotoSlider } from "@/components/experience/PhotoSlider";
 import {
   FAQS,
   FILTER_BULLETS,
@@ -139,6 +140,103 @@ export default function SaigonPrivatePage() {
             <CompareCard label="Hire a dev shop" cost="$20K – $50K" detail="Per app. Months of waiting. You own a contract, not the skill." />
             <CompareCard label="Take an AI bootcamp" cost="Up to $5K" detail="You leave with notes and prompts. Nothing shipped." />
             <CompareCard label="The Saigon retreat" cost="From $7K" detail="2 to 3 apps live, a Mac Mini with 8 agents, and you can do it again." featured />
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ TESTIMONIALS ═══ */}
+      <section className="section">
+        <div className="container">
+          <div className="reveal" style={{ textAlign: "center", maxWidth: 620, margin: "0 auto 48px" }}>
+            <span className="section-label">In their own words</span>
+            <h2 className="section-title">See what founders <span className="accent">have to say.</span></h2>
+          </div>
+          <VideoCarousel videos={[
+            { id: "jRwrSYlaO4Q", title: "Edge8 proof of concept" },
+            { id: "fXCe3vSkzVo", title: "Edge8 founder story" },
+            { id: "YSP6Xt0UEyk", title: "Edge8 testimonial" },
+            { id: "9g6bhTIJeKA", title: "Melbourne founder testimonial" },
+          ]} />
+        </div>
+      </section>
+
+      {/* ═══ WHO YOU'RE WORKING WITH ═══ */}
+      <section className="section" style={{ background: "var(--white)" }}>
+        <div className="container">
+          <div className="reveal" style={{ maxWidth: 760, marginBottom: 48 }}>
+            <span className="section-label">Who you&rsquo;re working with</span>
+            <h2 className="section-title">The people who <span className="accent">make it yours.</span></h2>
+            <p className="section-sub" style={{ marginTop: 16 }}>
+              Not a hotel. A small team who built this for you, and learned your name before you arrived.
+            </p>
+          </div>
+          {/* Quan — featured */}
+          <div className="meet-dave">
+            <div className="reveal">
+              <span className="section-label">Retreat Host</span>
+              <h3 className="section-title" style={{ fontSize: 30, marginTop: 4 }}>Quan</h3>
+              <p style={{ fontSize: 17, color: "var(--grey-mid)", lineHeight: 1.75, marginTop: 16 }}>
+                Quan is the Retreat Host. He is the reason the week feels effortless: the car is
+                there, the table is booked, and you never think about logistics.
+              </p>
+            </div>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/images/saigon-private/quan.jpg" alt="Quan, Retreat Host at Edge8" className="meet-dave-img reveal" />
+          </div>
+          {/* Dave + Trac — secondary */}
+          <div className="rt-team-secondary">
+            <div className="rt-team-card reveal">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/images/dave-headshot.webp" alt="Dave Hajdu, Founder & CAIO" />
+              <div>
+                <span className="nm">Dave</span>
+                <span className="ti">CAIO</span>
+                <p>
+                  Dave is your host and the CAIO. He spent years learning to lead AI rather than
+                  chase it, and built the retreat to hand that to other people.
+                </p>
+              </div>
+            </div>
+            <div className="rt-team-card reveal">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/images/saigon-private/trac.jpg" alt="Trac, Lead Engineer" />
+              <div>
+                <span className="nm">Trac</span>
+                <span className="ti">Lead Engineer</span>
+                <p>
+                  Trac leads the engineering. He and the team build the AI that runs the apartment,
+                  guides you through the city, and arranges your arrival before you land.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ INSIDE THE RETREAT (CAROUSEL) ═══ */}
+      <section className="section">
+        <div className="container">
+          <div className="reveal" style={{ maxWidth: 760, marginBottom: 32 }}>
+            <span className="section-label">Inside the retreat</span>
+            <h2 className="section-title">Heads down, <span className="accent">and together.</span></h2>
+            <p className="section-sub" style={{ marginTop: 16 }}>
+              Real founders and engineers, building side by side and breaking for lunch, through a
+              week in Saigon.
+            </p>
+          </div>
+          <div className="reveal" style={{ maxWidth: 880, margin: "0 auto" }}>
+            <PhotoSlider
+              ratio="3 / 2"
+              photos={[
+                { src: "/images/saigon-private/retreat/engineers-coaching.jpg", alt: "An engineer coaching a founder through a build in Saigon" },
+                { src: "/images/saigon-private/retreat/group-selfie.jpg", alt: "The retreat group together in Saigon" },
+                { src: "/images/saigon-private/retreat/group-lunch.jpg", alt: "The team and founders sharing lunch" },
+                { src: "/images/saigon-private/retreat/working-session.jpg", alt: "A working session in progress" },
+                { src: "/images/saigon-private/retreat/team-skyline.jpg", alt: "The Edge8 team with the Saigon skyline" },
+                { src: "/images/saigon-private/retreat/team-lunch.jpg", alt: "Breaking for a shared meal" },
+                { src: "/images/saigon-private/retreat/students-working.jpg", alt: "Founders building side by side" },
+              ]}
+            />
           </div>
         </div>
       </section>
@@ -379,32 +477,6 @@ export default function SaigonPrivatePage() {
         </div>
       </section>
 
-      {/* ═══ WHO YOU'RE WORKING WITH ═══ */}
-      <section className="section">
-        <div className="container">
-          <div className="meet-dave">
-            <div className="reveal">
-              <span className="section-label">Who you&rsquo;re working with</span>
-              <h2 className="section-title">Your CAIO, and a dedicated engineer.</h2>
-              <p style={{ fontSize: 17, color: "var(--grey-mid)", lineHeight: 1.75, marginTop: 16 }}>
-                A private retreat means private people. Dave runs the CAIO roadmap session at the
-                start. A dedicated engineer is paired with your team for the full duration. The same
-                Saigon-based team handles your post-retreat polish.
-              </p>
-              <p style={{ fontSize: 17, color: "var(--dark)", lineHeight: 1.6, marginTop: 20, fontWeight: 500, fontStyle: "italic" }}>
-                &ldquo;The private retreats are for the founder who has a real idea and just needs a
-                few days, a Mac, and an engineer to make it real.&rdquo;
-              </p>
-              <p style={{ fontSize: 15, color: "var(--grey-mid)", marginTop: 12 }}>
-                <strong style={{ color: "var(--dark)" }}>Dave Hajdu</strong> · Founder, Edge8
-              </p>
-            </div>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/images/dave-headshot.webp" alt="Dave Hajdu, founder of Edge8" className="meet-dave-img reveal" />
-          </div>
-        </div>
-      </section>
-
       {/* ═══ FAQ ═══ */}
       <section className="section" style={{ background: "var(--white)" }}>
         <div className="container">
@@ -428,22 +500,6 @@ export default function SaigonPrivatePage() {
               </details>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* ═══ TESTIMONIALS ═══ */}
-      <section className="section">
-        <div className="container">
-          <div className="reveal" style={{ textAlign: "center", maxWidth: 620, margin: "0 auto 48px" }}>
-            <span className="section-label">In their own words</span>
-            <h2 className="section-title">See what founders <span className="accent">have to say.</span></h2>
-          </div>
-          <VideoCarousel videos={[
-            { id: "jRwrSYlaO4Q", title: "Edge8 proof of concept" },
-            { id: "fXCe3vSkzVo", title: "Edge8 founder story" },
-            { id: "YSP6Xt0UEyk", title: "Edge8 testimonial" },
-            { id: "9g6bhTIJeKA", title: "Melbourne founder testimonial" },
-          ]} />
         </div>
       </section>
 

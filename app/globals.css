@@ -2235,6 +2235,15 @@ footer {
 .meet-dave { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
 .meet-dave-img { width: 100%; border-radius: var(--radius); display: block; object-fit: cover; aspect-ratio: 3 / 4; }
 
+/* Saigon-private team: secondary people (Dave, Trac) */
+.rt-team-secondary { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 56px; }
+.rt-team-card { display: flex; gap: 20px; align-items: flex-start; }
+.rt-team-card img { width: 116px; height: 145px; border-radius: var(--radius-sm); object-fit: cover; flex-shrink: 0; }
+.rt-team-card .nm { font-family: var(--font-display); font-size: 20px; font-weight: 600; color: var(--dark); display: block; }
+.rt-team-card .ti { font-size: 13px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--blue); display: block; margin: 2px 0 10px; }
+.rt-team-card p { font-size: 15px; color: var(--grey-mid); line-height: 1.6; }
+@media (max-width: 720px) { .rt-team-secondary { grid-template-columns: 1fr; } }
+
 /* ─── CASE STUDY DETAIL ──────────────────────────── */
 .cs-detail-hero {
   background: linear-gradient(180deg, var(--mint) 0%, var(--white) 100%);
