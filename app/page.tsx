@@ -411,26 +411,26 @@ export default function HomePage() {
             <div className="solution-row solution-row--reverse reveal">
               <div className="solution-row-img">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/homepage/images/home-page-solutions-certification.jpg" alt="Certify Your Human AI Talent" />
+                <img src="/homepage/images/home-page-solutions-Global Talent Network.jpg" alt="Hire AI-Trained Global Talent" />
               </div>
               <div className="solution-row-text">
-                <span className="solution-row-label">AI Officer Certification</span>
-                <h3 className="solution-row-title">Certify your Human AI Talent</h3>
-                <p className="solution-row-desc">The AI Officer Certification turns your managers into AI leaders. 500+ certified across Fortune 500s and SMEs. 12 months, 3 hours per week, every function in your business.</p>
-                <a href="/caio-leadership" className="solution-row-link">Learn more →</a>
+                <span className="solution-row-label">Global Talent Network</span>
+                <h3 className="solution-row-title">Hire AI-Trained Global Talent</h3>
+                <p className="solution-row-desc">AI-trained engineers in Vietnam at 75% less than US rates, deployed in 3 weeks. AI Officers, Engineers, and Marketing Professionals — flexible models, immediate impact.</p>
+                <a href="/global-staffing" className="solution-row-link">Learn more →</a>
               </div>
             </div>
             {/* Row 3: image left, text right */}
             <div className="solution-row reveal">
               <div className="solution-row-img">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/homepage/images/home-page-solutions-network-2.jpg" alt="Innovate like an Engineer" />
+                <img src="/homepage/images/home-page-solutions-network-2.jpg" alt="Private AI Build Retreats in Saigon" />
               </div>
               <div className="solution-row-text">
-                <span className="solution-row-label">Global Talent Network</span>
-                <h3 className="solution-row-title">Innovate like an Engineer</h3>
-                <p className="solution-row-desc">Stop ideating in slides. Start prototyping in code. We teach founders and teams to ship, test, and iterate the way modern engineering teams do, with AI as the accelerant.</p>
-                <a href="/global-staffing" className="solution-row-link">Learn more →</a>
+                <span className="solution-row-label">Private Retreats</span>
+                <h3 className="solution-row-title">Build in Saigon. Ship in Days.</h3>
+                <p className="solution-row-desc">Bring your team to Saigon for a fully private AI build retreat. Ship real apps, deploy AI agents, and leave with capabilities — not decks. Fully private, fully hands-on.</p>
+                <a href="/saigon-private" className="solution-row-link">Learn more →</a>
               </div>
             </div>
           </div>
