@@ -8,7 +8,6 @@ export const metadata: Metadata = {
     title: 'Careers at Edge8 | Join the AI Frontier',
     description:
       'Help founders lead AI. Work at the frontier of AI adoption in business.',
-    images: ['/social.jpg'],
   },
 }
 

@@ -4,3 +4,6 @@ node_modules/
 out/
 .vercel
 .env.local
+
+# Local working assets (source photos, not served)
+context/
