@@ -92,7 +92,7 @@ export default function HomePage() {
 
   useEffect(() => {
     if (!statsVisible) return
-    const targets = [182, 12, 29]
+    const targets = [190, 16, 46]
     const duration = 1800
     const start = Date.now()
     const tick = () => {
@@ -224,8 +224,8 @@ export default function HomePage() {
             </div>
             <div className="hero-stat reveal">
               <div className="hero-stat-number">{statCounts[2]}</div>
-              <div className="hero-stat-label">New Revenue Streams</div>
-              <div className="hero-stat-sub">launched by 7 clients in the last 3 months</div>
+              <div className="hero-stat-label">Applications Launched</div>
+              <div className="hero-stat-sub">launched by 11 clients in the last 3 months</div>
             </div>
           </div>
         </div>
