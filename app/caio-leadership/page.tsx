@@ -29,7 +29,7 @@ export default function CaioLeadershipPage() {
               <a href="/contact" className="btn btn-contact">Book a Conversation →</a>
             </div>
             <div className="svc-hero-img">
-              <Image src="/services/images/services-caio-leadership-hero.jpg" alt="CAIO Leadership" width={640} height={480} priority />
+              <Image src="/services/images/services-caio-leadership-hero-dave.webp" alt="Dave Hajdu leading an AI strategy session" width={640} height={640} priority />
             </div>
           </div>
         </div>
