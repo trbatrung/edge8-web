@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shopify as a Commerce Engine: Headless Architecture for VN, AU, CA, US</title>
+<style>
+  :root {
+    --navy: #04102D;
+    --mist: #EAEEF2;
+    --white: #FFFFFF;
+    --blue: #287BE8;
+    --pink: #D1458B;
+    --mint: #6FF2C1;
+    --ink: #1a2238;
+    --muted: #5b6477;
+    --line: #d4dae3;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--ink);
+    background: var(--white);
+    line-height: 1.6;
+    font-size: 16px;
+  }
+  .wrap { max-width: 960px; margin: 0 auto; padding: 0 24px 80px; }
+  header.hero {
+    background: var(--navy);
+    color: var(--white);
+    padding: 56px 24px 48px;
+  }
+  header.hero .inner { max-width: 960px; margin: 0 auto; }
+  header.hero .tag {
+    display: inline-block;
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--mint);
+    border: 1px solid var(--mint);
+    border-radius: 4px;
+    padding: 4px 10px;
+    margin-bottom: 20px;
+    font-weight: 600;
+  }
+  header.hero h1 { font-size: 34px; line-height: 1.2; margin: 0 0 12px; font-weight: 700; }
+  header.hero p { font-size: 17px; color: var(--mist); margin: 0; max-width: 720px; }
+  header.hero .meta { margin-top: 24px; font-size: 13px; color: #9aa6bd; }
+  h2 {
+    font-size: 24px;
+    margin: 48px 0 16px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--mist);
+    color: var(--navy);
+  }
+  h3 { font-size: 18px; margin: 28px 0 10px; color: var(--navy); }
+  p { margin: 0 0 14px; }
+  a { color: var(--blue); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .lead { font-size: 18px; color: var(--ink); }
+  .callout {
+    border-left: 4px solid var(--pink);
+    background: var(--mist);
+    padding: 18px 20px;
+    border-radius: 0 8px 8px 0;
+    margin: 20px 0;
+  }
+  .callout strong { color: var(--navy); }
+  .callout.mint { border-left-color: var(--mint); }
+  .callout.blue { border-left-color: var(--blue); }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 18px 0;
+    font-size: 14.5px;
+  }
+  th, td { text-align: left; padding: 11px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { background: var(--navy); color: var(--white); font-weight: 600; font-size: 13px; letter-spacing: 0.3px; }
+  tr:nth-child(even) td { background: #f6f8fb; }
+  .yes { color: #0a8f5b; font-weight: 600; }
+  .no { color: #c0392b; font-weight: 600; }
+  .partial { color: #b8860b; font-weight: 600; }
+  .pill {
+    display: inline-block; font-size: 12px; font-weight: 600;
+    padding: 2px 9px; border-radius: 20px; margin-right: 6px;
+  }
+  .pill.rec { background: var(--mint); color: var(--navy); }
+  .pill.warn { background: #fde2ee; color: var(--pink); }
+  .diagram-card {
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 24px;
+    margin: 24px 0;
+    background: var(--white);
+    box-shadow: 0 2px 14px rgba(4,16,45,0.06);
+  }
+  .legend { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 14px; font-size: 13px; color: var(--muted); }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .dot { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
+  ol.steps { counter-reset: step; list-style: none; padding: 0; margin: 20px 0; }
+  ol.steps li {
+    position: relative; padding: 14px 16px 14px 56px; margin-bottom: 12px;
+    background: #f6f8fb; border-radius: 8px; border: 1px solid var(--line);
+  }
+  ol.steps li::before {
+    counter-increment: step; content: counter(step);
+    position: absolute; left: 14px; top: 14px;
+    width: 28px; height: 28px; background: var(--navy); color: var(--white);
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 14px;
+  }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 18px 0; }
+  .card {
+    border: 1px solid var(--line); border-radius: 10px; padding: 18px; background: var(--white);
+  }
+  .card h4 { margin: 0 0 8px; color: var(--navy); font-size: 16px; }
+  .card p { font-size: 14px; color: var(--muted); margin: 0; }
+  .footnote { font-size: 13px; color: var(--muted); }
+  .src { font-size: 13.5px; }
+  .src li { margin-bottom: 6px; }
+  @media (max-width: 680px) {
+    .grid2 { grid-template-columns: 1fr; }
+    header.hero h1 { font-size: 26px; }
+  }
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="inner">
+    <span class="tag">Deep Research / Edge8</span>
+    <h1>Shopify as a Commerce Engine, Your Frontend, Your Database</h1>
+    <p>How to run a fully custom AI-driven storefront on top of Shopify while keeping every order and customer mirrored to your own Supabase database. Built for a Vietnam-based founder selling into Australia, Canada, and the United States.</p>
+    <div class="meta">Prepared for Dave Hajdu &middot; June 2026 &middot; Sources cited throughout and listed at the end</div>
+  </div>
+</header>
+
+<div class="wrap">
+
+<p class="lead">The short version: this is very doable, and it is close to the standard "headless Shopify" pattern. But one issue dominates everything else and changes your whole setup, so it comes first.</p>
+
+<div class="callout">
+  <strong>The decision that drives the architecture.</strong> Shopify Payments is not available to a Vietnam-registered business, and Stripe does not onboard Vietnam entities on standard terms either. Yet Shopify's own multi-currency selling (Shopify Markets) only processes multiple currencies through Shopify Payments or Adyen. Australia, Canada, and the US are all fully supported for Shopify Payments. So the core question is not technical, it is <strong>which legal entity owns the Shopify store</strong>. That choice decides what payments, currencies, and tax tooling you can use across all four markets.
+</div>
+
+<h2>1. The four markets at a glance</h2>
+
+<p>Shopify operates in all four countries, but the payment and currency story splits sharply between Vietnam and the other three.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Capability</th>
+      <th>Vietnam</th>
+      <th>Australia</th>
+      <th>Canada</th>
+      <th>United States</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Shopify Payments (native)</td>
+      <td class="no">No</td>
+      <td class="yes">Yes</td>
+      <td class="yes">Yes</td>
+      <td class="yes">Yes</td>
+    </tr>
+    <tr>
+      <td>Stripe available</td>
+      <td class="no">No</td>
+      <td class="yes">Yes</td>
+      <td class="yes">Yes</td>
+      <td class="yes">Yes</td>
+    </tr>
+    <tr>
+      <td>Multi-currency via Shopify Markets</td>
+      <td class="no">Needs Shopify Payments or Adyen</td>
+      <td class="yes">Yes</td>
+      <td class="yes">Yes</td>
+      <td class="yes">Yes</td>
+    </tr>
+    <tr>
+      <td>Local rails buyers expect</td>
+      <td class="partial">MoMo, ZaloPay, VietQR, bank transfer, COD</td>
+      <td>Cards, Afterpay, Zip, PayPal</td>
+      <td>Cards, Interac, PayPal</td>
+      <td>Cards, wallets, BNPL</td>
+    </tr>
+    <tr>
+      <td>Third-party gateway path</td>
+      <td class="partial">2C2P, VNPay, local PSPs</td>
+      <td>Available</td>
+      <td>Available</td>
+      <td>Available</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Vietnamese buyers are mobile-first and expect local e-wallets. MoMo and ZaloPay dominate, with bank transfer and cash on delivery still important for trust on first orders. Cards matter but sit behind wallets. AU, CA, and US are card-and-wallet markets where Shopify Payments plus local buy-now-pay-later options (Afterpay, Zip, Interac) cover almost everyone.</p>
+
+<div class="callout blue">
+  <strong>Why the entity question is unavoidable.</strong> A headless storefront still hands the shopper to Shopify's hosted checkout to take payment (custom-built checkout is a Shopify Plus-only feature). That means the payment processor is governed by the country of the store's business entity, not by your frontend. A Vietnam-entity store is pushed onto local third-party gateways such as 2C2P or VNPay, which are built for VND and Vietnamese buyers, not for charging an Australian or American shopper in their own currency.
+</div>
+
+<h3>Your two realistic entity paths</h3>
+<div class="grid2">
+  <div class="card">
+    <h4>Path A: Sell from a non-VN entity <span class="pill rec">Recommended for AU/CA/US</span></h4>
+    <p>Incorporate the Shopify store under a Singapore, Hong Kong, or US company. This unlocks Shopify Payments or Stripe, native multi-currency across all three Western markets, and far less payment friction. A common structure for VN founders is a Hong Kong or Singapore holding entity that owns the local Vietnamese company, which keeps your Vietnam operations and staff intact.</p>
+  </div>
+  <div class="card">
+    <h4>Path B: Sell from a VN entity <span class="pill warn">Best for the VN market only</span></h4>
+    <p>Run the store under your Vietnamese company and connect a local gateway (2C2P, VNPay, or similar) for VND, MoMo, and ZaloPay. This is the right fit for selling domestically in Vietnam, but it makes cross-border charging to AU/CA/US clumsy and is not where you want your primary international store.</p>
+  </div>
+</div>
+
+<p>Many founders run both: a non-VN entity store for AU/CA/US, and a separate VN-entity store (or a localized market) for domestic Vietnam. Your custom frontend and your Supabase backup can sit in front of both stores, which is one of the strongest reasons to go headless in the first place.</p>
+
+<h2>2. How you pull the catalog into your own website</h2>
+
+<p>This is the headless model, and it is exactly what you described: Shopify is the engine, your site is the face. There are three build options, and the difference comes down to how much you want Shopify's tooling versus your own stack.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Option</th>
+      <th>What it is</th>
+      <th>Control</th>
+      <th>Best when</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Storefront API + your framework</strong> <span class="pill rec">Recommended</span></td>
+      <td>Your own Next.js site calls Shopify's Storefront API for products, collections, and cart. You own the entire frontend.</td>
+      <td>Highest</td>
+      <td>You want full design control, AI-driven content, and to integrate non-Shopify systems like Supabase. Fits your Claude Code and Supabase stack.</td>
+    </tr>
+    <tr>
+      <td>Hydrogen + Oxygen</td>
+      <td>Shopify's own React framework, hosted free on Shopify's Oxygen edge network.</td>
+      <td>High, but Shopify-opinionated</td>
+      <td>You want the tightest Shopify integration and lowest maintenance, and you are comfortable inside Shopify's framework and hosting.</td>
+    </tr>
+    <tr>
+      <td>Hydrogen React</td>
+      <td>Shopify's component library dropped into a third-party React app.</td>
+      <td>Medium-high</td>
+      <td>You want Shopify's prebuilt commerce components but your own React framework and hosting.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>For your goals, the <strong>Storefront API with a Next.js frontend</strong> is the cleanest fit. It gives you total design freedom, lets Claude generate and own the content layer, and plugs naturally into Supabase. You add the Shopify "Headless" sales channel in the admin, which issues the Storefront API access tokens your site uses to read the catalog.</p>
+
+<div class="callout">
+  <strong>One honest limitation to plan around.</strong> On standard Shopify plans, your custom site builds the cart and then redirects the shopper to Shopify's hosted checkout to pay. You control everything up to checkout, and the checkout itself is secure and conversion-tuned, but it is Shopify-branded and only lightly customizable. Fully owning the checkout UI requires Shopify Plus (around 2,300 USD per month). For most builds, using the hosted checkout is the right trade and keeps you off the PCI compliance hook.
+</div>
+
+<h2>3. The recommended architecture</h2>
+
+<p>Shopify stays the source of truth for catalog, cart, payments, and orders. Your Next.js site is the storefront. A thin sync layer mirrors every order and customer into Supabase the moment they happen, so you always hold a full, independent copy. Claude acts as your content brain, generating product copy and pages and pushing them where they belong.</p>
+
+<div class="diagram-card">
+<svg viewBox="0 0 920 560" xmlns="http://www.w3.org/2000/svg" width="100%" role="img" aria-label="Architecture diagram of headless Shopify with custom frontend, Claude CMS, and Supabase backup">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#287BE8"/>
+    </marker>
+    <marker id="arrowPink" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#D1458B"/>
+    </marker>
+    <marker id="arrowNavy" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#04102D"/>
+    </marker>
+  </defs>
+
+  <!-- Claude CMS -->
+  <rect x="40" y="40" width="220" height="90" rx="10" fill="#04102D"/>
+  <text x="150" y="72" text-anchor="middle" fill="#6FF2C1" font-family="sans-serif" font-size="14" font-weight="700">CLAUDE (CMS BRAIN)</text>
+  <text x="150" y="94" text-anchor="middle" fill="#EAEEF2" font-family="sans-serif" font-size="11.5">Claude Code + Admin API</text>
+  <text x="150" y="112" text-anchor="middle" fill="#EAEEF2" font-family="sans-serif" font-size="11.5">Generates product copy, pages</text>
+
+  <!-- Shopify engine -->
+  <rect x="350" y="40" width="240" height="150" rx="10" fill="#FFFFFF" stroke="#287BE8" stroke-width="2.5"/>
+  <text x="470" y="68" text-anchor="middle" fill="#04102D" font-family="sans-serif" font-size="14" font-weight="700">SHOPIFY (ENGINE)</text>
+  <text x="470" y="92" text-anchor="middle" fill="#1a2238" font-family="sans-serif" font-size="11.5">Catalog &middot; Cart &middot; Inventory</text>
+  <text x="470" y="112" text-anchor="middle" fill="#1a2238" font-family="sans-serif" font-size="11.5">Hosted Checkout + Payments</text>
+  <text x="470" y="132" text-anchor="middle" fill="#1a2238" font-family="sans-serif" font-size="11.5">Orders &middot; Source of truth</text>
+  <text x="470" y="160" text-anchor="middle" fill="#287BE8" font-family="sans-serif" font-size="10.5" font-weight="600">Storefront API + Admin API + Webhooks</text>
+
+  <!-- Custom frontend -->
+  <rect x="350" y="260" width="240" height="110" rx="10" fill="#FFFFFF" stroke="#04102D" stroke-width="2.5"/>
+  <text x="470" y="290" text-anchor="middle" fill="#04102D" font-family="sans-serif" font-size="14" font-weight="700">YOUR WEBSITE</text>
+  <text x="470" y="313" text-anchor="middle" fill="#1a2238" font-family="sans-serif" font-size="11.5">Next.js custom frontend</text>
+  <text x="470" y="333" text-anchor="middle" fill="#1a2238" font-family="sans-serif" font-size="11.5">Full design control</text>
+  <text x="470" y="353" text-anchor="middle" fill="#1a2238" font-family="sans-serif" font-size="11.5">Reads catalog via Storefront API</text>
+
+  <!-- Sync layer -->
+  <rect x="660" y="260" width="220" height="110" rx="10" fill="#D1458B"/>
+  <text x="770" y="290" text-anchor="middle" fill="#FFFFFF" font-family="sans-serif" font-size="13.5" font-weight="700">SYNC LAYER</text>
+  <text x="770" y="313" text-anchor="middle" fill="#FFFFFF" font-family="sans-serif" font-size="11">Webhook receiver</text>
+  <text x="770" y="331" text-anchor="middle" fill="#FFFFFF" font-family="sans-serif" font-size="11">(Supabase Edge Function)</text>
+  <text x="770" y="351" text-anchor="middle" fill="#FFFFFF" font-family="sans-serif" font-size="11">+ nightly reconciliation</text>
+
+  <!-- Supabase -->
+  <rect x="660" y="430" width="220" height="100" rx="10" fill="#04102D"/>
+  <text x="770" y="462" text-anchor="middle" fill="#6FF2C1" font-family="sans-serif" font-size="13.5" font-weight="700">SUPABASE (YOUR DB)</text>
+  <text x="770" y="485" text-anchor="middle" fill="#EAEEF2" font-family="sans-serif" font-size="11">Orders + customers mirror</text>
+  <text x="770" y="504" text-anchor="middle" fill="#EAEEF2" font-family="sans-serif" font-size="11">Independent backup you own</text>
+
+  <!-- Shopper -->
+  <rect x="40" y="290" width="220" height="80" rx="10" fill="#EAEEF2" stroke="#04102D" stroke-width="1.5"/>
+  <text x="150" y="322" text-anchor="middle" fill="#04102D" font-family="sans-serif" font-size="13.5" font-weight="700">SHOPPERS</text>
+  <text x="150" y="344" text-anchor="middle" fill="#1a2238" font-family="sans-serif" font-size="11">VN &middot; AU &middot; CA &middot; US</text>
+
+  <!-- Arrows -->
+  <!-- Claude -> Shopify -->
+  <line x1="260" y1="85" x2="346" y2="95" stroke="#04102D" stroke-width="2" marker-end="url(#arrowNavy)"/>
+  <text x="300" y="74" text-anchor="middle" fill="#04102D" font-family="sans-serif" font-size="9.5">push content</text>
+
+  <!-- Shopify -> frontend (catalog) -->
+  <line x1="470" y1="190" x2="470" y2="256" stroke="#287BE8" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="540" y="228" text-anchor="middle" fill="#287BE8" font-family="sans-serif" font-size="9.5">catalog data</text>
+
+  <!-- Shopper -> frontend -->
+  <line x1="260" y1="320" x2="346" y2="318" stroke="#04102D" stroke-width="2" marker-end="url(#arrowNavy)"/>
+  <text x="303" y="308" text-anchor="middle" fill="#04102D" font-family="sans-serif" font-size="9.5">browse</text>
+
+  <!-- frontend -> shopify checkout -->
+  <path d="M470 260 C 470 230, 470 210, 470 192" stroke="#287BE8" stroke-width="0" fill="none"/>
+  <line x1="500" y1="258" x2="520" y2="192" stroke="#287BE8" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="560" y="250" text-anchor="middle" fill="#287BE8" font-family="sans-serif" font-size="9.5">cart to checkout</text>
+
+  <!-- Shopify -> sync (webhooks) -->
+  <line x1="590" y1="150" x2="700" y2="256" stroke="#D1458B" stroke-width="2" marker-end="url(#arrowPink)"/>
+  <text x="690" y="200" text-anchor="middle" fill="#D1458B" font-family="sans-serif" font-size="9.5">order/customer</text>
+  <text x="690" y="213" text-anchor="middle" fill="#D1458B" font-family="sans-serif" font-size="9.5">webhooks</text>
+
+  <!-- sync -> supabase -->
+  <line x1="770" y1="370" x2="770" y2="426" stroke="#D1458B" stroke-width="2" marker-end="url(#arrowPink)"/>
+  <text x="828" y="402" text-anchor="middle" fill="#D1458B" font-family="sans-serif" font-size="9.5">write</text>
+
+  <!-- supabase -> frontend (read own data) -->
+  <path d="M660 470 C 560 470, 560 410, 590 372" stroke="#04102D" stroke-width="1.5" stroke-dasharray="5,4" fill="none" marker-end="url(#arrowNavy)"/>
+  <text x="600" y="440" text-anchor="middle" fill="#5b6477" font-family="sans-serif" font-size="9.5">your data, your queries</text>
+
+  <!-- title -->
+  <text x="40" y="555" fill="#5b6477" font-family="sans-serif" font-size="11">Shopify is the engine. Your site is the face. Supabase is your independent copy. Claude is the content brain.</text>
+</svg>
+  <div class="legend">
+    <span><span class="dot" style="background:#04102D"></span> You own / control</span>
+    <span><span class="dot" style="background:#287BE8"></span> Shopify reads (catalog, cart)</span>
+    <span><span class="dot" style="background:#D1458B"></span> Backup sync (webhooks to DB)</span>
+    <span><span class="dot" style="background:#6FF2C1"></span> Your database of record</span>
+  </div>
+</div>
+
+<h2>4. Backing up every order and customer to Supabase</h2>
+
+<p>This is the part that gives you true data ownership. Shopify will push you a live event every time something happens, and you write it straight into your own Postgres. The mechanism is webhooks, with a scheduled reconciliation job as a safety net.</p>
+
+<ol class="steps">
+  <li><strong>Subscribe to the events you care about.</strong> Register webhook topics like <code>orders/create</code>, <code>orders/updated</code>, <code>orders/paid</code>, <code>customers/create</code>, and <code>customers/update</code> through the Shopify Admin GraphQL API or app config.</li>
+  <li><strong>Receive them in a Supabase Edge Function.</strong> A small serverless endpoint verifies the Shopify HMAC signature, then upserts the payload into your orders and customers tables. Returns a 200 fast so Shopify does not retry needlessly.</li>
+  <li><strong>Reconcile nightly.</strong> Webhook delivery is not 100 percent guaranteed, so run a scheduled job that pulls the day's orders and customers from the Admin API (using bulk operations for large pulls) and fills any gaps. This is the standard belt-and-suspenders pattern.</li>
+  <li><strong>Honor the privacy webhooks.</strong> Implement <code>customers/data_request</code>, <code>customers/redact</code>, and <code>shop/redact</code>. These are mandatory if you ever package this as a Shopify app, and they are good hygiene regardless. They let you respond to data access and deletion requests and erase data on demand.</li>
+</ol>
+
+<div class="callout mint">
+  <strong>Compliance note for four jurisdictions.</strong> Once you hold a copy of customer data in Supabase, you become a data controller under each market's privacy law: Australia's Privacy Act, Canada's PIPEDA, US state laws such as CCPA, and Vietnam's PDPD (Decree 13). The practical implications are consent at collection, a way to honor access and deletion requests (which the redact webhooks support), and choosing a Supabase region sensibly. None of this is a blocker, but build the deletion flow in from day one rather than retrofitting it.
+</div>
+
+<h2>5. Claude as your CMS</h2>
+
+<p>This fits your stack cleanly and is an area Shopify itself has leaned into. As of April 2026, Shopify ships an official AI Toolkit that connects coding agents like Claude Code directly to a store and pushes changes live through the Admin API. You have three complementary ways to use Claude as the content brain.</p>
+
+<div class="grid2">
+  <div class="card">
+    <h4>Generate and push product content</h4>
+    <p>Claude Code authenticates to your store via the Admin API or the official toolkit, generates product descriptions, SEO copy, and collection pages in your brand voice, validates the mutations, and writes them straight into Shopify. Merchants report this replacing many hours of manual copywriting per week.</p>
+  </div>
+  <div class="card">
+    <h4>Own the editorial layer in your DB</h4>
+    <p>For richer content (stories, landing pages, localized VN and EN copy), Claude writes into Supabase, and your Next.js frontend renders it alongside the Shopify catalog. This keeps Shopify lean as the commerce engine and gives you a true headless CMS you fully control.</p>
+  </div>
+  <div class="card">
+    <h4>Localize per market</h4>
+    <p>Claude generates market-specific copy and currency-aware messaging for VN, AU, CA, and US, including Vietnamese-language variants for the domestic market. This pairs naturally with Shopify Markets for per-region storefront behavior.</p>
+  </div>
+  <div class="card">
+    <h4>Operate via MCP</h4>
+    <p>Through MCP, Claude can also read store data, draft reports, and run routine catalog operations, so the same agent that writes content can help run the store. This sits well with the Claude Code and GitHub workflow you already use.</p>
+  </div>
+</div>
+
+<h2>6. Plans and rough costs</h2>
+
+<table>
+  <thead>
+    <tr><th>Component</th><th>What it covers</th><th>Indicative cost</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Shopify base plan</td><td>Storefront API access, Headless channel, hosted checkout. Technically available on all plans.</td><td>Standard Shopify tiers (tens of USD per month)</td></tr>
+    <tr><td>Shopify Plus (optional)</td><td>Only if you need a fully custom checkout UI, advanced API limits, Shopify Functions, B2B.</td><td>~2,300 USD per month</td></tr>
+    <tr><td>Frontend hosting (Vercel)</td><td>Hosting the Next.js storefront. Oxygen is free if you use Hydrogen instead.</td><td>Free to a few hundred USD per month at scale</td></tr>
+    <tr><td>Supabase</td><td>Your Postgres backup, edge functions, scheduled jobs.</td><td>Free tier to modest monthly as you grow</td></tr>
+    <tr><td>Claude API / Claude Code</td><td>Content generation and store operations.</td><td>Usage-based</td></tr>
+    <tr><td>Build effort</td><td>Agency headless builds quoted at 60k to 250k EUR. A lean solo or small-team build on your stack is far less.</td><td>Mostly your own time with Claude Code</td></tr>
+  </tbody>
+</table>
+
+<p class="footnote">Agency price ranges are for full-service builds and are not what you would spend building this yourself with Claude Code on Supabase. They are included so you know the market rate if you ever outsource.</p>
+
+<h2>Bottom line</h2>
+
+<div class="callout">
+  <p style="margin:0 0 10px"><strong>Recommended setup for selling into AU, CA, and US:</strong></p>
+  <p style="margin:0">Incorporate the international store under a Singapore, Hong Kong, or US entity so you can use Shopify Payments and native multi-currency. Build a Next.js storefront on the Storefront API for full design control. Mirror every order and customer into Supabase through webhooks plus a nightly reconciliation job, with the privacy redact webhooks wired in. Use Claude Code as your CMS to generate and push content. Keep Shopify's hosted checkout unless you later need Plus. For the Vietnam domestic market, run a separate localized store or market on a VN entity with a local gateway like 2C2P or VNPay for MoMo, ZaloPay, and bank transfer.</p>
+</div>
+
+<p>You get exactly what you asked for: Shopify as the engine, a frontend you fully control, AI-driven content, and an independent backup of every transaction and customer in your own database. The only real constraint is the payments-by-entity rule, and structuring the entity correctly removes it.</p>
+
+<h2>Sources</h2>
+<ol class="src">
+  <li><a href="https://help.shopify.com/en/manual/payments/shopify-payments/supported-countries">Shopify Help Center: Supported countries for Shopify Payments</a></li>
+  <li><a href="https://help.shopify.com/en/manual/payments/third-party-providers/payment-gateway-availability">Shopify Help Center: Understanding payment gateway availability</a></li>
+  <li><a href="https://help.shopify.com/en/manual/payments/shopify-payments/multi-currency">Shopify Help Center: Multi-currency (Shopify Payments or Adyen requirement)</a></li>
+  <li><a href="https://help.shopify.com/en/manual/international/managing">Shopify Help Center: Markets overview</a></li>
+  <li><a href="https://help.shopify.com/en/manual/international/managed-markets/overview">Shopify Help Center: Overview of Managed Markets</a></li>
+  <li><a href="https://shopify.dev/docs/storefronts/headless/getting-started/build-options">Shopify Dev: Options for building headless</a></li>
+  <li><a href="https://www.shopify.com/partners/blog/introducing-customer-account-api-for-headless-stores">Shopify: Customer Account API for headless stores</a></li>
+  <li><a href="https://www.shopify.com/enterprise/blog/headless-checkout">Shopify: Headless checkout (checkout customization is Plus-only)</a></li>
+  <li><a href="https://shopify.dev/docs/apps/build/webhooks">Shopify Dev: About webhooks</a></li>
+  <li><a href="https://hookdeck.com/webhooks/platforms/how-to-synchronize-orders-shopify-webhooks">Hookdeck: How to synchronize orders with Shopify webhooks (reconciliation)</a></li>
+  <li><a href="https://shopify.dev/docs/apps/build/compliance/privacy-law-compliance">Shopify Dev: Privacy law compliance (mandatory redact webhooks)</a></li>
+  <li><a href="https://www.dtcskills.com/blog/shopify-ai-toolkit-playbook">DTCskills: Shopify AI Toolkit playbook (Claude Code + Admin API)</a></li>
+  <li><a href="https://www.fudge.ai/guides/shopify-ai-toolkit-claude-code-setup/">Fudge: Shopify AI Toolkit + Claude Code setup (April 2026 launch)</a></li>
+  <li><a href="https://getarigato.com/articles/claude-and-shopify-integration">Arigato: Claude and Shopify integration for product copy</a></li>
+  <li><a href="https://www.cartdna.com/shopify-payment-guide/asia-east/vietnam">CartDNA: Shopify payment methods in Vietnam</a></li>
+  <li><a href="https://www.hulkapps.com/blogs/shopify-payment-providers/2c2p-payment-gateway-shopify-integration-in-vietnam">HulkApps: 2C2P payment gateway Shopify integration in Vietnam</a></li>
+  <li><a href="https://docs.stripe.com/atlas/singapore-founder-guide">Stripe: Incorporating a US company from Singapore</a></li>
+  <li><a href="https://statrys.com/blog/hong-kong-company-living-in-vietnam">Statrys: Why Vietnam-based owners incorporate in Hong Kong</a></li>
+  <li><a href="https://conversion-design.com/blog/shopify-headless-commerce-guide">Conversion Design: Shopify headless commerce costs and trade-offs</a></li>
+  <li><a href="https://weaverse.io/blogs/shopify-headless-pricing">Weaverse: Shopify headless pricing breakdown</a></li>
+</ol>
+
+</div>
+</body>
+</html>
