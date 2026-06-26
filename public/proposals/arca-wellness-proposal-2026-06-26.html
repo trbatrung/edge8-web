@@ -57,9 +57,17 @@
     margin-bottom: 20px;
     font-weight: 600;
   }
-  header.hero h1 { font-size: 34px; line-height: 1.2; margin: 0 0 12px; font-weight: 700; }
-  header.hero p { font-size: 17px; color: var(--mist); margin: 0; max-width: 720px; }
-  header.hero .meta { margin-top: 24px; font-size: 13px; color: #9aa6bd; }
+  header.hero h1 { font-size: 38px; line-height: 1.12; margin: 0 0 14px; font-weight: 800; letter-spacing: -0.5px; }
+  header.hero .hero-sub { font-size: 17px; color: var(--mist); margin: 0; max-width: 620px; line-height: 1.5; }
+  header.hero .hero-stats {
+    display: flex; flex-wrap: wrap; gap: 18px 44px;
+    margin: 34px 0 0; padding-top: 28px;
+    border-top: 1px solid rgba(255,255,255,0.12);
+  }
+  header.hero .hero-stats div { display: flex; flex-direction: column; }
+  header.hero .hero-stats strong { font-size: 27px; font-weight: 800; color: var(--mint); line-height: 1; }
+  header.hero .hero-stats span { font-size: 12px; color: #9aa6bd; margin-top: 7px; letter-spacing: 0.2px; }
+  header.hero .meta { margin-top: 26px; font-size: 12.5px; color: #8492ad; }
   h2 {
     font-size: 24px;
     margin: 48px 0 16px;
@@ -137,17 +145,24 @@
   .src li { margin-bottom: 6px; }
   @media (max-width: 680px) {
     .grid2 { grid-template-columns: 1fr; }
-    header.hero h1 { font-size: 26px; }
+    header.hero h1 { font-size: 28px; }
+    header.hero .hero-stats { gap: 16px 28px; }
+    header.hero .hero-stats strong { font-size: 23px; }
   }
 </style>
 </head>
 <body>
 <header class="hero">
   <div class="inner">
-    <span class="tag">Proposal / Edge8 AI</span>
+    <span class="tag">Proposal &middot; Edge8 AI</span>
     <h1>Edge8 AI &lt;&gt; Arca Wellness &amp; Longevity</h1>
-    <p>A custom, AI-built storefront for Arca: integrated with Vietnam's payment rails and owned end to end. Shopify was assessed and set aside for the core market. Built as a low-risk pilot.</p>
-    <div class="meta">Prepared for Arca Wellness &amp; Longevity &middot; by Edge8 AI &middot; 26 June 2026 &middot; Rev. 2 &middot; Confidential</div>
+    <p class="hero-sub">A custom storefront you own end to end. Vietnam payments built in. Run the whole system with Claude.</p>
+    <div class="hero-stats">
+      <div><strong>$1,000</strong><span>to start (first retreat)</span></div>
+      <div><strong>$0</strong><span>upfront build cost</span></div>
+      <div><strong>100%</strong><span>code + data, owned by you</span></div>
+    </div>
+    <div class="meta">Prepared for Arca Wellness &amp; Longevity &nbsp;&middot;&nbsp; by Edge8 AI &nbsp;&middot;&nbsp; 26 June 2026 &nbsp;&middot;&nbsp; Valid until 29 June 2026 &nbsp;&middot;&nbsp; Confidential</div>
   </div>
 </header>
 
