@@ -216,7 +216,44 @@
 
 <p>Many founders run both: a non-VN entity store for AU/CA/US, and a separate VN-entity store (or a localized market) for domestic Vietnam. Your custom frontend and your Supabase backup can sit in front of both stores, which is one of the strongest reasons to go headless in the first place.</p>
 
-<h2>2. How you pull the catalog into your own website</h2>
+<h2>2. Vietnam payment providers, provider by provider</h2>
+
+<p>You asked about Payoo, so here is the wider picture in plain terms. No single Vietnamese provider gives you every payment method on its own. The practical approach is to pick one main gateway for cards, QR, and bank transfer, then add the one or two e-wallets your customers actually reach for. Below is who matters and what each one puts in front of your shopper.</p>
+
+<div class="callout blue">
+  <strong>The one-line takeaway.</strong> Payoo is a strong, properly licensed gateway that covers cards, QR, bank transfer, and instalments through a single integration. What it does <em>not</em> hand you is MoMo and ZaloPay, Vietnam's two dominant e-wallets. Those are separate integrations. So "integrate Payoo and we have everything" is close, but plan MoMo and ZaloPay as their own add-ons.
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <h4>Payoo <span class="pill rec">The one you're integrating</span></h4>
+    <p><strong>Customer can pay with:</strong> domestic bank cards (40+ Vietnamese banks), Visa and Mastercard, VietQR / QR code, bank transfer, 0% instalments, and pay-at-store. <strong>Fit:</strong> one integration covers a lot, but there is no off-the-shelf Shopify app, so it connects through its API as part of a custom checkout. Does not include MoMo or ZaloPay.</p>
+  </div>
+  <div class="card">
+    <h4>VNPAY <span class="pill rec">Easiest Shopify fit</span></h4>
+    <p><strong>Customer can pay with:</strong> VNPAY-QR (scannable inside 40+ banking apps), domestic and international cards, and bank transfer. <strong>Fit:</strong> bank-backed and very widely used, with ready-made plugins and APIs that slot into Shopify more easily than most local options. A sensible default gateway for the Vietnam store.</p>
+  </div>
+  <div class="card">
+    <h4>MoMo <span class="pill warn">Separate integration</span></h4>
+    <p><strong>Customer can pay with:</strong> the MoMo wallet (Vietnam's #1, tens of millions of users), MoMo QR, and linked cards or bank accounts. <strong>Fit:</strong> sits on top of your main gateway as its own connection. For consumer sales in Vietnam, leaving MoMo out costs you real conversions.</p>
+  </div>
+  <div class="card">
+    <h4>ZaloPay <span class="pill warn">Separate integration</span></h4>
+    <p><strong>Customer can pay with:</strong> the ZaloPay wallet, ZaloPay QR, and linked bank or card. <strong>Fit:</strong> tied to Zalo, Vietnam's main messaging app, so reach is large among younger buyers. Like MoMo, it is its own integration rather than something a single gateway bundles in.</p>
+  </div>
+  <div class="card">
+    <h4>2C2P</h4>
+    <p><strong>Customer can pay with:</strong> international and domestic cards, QR, local wallets, bank transfer, and instalments, across Vietnam and the wider region. <strong>Fit:</strong> a regional gateway with an established Shopify integration. Worth a look if you want one provider that can stretch beyond Vietnam.</p>
+  </div>
+  <div class="card">
+    <h4>VietQR &amp; cash on delivery</h4>
+    <p><strong>What they are:</strong> VietQR is the national bank-transfer QR standard that nearly every banking app reads, and most gateways above can present it. Cash on delivery is still common and builds trust on a first order. Keep both available for the Vietnam market.</p>
+  </div>
+</div>
+
+<p class="footnote">Provider capabilities and Shopify compatibility change often, and Payoo does not publish a full method-and-fee list. Confirm the exact card networks, the precise wallet list, settlement currency, and pricing directly with each provider before you commit.</p>
+
+<h2>3. How you pull the catalog into your own website</h2>
 
 <p>This is the headless model, and it is exactly what you described: Shopify is the engine, your site is the face. There are three build options, and the difference comes down to how much you want Shopify's tooling versus your own stack.</p>
 
@@ -257,7 +294,7 @@
   <strong>One honest limitation to plan around.</strong> On standard Shopify plans, your custom site builds the cart and then redirects the shopper to Shopify's hosted checkout to pay. You control everything up to checkout, and the checkout itself is secure and conversion-tuned, but it is Shopify-branded and only lightly customizable. Fully owning the checkout UI requires Shopify Plus (around 2,300 USD per month). For most builds, using the hosted checkout is the right trade and keeps you off the PCI compliance hook.
 </div>
 
-<h2>3. The recommended architecture</h2>
+<h2>4. The recommended architecture</h2>
 
 <p>Shopify stays the source of truth for catalog, cart, payments, and orders. Your Next.js site is the storefront. A thin sync layer mirrors every order and customer into Supabase the moment they happen, so you always hold a full, independent copy. Claude acts as your content brain, generating product copy and pages and pushing them where they belong.</p>
 
@@ -356,7 +393,7 @@
   </div>
 </div>
 
-<h2>4. Backing up every order and customer to Supabase</h2>
+<h2>5. Backing up every order and customer to Supabase</h2>
 
 <p>This is the part that gives you true data ownership. Shopify will push you a live event every time something happens, and you write it straight into your own Postgres. The mechanism is webhooks, with a scheduled reconciliation job as a safety net.</p>
 
@@ -371,7 +408,7 @@
   <strong>Compliance note for four jurisdictions.</strong> Once you hold a copy of customer data in Supabase, you become a data controller under each market's privacy law: Australia's Privacy Act, Canada's PIPEDA, US state laws such as CCPA, and Vietnam's PDPD (Decree 13). The practical implications are consent at collection, a way to honor access and deletion requests (which the redact webhooks support), and choosing a Supabase region sensibly. None of this is a blocker, but build the deletion flow in from day one rather than retrofitting it.
 </div>
 
-<h2>5. Claude as your CMS</h2>
+<h2>6. Claude as your CMS</h2>
 
 <p>This fits your stack cleanly and is an area Shopify itself has leaned into. As of April 2026, Shopify ships an official AI Toolkit that connects coding agents like Claude Code directly to a store and pushes changes live through the Admin API. You have three complementary ways to use Claude as the content brain.</p>
 
@@ -394,7 +431,7 @@
   </div>
 </div>
 
-<h2>6. Plans and rough costs</h2>
+<h2>7. Plans and rough costs</h2>
 
 <table>
   <thead>
@@ -439,6 +476,9 @@
   <li><a href="https://getarigato.com/articles/claude-and-shopify-integration">Arigato: Claude and Shopify integration for product copy</a></li>
   <li><a href="https://www.cartdna.com/shopify-payment-guide/asia-east/vietnam">CartDNA: Shopify payment methods in Vietnam</a></li>
   <li><a href="https://www.hulkapps.com/blogs/shopify-payment-providers/2c2p-payment-gateway-shopify-integration-in-vietnam">HulkApps: 2C2P payment gateway Shopify integration in Vietnam</a></li>
+  <li><a href="https://www.payoo.vn/v2/en/service-online-payment">Payoo: Online payment gateway methods (QR, instalments, pay@store, banks)</a></li>
+  <li><a href="https://payatlas.com/company/payoo-771">PayAtlas: Payoo profile (operator, card networks, e-wallets)</a></li>
+  <li><a href="https://apps.shopify.com">Shopify App Store: no official Payoo app found (checked June 2026)</a></li>
   <li><a href="https://docs.stripe.com/atlas/singapore-founder-guide">Stripe: Incorporating a US company from Singapore</a></li>
   <li><a href="https://statrys.com/blog/hong-kong-company-living-in-vietnam">Statrys: Why Vietnam-based owners incorporate in Hong Kong</a></li>
   <li><a href="https://conversion-design.com/blog/shopify-headless-commerce-guide">Conversion Design: Shopify headless commerce costs and trade-offs</a></li>
