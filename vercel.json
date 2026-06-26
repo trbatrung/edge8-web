@@ -12,6 +12,11 @@
       "source": "/ai-capabilities-audit/",
       "destination": "/contact",
       "permanent": true
+    },
+    {
+      "source": "/proposals/shopify-engine-research.html",
+      "destination": "/proposals/arca-wellness-proposal.html",
+      "permanent": true
     }
   ]
 }
