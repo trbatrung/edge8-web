@@ -28,13 +28,13 @@
     line-height: 1.6;
     font-size: 16px;
   }
-  .wrap { max-width: 960px; margin: 0 auto; padding: 0 24px 80px; }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 52px 24px 80px; }
   header.hero {
     background: var(--navy);
     color: var(--white);
-    padding: 56px 24px 48px;
+    padding: 60px 24px 44px;
   }
-  header.hero .inner { max-width: 960px; margin: 0 auto; }
+  header.hero .inner { max-width: 880px; margin: 0 auto; }
   header.hero .tag {
     display: inline-block;
     font-size: 12px;
@@ -44,30 +44,40 @@
     border: 1px solid var(--mint);
     border-radius: 4px;
     padding: 4px 10px;
-    margin-bottom: 20px;
+    margin-bottom: 22px;
     font-weight: 600;
   }
-  header.hero h1 { font-size: 34px; line-height: 1.2; margin: 0 0 12px; font-weight: 700; }
-  header.hero p { font-size: 17px; color: var(--mist); margin: 0; max-width: 720px; }
-  header.hero .meta { margin-top: 24px; font-size: 13px; color: #9aa6bd; }
+  header.hero h1 { font-size: 38px; line-height: 1.12; margin: 0 0 14px; font-weight: 800; letter-spacing: -0.5px; }
+  header.hero .hero-sub { font-size: 17px; color: var(--mist); margin: 0; max-width: 600px; }
+  header.hero .hero-stats {
+    display: flex; flex-wrap: wrap; gap: 18px 40px;
+    margin: 34px 0 0; padding-top: 28px;
+    border-top: 1px solid rgba(255,255,255,0.12);
+  }
+  header.hero .hero-stats div { display: flex; flex-direction: column; }
+  header.hero .hero-stats strong { font-size: 27px; font-weight: 800; color: var(--mint); line-height: 1; }
+  header.hero .hero-stats span { font-size: 12px; color: #9aa6bd; margin-top: 7px; letter-spacing: 0.2px; }
+  header.hero .meta { margin-top: 26px; font-size: 12.5px; color: #8492ad; }
   h2 {
-    font-size: 24px;
-    margin: 48px 0 16px;
+    font-size: 23px;
+    margin: 52px 0 16px;
     padding-bottom: 10px;
     border-bottom: 2px solid var(--mist);
     color: var(--navy);
+    letter-spacing: -0.3px;
   }
-  h3 { font-size: 18px; margin: 28px 0 10px; color: var(--navy); }
+  h3 { font-size: 18px; margin: 30px 0 10px; color: var(--navy); }
   p { margin: 0 0 14px; }
   a { color: var(--blue); text-decoration: none; }
   a:hover { text-decoration: underline; }
-  .lead { font-size: 18px; color: var(--ink); }
+  .lead { font-size: 19px; line-height: 1.5; color: var(--ink); }
+  .lead strong { color: var(--navy); }
   .callout {
     border-left: 4px solid var(--pink);
     background: var(--mist);
-    padding: 18px 20px;
+    padding: 18px 22px;
     border-radius: 0 8px 8px 0;
-    margin: 20px 0;
+    margin: 22px 0;
   }
   .callout strong { color: var(--navy); }
   .callout.mint { border-left-color: var(--mint); }
@@ -123,8 +133,8 @@
   .card p { font-size: 14px; color: var(--muted); margin: 0; }
   .card .badge { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--blue); font-weight: 700; display: block; margin-bottom: 6px; }
   ul.ticks { list-style: none; padding: 0; margin: 18px 0; }
-  ul.ticks li { position: relative; padding: 6px 0 6px 28px; }
-  ul.ticks li::before { content: "\2713"; position: absolute; left: 0; top: 6px; color: #0a8f5b; font-weight: 700; }
+  ul.ticks li { position: relative; padding: 7px 0 7px 28px; }
+  ul.ticks li::before { content: "\2713"; position: absolute; left: 0; top: 7px; color: #0a8f5b; font-weight: 700; }
   .phase { display: flex; gap: 20px; padding: 22px 0; border-bottom: 1px solid var(--mist); }
   .phase:last-child { border-bottom: none; }
   .phase .num {
@@ -136,7 +146,18 @@
   .phase h4 { margin: 0 0 6px; font-size: 18px; color: var(--navy); }
   .phase p { margin: 0; font-size: 14.5px; }
   .footnote { font-size: 13px; color: var(--muted); }
-  /* ── Certification calculator ── */
+  /* Timeline */
+  .timeline { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin: 26px 0; }
+  .tl-step { position: relative; padding: 30px 22px 0 0; }
+  .tl-step::before { content: ""; position: absolute; top: 6px; left: 0; right: 0; height: 2px; background: var(--line); }
+  .tl-step:last-child::before { display: none; }
+  .tl-step::after { content: ""; position: absolute; top: 0; left: 0; width: 14px; height: 14px; border-radius: 50%; background: var(--mint); box-shadow: 0 0 0 4px rgba(111,242,193,0.28); }
+  .tl-step--after::after { background: var(--pink); box-shadow: 0 0 0 4px rgba(209,69,139,0.20); }
+  .tl-month { font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--blue); font-weight: 700; margin-bottom: 5px; }
+  .tl-step--after .tl-month { color: var(--pink); }
+  .tl-step h4 { margin: 0 0 6px; font-size: 16px; color: var(--navy); }
+  .tl-step p { margin: 0; font-size: 13.5px; color: var(--muted); line-height: 1.55; }
+  /* Certification calculator */
   .calc {
     border: 1px solid var(--line); border-radius: 12px; padding: 22px 24px;
     background: #f6f8fb; margin: 22px 0;
@@ -159,75 +180,83 @@
   .calc-saving { font-size: 13px; font-weight: 700; color: #0a8f5b; }
   @media (max-width: 680px) {
     .grid2, .grid3 { grid-template-columns: 1fr; }
-    header.hero h1 { font-size: 26px; }
+    header.hero h1 { font-size: 29px; }
+    header.hero .hero-stats { gap: 16px 28px; }
+    header.hero .hero-stats strong { font-size: 23px; }
+    .timeline { grid-template-columns: 1fr; }
+    .tl-step { padding: 0 0 24px 30px; }
+    .tl-step::before { top: 0; bottom: 0; left: 6px; right: auto; width: 2px; height: auto; }
+    .tl-step:last-child::before { display: none; }
+    .tl-step::after { top: 2px; }
   }
 </style>
 </head>
 <body>
 <header class="hero">
   <div class="inner">
-    <span class="tag">Proposal / Edge8 AI</span>
+    <span class="tag">Proposal &middot; Edge8 AI</span>
     <h1>Edge8 AI &times; Rentwest</h1>
-    <p>One company database that Rentwest owns, with your reports and workflows rebuilt on top of it &mdash; and your team trained to run it. The path from 15 systems to one, so you give your people their time back.</p>
-    <div class="meta">Prepared for Suzanne, Rentwest &middot; by Dave Hajdu &amp; Quan Chau, Edge8 AI &middot; 26 June 2026 &middot; Confidential</div>
+    <p class="hero-sub">One company database you own. Reporting and workflows rebuilt on top. Your team trained to run it.</p>
+    <div class="hero-stats">
+      <div><strong>2,200</strong><span>properties under management</span></div>
+      <div><strong>15 &rarr; 1</strong><span>systems into one database</span></div>
+      <div><strong>650 &rarr; 6 min</strong><span>inspections, already proven</span></div>
+    </div>
+    <div class="meta">Prepared for Suzanne, Rentwest &nbsp;&middot;&nbsp; Dave Hajdu &amp; Quan Chau, Edge8 AI &nbsp;&middot;&nbsp; 26 June 2026 &nbsp;&middot;&nbsp; Confidential</div>
   </div>
 </header>
 
 <div class="wrap">
 
-<p class="lead">The short version: your team is logging into a stack of separate systems just to answer one question about an owner or a property. We consolidate Rentwest onto a single company database you own, rebuild the reporting and the workflows on top of it, and train your team to keep building &mdash; the same move that turned 650 inspections from a day of admin into six minutes.</p>
-
-<div class="callout mint">
-  <strong>You have already proven this works.</strong> You put 650 routine inspections through Claude and scheduled them in six minutes &mdash; work that used to take 18 property managers an hour or two each. That is not a one-off trick. It is what happens to every repetitive task once the data sits in one place and the workflow is defined. This proposal is about doing that across the whole business, deliberately.
-</div>
+<p class="lead">You have already proven this works. You put 650 monthly inspections through Claude and scheduled them in <strong>six minutes</strong>, work that used to take 18 property managers an hour or two each. That was not a trick. It is what happens to any repetitive task once the data lives in one place. This proposal does it across the whole business.</p>
 
 <h2>1. What we heard</h2>
 
-<p>Rentwest runs ~2,200 rental properties across the Perth metro with about 40 staff and a small sales team, twenty years in this year. The constraint is not effort or talent &mdash; it is that property management is a deeply siloed software industry, and the tools do not share one source of truth.</p>
+<p>Rentwest runs about 2,200 rental properties across Perth with roughly 40 staff and a small sales team, twenty years in this year. The constraint is not effort or talent. Property management is a deeply siloed software industry, and the tools do not share one source of truth.</p>
 
 <ul class="ticks">
-  <li><strong>Too many systems.</strong> At one point ~15 separate tools (plus the Microsoft suite), each solving one slice of the problem, each its own login and MFA.</li>
-  <li><strong>No holistic view.</strong> Your main operating system holds the core records, but inspections live in one app, tenant applications in another, files in Teams and SharePoint, sales in a legacy Airtable exported to a spreadsheet. There is no single place to see an owner, their property, and everything attached to them.</li>
-  <li><strong>The cost is time.</strong> Getting a straight answer means going through several systems. Your real goal &mdash; the reason you ran the four-day-week pilot &mdash; is to give that time back to the team.</li>
-  <li><strong>The groundwork is already laid.</strong> With Andreas you have done the AI vision and guardrails work, the role scorecards, and the company-knowledge capture. That is exactly the input a build like this needs.</li>
+  <li><strong>Too many systems.</strong> At one point about 15 separate tools plus the Microsoft suite, each solving one slice of the problem, each its own login and MFA.</li>
+  <li><strong>No single view.</strong> Your core records sit in one system, inspections in another, applications in a third, files in Teams and SharePoint, sales in a legacy Airtable exported to a spreadsheet. Nowhere shows an owner, their property, and everything attached to them at once.</li>
+  <li><strong>The cost is time.</strong> A straight answer means hopping between systems. The real goal, the reason you ran the four-day-week pilot, is to give that time back to the team.</li>
+  <li><strong>The groundwork is done.</strong> With Andreas you have already built the AI vision and guardrails, the role scorecards, and the company-knowledge capture. That is exactly the input this build needs.</li>
 </ul>
 
 <h2>2. The core insight</h2>
 
 <div class="callout">
-  <strong>This is not an AI problem &mdash; the speed of AI is exposing a data problem.</strong> Everything you want rests on two things: <strong>one central database</strong>, and <strong>clearly defined workflows</strong> on top of it. Get those right and the &ldquo;quick wins&rdquo; stop being clever one-offs and become how the business runs. Get them wrong and no tool, however good, can give you a clean answer fast.
+  <strong>This is not an AI problem. The speed of AI is exposing a data problem.</strong> Everything you want rests on two things: one central database, and clearly defined workflows on top of it. Get those right and the quick wins stop being clever one-offs and become how the business runs. Get them wrong and no tool, however good, can give you a clean answer fast.
 </div>
 
-<p>A &ldquo;vector database&rdquo; is one ingredient, but the foundation is simpler and more durable than that: a clean, relational company database that you own, organised around how your business actually works, with the scattered apps either connected to it or retired into it.</p>
+<p>A vector database is one ingredient. The foundation is simpler and more durable: a clean, relational company database that you own, organised around how your business actually works, with the scattered apps either connected to it or retired into it.</p>
 
 <h2>3. The build: one company operating system</h2>
 
-<p>We model every company as four functions &mdash; we call them offices &mdash; and the database is structured to match. For a property management business it maps cleanly:</p>
+<p>We model every company as four functions, which we call offices, and we structure the database to match. For a property management business it maps cleanly:</p>
 
 <div class="grid2">
   <div class="card">
     <span class="badge">Revenue</span>
     <h4>Owners, properties &amp; leases</h4>
-    <p>Owners, the properties they hold, leases, rent, sales pipeline. The holistic owner-and-property view, in one place.</p>
+    <p>Owners, the properties they hold, leases, rent, and the sales pipeline. The holistic owner and property view, in one place.</p>
   </div>
   <div class="card">
     <span class="badge">Operations</span>
     <h4>Inspections, maintenance &amp; applications</h4>
-    <p>Routine inspections, maintenance jobs, tenant applications &mdash; the work that today sits in three or four separate apps.</p>
+    <p>Routine inspections, maintenance jobs, and tenant applications. The work that today sits in three or four separate apps.</p>
   </div>
   <div class="card">
     <span class="badge">Talent</span>
     <h4>Team &amp; scorecards</h4>
-    <p>Your 40 staff, the role scorecards you have already built, capacity, and workload &mdash; tied to the work they actually do.</p>
+    <p>Your 40 staff, the role scorecards you have already built, capacity, and workload, tied to the work they actually do.</p>
   </div>
   <div class="card">
     <span class="badge">Innovation</span>
     <h4>New ideas &amp; improvement</h4>
-    <p>Where new initiatives, automations, and experiments are tracked &mdash; so improvement compounds instead of getting lost.</p>
+    <p>Where new initiatives, automations, and experiments are tracked, so improvement compounds instead of getting lost.</p>
   </div>
 </div>
 
-<p>The stack underneath is the same one we run our own companies on, and the same one we use on every client engagement &mdash; Claude-native, which suits the fact that Claude is already your team&rsquo;s favourite:</p>
+<p>The stack underneath is the same one we run our own companies on, and the same one we use on every client engagement. It is Claude-native, which suits the fact that Claude is already your team&rsquo;s favourite:</p>
 
 <div class="diagram-card">
 <svg viewBox="0 0 920 560" xmlns="http://www.w3.org/2000/svg" width="100%" role="img" aria-label="Diagram: scattered Rentwest systems consolidating into one owned company database with Claude as the brain and custom apps for staff, owners, and tenants">
@@ -260,9 +289,9 @@
 
   <!-- Claude brain -->
   <rect x="345" y="40" width="230" height="92" rx="10" fill="#04102D"/>
-  <text x="460" y="72" text-anchor="middle" fill="#6FF2C1" font-family="sans-serif" font-size="14" font-weight="700">CLAUDE &mdash; THE BRAIN</text>
+  <text x="460" y="72" text-anchor="middle" fill="#6FF2C1" font-family="sans-serif" font-size="14" font-weight="700">CLAUDE &middot; THE BRAIN</text>
   <text x="460" y="94" text-anchor="middle" fill="#EAEEF2" font-family="sans-serif" font-size="11.5">Runs ops, drafts reports,</text>
-  <text x="460" y="112" text-anchor="middle" fill="#EAEEF2" font-family="sans-serif" font-size="11.5">schedules, publishes &mdash; in chat</text>
+  <text x="460" y="112" text-anchor="middle" fill="#EAEEF2" font-family="sans-serif" font-size="11.5">schedules and publishes, in chat</text>
 
   <!-- One company database -->
   <rect x="338" y="170" width="244" height="220" rx="10" fill="#04102D"/>
@@ -289,7 +318,7 @@
   <text x="785" y="200" text-anchor="middle" fill="#04102D" font-family="sans-serif" font-size="13.5" font-weight="700">CUSTOM APPS</text>
   <text x="785" y="223" text-anchor="middle" fill="#1a2238" font-family="sans-serif" font-size="11">Fast, exactly your workflow</text>
   <text x="785" y="241" text-anchor="middle" fill="#1a2238" font-family="sans-serif" font-size="11">Built on Vercel &middot; code in GitHub</text>
-  <text x="785" y="266" text-anchor="middle" fill="#287BE8" font-family="sans-serif" font-size="10.5" font-weight="600">No more app you don&rsquo;t use</text>
+  <text x="785" y="266" text-anchor="middle" fill="#287BE8" font-family="sans-serif" font-size="10.5" font-weight="600">No more app you never use</text>
 
   <!-- DB <-> apps -->
   <line x1="586" y1="250" x2="676" y2="220" stroke="#287BE8" stroke-width="2" marker-end="url(#arrow)"/>
@@ -303,28 +332,28 @@
   <line x1="785" y1="294" x2="785" y2="326" stroke="#04102D" stroke-width="2" marker-end="url(#arrowNavy)"/>
 
   <text x="30" y="470" fill="#5b6477" font-family="sans-serif" font-size="11">Fifteen systems collapse into one database Rentwest owns. Claude runs on top of it. Custom apps replace the tools you were only half-using.</text>
-  <text x="30" y="492" fill="#5b6477" font-family="sans-serif" font-size="11">No licensing tax, no lock-in &mdash; the data, the code, and the apps are yours.</text>
+  <text x="30" y="492" fill="#5b6477" font-family="sans-serif" font-size="11">No licensing tax, no lock-in. The data, the code, and the apps are yours.</text>
 </svg>
   <div class="legend">
     <span><span class="dot" style="background:#04102D"></span> Rentwest owns / controls</span>
-    <span><span class="dot" style="background:#287BE8"></span> Apps &harr; database</span>
+    <span><span class="dot" style="background:#287BE8"></span> Apps to database</span>
     <span><span class="dot" style="background:#0a8f5b"></span> Migration in</span>
     <span><span class="dot" style="background:#6FF2C1"></span> Your system of record</span>
   </div>
 </div>
 
-<p>Nothing here is exotic. It is a standard, modern stack &mdash; Claude as the brain, GitHub for the code, Supabase for the database, Vercel to put it on the web &mdash; sized to Rentwest. As the data moves in, you start noticing apps you no longer need, and you build the replacement straight on top of your own database. We run our own companies with zero third-party apps this way.</p>
+<p>Nothing here is exotic. It is a standard, modern stack: Claude as the brain, GitHub for the code, Supabase for the database, Vercel to put it on the web, sized to Rentwest. As the data moves in, you notice apps you no longer need, and you build the replacement straight on top of your own database. We run our own companies with zero third-party apps this way.</p>
 
 <h2>4. How we&rsquo;d phase it</h2>
 
-<p>Three phases, each a standalone win. You set the pace &mdash; incremental, one component at a time, or a bigger push when it suits you.</p>
+<p>Three phases, each a standalone win. You set the pace: incremental, one component at a time, or a bigger push when it suits you.</p>
 
 <div class="phase">
   <div class="num">1</div>
   <div>
     <div class="role">The foundation</div>
     <h4>One database &amp; the holistic owner view</h4>
-    <p>We define the first problem worth solving precisely, discover where every piece of data lives, and design a clean company data model. Then we stand up your central database and bring the first data in &mdash; so an owner, their properties, leases, inspections, and applications finally sit in one place. This is the hardest and most valuable step; on its own it removes the &ldquo;go through five systems&rdquo; tax.</p>
+    <p>We define the first problem worth solving precisely, find where every piece of data lives, and design a clean company data model. Then we stand up your central database and bring the first data in, so an owner, their properties, leases, inspections, and applications finally sit in one place. This is the hardest and most valuable step. On its own it removes the go-through-five-systems tax.</p>
   </div>
 </div>
 
@@ -332,8 +361,8 @@
   <div class="num">2</div>
   <div>
     <div class="role">The rebuild</div>
-    <h4>Reports &amp; workflows on top of your data</h4>
-    <p>With clean data in place, we rebuild the work your team does by hand &mdash; inspection scheduling, tenant applications, owner reporting &mdash; running straight off your own database. We replace one workflow at a time, in the order that gives the most relief first, so nothing breaks and you stay in control.</p>
+    <h4>Reports &amp; workflows on your own data</h4>
+    <p>With clean data in place, we rebuild the work your team does by hand: inspection scheduling, tenant applications, owner reporting, running straight off your own database. We replace one workflow at a time, in the order that gives the most relief first, so nothing breaks and you stay in control.</p>
   </div>
 </div>
 
@@ -342,16 +371,16 @@
   <div>
     <div class="role">The replacement</div>
     <h4>Retire the apps you no longer need</h4>
-    <p>Once a workflow runs on your own system and is proven, we decommission the app it replaced and its licence comes off your books. What remains is a small hosting cost and a system that is yours, tailored exactly how you want it.</p>
+    <p>Once a workflow runs on your own system and is proven, we switch off the app it replaced and its licence comes off your books. What remains is a small hosting cost and a system that is yours, tailored exactly how you want it.</p>
   </div>
 </div>
 
 <h2>5. What the build costs</h2>
 
-<p>We price the build the way we price every engagement: transparently, by the hour, in <strong>human tokens</strong>. One human token is one hour of expert human work. There are no mystery invoices &mdash; every Friday you see the pull requests shipped, the Claude tokens used, and the human tokens spent.</p>
+<p>We price the build the way we price every engagement: transparently, by the hour, in <strong>human tokens</strong>. One human token is one hour of expert human work. No mystery invoices. Every Friday you see the pull requests shipped, the Claude tokens used, and the human tokens spent.</p>
 
 <div class="callout blue">
-  <strong>Phase&nbsp;1 foundation block: 160 human tokens &mdash; $12,000.</strong> Roughly four weeks of focused expert build: the data model, your central database, the first migrations, and the holistic owner-and-property view. After that, the build continues on the same meter &mdash; buy a token pack whenever you want the next workflow, and stop whenever it is far enough.
+  <strong>Phase&nbsp;1 foundation block: 160 human tokens, $12,000.</strong> About four weeks of focused expert build: the data model, your central database, the first migrations, and the holistic owner and property view. After that, the build continues on the same meter. Buy a token pack whenever you want the next workflow, and stop whenever it is far enough.
 </div>
 
 <table>
@@ -359,18 +388,18 @@
     <tr><th>Component</th><th>What it covers</th><th class="num">Cost (AUD)</th></tr>
   </thead>
   <tbody>
-    <tr><td><strong>Phase&nbsp;1 foundation</strong></td><td>160 human tokens &mdash; data model, central database, first migrations, holistic owner view.</td><td class="num"><strong>$12,000</strong></td></tr>
-    <tr><td>Ongoing build</td><td>Token packs for each later workflow (Phase&nbsp;2 onward). 40 tokens = ~one focused workflow.</td><td class="num">$3,000 / 40-token pack</td></tr>
-    <tr><td>Database (Supabase)</td><td>Your Postgres &mdash; the system of record you own outright.</td><td class="num">Free tier to modest monthly</td></tr>
-    <tr><td>Hosting (Vercel)</td><td>Putting your apps on the web.</td><td class="num">~$30/mo to low hundreds at scale</td></tr>
+    <tr><td><strong>Phase&nbsp;1 foundation</strong></td><td>160 human tokens: data model, central database, first migrations, holistic owner view.</td><td class="num"><strong>$12,000</strong></td></tr>
+    <tr><td>Ongoing build</td><td>Token packs for each later workflow. 40 tokens is about one focused workflow.</td><td class="num">$3,000 / 40-token pack</td></tr>
+    <tr><td>Database (Supabase)</td><td>Your Postgres, the system of record you own outright.</td><td class="num">Free tier to modest monthly</td></tr>
+    <tr><td>Hosting (Vercel)</td><td>Putting your apps on the web.</td><td class="num">About $30/mo, low hundreds at scale</td></tr>
     <tr><td>Claude</td><td>The brain that runs ops and generates reports.</td><td class="num">Usage-based</td></tr>
   </tbody>
 </table>
 
-<p class="footnote">A human token is one hour of expert work ($75 AUD). The transparency is the point: you only ever pay for hours that produced visible, shipped work, and you can pause after any phase.</p>
+<p class="footnote">A human token is one hour of expert work ($75 AUD). The transparency is the point. You only pay for hours that produced visible, shipped work, and you can pause after any phase.</p>
 
-<h3 style="margin-top:28px">Keep building in-house (optional)</h3>
-<p>When you want more horsepower than token packs, a dedicated Edge8 engineer can support and keep extending your system &mdash; learning your business and automating more over time.</p>
+<h3 style="margin-top:30px">Keep building in-house (optional)</h3>
+<p>When you want more horsepower than token packs, a dedicated Edge8 engineer can support and keep extending your system, learning your business and automating more over time.</p>
 <div class="grid2">
   <div class="card">
     <h4>Token packs</h4>
@@ -378,34 +407,34 @@
   </div>
   <div class="card">
     <h4>Fractional or full-time engineer</h4>
-    <p>$3,000&ndash;$6,000 / month. An Edge8 engineer embedded with your team, part-time or full-time. Best when you want to move fast.</p>
+    <p>$3,000 to $6,000 a month. An Edge8 engineer embedded with your team, part-time or full-time. Best when you want to move fast.</p>
   </div>
 </div>
 
 <h2>6. Train your team: the AI Officer Institute</h2>
 
-<p>You held off on training until you understood your needs &mdash; the right call. The build gives the team a reason to learn; the training makes sure your Claude and ChatGPT seats are actually used well. Our online program is the AI Officer Certification: a structured 12-month curriculum, 3 hours a week, 100% online, that has certified 500+ AI Officers across Asia and North America.</p>
+<p>You held off on training until you understood your needs. The right call. The build gives the team a reason to learn, and the training makes sure your Claude and ChatGPT seats actually get used well. Our online program is the AI Officer Certification: a structured 12-month curriculum, three hours a week, fully online, that has certified more than 500 AI Officers across Asia and North America.</p>
 
 <div class="grid3">
   <div class="card">
     <span class="badge">Series 1</span>
     <h4>Generative AI Foundations</h4>
-    <p>Fundamentals, the AI Officer mindset, business frameworks, building your first AI workflow.</p>
+    <p>Fundamentals, the AI Officer mindset, business frameworks, and building your first AI workflow.</p>
   </div>
   <div class="card">
     <span class="badge">Series 2 &middot; most popular</span>
     <h4>Agentic AI Systems</h4>
-    <p>Agent design, multi-agent orchestration, data systems, CRM &amp; process automation, AI program management.</p>
+    <p>Agent design, multi-agent orchestration, data systems, CRM and process automation, and AI program management.</p>
   </div>
   <div class="card">
     <span class="badge">Series 3</span>
     <h4>Business AI Strategy</h4>
-    <p>Business cases, ROI frameworks, AI talent strategy, change management, governance.</p>
+    <p>Business cases, ROI frameworks, AI talent strategy, change management, and governance.</p>
   </div>
 </div>
 
-<h3>What it costs &mdash; set your own numbers</h3>
-<p>List price is $150 per person per month. If Rentwest takes the full package &mdash; the build, a retreat, and team certification together &mdash; certification comes with a <strong>75% discount</strong>. Set the seats and toggle the discount to see your number:</p>
+<h3>What it costs: set your own numbers</h3>
+<p>List price is $150 per person per month. Take the full package, the build plus a retreat plus team certification, and certification comes with a <strong>75% discount</strong>. Set the seats and toggle the discount to see your number:</p>
 
 <div class="calc">
   <div class="calc-row">
@@ -424,43 +453,70 @@
   </div>
 </div>
 
-<p class="footnote">Default shows all 40 staff with the full-package discount applied. Untick the discount to see list pricing, or change the seat count to certify a smaller pilot cohort first.</p>
+<p class="footnote">Default shows all 40 staff with the full-package discount applied. Untick the discount for list pricing, or lower the seat count to certify a smaller pilot cohort first.</p>
 
-<h2>7. The Infinite Leverage Retreat &mdash; learn by doing</h2>
+<h2>7. The Infinite Leverage Retreat: learn by doing</h2>
 
-<p>The fastest way to make this real is to build alongside us. The Infinite Leverage Retreat is a private, hands-on build: you walk in with an idea and walk out, in 3 to 5 days, with two or three working applications running on your real data &mdash; on a Mac Mini pre-loaded with 8 working AI agents, plus the 18 protocols we build every client on, and 40 human tokens of polish for the 30 days after. Past teams have walked out with CRMs, applicant tracking, event management, and survey tools &mdash; the kind of software a dev shop charges $20,000 to $50,000 to build.</p>
+<p>The fastest way to make this real is to build it with us. The Infinite Leverage Retreat is a private, hands-on build. You walk in with an idea and walk out, in three to five days, with two or three working applications running on your real data. They run on a Mac Mini pre-loaded with 8 working AI agents, with the 18 protocols we build every client on, and 40 human tokens of polish for the 30 days after. Past teams have walked out with CRMs, applicant tracking, event management, and survey tools, the kind of software a dev shop charges $20,000 to $50,000 to build.</p>
 
 <p>For Rentwest, the natural build is the foundation itself: your central database and the holistic owner view, built live with your operators in the room.</p>
 
 <div class="grid2">
   <div class="card">
     <h4>In Saigon <span class="pill rec">Full immersion</span></h4>
-    <p style="margin-bottom:10px;color:var(--ink)"><strong>From $10,500</strong> &mdash; solo, 3 days.</p>
-    <p>+$1,500 per extra day. +$1,500 per additional person, per day. Includes the Saigon concierge week: VIP immigration, airport pickup, a room at the AIO Pad, daily lunch, a private car and driver. Suzanne + 1 operator over 3 days &asymp; $15,000.</p>
+    <p style="margin-bottom:10px;color:var(--ink)"><strong>From $10,500</strong> for one person, three days.</p>
+    <p>Add $1,500 per extra day, and $1,500 per additional person per day. Includes the Saigon concierge week: VIP immigration, airport pickup, a room at the AIO Pad, daily lunch, and a private car and driver. Suzanne plus one operator over three days is about $15,000.</p>
   </div>
   <div class="card">
     <h4>In Perth <span class="pill warn">We come to you</span></h4>
-    <p style="margin-bottom:10px;color:var(--ink)"><strong>Saigon price + $15,000</strong> on-site premium.</p>
-    <p>Dave, Quan, and an engineer deliver the retreat at your office. Plus domestic Australian travel only &mdash; <strong>no international flights</strong>, because we are already in Australia for the workshops below. Tie it to that trip and the on-site option is genuinely affordable.</p>
+    <p style="margin-bottom:10px;color:var(--ink)"><strong>Saigon price plus $15,000</strong> on-site premium.</p>
+    <p>Dave, Quan, and an engineer deliver the retreat at your office, with domestic Australian travel only. No international flights, because we are already in Australia for the workshops below. Tie it to that trip and the on-site option becomes genuinely affordable.</p>
   </div>
 </div>
 
-<p class="footnote">After the retreat, the 40 included human tokens cover 30 days of polish. To keep building, the continuation is $3,000/month for another 40 tokens, cancel anytime.</p>
+<p class="footnote">After the retreat, the 40 included human tokens cover 30 days of polish. To keep building, the continuation is $3,000 a month for another 40 tokens, cancel anytime.</p>
 
-<h2>8. The near-term window: we&rsquo;re in Australia, 31 Aug &ndash; 3 Sep</h2>
+<h2>8. The near-term window: we&rsquo;re in Australia, 31 Aug to 3 Sep</h2>
 
 <p>There is a natural moment to start, and it is soon. Dave, Quan, and an engineer are in Australia for back-to-back workshops at the end of August:</p>
 
 <ul class="ticks">
-  <li><strong>Sydney &mdash; 31 Aug &amp; 1 Sep:</strong> a two-day AI workshop you&rsquo;re welcome to attend.</li>
-  <li><strong>Melbourne &mdash; 2 &amp; 3 Sep:</strong> the second leg.</li>
-  <li><strong>Perth &mdash; before or after:</strong> because the team is already in-country, an on-site Perth retreat or working session is a short domestic add-on, not an international trip. This is the window that makes the Perth option cheap.</li>
+  <li><strong>Sydney, 31 Aug and 1 Sep:</strong> a two-day AI workshop you are welcome to attend.</li>
+  <li><strong>Melbourne, 2 and 3 Sep:</strong> the second leg.</li>
+  <li><strong>Perth, before or after:</strong> because the team is already in the country, an on-site Perth retreat or working session is a short domestic add-on, not an international trip. This is the window that makes the Perth option affordable.</li>
 </ul>
 
-<h2>9. The full package</h2>
+<h2>9. The timeline</h2>
+
+<p>A single quarter from kickoff to a trained team. The foundation in July, the build in August, and the retreat in September around our Australia trip, with certification starting once the team has something real to apply it to.</p>
+
+<div class="timeline">
+  <div class="tl-step">
+    <div class="tl-month">July</div>
+    <h4>Ramp, scope &amp; database</h4>
+    <p>Onboard, lock the first problem, discover where the data lives, and stand up your central database. The Phase&nbsp;1 foundation.</p>
+  </div>
+  <div class="tl-step">
+    <div class="tl-month">August</div>
+    <h4>Build</h4>
+    <p>Rebuild reports and workflows on your own data, one at a time, in the order that gives the most relief first. Phase&nbsp;2.</p>
+  </div>
+  <div class="tl-step">
+    <div class="tl-month">September</div>
+    <h4>Maintain &amp; retreat</h4>
+    <p>Harden and maintain what is live, and run the Infinite Leverage Retreat in Perth around the 31 Aug to 3 Sep trip. Phase&nbsp;3.</p>
+  </div>
+  <div class="tl-step tl-step--after">
+    <div class="tl-month">After the retreat</div>
+    <h4>Certification begins</h4>
+    <p>Your team starts the AI Officer Certification, now with a real system to apply it to and the shared language to run it.</p>
+  </div>
+</div>
+
+<h2>10. The full package</h2>
 
 <div class="callout">
-  <strong>Take it together and certification is 75% off.</strong> The pieces stand alone, but they compound: the build gives you the system, the retreat teaches your operators to extend it, and the certification gives the whole team the shared language to run it. Choosing the full package &mdash; build + retreat + team certification &mdash; applies the 75% certification discount shown in the calculator above.
+  <strong>Take it together and certification is 75% off.</strong> The pieces stand alone, but they compound. The build gives you the system, the retreat teaches your operators to extend it, and the certification gives the whole team the shared language to run it. Choose the full package, build plus retreat plus team certification, and the 75% certification discount in the calculator above applies.
 </div>
 
 <table>
@@ -468,25 +524,26 @@
     <tr><th>Piece</th><th>What it is</th><th class="num">From (AUD)</th></tr>
   </thead>
   <tbody>
-    <tr><td><strong>Build &mdash; Phase 1</strong></td><td>160 human tokens: one database + holistic owner view.</td><td class="num">$12,000</td></tr>
-    <tr><td><strong>Retreat</strong></td><td>3&ndash;5 day private build. Saigon, or Perth on-site around the trip.</td><td class="num">$10,500 (Saigon)</td></tr>
-    <tr><td><strong>Team certification</strong></td><td>AI Officer Certification, your seat count, full-package rate.</td><td class="num">$1,500/mo (40 seats, &minus;75%)</td></tr>
-    <tr><td>Ongoing build (optional)</td><td>Token packs, or a fractional/full-time engineer.</td><td class="num">$3,000/pack &middot; $3,000&ndash;$6,000/mo</td></tr>
+    <tr><td><strong>Build, Phase 1</strong></td><td>160 human tokens: one database plus the holistic owner view.</td><td class="num">$12,000</td></tr>
+    <tr><td><strong>Retreat</strong></td><td>Three to five day private build. Saigon, or Perth on-site around the trip.</td><td class="num">$10,500 (Saigon)</td></tr>
+    <tr><td><strong>Team certification</strong></td><td>AI Officer Certification, your seat count, full-package rate.</td><td class="num">$1,500/mo (40 seats, 75% off)</td></tr>
+    <tr><td>Ongoing build (optional)</td><td>Token packs, or a fractional or full-time engineer.</td><td class="num">$3,000/pack &middot; $3,000 to $6,000/mo</td></tr>
   </tbody>
 </table>
 
 <h2>Next steps</h2>
 <ol class="steps">
-  <li><strong>A problem-definition call.</strong> One short session to get crystal clear on the single problem we solve first &mdash; so the foundation is built to the thing that matters most.</li>
-  <li><strong>Data discovery (your homework).</strong> You map where everything lives today &mdash; the PM system, inspections, applications, Teams, SharePoint, Airtable &mdash; and which apps you&rsquo;d happily retire.</li>
+  <li><strong>A problem-definition call.</strong> One short session to get crystal clear on the single problem we solve first, so the foundation is built to what matters most.</li>
+  <li><strong>Data discovery, your homework.</strong> You map where everything lives today: the PM system, inspections, applications, Teams, SharePoint, Airtable, and which apps you would happily retire.</li>
   <li><strong>We design the data model.</strong> Dave or Quan owns this piece: a clean company database structure, and a plan to connect or migrate each source.</li>
-  <li><strong>Start the Phase&nbsp;1 build.</strong> 160 human tokens, metered weekly. Incremental or a bigger push &mdash; your pace. And pick a retreat (Saigon or Perth) and a certification cohort size.</li>
+  <li><strong>Start the Phase&nbsp;1 build.</strong> 160 human tokens, metered weekly, incremental or a bigger push, at your pace. Pick a retreat, Saigon or Perth, and a certification cohort size.</li>
 </ol>
 
 <div class="callout mint">
-  <strong>The bottom line.</strong> Rentwest moves from 15 systems to one database it owns, with reports and workflows rebuilt on top and the team trained to keep going. You give your people their time back &mdash; the thing you actually care about &mdash; and you own the asset that makes it compound. Start small with the foundation, or build it live with us in Perth around the trip. Either way, you only ever pay for work you can see shipped.</div>
+  <strong>The bottom line.</strong> Rentwest moves from 15 systems to one database it owns, with reports and workflows rebuilt on top and the team trained to keep going. You give your people their time back, the thing you actually care about, and you own the asset that makes it compound. Start small with the foundation, or build it live with us in Perth around the trip. Either way, you only pay for work you can see shipped.
+</div>
 
-<p class="footnote" style="margin-top:28px">All figures in Australian dollars, converted from our standard USD rates at approximately 1&nbsp;USD&nbsp;=&nbsp;1.50&nbsp;AUD; we&rsquo;ll confirm at the prevailing rate on invoice. Running costs (Supabase, Vercel, Claude) are usage-based and sit at the low end at Rentwest&rsquo;s scale. Prepared by Edge8 AI &mdash; Dave Hajdu &amp; Quan Chau. With thanks to Brad Giles for the introduction. Confidential to Rentwest.</p>
+<p class="footnote" style="margin-top:30px">All figures in Australian dollars, converted from our standard USD rates at about 1&nbsp;USD to 1.50&nbsp;AUD. We will confirm at the prevailing rate on invoice. Running costs (Supabase, Vercel, Claude) are usage-based and sit at the low end at Rentwest&rsquo;s scale. Prepared by Edge8 AI, Dave Hajdu and Quan Chau. With thanks to Brad Giles for the introduction. Confidential to Rentwest.</p>
 
 </div>
 
