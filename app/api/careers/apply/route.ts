@@ -1,5 +1,11 @@
 import { Resend } from 'resend'
-import { createClient } from '@supabase/supabase-js'
+import { supabase } from '@/lib/supabase'
+import {
+  getOrCreatePerson,
+  getOrCreateCandidate,
+  attachResumeDocument,
+  getOrCreateApplication,
+} from '@/lib/company-os'
 import { NextRequest, NextResponse } from 'next/server'
 import { randomUUID } from 'crypto'
 
@@ -46,11 +52,6 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Resume is too large (max 10 MB)' }, { status: 400 })
     }
 
-    const supabase = createClient(
-      process.env.SUPABASE_URL!,
-      process.env.SUPABASE_SECRET_KEY!,
-    )
-
     // 1) Upload resume to private storage bucket
     const filename = sanitizeFilename(resume.name || 'resume.pdf')
     const storagePath = `${job_id}/${randomUUID()}-${filename}`
@@ -66,32 +67,41 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Failed to upload resume' }, { status: 500 })
     }
 
-    // 2) Insert applicant
-    const { data: applicant, error: applicantErr } = await supabase
-      .from('job_applicants')
-      .insert({
-        full_name,
-        email,
-        phone,
-        linkedin,
-        source: 'edge8.ai/careers',
-        resume: storagePath,
-      })
-      .select('id')
-      .single()
-    if (applicantErr || !applicant) {
-      console.error('Applicant insert error:', applicantErr)
+    // 2) company_os: person → candidate → resume document → application
+    const person = await getOrCreatePerson({
+      email,
+      name: full_name,
+      phone,
+      source: 'edge8.ai/careers',
+    })
+    if (!person.ok) {
+      console.error('Person upsert error:', person.error)
       return NextResponse.json({ error: 'Failed to save applicant' }, { status: 500 })
     }
 
-    // 3) Link application to job
-    const { error: applicationErr } = await supabase.from('job_applications').insert({
-      job_id,
-      applicant_id: applicant.id,
+    const candidate = await getOrCreateCandidate(person.id, { linkedin })
+    if (!candidate.ok) {
+      console.error('Candidate upsert error:', candidate.error)
+      return NextResponse.json({ error: 'Failed to save applicant' }, { status: 500 })
+    }
+
+    const doc = await attachResumeDocument(candidate.id, {
+      storagePath,
+      mimeType: resume.type || null,
+      byteSize: resume.size,
+      personName: full_name,
     })
-    if (applicationErr) {
-      console.error('Application insert error:', applicationErr)
-      // Applicant row exists; treat as soft failure but inform the user
+    if (!doc.ok) {
+      console.error('Resume document error:', doc.error)
+      return NextResponse.json({ error: 'Failed to save resume' }, { status: 500 })
+    }
+
+    const application = await getOrCreateApplication(candidate.id, job_id, {
+      job_slug,
+      job_title,
+    })
+    if (!application.ok) {
+      console.error('Application error:', application.error)
       return NextResponse.json({ error: 'Failed to link application' }, { status: 500 })
     }
 
@@ -124,7 +134,7 @@ export async function POST(req: NextRequest) {
               <tr><td style="padding:6px 16px 6px 0;color:#666">Phone</td><td>${phone ?? '—'}</td></tr>
               <tr><td style="padding:6px 16px 6px 0;color:#666">LinkedIn</td><td>${linkedin ? `<a href="${linkedin}">${linkedin}</a>` : '—'}</td></tr>
               <tr><td style="padding:6px 16px 6px 0;color:#666">Resume</td><td>${signed?.signedUrl ? `<a href="${signed.signedUrl}">Download (7-day link)</a>` : storagePath}</td></tr>
-              <tr><td style="padding:6px 16px 6px 0;color:#666">Applicant ID</td><td><code>${applicant.id}</code></td></tr>
+              <tr><td style="padding:6px 16px 6px 0;color:#666">Candidate ID</td><td><code>${candidate.id}</code></td></tr>
             </table>
           `,
         })
@@ -133,7 +143,7 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    return NextResponse.json({ ok: true, applicant_id: applicant.id })
+    return NextResponse.json({ ok: true, application_id: application.id })
   } catch (err) {
     console.error('Apply route error:', err)
     return NextResponse.json({ error: 'Failed to submit' }, { status: 500 })

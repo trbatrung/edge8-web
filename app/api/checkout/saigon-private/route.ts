@@ -18,6 +18,7 @@ import {
   findOverlappingBlock,
   insertBookingBlock,
 } from "@/lib/private-session-blocks";
+import { recordPrivateSessionBooking } from "@/lib/company-os";
 
 const EVENT_ID = "saigon-private";
 
@@ -195,6 +196,7 @@ export async function POST(request: Request) {
   }
 
   let checkoutUrl: string | null = null;
+  let stripeSessionId: string | null = null;
   try {
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
@@ -217,6 +219,7 @@ export async function POST(request: Request) {
       },
     });
     checkoutUrl = session.url;
+    stripeSessionId = session.id;
   } catch (error) {
     const message = error instanceof Error ? error.message : "Unknown Stripe error";
     console.error(`[checkout/saigon-private]`, message);
@@ -240,6 +243,20 @@ export async function POST(request: Request) {
   if (!blockResult.ok) {
     console.error("[checkout/saigon-private] block insert failed:", blockResult.error);
   }
+
+  // Mirror the reservation into company_os (order + booking). Best-effort: the
+  // lead (people + inquiries) is already saved via recordRetreatSignup above.
+  await recordPrivateSessionBooking({
+    personId: signup.personId,
+    inquiryId: signup.inquiryId,
+    startDate,
+    endDate,
+    teamSize,
+    amountCents: expectedTotal * 100,
+    stripeSessionId,
+    idea,
+    days,
+  });
 
   return NextResponse.json({
     ok: true,
