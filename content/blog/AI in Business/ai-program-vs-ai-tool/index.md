@@ -37,6 +37,8 @@ None of this is exotic. The difficulty is not the technology. It is knowing what
 
 ![Inside the program I built: the dashboard, the day-before prep, and one meeting split into two outputs](/blog/images/ai-coaching-system-infographic.webp)
 
+Want to see exactly how one of these gets built? I wrote up the full system, step by step, every framework and every command: [How to Build Your AI Leadership Coach](https://www.ai-officer.com/post/how-to-build-your-ai-leadership-coach).
+
 ## The number that stung
 
 I asked it to rate my last one-on-one with each person on the Coach, Mentor, Direct mix. Coaching is asking questions so people grow. Mentoring is sharing your experience. Directing is just giving the answer. The research target for a strong leader is roughly eighty percent coaching, fifteen mentoring, five directing.
