@@ -28,7 +28,7 @@ export default function TrainingAndCertificationPage() {
               <a href="https://www.ai-officer.com" className="btn btn-contact" target="_blank" rel="noopener noreferrer">Explore the Program →</a>
             </div>
             <div className="svc-hero-img">
-              <Image src="/services/images/services-training-and-certification-hero.jpg" alt="Training and Certification" width={640} height={480} priority />
+              <Image src="/services/images/services-training-and-certification-hero-cohort.webp" alt="An AI Officer certification cohort working together at the Saigon retreat" width={640} height={640} priority />
             </div>
           </div>
         </div>

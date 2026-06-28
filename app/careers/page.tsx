@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { getActiveJobs } from '@/lib/jobs'
 import JobCard from './JobCard'
 import RevealObserver from './RevealObserver'
+import HeroStats from '@/components/HeroStats'
 
 export default async function CareersPage() {
   const jobs = await getActiveJobs()
@@ -38,25 +39,11 @@ export default async function CareersPage() {
               </Link>
             </div>
           </div>
-
-          <div className="careers-hero-stats reveal">
-            <div className="careers-hero-stat">
-              <div className="careers-hero-stat-num">182</div>
-              <div className="careers-hero-stat-label">Workflows Built</div>
-            </div>
-            <div className="careers-hero-stat-div" />
-            <div className="careers-hero-stat">
-              <div className="careers-hero-stat-num">12</div>
-              <div className="careers-hero-stat-label">AI Teams Deployed</div>
-            </div>
-            <div className="careers-hero-stat-div" />
-            <div className="careers-hero-stat">
-              <div className="careers-hero-stat-num">29</div>
-              <div className="careers-hero-stat-label">Revenue Streams Created</div>
-            </div>
-          </div>
         </div>
       </section>
+
+      {/* ═══ HERO STATS STRIP ═══════════════════════════════ */}
+      <HeroStats />
 
       {/* ═══ WHY WORK HERE ════════════════════════════════════ */}
       <section className="section" style={{ background: 'var(--tint)' }}>

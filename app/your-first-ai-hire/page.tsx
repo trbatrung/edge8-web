@@ -109,7 +109,7 @@ export default function YourFirstAIHirePage() {
               <a href="https://ai-officer.typeform.com/letstalk" className="btn btn-contact" target="_blank" rel="noopener noreferrer">Claim Your Spot Now →</a>
             </div>
             <div className="svc-hero-img">
-              <Image src="/services/images/services-your-first-ai-hire-hero.jpg" alt="Your First AI Hire" width={640} height={480} priority />
+              <Image src="/services/images/services-your-first-ai-hire-hero-session.webp" alt="An Edge8 client and engineer in a working session" width={640} height={640} priority />
             </div>
           </div>
         </div>

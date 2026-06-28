@@ -4,6 +4,7 @@ import { useState, useEffect, useRef, useCallback } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import Script from 'next/script'
+import HeroStats from '@/components/HeroStats'
 
 const testimonials = [
   {
@@ -52,9 +53,6 @@ const extTestimonials = [...testimonials, ...testimonials, ...testimonials]
 export default function HomePage() {
   const [activeExtIdx, setActiveExtIdx] = useState(T_REAL_OFFSET)
   const [formStatus, setFormStatus] = useState<'idle' | 'sending' | 'sent'>('idle')
-  const [statsVisible, setStatsVisible] = useState(false)
-  const [statCounts, setStatCounts] = useState([0, 0, 0])
-  const statsRef = useRef<HTMLDivElement>(null)
   const viewportRef = useRef<HTMLDivElement>(null)
   const trackRef = useRef<HTMLDivElement>(null)
   const snapTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
@@ -81,30 +79,6 @@ export default function HomePage() {
   }, [])
 
   // Stats counter — animates on scroll into view
-  useEffect(() => {
-    if (!statsRef.current) return
-    const obs = new IntersectionObserver(([e]) => {
-      if (e.isIntersecting) { setStatsVisible(true); obs.disconnect() }
-    }, { threshold: 0.4 })
-    obs.observe(statsRef.current)
-    return () => obs.disconnect()
-  }, [])
-
-  useEffect(() => {
-    if (!statsVisible) return
-    const targets = [190, 16, 46]
-    const duration = 1800
-    const start = Date.now()
-    const tick = () => {
-      const t = Math.min((Date.now() - start) / duration, 1)
-      const ease = 1 - Math.pow(1 - t, 3)
-      setStatCounts(targets.map(v => Math.round(v * ease)))
-      if (t < 1) requestAnimationFrame(tick)
-    }
-    requestAnimationFrame(tick)
-  }, [statsVisible])
-
-
   // Testimonials scroll sync (infinite loop)
   useEffect(() => {
     const viewport = viewportRef.current
@@ -209,27 +183,7 @@ export default function HomePage() {
       </section>
 
       {/* ═══ HERO STATS STRIP ═══════════════════════════════ */}
-      <section className="hero-stats" aria-label="Edge8 program results to date" ref={statsRef}>
-        <div className="container">
-          <div className="hero-stats-grid">
-            <div className="hero-stat reveal">
-              <div className="hero-stat-number">{statCounts[0]}</div>
-              <div className="hero-stat-label">Workflows Automated</div>
-              <div className="hero-stat-sub">with AI Agents running across our client base</div>
-            </div>
-            <div className="hero-stat reveal">
-              <div className="hero-stat-number">{statCounts[1]}</div>
-              <div className="hero-stat-label">Leadership Teams</div>
-              <div className="hero-stat-sub">certified to run AI on their own</div>
-            </div>
-            <div className="hero-stat reveal">
-              <div className="hero-stat-number">{statCounts[2]}</div>
-              <div className="hero-stat-label">Applications Launched</div>
-              <div className="hero-stat-sub">launched by 11 clients in the last 3 months</div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <HeroStats />
 
       {/* ═══ THE SHIFT ════════════════════════════════════════ */}
       <section className="shift section" id="shift">

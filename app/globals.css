@@ -2435,40 +2435,6 @@ footer {
   justify-content: center;
   flex-wrap: wrap;
 }
-.careers-hero-stats {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 72px;
-  padding-top: 48px;
-  border-top: 1px solid var(--dark-border);
-  position: relative;
-}
-.careers-hero-stat {
-  text-align: center;
-  padding: 0 48px;
-}
-.careers-hero-stat-div {
-  width: 1px;
-  height: 40px;
-  background: var(--dark-border);
-  flex-shrink: 0;
-}
-.careers-hero-stat-num {
-  font-family: var(--font-display);
-  font-size: clamp(32px, 4vw, 44px);
-  font-weight: 600;
-  color: var(--white);
-  line-height: 1;
-}
-.careers-hero-stat-label {
-  font-size: 12px;
-  color: rgba(255,255,255,0.4);
-  margin-top: 6px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
 /* Why Work Here */
 .careers-why-grid {
   display: grid;
@@ -2784,7 +2750,6 @@ footer {
 }
 @media (max-width: 768px) {
   .careers-hero { padding: 100px 0 72px; }
-  .careers-hero-stat { padding: 0 24px; }
   .careers-why-grid { grid-template-columns: 1fr; }
   .careers-process-steps { grid-template-columns: 1fr; gap: 32px; max-width: 400px; }
   .careers-process-steps::before { display: none; }
@@ -2794,12 +2759,6 @@ footer {
   .careers-empty { padding: 48px 24px; }
   .careers-roles-header { flex-direction: column; align-items: flex-start; }
 }
-@media (max-width: 480px) {
-  .careers-hero-stats { flex-direction: column; gap: 24px; }
-  .careers-hero-stat-div { display: none; }
-  .careers-hero-stat { padding: 0; }
-}
-
 /* ─────────────── Apply page ─────────────── */
 .apply-page { background: var(--dark); color: #fff; }
 .apply-hero { padding: 96px 0 32px; }
