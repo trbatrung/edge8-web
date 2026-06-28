@@ -827,6 +827,18 @@ export const allPosts: PostMeta[] = [
     mdFile: 'AI in Business/why-grok-4-s-success-proves-strategic-ai-planning-beats-first-mover-advantage/index',
     excerpt: "While ChatGPT dominated headlines for nearly a decade, Elon Musk quietly orchestrated a masterclass in long-term strategic thinking. Grok 4's breakthrough validates a fundamental principle: strategic patience beats early market entry.",
   },
+  {
+    slug: 'ai-program-vs-ai-tool',
+    title: 'AI Program vs AI Tool: I Built a Real One, and the Number Stung',
+    date: '2026-06-28',
+    category: 'Innovation',
+    categorySlug: 'innovation',
+    image: '/blog/images/ai-program-vs-ai-tool.webp',
+    readTime: '5 min read',
+    tags: ['AI Program', 'AI Strategy', 'AI Consulting'],
+    mdFile: 'AI in Business/ai-program-vs-ai-tool/index',
+    excerpt: "Most companies buy AI tools when they need an AI program built on their own data. I built one on myself in a day, and it told me the truth about how I lead. Here is the difference, and why it is the whole game.",
+  },
 ]
 
 export const categories = [
