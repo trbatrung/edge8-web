@@ -1,10 +1,10 @@
-import { supabase } from "./supabase";
+import { companyOs } from "./supabase";
+import { getOrCreatePerson, EDGE8_BRAND_ID } from "./company-os";
 import { SOURCE_SITE } from "./utils";
 
-// Upserts a person by email and creates a retreat inquiry against the shared
-// ai-officer database. The eventId tags `source` so the shared CRM can
-// attribute leads per cohort. Optional form answers go into the inquiry's
-// `message` body so the admin sees them in the dashboard.
+// Records a retreat lead into the company_os schema: get-or-create the person by
+// email, then insert an inquiry tagged to the Edge8 brand. Structured answers go
+// into inquiries.metadata so the dashboard can filter/chart on them.
 
 export type RetreatSignupInput = {
   email: string;
@@ -33,30 +33,14 @@ export type RetreatSignupResult =
 export async function recordRetreatSignup(
   input: RetreatSignupInput,
 ): Promise<RetreatSignupResult> {
-  const email = input.email.trim().toLowerCase();
-  if (!email || !email.includes("@")) {
-    return { ok: false, error: "A valid email is required." };
-  }
-
-  const { data: person, error: personError } = await supabase
-    .from("people")
-    .upsert(
-      {
-        email,
-        name: input.name ?? null,
-        phone: input.phone ?? null,
-        company: input.company ?? null,
-        role: input.role ?? null,
-        source_site: SOURCE_SITE,
-      },
-      { onConflict: "email" },
-    )
-    .select("id")
-    .single();
-
-  if (personError || !person) {
-    console.error("[signups] failed to upsert person:", personError?.message);
-    return { ok: false, error: "Could not save your details. Please try again." };
+  const person = await getOrCreatePerson({
+    email: input.email,
+    name: input.name,
+    phone: input.phone,
+    source: SOURCE_SITE,
+  });
+  if (!person.ok) {
+    return { ok: false, error: person.error };
   }
 
   const source = input.eventId
@@ -73,27 +57,27 @@ export async function recordRetreatSignup(
   if (input.message) messageParts.push(input.message);
   const composedMessage = messageParts.length > 0 ? messageParts.join("\n") : null;
 
-  // Mirror the form data into inquiries.metadata so the retreat dashboard
-  // (which filters / charts off metadata, not message) sees this signup
-  // exactly the same way it sees signups that came in via aio-website.
+  // Mirror the form data into inquiries.metadata so dashboards that filter /
+  // chart off metadata see this signup the same way as aio-website signups.
   const metadata: Record<string, string> = {};
+  if (input.company) metadata.company = input.company;
   if (input.cohortSlug) metadata.cohort = input.cohortSlug;
   if (input.productTier) metadata.tier = input.productTier;
   if (input.aiFluency) metadata.ai_fluency = input.aiFluency;
   if (input.goal) metadata.goal = input.goal;
   if (input.referralSource) metadata.referral_source = input.referralSource;
 
-  const { data: inquiry, error: inquiryError } = await supabase
+  const { data: inquiry, error: inquiryError } = await companyOs
     .from("inquiries")
     .insert({
       person_id: person.id,
+      brand_id: EDGE8_BRAND_ID,
       type: "retreat",
       message: composedMessage,
       source,
       source_site: SOURCE_SITE,
       status: "new_lead",
-      affiliate_id: input.affiliateId ?? null,
-      metadata: Object.keys(metadata).length > 0 ? metadata : null,
+      metadata,
     })
     .select("id")
     .single();

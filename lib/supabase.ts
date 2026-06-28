@@ -20,3 +20,9 @@ export const supabase = createClient(
     auth: { persistSession: false },
   }
 );
+
+// Query builder scoped to the `company_os` schema — the canonical Company OS
+// (people, inquiries, candidates, applications, documents, bookings, orders).
+// Site forms write here via the service-role key (bypasses RLS). Storage stays
+// on the base `supabase` client (buckets are schema-independent).
+export const companyOs = supabase.schema("company_os");
