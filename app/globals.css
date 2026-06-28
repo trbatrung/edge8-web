@@ -1558,7 +1558,7 @@ nav {
 .post-cover-wrap { width: 100%; max-height: 520px; overflow: hidden; }
 .post-cover { width: 100%; max-height: 520px; object-fit: cover; display: block; }
 .post-section { padding: 56px 0 96px; }
-.post-layout { display: grid; grid-template-columns: 3fr 1fr; gap: 64px; align-items: start; }
+.post-layout { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 1fr); gap: 64px; align-items: start; }
 .post-meta { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 20px; }
 .post-category-tag { font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--blue); background: rgba(40,123,232,0.08); padding: 4px 12px; border-radius: 100px; text-decoration: none; transition: var(--transition); }
 .post-category-tag:hover { background: rgba(40,123,232,0.15); }
@@ -1580,6 +1580,7 @@ nav {
 .post-body li { margin-bottom: 10px; }
 .post-body hr { border: none; border-top: 1px solid var(--tint-deep); margin: 44px 0; }
 .post-body code { font-family: monospace; background: var(--tint); padding: 2px 6px; border-radius: 4px; font-size: 0.88em; }
+.post-body img { max-width: 100%; height: auto; display: block; margin: 28px auto; border-radius: var(--radius-sm); }
 .post-sidebar { position: sticky; top: 88px; }
 .sidebar-title { font-size: 11px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--grey-mid); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--tint-deep); }
 .sidebar-post { display: flex; gap: 12px; padding: 16px 0; border-bottom: 1px solid var(--tint); text-decoration: none; align-items: flex-start; transition: var(--transition); }
@@ -1593,6 +1594,11 @@ nav {
 .sidebar-cta { background: var(--dark); border-radius: var(--radius); padding: 24px; margin-top: 24px; }
 .sidebar-cta-title { font-weight: 500; font-size: 15px; color: var(--tint); margin-bottom: 10px; }
 .sidebar-cta p { font-size: 13px; color: var(--grey-mid); line-height: 1.65; margin-bottom: 16px; }
+
+@media (max-width: 900px) {
+  .post-layout { grid-template-columns: 1fr; gap: 40px; }
+  .post-sidebar { position: static; }
+}
 
 /* ─── CONTACT PAGE ────────────────────────────────── */
 .contact-hero { background: var(--tint); }
