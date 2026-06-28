@@ -13,9 +13,9 @@ I teach the difference for a living. This week I stopped teaching it and built o
 
 I have built versions of this system for years, going back to wiring automations by hand in the old Make.com days. There was always something running: a packaged tool with a limited routine, an automation that did one slice of the job. The curriculum I teach for EO Vietnam and EO Perth, built on concepts I teach with Dr. Brooks C. Holtom of Georgetown, says every leader should build an AI coach for their team. I always had. What I never had was a way to build it exactly right.
 
-This week, with Claude and Lark, I did. Start to finish, in a day. Not a chatbot. A system that prepares me before every one-on-one, writes two separate recaps after, follows up on commitments, and tracks how I am leading over time. Built on my real data and my five real direct reports.
+This week I did, and here is the part that matters to you: I did not write the code. I assembled it. I directed Claude Code, Anthropic's agentic development tool, to read my datasets and the frameworks and wire the whole system together in Lark. I was the architect. The agent did the build. Start to finish, in a day. Not a chatbot. A system that prepares me before every one-on-one, writes two separate recaps after, follows up on commitments, and tracks how I am leading over time. Built on my real data and my five real direct reports.
 
-This is the distinction that matters for your company. A tool is something you buy and bolt on. A program is something you build on your own data that does a job. One is a cost. The other is leverage.
+This is the distinction that matters for your company. A tool is something you buy and bolt on. A program is something you assemble on your own data, with agentic development, to do a real job. The hard part is the thinking inside the frameworks. The assembly is fast, because you direct an agent and it does the wiring. One is a cost. The other is leverage.
 
 ![Dave Hajdu coaching a leader one-on-one](/blog/images/dave-coaching-one-on-one.webp)
 
@@ -37,7 +37,7 @@ None of this is exotic. The difficulty is not the technology. It is knowing what
 
 ![Inside the program I built: the dashboard, the day-before prep, and one meeting split into two outputs](/blog/images/ai-coaching-system-infographic.webp)
 
-Want to see exactly how one of these gets built? I wrote up the full system, step by step, every framework and every command: [How to Build Your AI Leadership Coach](https://www.ai-officer.com/post/how-to-build-your-ai-leadership-coach).
+Want to see exactly how one of these gets assembled? I wrote up the full system, step by step, every framework and every command: [the full AI Leadership Coach Assembly guide](https://www.ai-officer.com/post/how-to-build-your-ai-leadership-coach).
 
 ## The number that stung
 
