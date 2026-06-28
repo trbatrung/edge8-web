@@ -1,5 +1,6 @@
 import { Resend } from 'resend'
 import { createClient } from '@supabase/supabase-js'
+import { notifyOps } from '@/lib/lark'
 import { NextRequest, NextResponse } from 'next/server'
 import { randomUUID } from 'crypto'
 
@@ -195,6 +196,11 @@ export async function POST(req: NextRequest) {
         console.error('Lark webhook error:', larkErr)
       }
     }
+
+    // Ops channel notice (every submission)
+    void notifyOps(
+      `🌏 New Vietnam Adventure form\nFamily: ${family_name}\nContact: ${contact_name} <${contact_email}>\nTravelers: ${rows.length} | Passport photos: ${totalPhotos}`,
+    )
 
     return NextResponse.json({ ok: true, family_id: family.id })
   } catch (err) {

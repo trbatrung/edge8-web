@@ -6,6 +6,7 @@ import {
   attachResumeDocument,
   getOrCreateApplication,
 } from '@/lib/company-os'
+import { notifyOps } from '@/lib/lark'
 import { NextRequest, NextResponse } from 'next/server'
 import { randomUUID } from 'crypto'
 
@@ -142,6 +143,11 @@ export async function POST(req: NextRequest) {
         console.error('Resend error:', mailErr)
       }
     }
+
+    // Ops channel notice (every submission)
+    void notifyOps(
+      `🔔 New job application\n${full_name} <${email}> — ${job_title || 'role'}${phone ? ` · ${phone}` : ''}${linkedin ? `\n${linkedin}` : ''}`,
+    )
 
     return NextResponse.json({ ok: true, application_id: application.id })
   } catch (err) {
