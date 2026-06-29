@@ -5,8 +5,8 @@ import { usePathname } from 'next/navigation'
 import Nav from './Nav'
 import Footer from './Footer'
 
-// Routes that render standalone, without the site nav/footer (e.g. full-screen decks).
-const BARE_ROUTES = ['/blueprints/team-onboarding', '/reserve']
+// Routes that render standalone, without the site nav/footer (e.g. full-screen decks, the /admin CRM).
+const BARE_ROUTES = ['/blueprints/team-onboarding', '/reserve', '/admin']
 
 export default function SiteFrame({ children }: { children: ReactNode }) {
   const pathname = usePathname()

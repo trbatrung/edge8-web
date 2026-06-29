@@ -1,6 +1,7 @@
 import { Resend } from 'resend'
 import { companyOs } from '@/lib/supabase'
 import { getOrCreatePerson, EDGE8_BRAND_ID } from '@/lib/company-os'
+import { notifyOps } from '@/lib/lark'
 import { NextRequest, NextResponse } from 'next/server'
 
 const FROM = 'Edge8 <contact@edge8.ai>'
@@ -40,6 +41,11 @@ export async function POST(req: NextRequest) {
     } else {
       console.error('company_os person error:', person.error)
     }
+
+    // Ops channel notice (every submission)
+    void notifyOps(
+      `🔔 New AI Audit / Contact\n${name} <${email}>${company ? ` · ${company}` : ''}${teamSize ? ` · team ${teamSize}` : ''}${message ? `\n${message}` : ''}`,
+    )
 
     // 2️⃣ Send email via Resend
     const resend = new Resend(process.env.RESEND_API_KEY)

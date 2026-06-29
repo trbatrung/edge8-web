@@ -3,7 +3,7 @@ import { stripe } from "@/lib/stripe";
 import { recordRetreatSignup } from "@/lib/signups";
 import { sendTransactionalEmail } from "@/lib/email";
 import { sendTelegramMessage } from "@/lib/telegram";
-import { sendLarkMessage } from "@/lib/lark";
+import { sendLarkMessage, notifyOps } from "@/lib/lark";
 import {
   BASE_TEAM_SIZE,
   BASE_PRICE_ENV,
@@ -159,7 +159,7 @@ export async function POST(request: Request) {
   ]
     .filter(Boolean)
     .join("\n");
-  void Promise.allSettled([sendTelegramMessage(pingText), sendLarkMessage(pingText)]);
+  void Promise.allSettled([sendTelegramMessage(pingText), sendLarkMessage(pingText), notifyOps(pingText)]);
 
   // Admin email keeps the longer record.
   const adminEmails = process.env.ADMIN_EMAILS;
