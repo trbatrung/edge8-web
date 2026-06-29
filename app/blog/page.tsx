@@ -15,8 +15,8 @@ export default function BlogPage() {
   const [visibleCount, setVisibleCount] = useState(INITIAL_COUNT)
   const sentinelRef = useRef<HTMLDivElement>(null)
 
-  const featured = allPosts.find(p => p.slug === '2026-ai-trends-5-game-changing-shifts-that-will-define-business-success')
-    ?? [...allPosts].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())[0]
+  // Featured = the newest post by date, so it stays current automatically.
+  const featured = [...allPosts].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())[0]
 
   const filteredPosts = (
     activeCategory === 'all'
