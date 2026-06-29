@@ -1,0 +1,189 @@
+"use client";
+
+import { useState } from "react";
+import { KanbanBoard, type KanbanColumn } from "@/components/admin/KanbanBoard";
+import { DetailDrawer } from "@/components/admin/DetailDrawer";
+import { Badge, statusTone } from "@/components/admin/Badge";
+import { humanize, timeAgo } from "@/lib/admin/format";
+import { moveInquiryStatus, archiveInquiry, replyToInquiry } from "./actions";
+
+export type InquiryCard = {
+  id: string;
+  columnId: string;
+  type: string | null;
+  subject: string | null;
+  message: string | null;
+  source: string | null;
+  created_at: string;
+  deal_id: string | null;
+  personId: string | null;
+  personName: string | null;
+  personEmail: string | null;
+  doNotContact: boolean;
+};
+
+const COLUMNS: KanbanColumn[] = [
+  { id: "new_lead", label: "New lead", accent: "#287BE8" },
+  { id: "contacted", label: "Contacted", accent: "#6b7194" },
+  { id: "discovery", label: "Discovery", accent: "#D1458B" },
+  { id: "proposal", label: "Proposal", accent: "#f59e0b" },
+  { id: "won", label: "Won", accent: "#1a9e74" },
+  { id: "lost", label: "Lost", accent: "#9ca3af" },
+];
+
+export function InquiriesBoard({ initialCards }: { initialCards: InquiryCard[] }) {
+  const [cards, setCards] = useState<InquiryCard[]>(initialCards);
+  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [banner, setBanner] = useState<string | null>(null);
+
+  const selected = cards.find((c) => c.id === selectedId) ?? null;
+
+  function move(cardId: string, toColumnId: string) {
+    const prev = cards;
+    setCards((cs) => cs.map((c) => (c.id === cardId ? { ...c, columnId: toColumnId } : c)));
+    setBanner(null);
+    moveInquiryStatus(cardId, toColumnId).then((r) => {
+      if (!r.ok) {
+        setCards(prev);
+        setBanner(`Couldn't move card: ${r.error}`);
+      }
+    });
+  }
+
+  function archive(cardId: string) {
+    const prev = cards;
+    setCards((cs) => cs.filter((c) => c.id !== cardId));
+    setSelectedId(null);
+    archiveInquiry(cardId).then((r) => {
+      if (!r.ok) {
+        setCards(prev);
+        setBanner(`Couldn't archive: ${r.error}`);
+      }
+    });
+  }
+
+  return (
+    <>
+      {banner && (
+        <div className="admin-alert admin-alert--err" style={{ marginBottom: 12 }}>
+          {banner}
+        </div>
+      )}
+
+      <KanbanBoard<InquiryCard>
+        columns={COLUMNS}
+        cards={cards}
+        onMove={move}
+        onCardClick={(c) => setSelectedId(c.id)}
+        renderCard={(c) => (
+          <>
+            <div className="sap-card-title">{c.personName || c.personEmail || "(unknown)"}</div>
+            <div className="sap-card-sub">{c.subject || humanize(c.type)}</div>
+            <div className="sap-card-meta">
+              {c.type && <Badge>{humanize(c.type)}</Badge>}
+              {c.doNotContact && <Badge tone="err">DNC</Badge>}
+              <span className="sap-card-sub" style={{ marginLeft: "auto" }}>
+                {timeAgo(c.created_at)}
+              </span>
+            </div>
+          </>
+        )}
+      />
+
+      <DetailDrawer
+        open={!!selected}
+        onClose={() => setSelectedId(null)}
+        eyebrow={selected ? humanize(selected.type) : ""}
+        title={selected?.personName || selected?.personEmail || "Inquiry"}
+      >
+        {selected && <InquiryDetail card={selected} onArchive={() => archive(selected.id)} />}
+      </DetailDrawer>
+    </>
+  );
+}
+
+function InquiryDetail({ card, onArchive }: { card: InquiryCard; onArchive: () => void }) {
+  const [body, setBody] = useState("");
+  const [subject, setSubject] = useState(card.subject ? `Re: ${card.subject}` : "Re: your inquiry");
+  const [sending, setSending] = useState(false);
+  const [msg, setMsg] = useState<{ ok: boolean; text: string } | null>(null);
+
+  function send(e: React.FormEvent) {
+    e.preventDefault();
+    setSending(true);
+    setMsg(null);
+    replyToInquiry({ to: card.personEmail, subject, body, doNotContact: card.doNotContact }).then((r) => {
+      setSending(false);
+      if (r.ok) {
+        setMsg({ ok: true, text: "Reply sent." });
+        setBody("");
+      } else {
+        setMsg({ ok: false, text: r.error });
+      }
+    });
+  }
+
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
+      <dl className="admin-kv">
+        <dt>Status</dt>
+        <dd>
+          <Badge tone={statusTone(card.columnId)}>{humanize(card.columnId)}</Badge>
+        </dd>
+        <dt>Email</dt>
+        <dd>{card.personEmail || "—"}</dd>
+        <dt>Source</dt>
+        <dd>{card.source || "—"}</dd>
+        <dt>Received</dt>
+        <dd>{timeAgo(card.created_at)}</dd>
+      </dl>
+
+      {card.message && (
+        <div>
+          <div className="admin-label" style={{ marginBottom: 4 }}>
+            Message
+          </div>
+          <div className="admin-card" style={{ padding: "12px 14px", whiteSpace: "pre-wrap", fontSize: 13.5 }}>
+            {card.message}
+          </div>
+        </div>
+      )}
+
+      <form className="admin-form" onSubmit={send}>
+        <div className="admin-label">Reply by email</div>
+        {card.doNotContact && (
+          <div className="admin-alert admin-alert--err">
+            This contact is marked do-not-contact — replies are disabled.
+          </div>
+        )}
+        {msg && <div className={`admin-alert ${msg.ok ? "admin-alert--ok" : "admin-alert--err"}`}>{msg.text}</div>}
+        <input
+          className="admin-input"
+          value={subject}
+          onChange={(e) => setSubject(e.target.value)}
+          placeholder="Subject"
+          disabled={card.doNotContact}
+        />
+        <textarea
+          className="admin-textarea"
+          value={body}
+          onChange={(e) => setBody(e.target.value)}
+          placeholder="Write a reply…"
+          disabled={card.doNotContact}
+        />
+        <div className="admin-form-actions">
+          <button
+            type="submit"
+            className="admin-btn admin-btn--primary"
+            disabled={sending || card.doNotContact || !body.trim()}
+          >
+            {sending ? "Sending…" : "Send reply"}
+          </button>
+          <button type="button" className="admin-btn admin-btn--danger" onClick={onArchive}>
+            Archive
+          </button>
+        </div>
+      </form>
+    </div>
+  );
+}

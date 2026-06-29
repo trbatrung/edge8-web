@@ -15,6 +15,8 @@ High-level product vision, thematic epics, status dashboard, and the phased road
 
 | Document | Contents |
 |---|---|
+| ⭐ [Four Offices of the Future](./product/four-offices-of-the-future.md) | **North‑star.** The org operating model (Revenue · Talent · Operations · Innovation) and how the Company OS / `/admin` CRM embodies it — shared people spine, per‑office role lenses, persona mapping, nested‑by‑office IA, agentic substrate. Read before building any admin screen. |
+| [Human Tokens & Infinite Leverage](./product/human-tokens-infinite-leverage.md) | The *why* and unit of measure behind the offices — human tokens (1 hr human work) vs AI tokens, the AI Token Ratio (leverage). Companion to the north‑star. |
 | [Product](./product/product.md) | What Edge8 is, audiences (ranked), values, business model, moat, the next 90 days. |
 | [Epics](./product/epics.md) | Six thematic epics — Services, Case Studies, Culture/About, **Careers and Talent Network (new)**, Content, Lead Conversion. |
 | [Epic Status](./product/epic-status.md) | At-a-glance dashboard — pipeline glyphs and % estimate per epic. |

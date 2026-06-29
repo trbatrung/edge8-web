@@ -1,0 +1,18 @@
+import { Suspense } from "react";
+import { LoginForm } from "./LoginForm";
+
+export default function AdminLoginPage() {
+  return (
+    <main className="admin-auth">
+      <div className="admin-auth-card">
+        <div className="admin-auth-brand">
+          <span className="admin-brand-mark">E8</span> Edge8 CRM
+        </div>
+        <p className="admin-auth-sub">Sign in to the Company OS.</p>
+        <Suspense>
+          <LoginForm />
+        </Suspense>
+      </div>
+    </main>
+  );
+}

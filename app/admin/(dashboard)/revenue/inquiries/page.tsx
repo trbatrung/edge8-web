@@ -1,0 +1,71 @@
+import { companyOs } from "@/lib/supabase";
+import { getActiveBrandId } from "@/lib/admin/brand";
+import { PageHead } from "@/components/admin/PageHead";
+import { InquiriesBoard, type InquiryCard } from "./InquiriesBoard";
+
+export const dynamic = "force-dynamic";
+
+const ACTIVE_STATUSES = ["new_lead", "contacted", "discovery", "proposal", "won", "lost"];
+
+type EmbeddedPerson = { full_name: string | null; email: string; do_not_contact: boolean | null };
+type Row = {
+  id: string;
+  type: string | null;
+  subject: string | null;
+  message: string | null;
+  source: string | null;
+  status: string | null;
+  created_at: string;
+  deal_id: string | null;
+  person_id: string | null;
+  people: EmbeddedPerson | EmbeddedPerson[] | null;
+};
+
+export default async function InquiriesPage() {
+  const brandId = getActiveBrandId();
+  let query = companyOs
+    .from("inquiries")
+    .select(
+      "id, type, subject, message, source, status, created_at, deal_id, person_id, people(full_name, email, do_not_contact)",
+    )
+    .in("status", ACTIVE_STATUSES)
+    .order("created_at", { ascending: false })
+    .limit(500);
+  if (brandId) query = query.eq("brand_id", brandId);
+
+  const { data, error } = await query;
+
+  const cards: InquiryCard[] = ((data as Row[] | null) ?? []).map((r) => {
+    const p = Array.isArray(r.people) ? r.people[0] : r.people;
+    return {
+      id: r.id,
+      columnId: r.status ?? "new_lead",
+      type: r.type,
+      subject: r.subject,
+      message: r.message,
+      source: r.source,
+      created_at: r.created_at,
+      deal_id: r.deal_id,
+      personId: r.person_id,
+      personName: p?.full_name ?? null,
+      personEmail: p?.email ?? null,
+      doNotContact: !!p?.do_not_contact,
+    };
+  });
+
+  return (
+    <>
+      <PageHead
+        eyebrow="Revenue"
+        title="Inquiries"
+        sub={`${cards.length} open · drag a card to change stage`}
+      />
+      {error && (
+        <div className="admin-alert admin-alert--err" style={{ marginBottom: 14 }}>
+          {error.message}
+        </div>
+      )}
+      <InquiriesBoard initialCards={cards} />
+    </>
+  );
+}
