@@ -34,10 +34,10 @@ const NAV: NavGroup[] = [
   {
     label: "Talent",
     items: [
-      { label: "Candidates", href: "/admin/talent/candidates", ico: "☺" },
-      { label: "Applications", href: "/admin/talent/applications", ico: "⇉" },
-      { label: "Job Reqs", href: "/admin/talent/jobs", ico: "▤" },
-      { label: "Team", href: "/admin/talent/team", ico: "☷" },
+      { label: "Candidates", href: "/admin/talent/candidates", ico: "☺", enabled: true },
+      { label: "Applications", href: "/admin/talent/applications", ico: "⇉", enabled: true },
+      { label: "Job Reqs", href: "/admin/talent/jobs", ico: "▤", enabled: true },
+      { label: "Team", href: "/admin/talent/team", ico: "☷", enabled: true },
     ],
   },
   {

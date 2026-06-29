@@ -49,8 +49,8 @@ export default async function DashboardPage() {
         <MetricCard label="Companies" value={fmt(companies)} href="/admin/revenue/companies" />
         <MetricCard label="Inquiries" value={fmt(inquiries)} href="/admin/revenue/inquiries" />
         <MetricCard label="Deals" value={fmt(deals)} href="/admin/revenue/deals" />
-        <MetricCard label="Candidates" value={fmt(candidates)} />
-        <MetricCard label="Applications" value={fmt(applications)} />
+        <MetricCard label="Candidates" value={fmt(candidates)} href="/admin/talent/candidates" />
+        <MetricCard label="Applications" value={fmt(applications)} href="/admin/talent/applications" />
         <MetricCard label="Orders" value={fmt(orders)} href="/admin/revenue/orders" />
         <MetricCard label="Bookings" value={fmt(bookings)} href="/admin/revenue/bookings" />
       </div>
