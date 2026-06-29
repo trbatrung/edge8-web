@@ -35,19 +35,29 @@ export async function middleware(request: NextRequest) {
     },
   });
 
-  // Touching getUser() refreshes the session cookie when needed.
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  try {
+    // Touching getUser() refreshes the session cookie when needed.
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
 
-  if (!user) {
+    if (!user) {
+      const loginUrl = request.nextUrl.clone();
+      loginUrl.pathname = "/admin/login";
+      loginUrl.search = `?redirect=${encodeURIComponent(pathname + search)}`;
+      return NextResponse.redirect(loginUrl);
+    }
+
+    return response;
+  } catch {
+    // Auth backend unreachable or misconfigured: fail safe to the login page
+    // rather than 500-ing all of /admin. requireAdmin() still gates every
+    // server action and RSC data fetch, so this never weakens the boundary.
     const loginUrl = request.nextUrl.clone();
     loginUrl.pathname = "/admin/login";
     loginUrl.search = `?redirect=${encodeURIComponent(pathname + search)}`;
     return NextResponse.redirect(loginUrl);
   }
-
-  return response;
 }
 
 export const config = {
