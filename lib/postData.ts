@@ -839,6 +839,18 @@ export const allPosts: PostMeta[] = [
     mdFile: 'AI in Business/ai-program-vs-ai-tool/index',
     excerpt: "Most companies buy AI tools when they need an AI program built on their own data. I built one on myself in a day, and it told me the truth about how I lead. Here is the difference, and why it is the whole game.",
   },
+  {
+    slug: 'the-other-50-percent-of-leadership',
+    title: 'The Other 50% of Leadership',
+    date: '2026-06-29',
+    category: 'Innovation',
+    categorySlug: 'innovation',
+    image: '/blog/images/the-other-50-percent-of-leadership.webp',
+    readTime: '8 min read',
+    tags: ['AI Leadership', 'AI Strategy', 'Infinite Leverage'],
+    mdFile: 'AI in Business/the-other-50-percent-of-leadership/index',
+    excerpt: "AI-era leadership now needs a second skill set: workflow design, information architecture, and writing instructions for AI. Here is how to build it.",
+  },
 ]
 
 export const categories = [
