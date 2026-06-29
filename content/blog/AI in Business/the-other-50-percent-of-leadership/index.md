@@ -33,6 +33,8 @@ If the second half of leadership is real, your org structure has to reflect it. 
 
 Underneath all four sits a central database. This is not optional and it is not a detail. No central database, no organized information, no leverage. It is the floor the whole structure stands on, and if you skip it, nothing above it will hold.
 
+![The central database: a shared identity core that every office reads from, with the tables under Talent, Operations, Innovation, and Revenue](/blog/images/central-database-company-os.svg)
+
 The useful part is that you design each office with the exact same four questions. A CTO can take these into a room on Monday and start mapping.
 
 - What is the process? The sequence of steps that turns inputs into the outcome.
