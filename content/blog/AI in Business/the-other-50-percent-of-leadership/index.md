@@ -21,6 +21,8 @@ The second is information architecture: organizing your information so it can ac
 
 The third is writing instructions for code and for AI: translating a vision into instructions a machine can execute. Prompts are code. System instructions are code. Scripts and apps are code. You do not have to type the code yourself. You direct, and AI writes it. But you have to be able to say exactly what you want with enough precision that the result is the thing you pictured.
 
+![Three skills to direct AI: workflow design, information architecture (Always Be Cataloguing), and writing instructions for code and AI](/blog/images/three-skills-to-direct-ai.svg)
+
 Notice the order, because it is causal. Leadership doubled, so you have to restructure the company around the new half. Once you restructure, you need a way to know the new half is paying off. Each piece earns the next. The three skills are what make the restructure possible. The restructure is what the next section is about.
 
 ## Reorganize into four offices, with one database underneath
@@ -70,7 +72,7 @@ Think of the old science-fiction starfighter. No pilot is fast enough or sharp e
 
 ## Why founders who can build tend to win
 
-I will be honest about my own miss here, briefly, because it is the reason I trust this. I had been teaching these ideas without practicing them, and I was turning into the thing I have always hated: someone who teaches but cannot do. So I went and [did the foundational work myself](/post/ai-program-vs-ai-tool/). I centralized the database for our Vietnam operation, then my own company's, and I did the core build personally, using engineers to check and extend rather than to start from scratch.
+I will be honest about my own miss here, briefly, because it is the reason I trust this. I had been teaching these ideas without practicing them, and I was turning into the thing I have always hated: someone who teaches but cannot do. So I went and [did the foundational work myself](/post/ai-program-vs-ai-tool/). I centralized the database for our EO Vietnam business group, then my own company's, and I did the core build personally, using engineers to check and extend rather than to start from scratch.
 
 The lesson held. The vision is too hard to hand off cold. This is why founder-engineers tend to win and founder-business-people tend to struggle. The founders who can translate a vision directly into instructions a machine executes move faster than the ones who have to describe it through three layers of telephone.
 
