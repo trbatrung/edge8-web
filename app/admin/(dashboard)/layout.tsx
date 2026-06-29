@@ -5,7 +5,7 @@ import { listBrands, getActiveBrandId } from "@/lib/admin/brand";
 import "../admin.css";
 
 export const metadata: Metadata = {
-  title: "Edge8 CRM",
+  title: "Edge8 OS",
   robots: { index: false, follow: false },
 };
 

@@ -103,7 +103,7 @@ export function AdminSidebar({
           ☰
         </button>
         <span className="admin-brand-mark">E8</span>
-        <strong>Edge8 CRM</strong>
+        <strong>Edge8 OS</strong>
       </div>
 
       {navOpen && <div className="admin-scrim" onClick={() => setNavOpen(false)} />}
@@ -111,7 +111,7 @@ export function AdminSidebar({
       <nav className={`admin-sidebar${navOpen ? " is-open" : ""}`} aria-label="Admin">
         <div className="admin-brand">
           <span className="admin-brand-mark">E8</span>
-          Edge8 CRM
+          Edge8 OS
         </div>
 
         <button
