@@ -35,15 +35,19 @@ export function statusTone(status: string | null | undefined): BadgeTone {
     case "refunded":
     case "cancelled":
     case "do_not_pursue":
+    case "terminated":
       return "err";
     case "pending":
     case "on_hold":
     case "discovery":
     case "proposal":
+    case "passive":
       return "warn";
     case "new_lead":
     case "contacted":
     case "open":
+    case "filled":
+    case "placed":
       return "info";
     default:
       return "neutral";
