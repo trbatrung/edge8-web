@@ -1,4 +1,4 @@
-/* Edge8 CRM admin styles. Scoped under .admin-shell / .admin-* / .sap-* / .mp-*
+/* Edge8 OS admin styles. Scoped under .admin-shell / .admin-* / .sap-* / .mp-*
    so nothing collides with the marketing site (globals.css). Loaded after
    globals.css by both admin route-group layouts. Reuses the brand palette. */
 
@@ -395,6 +395,40 @@ a.mp-kpi:hover { border-color: var(--admin-accent); transform: translateY(-1px);
 }
 .admin-textarea { min-height: 96px; resize: vertical; }
 .admin-form-actions { display: flex; gap: 8px; padding-top: 4px; }
+
+/* password field eye toggle + auth helper links */
+.admin-input-wrap { position: relative; }
+.admin-input-eye {
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--admin-muted);
+  cursor: pointer;
+  border-radius: 6px;
+}
+.admin-input-eye:hover { color: var(--admin-ink); background: var(--admin-line-soft); }
+.admin-label-row { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+.admin-auth-link {
+  background: none;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  color: var(--admin-accent);
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  text-decoration: none;
+}
+.admin-auth-link:hover { text-decoration: underline; }
 
 /* key/value detail rows */
 .admin-kv { display: grid; grid-template-columns: 120px 1fr; gap: 6px 12px; font-size: 13.5px; }
