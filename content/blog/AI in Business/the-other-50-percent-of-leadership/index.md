@@ -27,6 +27,8 @@ Notice the order, because it is causal. Leadership doubled, so you have to restr
 
 If the second half of leadership is real, your org structure has to reflect it. The shape that works is [four offices](https://www.ai-officer.com/post/the-four-offices-of-the-future-why-your-org-chart-is-the-reason-ai-isn-t-working): Revenue, Operations, Talent, and Innovation. Everything the company does ladders up into one of those four.
 
+![The Four Offices of the Future: Revenue, Operations, Talent, and Innovation resting on one central database](/blog/images/four-offices-of-the-future.svg)
+
 Underneath all four sits a central database. This is not optional and it is not a detail. No central database, no organized information, no leverage. It is the floor the whole structure stands on, and if you skip it, nothing above it will hold.
 
 The useful part is that you design each office with the exact same four questions. A CTO can take these into a room on Monday and start mapping.
@@ -46,11 +48,15 @@ Here is how you know the new half is working, and it is not a vibe. The premise 
 
 You know leverage is real when concrete units of value ship into the digital world. Pull requests. Features. Things that exist, that did not exist yesterday, measured against the goals you set. Either you are hitting those goals or you are not. There is no fog. Value stops being a story you tell in a board meeting and becomes a number you can point at.
 
+![Infinite leverage: the old way took 100 hours, 20 to plan and 80 to execute. With AI it takes 25 hours, 20 to plan and 5 to execute. Four times the output per hour](/blog/images/infinite-leverage-100-hours.svg)
+
 This is the part that should change how you read every AI pitch you get. The right question is never "do we have AI." It is "what shipped this week that would not have shipped without it, and did it move a goal we already named." If the answer is a demo nobody uses, you bought a tool. If the answer is features in production and goals getting hit with fewer human tokens spent, that is leverage, and you can put it on a chart.
 
 I will give you the number from my own company, and I want to be careful with it, because the easy version of this story is a lie.
 
 Edge8 is about twenty percent smaller in 2026 than it was. That is mostly attrition, and I am not proud of it. People left on their own. I only actually let two people go. The rest chose to move on, and I would not dress that up as strategy. Over the same window, revenue is up sixty percent since January.
+
+![The proof: 20 percent smaller team, mostly people who chose to leave, and 60 percent more revenue over the same window. The gain is the proof, the loss is carried with humility](/blog/images/proof-20-smaller-60-larger.svg)
 
 Sit with the gap. A fifth fewer people, sixty percent more revenue. I did not cut headcount to juice a margin, and I would not recommend that to anyone. What happened is that as people left, I did not reflexively backfill every seat one for one. AI absorbed the work, the structure held, and the business grew anyway. That gap between fewer people and far more revenue is exactly what the second half of leadership looks like on a P&L. It is what I mean when I say eight times the leverage. Not a slogan. A measured outcome, carried with some humility about how the headcount actually changed.
 
@@ -67,6 +73,8 @@ Think of the old science-fiction starfighter. No pilot is fast enough or sharp e
 I will be honest about my own miss here, briefly, because it is the reason I trust this. I had been teaching these ideas without practicing them, and I was turning into the thing I have always hated: someone who teaches but cannot do. So I went and [did the foundational work myself](/post/ai-program-vs-ai-tool/). I centralized the database for our Vietnam operation, then my own company's, and I did the core build personally, using engineers to check and extend rather than to start from scratch.
 
 The lesson held. The vision is too hard to hand off cold. This is why founder-engineers tend to win and founder-business-people tend to struggle. The founders who can translate a vision directly into instructions a machine executes move faster than the ones who have to describe it through three layers of telephone.
+
+![The non-technical person is done. You don't write the code, you direct it. Prompts are instructions and AI writes. Directing AI is the new technical](/blog/images/non-technical-person-is-done.svg)
 
 That is also why the two roles you staff for this are specific. You need AI officers to run the program: people who own the four offices, the design questions, and the central database. And you need AI engineers to build it: people who turn the vision into working systems and ship the pull requests you measure against. You audit before you hire either one, so you are buying the capability your structure actually calls for, not the one a job board happens to list.
 
