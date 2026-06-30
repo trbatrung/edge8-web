@@ -32,7 +32,9 @@ export async function getPostDataBySlug(slug: string): Promise<Post | null> {
   const hrIndex = rawContent.search(/\n---+\s*\n/)
   const content = hrIndex !== -1 ? rawContent.slice(hrIndex).replace(/^---+\s*\n/, '') : rawContent
 
-  const processedContent = await remark().use(remarkHtml).process(content)
+  // sanitize:false lets first-party markdown use raw HTML — <figure>/<figcaption>
+  // exhibit framing and the <details> FAQ accordion. Pure-markdown posts are unaffected.
+  const processedContent = await remark().use(remarkHtml, { sanitize: false }).process(content)
   const contentHtml = processedContent.toString()
 
   return { ...post, contentHtml }

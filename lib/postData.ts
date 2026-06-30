@@ -846,7 +846,7 @@ export const allPosts: PostMeta[] = [
     category: 'Innovation',
     categorySlug: 'innovation',
     image: '/blog/images/the-other-50-percent-of-leadership.webp',
-    readTime: '8 min read',
+    readTime: '9 min read',
     tags: ['AI Leadership', 'AI Strategy', 'Infinite Leverage'],
     mdFile: 'AI in Business/the-other-50-percent-of-leadership/index',
     excerpt: "AI-era leadership now needs a second skill set: workflow design, information architecture, and writing instructions for AI. Here is how to build it.",

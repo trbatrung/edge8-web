@@ -1581,6 +1581,31 @@ nav {
 .post-body hr { border: none; border-top: 1px solid var(--tint-deep); margin: 44px 0; }
 .post-body code { font-family: monospace; background: var(--tint); padding: 2px 6px; border-radius: 4px; font-size: 0.88em; }
 .post-body img { max-width: 100%; height: auto; display: block; margin: 28px auto; border-radius: var(--radius-sm); }
+
+/* ── Thesis statement card ───────────────────────────────────────── */
+.post-body .thesis-statement { margin: 36px 0 42px; padding: 28px 32px; border: 1px solid var(--tint-deep); border-left: 4px solid var(--blue); border-radius: var(--radius-sm); background: linear-gradient(180deg, rgba(40,123,232,0.06), rgba(40,123,232,0.02)); font-size: 20px; line-height: 1.55; font-weight: 500; color: var(--dark); }
+.post-body .thesis-label { display: block; font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 600; color: var(--blue); margin-bottom: 12px; }
+
+/* ── Figure exhibits ─────────────────────────────────────────────── */
+.post-body .post-figure { margin: 36px 0; }
+.post-body .post-figure p { margin: 0; }
+.post-body .post-figure img { margin: 0 auto 14px; }
+.post-body .post-figure figcaption { max-width: 600px; margin: 0 auto; text-align: center; font-size: 13.5px; line-height: 1.5; color: var(--grey-mid); }
+.post-body .post-figure figcaption strong { color: var(--dark); font-weight: 600; }
+.post-body .post-figure .fig-note { color: var(--blue); font-style: italic; }
+
+/* ── FAQ accordion ───────────────────────────────────────────────── */
+.post-body details.faq-item { border: 1px solid var(--tint-deep); border-radius: var(--radius-sm); margin: 14px 0; background: var(--white); overflow: hidden; transition: border-color var(--transition); }
+.post-body details.faq-item[open] { border-color: var(--blue); }
+.post-body details.faq-item summary { list-style: none; cursor: pointer; padding: 20px 24px; display: flex; align-items: center; justify-content: space-between; gap: 20px; font-family: var(--font-display); font-size: 18px; font-weight: 500; color: var(--dark); }
+.post-body details.faq-item summary::-webkit-details-marker { display: none; }
+.post-body details.faq-item summary:hover { color: var(--blue); }
+.post-body details.faq-item summary::after { content: '+'; flex: 0 0 auto; font-size: 26px; line-height: 1; font-weight: 400; color: var(--blue); }
+.post-body details.faq-item[open] summary::after { content: '\2212'; }
+.post-body details.faq-item > :not(summary) { margin-left: 24px; margin-right: 24px; }
+.post-body details.faq-item > :last-child { margin-bottom: 22px; }
+.post-body details.faq-item summary + * { margin-top: 0; }
+
 .post-sidebar { position: sticky; top: 88px; }
 .sidebar-title { font-size: 11px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--grey-mid); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--tint-deep); }
 .sidebar-post { display: flex; gap: 12px; padding: 16px 0; border-bottom: 1px solid var(--tint); text-decoration: none; align-items: flex-start; transition: var(--transition); }
