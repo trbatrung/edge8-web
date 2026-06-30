@@ -1,5 +1,5 @@
 <svg width="680" height="440" viewBox="0 0 680 440" xmlns="http://www.w3.org/2000/svg" role="img">
-<title>Fewer people, more revenue — Edge8 indexed to January 2026 = 100</title>
+<title>Fewer people, more revenue. Edge8 indexed to January 2026 = 100</title>
 <desc>A line chart indexed to January 2026 at 100. From January to June the revenue line climbs to about 160 while the headcount line falls to about 80. The two lines start together and fan apart, and the widening gap between them represents leverage: revenue per person roughly doubles.</desc>
 <style>.ff{font-family:'Inter',system-ui,-apple-system,sans-serif}.eb{letter-spacing:3px}</style>
 <rect width="680" height="440" rx="20" fill="#04102D"/>
@@ -43,5 +43,5 @@
  <text x="574" y="326" fill="#5AA0F5" font-size="13" font-weight="600">Headcount</text>
  <text x="574" y="346" fill="#5AA0F5" font-size="16" font-weight="700">−20%</text>
 </g>
-<text class="ff" x="40" y="424" fill="rgba(255,255,255,0.6)" font-size="13.5">The lines start together in January and fan apart — that widening gap is the leverage.</text>
+<text class="ff" x="40" y="424" fill="rgba(255,255,255,0.6)" font-size="13.5">The lines start together in January and fan apart. That widening gap is the leverage.</text>
 </svg>

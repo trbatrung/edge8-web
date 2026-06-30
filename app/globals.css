@@ -1582,9 +1582,13 @@ nav {
 .post-body code { font-family: monospace; background: var(--tint); padding: 2px 6px; border-radius: 4px; font-size: 0.88em; }
 .post-body img { max-width: 100%; height: auto; display: block; margin: 28px auto; border-radius: var(--radius-sm); }
 
-/* ── Thesis statement card ───────────────────────────────────────── */
-.post-body .thesis-statement { margin: 36px 0 42px; padding: 28px 32px; border: 1px solid var(--tint-deep); border-left: 4px solid var(--blue); border-radius: var(--radius-sm); background: linear-gradient(180deg, rgba(40,123,232,0.06), rgba(40,123,232,0.02)); font-size: 20px; line-height: 1.55; font-weight: 500; color: var(--dark); }
-.post-body .thesis-label { display: block; font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 600; color: var(--blue); margin-bottom: 12px; }
+/* ── Idea in Brief box (HBR-style) ───────────────────────────────── */
+.post-body .idea-in-brief { margin: 36px 0 42px; padding: 28px 32px; border: 1px solid var(--tint-deep); border-top: 3px solid var(--blue); border-radius: var(--radius-sm); background: linear-gradient(180deg, rgba(40,123,232,0.05), rgba(40,123,232,0.015)); }
+.post-body .iib-label { display: block; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 600; color: var(--blue); margin-bottom: 18px; }
+.post-body .iib-item { display: block; padding: 14px 0; border-top: 1px solid var(--tint-deep); }
+.post-body .iib-item:first-of-type { border-top: none; padding-top: 0; }
+.post-body .iib-head { display: block; font-family: var(--font-display); font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase; font-weight: 600; color: var(--dark); margin-bottom: 4px; }
+.post-body .iib-body { display: block; font-size: 16px; line-height: 1.5; color: var(--body-text); }
 
 /* ── Figure exhibits ─────────────────────────────────────────────── */
 .post-body .post-figure { margin: 36px 0; }
@@ -1593,6 +1597,7 @@ nav {
 .post-body .post-figure figcaption { max-width: 600px; margin: 0 auto; text-align: center; font-size: 13.5px; line-height: 1.5; color: var(--grey-mid); }
 .post-body .post-figure figcaption strong { color: var(--dark); font-weight: 600; }
 .post-body .post-figure .fig-note { color: var(--blue); font-style: italic; }
+.post-body .post-figure .fig-source { display: block; margin-top: 6px; font-size: 11.5px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--grey-light); }
 
 /* ── FAQ accordion ───────────────────────────────────────────────── */
 .post-body details.faq-item { border: 1px solid var(--tint-deep); border-radius: var(--radius-sm); margin: 14px 0; background: var(--white); overflow: hidden; transition: border-color var(--transition); }
