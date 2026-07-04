@@ -17,7 +17,16 @@ Hard rules for every chapter: no em or en dashes anywhere. Close third person on
 - ch07 The org chart with no agents on it
 - ch08 Everything bought, nothing built
 
-**Part Two: The Three Skills** (ch09 to ch16): not yet drafted.
+**Part Two: The Three Skills** (complete)
+
+- ch09 The eleven-day quote
+- ch10 Who does what
+- ch11 Marcus tries to copy it
+- ch12 The invented lead time
+- ch13 If your AI can't find it
+- ch14 I don't do the technical part
+- ch15 You direct, AI writes
+- ch16 The zeal, and the warning
 
 **Part Three: The Boring Middle and the Loyalty Trap** (ch17 to ch25): not yet drafted.
 

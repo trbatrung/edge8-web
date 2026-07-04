@@ -4,7 +4,7 @@ The audit took the rest of the week. Marcus did it on foot, the way he had done 
 
 Friday morning he came to the sales desk, and the audit stopped being an audit.
 
-Ray Delgado had the Caldwell County courthouse spread across the whole desk, drawings weighted flat with two sample blocks, walnut and white oak. Day three of the quote. Forty-one benches, a judge's dais, panelling for two courtrooms, and a jury box the county wanted to look exactly like the one it was replacing, except that a man could sit down in it without the whole room hearing him do it.
+Ray Delgado had the Caldwell County courthouse spread across the whole desk, drawings weighted flat with two sample blocks, walnut and white oak. Day three of the quote. Thirty-eight benches, a judge's dais, panelling for two courtrooms, and a jury box the county wanted to look exactly like the one it was replacing, except that a man could sit down in it without the whole room hearing him do it.
 
 Marcus took the leather customer chair, which on any ordinary morning was the best seat in the building, and watched.
 
