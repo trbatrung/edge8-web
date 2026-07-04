@@ -58,6 +58,7 @@ const NAV: NavGroup[] = [
   },
   {
     label: "Settings",
+    collapsible: true,
     items: [
       { label: "Brands", href: "/admin/settings/brands", ico: "✺" },
       { label: "Legal entities", href: "/admin/settings/legal-entities", ico: "§" },
