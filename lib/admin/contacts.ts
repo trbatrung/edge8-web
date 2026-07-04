@@ -27,6 +27,9 @@ export type Person = {
   metadata: Record<string, unknown> | null;
   created_at: string;
   updated_at: string | null;
+  lifecycle_stage: string;
+  lead_status: string | null;
+  disqualified_reason: string | null;
 };
 
 export type Person360 = {
@@ -39,6 +42,9 @@ export type Person360 = {
   applications: Array<{ id: string; job_requisition_id: string | null; status: string | null; rating: number | null; applied_at: string | null; created_at: string }>;
   documents: Array<{ id: string; title: string | null; mime_type: string | null; byte_size: number | null; created_at: string }>;
   surveyResponses: Array<{ id: string; survey_id: string | null; submitted_at: string | null; created_at: string | null }>;
+  interactions: Array<{ id: string; kind: string | null; subject: string | null; body: string | null; occurred_at: string | null; created_at: string }>;
+  meetings: Array<{ id: string; title: string | null; meeting_type: string | null; started_at: string | null; source: string | null }>;
+  transitions: Array<{ id: string; from_stage: string | null; to_stage: string | null; from_status: string | null; to_status: string | null; reason: string | null; note: string | null; occurred_at: string }>;
 };
 
 async function safe<T>(p: PromiseLike<{ data: T[] | null; error: unknown }>): Promise<T[]> {
@@ -51,7 +57,7 @@ export async function getPerson360(id: string): Promise<Person360 | null> {
   if (personRes.error || !personRes.data) return null;
   const person = personRes.data as Person;
 
-  const [inquiries, deals, orders, bookings, candidateRes, documents, surveyResponses] =
+  const [inquiries, deals, orders, bookings, candidateRes, documents, surveyResponses, interactions, participantRows, transitions] =
     await Promise.all([
       safe(companyOs.from("inquiries").select("id, type, subject, status, source, created_at, deal_id").eq("person_id", id).order("created_at", { ascending: false })),
       safe(companyOs.from("deals").select("id, title, amount_cents, currency, status, stage_id, created_at").eq("person_id", id).order("created_at", { ascending: false })),
@@ -60,6 +66,9 @@ export async function getPerson360(id: string): Promise<Person360 | null> {
       companyOs.from("candidates").select("id, headline, pool_status, linkedin_url, resume_document_id").eq("person_id", id).maybeSingle(),
       safe(companyOs.from("documents").select("id, title, mime_type, byte_size, created_at").eq("entity_type", "person").eq("entity_id", id).order("created_at", { ascending: false })),
       safe(companyOs.from("survey_responses").select("id, survey_id, submitted_at, created_at").eq("person_id", id).order("created_at", { ascending: false })),
+      safe(companyOs.from("interactions").select("id, kind, subject, body, occurred_at, created_at").eq("person_id", id).order("occurred_at", { ascending: false }).limit(100)),
+      safe(companyOs.from("meeting_participants").select("meetings(id, title, meeting_type, started_at, source)").eq("person_id", id)),
+      safe(companyOs.from("lifecycle_transitions").select("id, from_stage, to_stage, from_status, to_status, reason, note, occurred_at").eq("person_id", id).order("occurred_at", { ascending: false }).limit(100)),
     ]);
 
   const candidate = candidateRes.data ?? null;
@@ -84,5 +93,10 @@ export async function getPerson360(id: string): Promise<Person360 | null> {
     applications,
     documents: documents as Person360["documents"],
     surveyResponses: surveyResponses as Person360["surveyResponses"],
+    interactions: interactions as Person360["interactions"],
+    meetings: (participantRows as Array<{ meetings: Person360["meetings"][number] | Person360["meetings"] | null }>)
+      .flatMap((r) => (Array.isArray(r.meetings) ? r.meetings : r.meetings ? [r.meetings] : []))
+      .sort((a, b) => (b.started_at ?? "").localeCompare(a.started_at ?? "")),
+    transitions: transitions as Person360["transitions"],
   };
 }

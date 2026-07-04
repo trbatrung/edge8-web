@@ -1,5 +1,6 @@
 import { companyOs } from "./supabase";
 import { getOrCreatePerson, EDGE8_BRAND_ID } from "./company-os";
+import { promotePersonToLead } from "./lifecycle";
 import { SOURCE_SITE } from "./utils";
 
 // Records a retreat lead into the company_os schema: get-or-create the person by
@@ -86,6 +87,11 @@ export async function recordRetreatSignup(
     console.error("[signups] failed to insert inquiry:", inquiryError?.message);
     return { ok: false, error: "Could not save your inquiry. Please try again." };
   }
+
+  // Inbound = speed-to-lead clock starts: promote into the SDR queue with an
+  // SLA. Never fails the signup.
+  const promoted = await promotePersonToLead(person.id, { reason: "inbound_inquiry" });
+  if (!promoted.ok) console.error("[signups] lead promotion failed:", promoted.error);
 
   return { ok: true, personId: person.id, inquiryId: inquiry.id };
 }

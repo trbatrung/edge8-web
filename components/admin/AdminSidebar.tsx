@@ -21,10 +21,11 @@ const NAV: NavGroup[] = [
     label: "Revenue",
     collapsible: true,
     items: [
-      { label: "Leads & Customers", href: "/admin/revenue/leads", ico: "◉", enabled: true },
+      { label: "Leads", href: "/admin/revenue/leads", ico: "◉", enabled: true },
       { label: "Companies", href: "/admin/revenue/companies", ico: "▣", enabled: true },
       { label: "Inquiries", href: "/admin/revenue/inquiries", ico: "☰", enabled: true },
       { label: "Deals", href: "/admin/revenue/deals", ico: "$", enabled: true },
+      { label: "Funnel", href: "/admin/revenue/funnel", ico: "▽", enabled: true },
       { label: "Products", href: "/admin/revenue/products", ico: "▦", enabled: true },
       { label: "Orders", href: "/admin/revenue/orders", ico: "⛁", enabled: true },
       { label: "Bookings", href: "/admin/revenue/bookings", ico: "⌂", enabled: true },

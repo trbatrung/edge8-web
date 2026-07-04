@@ -1,6 +1,7 @@
 import { Resend } from 'resend'
 import { companyOs } from '@/lib/supabase'
 import { getOrCreatePerson, EDGE8_BRAND_ID } from '@/lib/company-os'
+import { promotePersonToLead } from '@/lib/lifecycle'
 import { notifyOps } from '@/lib/lark'
 import { NextRequest, NextResponse } from 'next/server'
 
@@ -38,6 +39,9 @@ export async function POST(req: NextRequest) {
         metadata:    { company, team_size: teamSize || null, name, email },
       })
       if (inquiryError) console.error('company_os inquiry error:', inquiryError)
+      // Inbound = speed-to-lead clock starts: promote into the SDR queue.
+      const promoted = await promotePersonToLead(person.id, { reason: 'inbound_inquiry' })
+      if (!promoted.ok) console.error('lead promotion error:', promoted.error)
     } else {
       console.error('company_os person error:', person.error)
     }

@@ -5,6 +5,7 @@ import { PageHead } from "@/components/admin/PageHead";
 import { Badge, statusTone } from "@/components/admin/Badge";
 import { Tabs, type TabDef } from "@/components/admin/Tabs";
 import { PersonEditForm } from "./PersonEditForm";
+import { PromoteButton } from "./PromoteButton";
 import { formatCents, formatDate, humanize, timeAgo } from "@/lib/admin/format";
 
 export const dynamic = "force-dynamic";
@@ -17,11 +18,71 @@ export default async function ContactDetailPage({ params }: { params: { id: stri
   const data = await getPerson360(params.id);
   if (!data) notFound();
 
-  const { person, inquiries, deals, orders, bookings, candidate, applications, documents, surveyResponses } = data;
+  const { person, inquiries, deals, orders, bookings, candidate, applications, documents, surveyResponses, interactions, meetings, transitions } = data;
   const name = person.full_name || person.preferred_name || person.email;
   const location = [person.city, person.state_province, person.country].filter(Boolean).join(", ");
 
+  // One merged activity stream: interactions, meetings, and lifecycle
+  // transitions, newest first. This is the relationship history in one place.
+  type ActivityItem = { key: string; at: string; title: string; sub: string; badge?: string };
+  const activity: ActivityItem[] = [
+    ...interactions.map((i) => ({
+      key: `i-${i.id}`,
+      at: i.occurred_at ?? i.created_at,
+      title: i.subject || humanize(i.kind) || "Interaction",
+      sub: i.body ? (i.body.length > 140 ? `${i.body.slice(0, 140)}…` : i.body) : humanize(i.kind),
+      badge: humanize(i.kind ?? "note"),
+    })),
+    ...meetings.map((m) => ({
+      key: `m-${m.id}`,
+      at: m.started_at ?? "",
+      title: m.title || "Meeting",
+      sub: [humanize(m.meeting_type), m.source ? `via ${m.source}` : null].filter(Boolean).join(" · "),
+      badge: "Meeting",
+    })),
+    ...transitions.map((t) => ({
+      key: `t-${t.id}`,
+      at: t.occurred_at,
+      title: `Lifecycle: ${humanize(t.from_stage ?? "—")} → ${humanize(t.to_stage ?? "—")}`,
+      sub: [
+        t.from_status || t.to_status
+          ? `${humanize(t.from_status ?? "—")} → ${humanize(t.to_status ?? "—")}`
+          : null,
+        t.reason ? humanize(t.reason) : null,
+        t.note,
+      ]
+        .filter(Boolean)
+        .join(" · "),
+      badge: "Stage change",
+    })),
+  ]
+    .filter((a) => a.at)
+    .sort((a, b) => b.at.localeCompare(a.at));
+
   const tabs: TabDef[] = [
+    {
+      key: "activity",
+      label: "Activity",
+      count: activity.length,
+      content: activity.length === 0 ? (
+        <Empty text="No activity yet." />
+      ) : (
+        <div className="admin-list">
+          {activity.map((a) => (
+            <div className="admin-list-row" key={a.key}>
+              <div className="admin-list-main">
+                <div className="admin-list-title">{a.title}</div>
+                <div className="admin-list-sub">{a.sub || "—"}</div>
+              </div>
+              <div className="admin-list-aside">
+                {a.badge && <Badge>{a.badge}</Badge>}
+                <span className="admin-cell-muted">{timeAgo(a.at)}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      ),
+    },
     {
       key: "inquiries",
       label: "Inquiries",
@@ -216,10 +277,22 @@ export default async function ContactDetailPage({ params }: { params: { id: stri
         title={name}
         sub={person.email}
         action={
-          <span style={{ display: "inline-flex", gap: 6 }}>
+          <span style={{ display: "inline-flex", gap: 6, alignItems: "center", flexWrap: "wrap" }}>
             {person.do_not_contact && <Badge tone="err">Do not contact</Badge>}
             {person.is_team_member && <Badge tone="info">Team</Badge>}
+            {person.lifecycle_stage && person.lifecycle_stage !== "none" && (
+              <Badge tone={person.lifecycle_stage === "customer" ? "ok" : "info"}>
+                {humanize(person.lifecycle_stage)}
+                {person.lead_status ? ` · ${humanize(person.lead_status)}` : ""}
+              </Badge>
+            )}
             {person.persona && <Badge>{humanize(person.persona)}</Badge>}
+            {!person.do_not_contact &&
+              !person.is_team_member &&
+              (["none", "subscriber"].includes(person.lifecycle_stage ?? "none") ||
+                ["unqualified", "nurture"].includes(person.lead_status ?? "")) && (
+                <PromoteButton personId={person.id} />
+              )}
           </span>
         }
       />

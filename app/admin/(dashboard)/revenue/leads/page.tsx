@@ -1,105 +1,157 @@
-import Link from "next/link";
-import { listEntity } from "@/lib/admin/query";
-import { getActiveBrandId } from "@/lib/admin/brand";
+import { companyOs } from "@/lib/supabase";
 import { PageHead } from "@/components/admin/PageHead";
-import { DataTable, type Column } from "@/components/admin/DataTable";
-import { Badge } from "@/components/admin/Badge";
-import { formatDate } from "@/lib/admin/format";
-import { firstParam, type SearchParamsObj } from "@/lib/admin/url";
+import { MetricCard } from "@/components/admin/MetricCard";
+import { ACTIVE_LEAD_STAGES } from "@/lib/lifecycle";
+import { LeadQueue, type QueueRow } from "./LeadQueue";
 
 export const dynamic = "force-dynamic";
 
-// The Revenue office's people lens: the shared people spine filtered to the
-// revenue personas (prospect = lead, client = customer). Rows link to the one
-// canonical Contact 360 at /admin/contacts/[id], shared across every office.
-const REVENUE_PERSONAS = ["prospect", "client"];
+// The SDR workstation. A queue, not a list: system-ordered (SLA first, then
+// oldest promotion), worked top to bottom. Nurture/unqualified people leave
+// the queue but stay on /admin/contacts; customers never appear here.
 
-type Person = {
+const WEEKLY_MEETINGS_GOAL = 8;
+const ACTIVE_STATUS_FILTER =
+  "lead_status.is.null,lead_status.in.(new,attempting,connected,meeting_booked)";
+
+type Embedded<T> = T | T[] | null;
+const one = <T,>(e: Embedded<T>): T | null => (Array.isArray(e) ? e[0] ?? null : e);
+
+type PersonRow = {
   id: string;
   full_name: string | null;
   email: string;
   phone: string | null;
-  persona: string | null;
   source: string | null;
+  lifecycle_stage: string;
+  lead_status: string | null;
+  lead_sla_due_at: string | null;
+  lead_attempt_count: number;
   created_at: string;
+  person_companies: { companies: Embedded<{ name: string | null }> }[] | null;
+  person_qualifications: Embedded<{
+    goal: string | null;
+    plan: string | null;
+    challenge: string | null;
+    timeline: string | null;
+    budget: string | null;
+    authority: string | null;
+  }>;
+  inquiries: { subject: string | null; message: string | null; created_at: string }[] | null;
 };
 
-const PAGE_SIZE = 25;
-const SORTABLE = new Set(["full_name", "email", "created_at"]);
+function startOfWeekIso(): string {
+  const d = new Date();
+  const day = (d.getDay() + 6) % 7;
+  d.setHours(0, 0, 0, 0);
+  d.setDate(d.getDate() - day);
+  return d.toISOString();
+}
 
-export default async function LeadsPage({ searchParams }: { searchParams: SearchParamsObj }) {
-  const brandId = getActiveBrandId();
-  const page = Math.max(1, Number(firstParam(searchParams.page) ?? "1") || 1);
-  const q = firstParam(searchParams.q) ?? "";
-  const sortParam = firstParam(searchParams.sort);
-  const sort = sortParam && SORTABLE.has(sortParam) ? sortParam : "created_at";
-  const dir = firstParam(searchParams.dir) === "asc" ? "asc" : "desc";
+function startOfDayIso(): string {
+  const d = new Date();
+  d.setHours(0, 0, 0, 0);
+  return d.toISOString();
+}
 
-  const filters: Record<string, string | (string | number)[]> = { persona: REVENUE_PERSONAS };
-  if (brandId) filters.source_brand_id = brandId;
+export default async function LeadsPage() {
+  const nowIso = new Date().toISOString();
 
-  const { rows, total, pageSize, error } = await listEntity<Person>(
-    "people",
-    "id, full_name, email, phone, persona, source, created_at",
-    {
-      page,
-      pageSize: PAGE_SIZE,
-      search: q,
-      searchColumns: ["full_name", "email", "phone"],
-      sort,
-      dir,
-      filters,
-    },
-  );
+  const [queueRes, meetingsRes, connectsRes, overdueRes] = await Promise.all([
+    companyOs
+      .from("people")
+      .select(
+        "id, full_name, email, phone, source, lifecycle_stage, lead_status, lead_sla_due_at, lead_attempt_count, created_at, person_companies(companies(name)), person_qualifications!person_id(goal, plan, challenge, timeline, budget, authority), inquiries(subject, message, created_at)",
+      )
+      .in("lifecycle_stage", ACTIVE_LEAD_STAGES)
+      .or(ACTIVE_STATUS_FILTER)
+      .order("lead_sla_due_at", { ascending: true, nullsFirst: false })
+      .order("created_at", { ascending: true })
+      .limit(200),
+    companyOs
+      .from("lifecycle_transitions")
+      .select("id", { count: "exact", head: true })
+      .eq("reason", "meeting_booked")
+      .gte("occurred_at", startOfWeekIso()),
+    companyOs
+      .from("lifecycle_transitions")
+      .select("id", { count: "exact", head: true })
+      .eq("to_status", "connected")
+      .gte("occurred_at", startOfDayIso()),
+    companyOs
+      .from("people")
+      .select("id", { count: "exact", head: true })
+      .in("lifecycle_stage", ACTIVE_LEAD_STAGES)
+      .or(ACTIVE_STATUS_FILTER)
+      .not("lead_sla_due_at", "is", null)
+      .lt("lead_sla_due_at", nowIso),
+  ]);
 
-  const columns: Column<Person>[] = [
-    {
-      key: "full_name",
-      header: "Name",
-      sortable: true,
-      cell: (r) => (
-        <Link href={`/admin/contacts/${r.id}`} className="admin-cell-strong">
-          {r.full_name || "(no name)"}
-        </Link>
-      ),
-    },
-    { key: "email", header: "Email", sortable: true, cell: (r) => <span className="admin-cell-muted">{r.email}</span> },
-    {
-      key: "persona",
-      header: "Type",
-      cell: (r) =>
-        r.persona === "client" ? <Badge tone="ok">Customer</Badge> : <Badge tone="info">Lead</Badge>,
-    },
-    { key: "phone", header: "Phone", cell: (r) => r.phone || <span className="admin-cell-muted">—</span> },
-    { key: "source", header: "Source", cell: (r) => <span className="admin-cell-muted">{r.source || "—"}</span> },
-    { key: "created_at", header: "Added", sortable: true, cell: (r) => formatDate(r.created_at) },
-  ];
+  const rows: QueueRow[] = ((queueRes.data as PersonRow[] | null) ?? []).map((p) => {
+    const qual = one(p.person_qualifications);
+    const latestInquiry = (p.inquiries ?? [])
+      .slice()
+      .sort((a, b) => b.created_at.localeCompare(a.created_at))[0];
+    return {
+      id: p.id,
+      name: p.full_name || p.email,
+      email: p.email,
+      phone: p.phone,
+      company: one(p.person_companies?.[0]?.companies ?? null)?.name ?? null,
+      source: p.source,
+      stage: p.lifecycle_stage,
+      status: p.lead_status ?? "new",
+      slaDueAt: p.lead_sla_due_at,
+      attemptCount: p.lead_attempt_count ?? 0,
+      inquiry: latestInquiry
+        ? {
+            subject: latestInquiry.subject,
+            message: latestInquiry.message,
+            createdAt: latestInquiry.created_at,
+          }
+        : null,
+      qual: {
+        goal: qual?.goal ?? "",
+        plan: qual?.plan ?? "",
+        challenge: qual?.challenge ?? "",
+        timeline: qual?.timeline ?? "",
+        budget: qual?.budget ?? "",
+        authority: qual?.authority ?? "",
+      },
+    };
+  });
+
+  const meetingsBooked = meetingsRes.count ?? 0;
+  const connectsToday = connectsRes.count ?? 0;
+  const slaOverdue = overdueRes.count ?? 0;
 
   return (
     <>
       <PageHead
         eyebrow="Revenue"
-        title="Leads & Customers"
-        sub={`${total.toLocaleString()} ${total === 1 ? "person" : "people"} · prospects and clients`}
+        title="Leads"
+        sub={`${rows.length} in the queue · worked top to bottom, SLA first`}
       />
-      {error && (
+      {queueRes.error && (
         <div className="admin-alert admin-alert--err" style={{ marginBottom: 14 }}>
-          {error}
+          {queueRes.error.message}
         </div>
       )}
-      <DataTable
-        columns={columns}
-        rows={rows}
-        total={total}
-        page={page}
-        pageSize={pageSize}
-        sort={sort}
-        dir={dir}
-        basePath="/admin/revenue/leads"
-        searchParams={searchParams}
-        searchPlaceholder="Search name, email, or phone…"
-        emptyText="No leads or customers match."
-      />
+      <div className="mp-kpi-grid" style={{ marginBottom: 16 }}>
+        <MetricCard
+          label="Meetings booked this week"
+          value={`${meetingsBooked} / ${WEEKLY_MEETINGS_GOAL}`}
+          sub="handed off to the closer"
+        />
+        <MetricCard label="Connects today" value={connectsToday} />
+        <MetricCard label="Queue remaining" value={rows.length} />
+        <MetricCard
+          label="SLA overdue"
+          value={slaOverdue}
+          sub={slaOverdue > 0 ? "respond now" : "all inside SLA"}
+        />
+      </div>
+      <LeadQueue rows={rows} />
     </>
   );
 }
