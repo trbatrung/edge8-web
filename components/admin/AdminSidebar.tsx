@@ -9,7 +9,7 @@ import { signOut } from "@/app/admin/(dashboard)/actions";
 // are not navigable — flip them to `true` (and build the route) as each phase
 // ships, so the shell always looks complete without dead 404 links.
 type NavItem = { label: string; href: string; ico: string; enabled?: boolean };
-type NavGroup = { label: string | null; items: NavItem[] };
+type NavGroup = { label: string | null; items: NavItem[]; collapsible?: boolean };
 
 // Organized by the Four Offices of the Future (Revenue, Talent, Operations,
 // Innovation) + a Dashboard home and a Settings/config area. Each office leads
@@ -19,6 +19,7 @@ const NAV: NavGroup[] = [
   { label: null, items: [{ label: "Dashboard", href: "/admin", ico: "◈", enabled: true }] },
   {
     label: "Revenue",
+    collapsible: true,
     items: [
       { label: "Leads & Customers", href: "/admin/revenue/leads", ico: "◉", enabled: true },
       { label: "Companies", href: "/admin/revenue/companies", ico: "▣", enabled: true },
@@ -33,6 +34,7 @@ const NAV: NavGroup[] = [
   },
   {
     label: "Talent",
+    collapsible: true,
     items: [
       { label: "Candidates", href: "/admin/talent/candidates", ico: "☺", enabled: true },
       { label: "Applications", href: "/admin/talent/applications", ico: "⇉", enabled: true },
@@ -42,6 +44,7 @@ const NAV: NavGroup[] = [
   },
   {
     label: "Operations",
+    collapsible: true,
     items: [
       { label: "Vendors", href: "/admin/operations/vendors", ico: "▥" },
       { label: "Documents", href: "/admin/operations/documents", ico: "⎙" },
@@ -50,6 +53,7 @@ const NAV: NavGroup[] = [
   },
   {
     label: "Innovation",
+    collapsible: true,
     items: [{ label: "Idea backlog", href: "/admin/innovation/ideas", ico: "✦" }],
   },
   {
@@ -82,6 +86,11 @@ export function AdminSidebar({
   const router = useRouter();
   const [navOpen, setNavOpen] = useState(false);
   const [brandMenuOpen, setBrandMenuOpen] = useState(false);
+  const [collapsed, setCollapsed] = useState<Record<string, boolean>>({});
+
+  function toggleGroup(label: string) {
+    setCollapsed((c) => ({ ...c, [label]: !c[label] }));
+  }
 
   const activeBrand = brands.find((b) => b.id === activeBrandId) ?? null;
 
@@ -143,10 +152,30 @@ export function AdminSidebar({
         )}
 
         <div className="admin-nav" onClick={() => setNavOpen(false)}>
-          {NAV.map((group, gi) => (
-            <div className="admin-nav-group" key={group.label ?? `g${gi}`}>
-              {group.label && <div className="admin-nav-grouplabel">{group.label}</div>}
-              {group.items.map((item) =>
+          {NAV.map((group, gi) => {
+            const label = group.label;
+            const isCollapsed = Boolean(label && group.collapsible && collapsed[label]);
+            return (
+            <div className="admin-nav-group" key={label ?? `g${gi}`}>
+              {label && group.collapsible ? (
+                <button
+                  className="admin-nav-grouplabel admin-nav-grouptoggle"
+                  aria-expanded={!isCollapsed}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    toggleGroup(label);
+                  }}
+                >
+                  {label}
+                  <span className={`admin-nav-caret${isCollapsed ? " is-collapsed" : ""}`} aria-hidden>
+                    ▾
+                  </span>
+                </button>
+              ) : (
+                label && <div className="admin-nav-grouplabel">{label}</div>
+              )}
+              {!isCollapsed &&
+              group.items.map((item) =>
                 item.enabled ? (
                   <Link
                     key={item.href}
@@ -175,7 +204,8 @@ export function AdminSidebar({
                 ),
               )}
             </div>
-          ))}
+            );
+          })}
         </div>
 
         <div className="admin-foot">
