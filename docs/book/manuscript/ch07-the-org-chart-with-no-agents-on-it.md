@@ -2,7 +2,7 @@
 
 Marcus made the forty-minute drive with three defenses ready.
 
-He had built them the way he built everything that mattered, out loud, alone in the truck at red lights. One: her shop was not his shop. Steel was not walnut, and whatever worked in one would break in the other. Two: she had hired someone. Whatever she had said at the peer group, somewhere in that building sat a quiet, expensive person doing the job Trevor had been hired to do, and today he would find them. Three: at the bottom of all of it there would be a product with a name on it, and a thing with a name could be bought. He still had a budget line. For one more quarter, he still had a budget line.
+He had built them the way he built everything that mattered, out loud, alone in the truck at red lights. One: her shop was not his shop. Steel was not walnut, and whatever worked in one would break in the other. Two: she had hired someone. Whatever she had said on the phone, somewhere in that building sat a quiet, expensive person doing the job Trevor had been hired to do, and today he would find them. Three: at the bottom of all of it there would be a product with a name on it, and a thing with a name could be bought. He still had a budget line. For one more quarter, he still had a budget line.
 
 By ten in the morning the first two were gone.
 

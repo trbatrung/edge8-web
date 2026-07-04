@@ -52,7 +52,7 @@ Sam stood, decided that was wrong, and sat back down closer to the table. His fi
 
 Ellery looked at Marcus. "Your head of sales was the eleven days."
 
-"Ray left in May," Marcus said. "I owed him that conversation a year before I had it. The desk runs on a junior, the agents, and thirty years of Ray's judgment on paper. The two days cost us Ray. You won't find that on the slide, and I am not asking this room to call it a win."
+"Ray left at the end of June," Marcus said. "I owed him that conversation a year before I had it. The desk runs on a junior, the agents, and thirty years of Ray's judgment on paper. The two days cost us Ray. You won't find that on the slide, and I am not asking this room to call it a win."
 
 Ellery held his eyes a moment and let it stand. "And Nash?"
 
