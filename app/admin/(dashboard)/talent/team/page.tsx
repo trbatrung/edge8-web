@@ -5,6 +5,7 @@ import { DataTable, type Column } from "@/components/admin/DataTable";
 import { Badge, statusTone } from "@/components/admin/Badge";
 import { formatDate, humanize } from "@/lib/admin/format";
 import { firstParam, type SearchParamsObj } from "@/lib/admin/url";
+import { InvitePortalButton } from "@/components/admin/InvitePortalButton";
 
 export const dynamic = "force-dynamic";
 
@@ -14,7 +15,7 @@ export const metadata = {
 };
 
 // Talent office: internal team (persona=employee). Name opens the Contact 360.
-type P = { full_name: string | null; email: string };
+type P = { full_name: string | null; email: string; auth_user_id: string | null };
 type TeamMember = {
   id: string;
   employee_number: string | null;
@@ -40,7 +41,7 @@ export default async function TeamPage({ searchParams }: { searchParams: SearchP
 
   const { rows, total, pageSize, error } = await listEntity<TeamMember>(
     "team_members",
-    "id, employee_number, employment_type, work_location, status, start_date, created_at, person_id, people!person_id(full_name, email)",
+    "id, employee_number, employment_type, work_location, status, start_date, created_at, person_id, people!person_id(full_name, email, auth_user_id)",
     { page, pageSize: PAGE_SIZE, search: q, searchColumns: ["employee_number"], sort, dir },
   );
 
@@ -62,6 +63,16 @@ export default async function TeamPage({ searchParams }: { searchParams: SearchP
     { key: "work_location", header: "Location", cell: (r) => r.work_location || <span className="admin-cell-muted">—</span> },
     { key: "status", header: "Status", cell: (r) => (r.status ? <Badge tone={statusTone(r.status)}>{humanize(r.status)}</Badge> : <span className="admin-cell-muted">—</span>) },
     { key: "start_date", header: "Started", sortable: true, cell: (r) => (r.start_date ? formatDate(r.start_date) : <span className="admin-cell-muted">—</span>) },
+    {
+      key: "portal",
+      header: "Portal",
+      cell: (r) =>
+        r.person_id ? (
+          <InvitePortalButton teamMemberId={r.id} provisioned={!!one(r.people)?.auth_user_id} />
+        ) : (
+          <span className="admin-cell-muted">—</span>
+        ),
+    },
   ];
 
   return (
