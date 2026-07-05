@@ -64,7 +64,7 @@ export async function getTeamActor(): Promise<GetActorResult> {
   // Admins live in /admin. They keep full service-role access there and get no
   // /team identity, so a plain employee can never reach the CRM and an admin is
   // never accidentally scoped as an employee.
-  if (isAdminEmail(email)) return { actor: null, redirectTo: "/admin" };
+  if (await isAdminEmail(email)) return { actor: null, redirectTo: "/admin" };
 
   // Identity by auth_user_id, never by email.
   const { data: person } = await companyOs

@@ -103,6 +103,12 @@ const NAV: NavGroup[] = [
     collapsible: true,
     items: [
       {
+        subheading: "Access",
+        items: [
+          { label: "Admins", href: "/admin/settings/admins", ico: "⚿", enabled: true },
+        ],
+      },
+      {
         subheading: "Configuration",
         items: [
           { label: "Brands", href: "/admin/settings/brands", ico: "✺" },
