@@ -669,3 +669,23 @@ a.mp-kpi:hover { border-color: var(--admin-accent); transform: translateY(-1px);
   }
   .admin-main { padding: 28px 16px 64px; }
 }
+
+/* ─── Time Off ────────────────────────────────────── */
+.admin-timeoff .admin-card { padding: 18px 20px; }
+.admin-card-title { font-size: 15px; font-weight: 600; color: var(--admin-ink); margin: 0 0 14px; }
+.admin-timeoff-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 14px;
+}
+.admin-timeoff-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13.5px;
+  color: var(--admin-ink);
+  cursor: pointer;
+}
+.admin-timeoff-preview { align-self: center; font-size: 13px; color: var(--admin-muted); }
+.admin-timeoff-actions { display: flex; gap: 6px; justify-content: flex-end; }
+.admin-btn--sm { padding: 5px 10px; font-size: 12.5px; }

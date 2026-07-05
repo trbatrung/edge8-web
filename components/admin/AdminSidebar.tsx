@@ -47,6 +47,7 @@ const NAV: NavGroup[] = [
     label: "Operations",
     collapsible: true,
     items: [
+      { label: "Time Off", href: "/admin/operations/time-off", ico: "☼", enabled: true },
       { label: "Vendors", href: "/admin/operations/vendors", ico: "▥" },
       { label: "Documents", href: "/admin/operations/documents", ico: "⎙" },
       { label: "Surveys", href: "/admin/operations/surveys", ico: "✎" },
