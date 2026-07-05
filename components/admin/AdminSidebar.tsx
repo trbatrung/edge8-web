@@ -9,30 +9,34 @@ import { signOut } from "@/app/admin/(dashboard)/actions";
 // are not navigable — flip them to `true` (and build the route) as each phase
 // ships, so the shell always looks complete without dead 404 links.
 type NavItem = { label: string; href: string; ico: string; enabled?: boolean };
-type NavGroup = { label: string | null; items: NavItem[]; collapsible?: boolean };
+type NavSubsection = { subheading: string; items: NavItem[] };
+type NavEntry = NavItem | NavSubsection;
+type NavGroup = { label: string | null; items: NavEntry[]; collapsible?: boolean };
 
-// A CRM group (the contact spine + the revenue-office lenses) sits ahead of the
-// Four Offices of the Future (Revenue, Talent, Operations, Innovation), plus a
-// Dashboard home and a Settings/config area. Rows open the one shared Contact
-// 360. See docs/product/four-offices-of-the-future.md.
+const isSubsection = (e: NavEntry): e is NavSubsection => "subheading" in e;
+
+// Organized by the Four Offices of the Future (Revenue, Talent, Operations,
+// Innovation) + a Dashboard home and a Settings/config area. The Revenue office
+// leads with a nested CRM subsection (contact spine + pipeline lenses) above its
+// commerce items. Rows open the one shared Contact 360.
+// See docs/product/four-offices-of-the-future.md.
 const NAV: NavGroup[] = [
   { label: null, items: [{ label: "Dashboard", href: "/admin", ico: "◈", enabled: true }] },
-  {
-    label: "CRM",
-    collapsible: true,
-    items: [
-      { label: "Contacts", href: "/admin/contacts", ico: "⚇", enabled: true },
-      { label: "Leads", href: "/admin/revenue/leads", ico: "◉", enabled: true },
-      { label: "Companies", href: "/admin/revenue/companies", ico: "▣", enabled: true },
-      { label: "Inquiries", href: "/admin/revenue/inquiries", ico: "☰", enabled: true },
-      { label: "Deals", href: "/admin/revenue/deals", ico: "$", enabled: true },
-      { label: "Funnel", href: "/admin/revenue/funnel", ico: "▽", enabled: true },
-    ],
-  },
   {
     label: "Revenue",
     collapsible: true,
     items: [
+      {
+        subheading: "CRM",
+        items: [
+          { label: "Contacts", href: "/admin/contacts", ico: "⚇", enabled: true },
+          { label: "Leads", href: "/admin/revenue/leads", ico: "◉", enabled: true },
+          { label: "Companies", href: "/admin/revenue/companies", ico: "▣", enabled: true },
+          { label: "Inquiries", href: "/admin/revenue/inquiries", ico: "☰", enabled: true },
+          { label: "Deals", href: "/admin/revenue/deals", ico: "$", enabled: true },
+          { label: "Funnel", href: "/admin/revenue/funnel", ico: "▽", enabled: true },
+        ],
+      },
       { label: "Products", href: "/admin/revenue/products", ico: "▦", enabled: true },
       { label: "Orders", href: "/admin/revenue/orders", ico: "⛁", enabled: true },
       { label: "Bookings", href: "/admin/revenue/bookings", ico: "⌂", enabled: true },
@@ -111,6 +115,35 @@ export function AdminSidebar({
     router.refresh();
   }
 
+  function renderItem(item: NavItem, isSub: boolean) {
+    const cls = `admin-nav-link${isActive(pathname, item.href) ? " is-active" : ""}${isSub ? " is-sub" : ""}`;
+    if (item.enabled) {
+      return (
+        <Link key={item.href} href={item.href} className={cls}>
+          <span className="admin-nav-ico" aria-hidden>
+            {item.ico}
+          </span>
+          {item.label}
+        </Link>
+      );
+    }
+    return (
+      <span
+        key={item.href}
+        className={cls}
+        aria-disabled
+        style={{ opacity: 0.4, cursor: "not-allowed" }}
+        title="Coming in a later phase"
+      >
+        <span className="admin-nav-ico" aria-hidden>
+          {item.ico}
+        </span>
+        {item.label}
+        <span className="admin-nav-badge">soon</span>
+      </span>
+    );
+  }
+
   return (
     <>
       <div className="admin-mobilebar">
@@ -185,32 +218,14 @@ export function AdminSidebar({
                 label && <div className="admin-nav-grouplabel">{label}</div>
               )}
               {!isCollapsed &&
-              group.items.map((item) =>
-                item.enabled ? (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className={`admin-nav-link${isActive(pathname, item.href) ? " is-active" : ""}`}
-                  >
-                    <span className="admin-nav-ico" aria-hidden>
-                      {item.ico}
-                    </span>
-                    {item.label}
-                  </Link>
+              group.items.map((entry) =>
+                isSubsection(entry) ? (
+                  <div key={`sub-${entry.subheading}`}>
+                    <div className="admin-nav-subhead">{entry.subheading}</div>
+                    {entry.items.map((item) => renderItem(item, true))}
+                  </div>
                 ) : (
-                  <span
-                    key={item.href}
-                    className="admin-nav-link"
-                    aria-disabled
-                    style={{ opacity: 0.4, cursor: "not-allowed" }}
-                    title="Coming in a later phase"
-                  >
-                    <span className="admin-nav-ico" aria-hidden>
-                      {item.ico}
-                    </span>
-                    {item.label}
-                    <span className="admin-nav-badge">soon</span>
-                  </span>
+                  renderItem(entry, false)
                 ),
               )}
             </div>
