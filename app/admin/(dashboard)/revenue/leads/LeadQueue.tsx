@@ -88,7 +88,11 @@ export function LeadQueue({ rows }: { rows: QueueRow[] }) {
   }
 
   if (rows.length === 0) {
-    return <div className="admin-empty">Queue is clear. Promote people from Contacts, or wait for inbound.</div>;
+    return (
+      <div className="admin-empty">
+        Queue is clear. Promote people from Contacts, or wait for inbound.
+      </div>
+    );
   }
 
   return (
@@ -98,46 +102,36 @@ export function LeadQueue({ rows }: { rows: QueueRow[] }) {
           {banner}
         </div>
       )}
-      <div className="admin-list">
+      <div className="lead-queue">
         {rows.map((r) => {
           const open = openId === r.id;
           return (
-            <div key={r.id} className="admin-card" style={{ marginBottom: 10 }}>
+            <div key={r.id} className={`lead-card${open ? " is-open" : ""}`}>
               <button
                 type="button"
+                className="lead-head"
+                aria-expanded={open}
                 onClick={() => setOpenId(open ? null : r.id)}
-                style={{
-                  display: "flex",
-                  width: "100%",
-                  alignItems: "center",
-                  gap: "8px 12px",
-                  flexWrap: "wrap",
-                  background: "none",
-                  border: "none",
-                  padding: 0,
-                  cursor: "pointer",
-                  textAlign: "left",
-                }}
               >
-                <div style={{ flex: "1 1 auto", minWidth: 160 }}>
-                  <div className="admin-list-title">
+                <div className="lead-head-main">
+                  <div className="lead-name">
                     {r.name}
                     {r.company ? <span className="admin-cell-muted"> · {r.company}</span> : null}
                   </div>
-                  <div className="admin-list-sub">
-                    {r.inquiry?.subject || r.inquiry?.message || r.source || r.email}
+                  <div className="lead-sub">
+                    {r.inquiry?.subject || r.inquiry?.message || r.email}
                   </div>
                 </div>
-                {slaBadge(r.slaDueAt)}
-                {statusBadge(r.status)}
-                <span className="admin-cell-muted" style={{ whiteSpace: "nowrap", fontSize: 12 }}>
-                  {r.attemptCount > 0 ? `attempt ${r.attemptCount}` : "no attempts"}
-                </span>
+                <div className="lead-head-meta">
+                  {slaBadge(r.slaDueAt)}
+                  {statusBadge(r.status)}
+                  <span className="lead-attempt">
+                    {r.attemptCount > 0 ? `attempt ${r.attemptCount}` : "no attempts"}
+                  </span>
+                </div>
               </button>
 
-              {open && (
-                <LeadDetail row={r} pending={pending} run={run} />
-              )}
+              {open && <LeadDetail row={r} pending={pending} run={run} />}
             </div>
           );
         })}
@@ -164,52 +158,37 @@ function LeadDetail({
   const capturedCount = GPCT_FIELDS.filter(([k]) => qual[k].trim()).length;
 
   return (
-    <div style={{ borderTop: "1px solid var(--admin-line)", marginTop: 12, paddingTop: 12 }}>
-      <div style={{ display: "flex", gap: 16, flexWrap: "wrap", marginBottom: 12 }}>
-        <span className="admin-cell-muted">
-          <Link href={`/admin/contacts/${row.id}`} className="admin-cell-strong">
-            Open contact
-          </Link>
-        </span>
-        <span className="admin-cell-muted">{row.email}</span>
+    <div className="lead-detail">
+      <div className="lead-meta-row">
+        <Link href={`/admin/contacts/${row.id}`} className="admin-cell-strong">
+          Open contact
+        </Link>
+        <a className="admin-cell-muted" href={`mailto:${row.email}`}>
+          {row.email}
+        </a>
         {row.phone && <span className="admin-cell-muted">{row.phone}</span>}
         {row.inquiry && (
-          <span className="admin-cell-muted">
-            Inbound {formatDate(row.inquiry.createdAt)}
-          </span>
+          <span className="admin-cell-muted">Inbound {formatDate(row.inquiry.createdAt)}</span>
         )}
       </div>
 
-      {row.inquiry?.message && (
-        <p className="admin-list-sub" style={{ marginBottom: 12, whiteSpace: "pre-wrap" }}>
-          {row.inquiry.message}
-        </p>
-      )}
+      {row.inquiry?.message && <p className="lead-inquiry">{row.inquiry.message}</p>}
 
-      <div className="admin-label" style={{ marginBottom: 6 }}>
-        Qualification (GPCT) · {capturedCount}/6 captured
-      </div>
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
-          gap: 8,
-          marginBottom: 8,
-        }}
-      >
+      <div className="lead-section-label">Qualification (GPCT) · {capturedCount}/6 captured</div>
+      <div className="lead-gpct">
         {GPCT_FIELDS.map(([key, label]) => (
-          <label key={key} className="admin-field" style={{ margin: 0 }}>
+          <label key={key} className="lead-field">
             <span className="admin-label">{label}</span>
             <input
               className="admin-input"
               value={qual[key]}
-              placeholder={`Not captured`}
+              placeholder="Not captured"
               onChange={(e) => setQual((q) => ({ ...q, [key]: e.target.value }))}
             />
           </label>
         ))}
       </div>
-      <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginBottom: 16 }}>
+      <div className="lead-actions" style={{ marginBottom: 20 }}>
         <button
           type="button"
           className="admin-btn"
@@ -224,13 +203,10 @@ function LeadDetail({
         </button>
       </div>
 
-      <div className="admin-label" style={{ marginBottom: 6 }}>
-        Work it
-      </div>
-      <div style={{ display: "flex", gap: 8, flexWrap: "wrap", alignItems: "center", marginBottom: 12 }}>
+      <div className="lead-section-label">Work it</div>
+      <div className="lead-actions" style={{ marginBottom: 10 }}>
         <input
-          className="admin-input"
-          style={{ maxWidth: 320 }}
+          className="admin-input lead-note"
           placeholder="Call note (optional)"
           value={callNote}
           onChange={(e) => setCallNote(e.target.value)}
@@ -264,10 +240,9 @@ function LeadDetail({
         </button>
       </div>
 
-      <div style={{ display: "flex", gap: 8, flexWrap: "wrap", alignItems: "center" }}>
+      <div className="lead-actions">
         <select
-          className="admin-input"
-          style={{ maxWidth: 200 }}
+          className="admin-input lead-select"
           value={reason}
           onChange={(e) => setReason(e.target.value)}
         >
@@ -279,8 +254,7 @@ function LeadDetail({
           ))}
         </select>
         <input
-          className="admin-input"
-          style={{ maxWidth: 240 }}
+          className="admin-input lead-note"
           placeholder="Note (optional)"
           value={dqNote}
           onChange={(e) => setDqNote(e.target.value)}
