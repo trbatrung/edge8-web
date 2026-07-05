@@ -122,7 +122,7 @@ export default async function DealsPage() {
       <PageHead
         eyebrow="Revenue"
         title="Deals"
-        sub={`${openCards.length} open · ${pendingHandoffs} awaiting handoff decision · drag to change stage`}
+        sub={`${openCards.length} open · ${pendingHandoffs} awaiting handoff decision · board or list view`}
       />
       {error && (
         <div className="admin-alert admin-alert--err" style={{ marginBottom: 14 }}>

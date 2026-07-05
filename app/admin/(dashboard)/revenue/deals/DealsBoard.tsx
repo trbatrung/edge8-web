@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { KanbanBoard, type KanbanColumn } from "@/components/admin/KanbanBoard";
@@ -84,6 +84,22 @@ export function DealsBoard({
   const router = useRouter();
   const [cards, setCards] = useState<DealCard[]>(initialCards);
   const [selectedId, setSelectedId] = useState<string | null>(null);
+  // Board (kanban) is the default; the last-picked view is remembered in
+  // localStorage. Init to "board" on both server and first client render to
+  // avoid a hydration mismatch, then hydrate the saved choice in an effect.
+  const [view, setView] = useState<"board" | "list">("board");
+  useEffect(() => {
+    const saved = localStorage.getItem("deals-view");
+    if (saved === "board" || saved === "list") setView(saved);
+  }, []);
+  function changeView(next: "board" | "list") {
+    setView(next);
+    try {
+      localStorage.setItem("deals-view", next);
+    } catch {
+      // private mode / storage disabled — the toggle still works this session.
+    }
+  }
   const [banner, setBanner] = useState<string | null>(null);
   const [pendingLost, setPendingLost] = useState<{ cardId: string; toColumnId: string } | null>(
     null,
@@ -155,6 +171,27 @@ export function DealsBoard({
 
   return (
     <>
+      <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: 12 }}>
+        <div className="admin-viewtoggle" role="group" aria-label="Deal view">
+          <button
+            type="button"
+            className={view === "board" ? "is-active" : ""}
+            aria-pressed={view === "board"}
+            onClick={() => changeView("board")}
+          >
+            Board
+          </button>
+          <button
+            type="button"
+            className={view === "list" ? "is-active" : ""}
+            aria-pressed={view === "list"}
+            onClick={() => changeView("list")}
+          >
+            List
+          </button>
+        </div>
+      </div>
+
       {banner && (
         <div className="admin-alert admin-alert--err" style={{ marginBottom: 12 }}>
           {banner}
@@ -189,7 +226,8 @@ export function DealsBoard({
         </div>
       )}
 
-      <KanbanBoard<DealCard>
+      {view === "board" ? (
+        <KanbanBoard<DealCard>
         columns={columns}
         cards={cards}
         onMove={move}
@@ -263,6 +301,9 @@ export function DealsBoard({
           );
         }}
       />
+      ) : (
+        <DealsList cards={cards} columns={columns} onRowClick={(c) => setSelectedId(c.id)} />
+      )}
 
       <DetailDrawer
         open={!!selected}
@@ -276,6 +317,7 @@ export function DealsBoard({
             stages={columns.filter((c) => c.id !== HANDOFF_COLUMN_ID)}
             lostSet={lostSet}
             onChangeStage={applyMove}
+            onDecideHandoff={decide}
             onSaved={() => router.refresh()}
           />
         )}
@@ -289,12 +331,14 @@ function DealDetail({
   stages,
   lostSet,
   onChangeStage,
+  onDecideHandoff,
   onSaved,
 }: {
   card: DealCard;
   stages: KanbanColumn[];
   lostSet: Set<string>;
   onChangeStage: (cardId: string, toStageId: string, lostReason?: string) => void;
+  onDecideHandoff: (cardId: string, decision: "accepted" | "rejected", rejectReason?: string) => void;
   onSaved: () => void;
 }) {
   const [nextStep, setNextStep] = useState(card.nextStep ?? "");
@@ -304,10 +348,71 @@ function DealDetail({
   // flow but inline in the drawer so it stays visible above the board backdrop.
   const [pendingLostStage, setPendingLostStage] = useState<string | null>(null);
   const [lostReason, setLostReason] = useState("");
+  // Handoff decision, so list view (no on-card buttons) can accept/reject too.
+  const [rejectingHandoff, setRejectingHandoff] = useState(false);
+  const [handoffReason, setHandoffReason] = useState("");
   const pendingHandoff = card.handoffStatus === "pending";
 
   return (
     <>
+      {pendingHandoff && (
+        <div style={{ marginBottom: 16 }}>
+          <div className="admin-label" style={{ marginBottom: 6 }}>
+            SDR handoff
+          </div>
+          {rejectingHandoff ? (
+            <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+              <select
+                className="admin-input"
+                aria-label="Reject reason"
+                value={handoffReason}
+                onChange={(e) => setHandoffReason(e.target.value)}
+              >
+                <option value="">Why reject this handoff?</option>
+                {REJECT_REASONS.map(([v, l]) => (
+                  <option key={v} value={v}>
+                    {l}
+                  </option>
+                ))}
+              </select>
+              <div style={{ display: "flex", gap: 8 }}>
+                <button
+                  type="button"
+                  className="admin-btn admin-btn--danger"
+                  disabled={!handoffReason}
+                  onClick={() => onDecideHandoff(card.id, "rejected", handoffReason)}
+                >
+                  Confirm reject
+                </button>
+                <button type="button" className="admin-btn" onClick={() => setRejectingHandoff(false)}>
+                  Cancel
+                </button>
+              </div>
+            </div>
+          ) : (
+            <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+              <button
+                type="button"
+                className="admin-btn admin-btn--primary"
+                onClick={() => onDecideHandoff(card.id, "accepted")}
+              >
+                Accept handoff
+              </button>
+              <button
+                type="button"
+                className="admin-btn"
+                onClick={() => {
+                  setRejectingHandoff(true);
+                  setHandoffReason("");
+                }}
+              >
+                Reject…
+              </button>
+            </div>
+          )}
+        </div>
+      )}
+
       <div style={{ marginBottom: 16 }}>
         <div className="admin-label" style={{ marginBottom: 6 }}>
           Stage
@@ -453,5 +558,94 @@ function DealDetail({
         </div>
       )}
     </>
+  );
+}
+
+// Non-drag alternative to the kanban: a flat table driven by the same client
+// card state. Row tap opens the shared DealDetail drawer, so every action
+// (stage change, handoff decision, next step) works identically to the board.
+function DealsList({
+  cards,
+  columns,
+  onRowClick,
+}: {
+  cards: DealCard[];
+  columns: KanbanColumn[];
+  onRowClick: (card: DealCard) => void;
+}) {
+  const stageLabel = new Map(columns.map((c) => [c.id, c.label]));
+
+  if (cards.length === 0) {
+    return <div className="admin-empty">No deals yet.</div>;
+  }
+
+  return (
+    <div className="admin-table-wrap">
+      <div className="admin-table-scroll">
+        <table className="admin-table">
+          <thead>
+            <tr>
+              <th>Deal</th>
+              <th>Stage</th>
+              <th style={{ textAlign: "right" }}>Amount</th>
+              <th style={{ textAlign: "right" }}>Prob</th>
+              <th>Next step</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {cards.map((c) => {
+              const d = idleDays(c.updatedAt);
+              const idle = c.status === "open" && d != null && d > 14;
+              return (
+                <tr key={c.id} className="is-clickable" onClick={() => onRowClick(c)}>
+                  <td>
+                    <div className="admin-cell-strong">
+                      {c.title || c.personName || c.companyName || "(untitled deal)"}
+                    </div>
+                    <div className="admin-cell-muted">{c.companyName || c.personName || "—"}</div>
+                  </td>
+                  <td>
+                    {c.columnId === HANDOFF_COLUMN_ID ? (
+                      <Badge tone="warn">New from SDR</Badge>
+                    ) : (
+                      stageLabel.get(c.columnId) ?? "—"
+                    )}
+                  </td>
+                  <td style={{ textAlign: "right" }}>
+                    {formatCents(c.amountCents, c.currency ?? undefined)}
+                  </td>
+                  <td style={{ textAlign: "right" }}>
+                    {c.probability != null ? `${c.probability}%` : "—"}
+                  </td>
+                  <td>
+                    {c.status !== "open" ? (
+                      <span className="admin-cell-muted">—</span>
+                    ) : c.nextStepDate ? (
+                      <span>
+                        {c.nextStep || "next step"} · {formatDate(c.nextStepDate)}
+                      </span>
+                    ) : (
+                      <span style={{ color: "var(--admin-err-ink)", fontWeight: 600 }}>
+                        No next step
+                      </span>
+                    )}
+                  </td>
+                  <td>
+                    <Badge tone={statusTone(c.status ?? "")}>{humanize(c.status)}</Badge>
+                    {idle && (
+                      <>
+                        {" "}
+                        <Badge tone="warn">idle {d}d</Badge>
+                      </>
+                    )}
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+    </div>
   );
 }

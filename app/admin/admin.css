@@ -541,6 +541,30 @@ a.mp-kpi:hover { border-color: var(--admin-accent); transform: translateY(-1px);
 .admin-tab:hover { color: var(--admin-ink); }
 .admin-tab.is-active { color: var(--admin-accent); border-bottom-color: var(--admin-accent); font-weight: 600; }
 
+/* ─── View toggle (segmented) ─────────────────────── */
+.admin-viewtoggle {
+  display: inline-flex;
+  border: 1px solid var(--admin-line);
+  border-radius: var(--admin-radius-sm);
+  overflow: hidden;
+  background: var(--admin-surface);
+}
+.admin-viewtoggle button {
+  min-height: 40px;
+  padding: 8px 16px;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--admin-muted);
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  transition: background var(--transition), color var(--transition);
+}
+.admin-viewtoggle button + button { border-left: 1px solid var(--admin-line); }
+.admin-viewtoggle button:hover { color: var(--admin-ink); }
+.admin-viewtoggle button.is-active { background: var(--admin-accent); color: #fff; }
+
 /* ─── 360 detail layout + record lists ────────────── */
 .admin-360 { display: grid; grid-template-columns: 308px 1fr; gap: 20px; align-items: start; }
 .admin-section-card { padding: 18px 20px; }
