@@ -6,6 +6,11 @@ import { LeadQueue, type QueueRow } from "./LeadQueue";
 
 export const dynamic = "force-dynamic";
 
+export const metadata = {
+  title: "Leads",
+  description: "The SDR queue for qualifying inbound and booking meetings.",
+};
+
 // The SDR workstation. A queue, not a list: system-ordered (SLA first, then
 // oldest promotion), worked top to bottom. Nurture/unqualified people leave
 // the queue but stay on /admin/contacts; customers never appear here.

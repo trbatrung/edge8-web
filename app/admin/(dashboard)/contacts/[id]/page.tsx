@@ -10,6 +10,11 @@ import { formatCents, formatDate, humanize, timeAgo } from "@/lib/admin/format";
 
 export const dynamic = "force-dynamic";
 
+export const metadata = {
+  title: "Contact",
+  description: "Full relationship history and activity for one contact.",
+};
+
 function Empty({ text }: { text: string }) {
   return <div className="admin-empty">{text}</div>;
 }

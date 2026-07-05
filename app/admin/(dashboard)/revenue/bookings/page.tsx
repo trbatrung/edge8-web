@@ -9,6 +9,11 @@ import { firstParam, type SearchParamsObj } from "@/lib/admin/url";
 
 export const dynamic = "force-dynamic";
 
+export const metadata = {
+  title: "Bookings",
+  description: "Scheduled bookings and reservations.",
+};
+
 // Revenue office: bookings (private sessions, stays). Each links to its person 360.
 type P = { full_name: string | null; email: string };
 type Pr = { title: string | null };

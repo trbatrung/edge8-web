@@ -9,6 +9,11 @@ import { firstParam, type SearchParamsObj } from "@/lib/admin/url";
 
 export const dynamic = "force-dynamic";
 
+export const metadata = {
+  title: "Contacts",
+  description: "Every person in the Company Database, one searchable contact spine.",
+};
+
 type Person = {
   id: string;
   full_name: string | null;

@@ -9,6 +9,11 @@ import { firstParam, type SearchParamsObj } from "@/lib/admin/url";
 
 export const dynamic = "force-dynamic";
 
+export const metadata = {
+  title: "Job requisitions",
+  description: "Open roles and their hiring status.",
+};
+
 // Talent office: job requisitions. Title opens the req's hiring board.
 type Co = { name: string | null };
 type JobReq = {

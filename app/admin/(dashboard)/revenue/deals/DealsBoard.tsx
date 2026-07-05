@@ -60,7 +60,7 @@ function NextStepLine({ card }: { card: DealCard }) {
   if (card.status !== "open") return null;
   if (!card.nextStepDate) {
     return (
-      <div className="sap-card-sub" style={{ color: "#dc2626", fontWeight: 600 }}>
+      <div className="sap-card-sub" style={{ color: "var(--admin-err-ink)", fontWeight: 600 }}>
         No next step
       </div>
     );

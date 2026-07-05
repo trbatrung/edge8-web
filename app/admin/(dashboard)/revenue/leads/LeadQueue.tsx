@@ -110,7 +110,8 @@ export function LeadQueue({ rows }: { rows: QueueRow[] }) {
                   display: "flex",
                   width: "100%",
                   alignItems: "center",
-                  gap: 12,
+                  gap: "8px 12px",
+                  flexWrap: "wrap",
                   background: "none",
                   border: "none",
                   padding: 0,
@@ -118,7 +119,7 @@ export function LeadQueue({ rows }: { rows: QueueRow[] }) {
                   textAlign: "left",
                 }}
               >
-                <div style={{ flex: 1, minWidth: 0 }}>
+                <div style={{ flex: "1 1 auto", minWidth: 160 }}>
                   <div className="admin-list-title">
                     {r.name}
                     {r.company ? <span className="admin-cell-muted"> · {r.company}</span> : null}
@@ -163,7 +164,7 @@ function LeadDetail({
   const capturedCount = GPCT_FIELDS.filter(([k]) => qual[k].trim()).length;
 
   return (
-    <div style={{ borderTop: "1px solid var(--admin-border, #e5e7eb)", marginTop: 12, paddingTop: 12 }}>
+    <div style={{ borderTop: "1px solid var(--admin-line)", marginTop: 12, paddingTop: 12 }}>
       <div style={{ display: "flex", gap: 16, flexWrap: "wrap", marginBottom: 12 }}>
         <span className="admin-cell-muted">
           <Link href={`/admin/contacts/${row.id}`} className="admin-cell-strong">

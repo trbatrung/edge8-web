@@ -9,6 +9,11 @@ import { firstParam, type SearchParamsObj } from "@/lib/admin/url";
 
 export const dynamic = "force-dynamic";
 
+export const metadata = {
+  title: "Orders",
+  description: "Customer orders and payments.",
+};
+
 // Revenue office: orders (financial records, read-mostly). Born from checkout.
 type P = { full_name: string | null; email: string };
 type Pr = { title: string | null };

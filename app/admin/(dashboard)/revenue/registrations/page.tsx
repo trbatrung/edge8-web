@@ -8,6 +8,11 @@ import { firstParam, type SearchParamsObj } from "@/lib/admin/url";
 
 export const dynamic = "force-dynamic";
 
+export const metadata = {
+  title: "Registrations",
+  description: "Event and program registrations.",
+};
+
 // Revenue office: event registrations. Each links to its person 360 when known.
 type P = { full_name: string | null; email: string };
 type Pr = { title: string | null };

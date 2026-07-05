@@ -64,6 +64,7 @@ export function DataTable<T extends { id?: string | number }>({
       </div>
 
       <div className="admin-table-wrap">
+        <div className="admin-table-scroll">
         <table className="admin-table">
           <thead>
             <tr>
@@ -98,6 +99,7 @@ export function DataTable<T extends { id?: string | number }>({
             )}
           </tbody>
         </table>
+        </div>
 
         {total > 0 && (
           <div className="admin-pagination">

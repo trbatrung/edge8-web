@@ -5,6 +5,11 @@ import { InquiriesBoard, type InquiryCard } from "./InquiriesBoard";
 
 export const dynamic = "force-dynamic";
 
+export const metadata = {
+  title: "Inquiries",
+  description: "Inbound inquiries from the website and forms.",
+};
+
 const ACTIVE_STATUSES = ["new_lead", "contacted", "discovery", "proposal", "won", "lost"];
 
 type EmbeddedPerson = { full_name: string | null; email: string; do_not_contact: boolean | null };

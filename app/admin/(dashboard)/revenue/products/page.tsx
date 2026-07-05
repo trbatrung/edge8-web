@@ -8,6 +8,11 @@ import { firstParam, type SearchParamsObj } from "@/lib/admin/url";
 
 export const dynamic = "force-dynamic";
 
+export const metadata = {
+  title: "Products",
+  description: "Sellable products and services.",
+};
+
 // Revenue office: the sellable catalog (events, sprints, memberships).
 type Product = {
   id: string;

@@ -9,6 +9,11 @@ import { firstParam, type SearchParamsObj } from "@/lib/admin/url";
 
 export const dynamic = "force-dynamic";
 
+export const metadata = {
+  title: "Affiliates",
+  description: "Referral partners and their commissions.",
+};
+
 // Revenue office: affiliate / referral partners. Each links to its person 360.
 type P = { full_name: string | null; email: string };
 type Affiliate = {

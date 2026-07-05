@@ -7,6 +7,11 @@ import { firstParam, type SearchParamsObj } from "@/lib/admin/url";
 
 export const dynamic = "force-dynamic";
 
+export const metadata = {
+  title: "Companies",
+  description: "Organizations tracked in the Company Database.",
+};
+
 // Revenue office: companies (accounts). Spine-level, brand-agnostic.
 type Company = {
   id: string;

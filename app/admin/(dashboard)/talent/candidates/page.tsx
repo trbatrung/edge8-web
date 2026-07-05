@@ -8,6 +8,11 @@ import { firstParam, type SearchParamsObj } from "@/lib/admin/url";
 
 export const dynamic = "force-dynamic";
 
+export const metadata = {
+  title: "Candidates",
+  description: "The talent pool and applicant records.",
+};
+
 // Talent office: candidates (persona=job_seeker). Name opens the recruiting
 // Candidate detail; resume links to the signed-URL route handler.
 type P = { full_name: string | null; email: string };

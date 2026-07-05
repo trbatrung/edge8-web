@@ -7,6 +7,11 @@ import { formatDate, humanize } from "@/lib/admin/format";
 
 export const dynamic = "force-dynamic";
 
+export const metadata = {
+  title: "Candidate",
+  description: "One candidate's profile and application history.",
+};
+
 const one = <T,>(e: T | T[] | null): T | null => (Array.isArray(e) ? e[0] ?? null : e);
 
 type P = { id: string; full_name: string | null; email: string; phone: string | null; linkedin_url: string | null };

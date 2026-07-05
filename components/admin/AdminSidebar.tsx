@@ -11,21 +11,28 @@ import { signOut } from "@/app/admin/(dashboard)/actions";
 type NavItem = { label: string; href: string; ico: string; enabled?: boolean };
 type NavGroup = { label: string | null; items: NavItem[]; collapsible?: boolean };
 
-// Organized by the Four Offices of the Future (Revenue, Talent, Operations,
-// Innovation) + a Dashboard home and a Settings/config area. Each office leads
-// with its persona-filtered people lens; rows open the one shared Contact 360.
-// See docs/product/four-offices-of-the-future.md.
+// A CRM group (the contact spine + the revenue-office lenses) sits ahead of the
+// Four Offices of the Future (Revenue, Talent, Operations, Innovation), plus a
+// Dashboard home and a Settings/config area. Rows open the one shared Contact
+// 360. See docs/product/four-offices-of-the-future.md.
 const NAV: NavGroup[] = [
   { label: null, items: [{ label: "Dashboard", href: "/admin", ico: "◈", enabled: true }] },
   {
-    label: "Revenue",
+    label: "CRM",
     collapsible: true,
     items: [
+      { label: "Contacts", href: "/admin/contacts", ico: "⚇", enabled: true },
       { label: "Leads", href: "/admin/revenue/leads", ico: "◉", enabled: true },
       { label: "Companies", href: "/admin/revenue/companies", ico: "▣", enabled: true },
       { label: "Inquiries", href: "/admin/revenue/inquiries", ico: "☰", enabled: true },
       { label: "Deals", href: "/admin/revenue/deals", ico: "$", enabled: true },
       { label: "Funnel", href: "/admin/revenue/funnel", ico: "▽", enabled: true },
+    ],
+  },
+  {
+    label: "Revenue",
+    collapsible: true,
+    items: [
       { label: "Products", href: "/admin/revenue/products", ico: "▦", enabled: true },
       { label: "Orders", href: "/admin/revenue/orders", ico: "⛁", enabled: true },
       { label: "Bookings", href: "/admin/revenue/bookings", ico: "⌂", enabled: true },

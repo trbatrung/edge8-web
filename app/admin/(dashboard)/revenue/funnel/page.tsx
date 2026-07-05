@@ -5,6 +5,11 @@ import { humanize } from "@/lib/admin/format";
 
 export const dynamic = "force-dynamic";
 
+export const metadata = {
+  title: "Funnel",
+  description: "Conversion at every stage from inquiry to closed won.",
+};
+
 // The management system: conversion per arrow, computed entirely from
 // enumerated transitions and deal outcomes. When a rate dips, coach the
 // specific skill behind that arrow.
@@ -111,8 +116,8 @@ export default async function FunnelPage() {
         <MetricCard label="Won (30d)" value={won30} />
       </div>
 
-      <div className="admin-card admin-section-card" style={{ marginBottom: 16 }}>
-        <div className="admin-table-wrap">
+      <div className="admin-table-wrap" style={{ marginBottom: 16 }}>
+        <div className="admin-table-scroll">
           <table className="admin-table">
             <thead>
               <tr>

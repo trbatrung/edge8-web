@@ -8,8 +8,13 @@ import { DealsBoard, HANDOFF_COLUMN_ID, type DealCard } from "./DealsBoard";
 
 export const dynamic = "force-dynamic";
 
+export const metadata = {
+  title: "Deals",
+  description: "The closer's pipeline board and revenue forecast.",
+};
+
 const STAGE_ACCENT: Record<number, string> = {
-  0: "#287BE8",
+  0: "var(--admin-accent)",
   1: "#6b7194",
   2: "#D1458B",
   3: "#f59e0b",

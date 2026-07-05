@@ -8,6 +8,11 @@ import { firstParam, type SearchParamsObj } from "@/lib/admin/url";
 
 export const dynamic = "force-dynamic";
 
+export const metadata = {
+  title: "Applications",
+  description: "Job applications moving through the hiring pipeline.",
+};
+
 // Talent office: applications across all reqs. Candidate -> Contact 360,
 // Job req -> the req's hiring board.
 type P = { full_name: string | null; email: string };

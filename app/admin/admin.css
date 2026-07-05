@@ -194,8 +194,9 @@
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  gap: 16px;
+  gap: 12px 16px;
   margin-bottom: 22px;
+  flex-wrap: wrap;
 }
 .admin-eyebrow {
   font-size: 12px;
@@ -204,8 +205,8 @@
   color: var(--admin-muted);
   margin-bottom: 4px;
 }
-.admin-page-title { font-family: var(--font-display); font-weight: 600; font-size: 26px; color: var(--admin-ink); }
-.admin-page-sub { color: var(--admin-muted); margin-top: 4px; font-size: 14px; }
+.admin-page-title { font-family: var(--font-display); font-weight: 600; font-size: 26px; color: var(--admin-ink); overflow-wrap: anywhere; }
+.admin-page-sub { color: var(--admin-muted); margin-top: 4px; font-size: 14px; overflow-wrap: anywhere; }
 
 /* ─── Buttons ─────────────────────────────────────── */
 .admin-btn {
@@ -306,6 +307,9 @@ a.mp-kpi:hover { border-color: var(--admin-accent); transform: translateY(-1px);
   box-shadow: var(--admin-shadow);
   overflow: hidden;
 }
+/* Horizontal scroll for wide tables on narrow screens; the wrap keeps the
+   rounded corners, this inner layer scrolls so no columns get clipped. */
+.admin-table-scroll { overflow-x: auto; }
 .admin-table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
 .admin-table thead th {
   text-align: left;

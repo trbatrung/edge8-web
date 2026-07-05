@@ -8,6 +8,11 @@ import { firstParam, type SearchParamsObj } from "@/lib/admin/url";
 
 export const dynamic = "force-dynamic";
 
+export const metadata = {
+  title: "Team",
+  description: "Edge8 team members and departments.",
+};
+
 // Talent office: internal team (persona=employee). Name opens the Contact 360.
 type P = { full_name: string | null; email: string };
 type TeamMember = {
