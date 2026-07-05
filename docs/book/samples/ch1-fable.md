@@ -14,19 +14,19 @@ Walt gaveled them through the minutes and the safety report, then cleared his th
 
 "Grace prints my materials Monday mornings."
 
-"Then you've had it for two hours. Good enough." She opened the folder. "Eighteen months ago this board approved a technology line without a ceiling, because Marcus asked us to trust him. I went back through all of it. Trevor Nash, Director of AI Innovation, two hundred thousand a year, thirteen months on payroll. Licenses, one hundred forty seats across four platforms, fifty-two thousand a year, eighteen months of it. The bootcamp last spring, every employee, two days, thirty-eight thousand, plus two days of a stopped floor, call that twelve more. The Corrigan Group engagement, sixty-two thousand, concluded in March. All in, a little over four hundred thousand dollars."
+"Then you've had it for two hours. Good enough." She opened the folder. "Eighteen months ago this board spent the better part of a year telling you to stop sitting this out, and your own peer group was telling you the same thing, and you finally agreed, and we approved a technology line without a ceiling because you asked us to trust you with it. I went back through all of it. Trevor Nash, Director of AI Innovation, two hundred thousand a year, thirteen months on payroll. Licenses, one hundred forty seats across four platforms, fifty-two thousand a year, eighteen months of it. The bootcamp last spring, every employee, two days, thirty-eight thousand, plus two days of a stopped floor, call that twelve more. The Corrigan Group engagement, sixty-two thousand, concluded in March. All in, a little over four hundred thousand dollars."
 
 "Those numbers are right," Marcus said.
 
 "I know they're right. Here's my question." She took a single page from the folder and slid it down the table. "That's the P&L, same eighteen months. Show me where the four hundred thousand comes back. Point to the line."
 
-Marcus stopped the page with two fingers and did not look down. "It doesn't work like that. Not in the first..."
+Marcus stopped the page with two fingers and did not look down. He did not need to. He had pulled the same twelve months himself back in March, alone at his desk on a Sunday, hoping the numbers would sit differently in an empty building than they had in the daylight. They hadn't. "It doesn't work like that. Not in the first..."
 
 "Point to the line."
 
 "You don't judge a foundation by the first rain that hits it."
 
-"I'm not judging a foundation. I'm looking for one. Margin, flat. Revenue per employee, down a point. Overtime in the shop, up. Show me one number in this company that moved because of that money and I will withdraw the item myself."
+"I'm not judging a foundation. I'm looking for one. Revenue, flat against last year. Total cost, flat against last year, worse once you count what's sitting in that folder. Two numbers, Marcus. Revenue up or cost down, that is the whole scorecard, and neither one has moved a point in eighteen months. Show me one number in this company that budged because of that money and I will withdraw the item myself."
 
 Marcus had three answers ready. He had rehearsed them in the truck that morning, out loud, alone at a red light, the way he rehearsed everything that mattered.
 
@@ -82,7 +82,7 @@ She closed the folder.
 
 For a moment the only sound in the room was the compressor cycling somewhere beneath the floor.
 
-"The leadership," Marcus said, "took a rented bay and one truck and built the most trusted custom shop in three states. The leadership has made payroll five hundred and some times in a row. Ask anyone on that floor whether the leadership is broken. I have never pretended to be a technology man. I have never needed to be one. When the job called for one, I went out and hired one, the same way I hired a controller and a safety officer, and I put real money behind him, because half measures are how companies our size die. If it needs more time, that is because we are doing it right instead of doing it loud."
+"The leadership," Marcus said, "took a rented bay and one truck and built the most trusted custom shop in three states, out of people who know each other's kids' names, the work their hands made, and a process that never once needed a machine's opinion. The leadership has made payroll five hundred and some times in a row. Ask anyone on that floor whether the leadership is broken. I did not come looking for this, Ellery. Half this room and half of Antonelli's spent the better part of a year telling me I was falling behind on something I could not see the shape of in a people business, and I finally listened, against my own read of my own company. I have never pretended to be a technology man. I have never needed to be one. When the job called for one, I went out and hired one, the same way I hired a controller and a safety officer, and I put real money behind him, because half measures are how companies our size die. If it needs more time, that is because we are doing it right instead of doing it loud."
 
 It was a good speech. He heard it land the way good speeches land, respectfully, and change nothing.
 

@@ -6,6 +6,8 @@ AI came up before the bread did. It came up every month now, the way the weather
 
 Gil Ferran, who did commercial paving, had spent sixty thousand dollars on a customer service tool that, in his words, lied to his customers politely and around the clock. A man who ran cold storage said his consultant's roadmap had a roadmap. Somebody's nephew had automated something and broken payroll. The laughter went around the table like a basket of rolls, and underneath the laughter, unspoken, was the thing the room actually met for, which was relief. Everyone had spent. Nobody had numbers. Therefore the tools were not ready, and no one at this table was a fool.
 
+Marcus had brought three questions in his shirt pocket, written the week before at his own kitchen table, and for a moment, somewhere between the paving story and the cold storage story, he almost took the page out. Then he looked at the table, warm with relief, everyone already agreeing with everyone else, and understood that a room built to confirm the tools were broken was not a room that was going to help him answer three questions about his own people and his own paper. He left the page where it was.
+
 Marcus told the board story. He had it polished to a shine by now: Ellery's folder, the one-page P&L, point to the line. He gave them her question word for word, the tools or the leadership, and paused where the pause went, and the table groaned on cue.
 
 "Boards read airline magazines," said the cold storage man. "That's the whole disease."
@@ -43,6 +45,8 @@ Priya looked at him for a moment. In the sodium light of the lot she looked most
 "Not who leads it for you," she said. "You. Hours, in your week. Name them."
 
 Marcus opened his mouth. He was a man who could account for every dollar in his building, who knew his freight costs to the point and his scrap rate to the decimal, and he stood in a restaurant parking lot with his week laid out in front of him and could not put his finger on one hour. There was the operations review, where Trevor gave updates. There was the demo in January. There was the signing of things.
+
+It was not one of the three questions folded in his shirt pocket. It was worse than all three, because it did not ask what anybody else in the building knew or didn't. It asked about him.
 
 "I'd have to think about it," he said.
 

@@ -26,6 +26,8 @@ Brandt stayed twenty minutes. He was breaking ground in the spring, out by the i
 
 Marcus watched all of it with something that had no good business name. Pride was close. The desk was the one part of Halden that had never once made him nervous. Banks made him rehearse. Boards made him rehearse. Ray made him feel the way the smell of the finishing room made him feel at six in the morning, that the world had at least one corner where things were exactly what he had built them to be.
 
+People, and the work their hands made, and a process patient enough to let the two of those trust each other. That was the whole of Halden Furnish, as far as Marcus had ever needed to look, and it had never once occurred to him to wonder what a machine would make of any of it.
+
 There had been a moment, a year or so back, when Trevor had floated something at a staff meeting, a takeoff tool, quoting software, something with a dashboard in it. Marcus had ended the conversation with one sentence. He could no longer remember the sentence. He could remember the feeling, which was the feeling of a man closing a gate, and he had never once revisited it, the way you never revisit a thing you are sure of.
 
 The Caldwell number would go out a week from Monday. Eleven days, near enough. It was always near enough eleven days, and in twenty-two years Marcus had never heard the number as a cost. It was the sound of the thing being done right. You did not frame a courthouse in a weekend, and you did not price one in an afternoon.

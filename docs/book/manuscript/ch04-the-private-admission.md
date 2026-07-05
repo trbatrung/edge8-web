@@ -16,6 +16,10 @@ Jocelyn did not laugh in any of the places the men at the club had laughed.
 
 He looked at his plate. Then, because it was Jocelyn, and because the kitchen was the one room left where he had never once been a chief executive, he told her the true version. The line that wasn't there. The question about the tools and the leadership. The license report he had laid face down, and the login card in his desk drawer, fourteen months old, with the temporary password that had told the truth about him all along.
 
+And the part he had not said out loud, even to himself, until just now. That he had pulled the same twelve months Ellery pulled, back in March, alone at his desk on a Sunday, because some private, cowardly corner of him needed to know before anyone could ask him in a room. Revenue, flat. Total cost, flat. Eighteen months of spending, and neither number had so much as flinched, and he had known that a month before the board ever opened a folder.
+
+"I never wanted to do it, Joss." He heard himself say it and did not stop. "Eighteen months ago. Gil and half that table at Antonelli's, needling me about it every month, and then the board, gently at first. I run a business made of people who are good with their hands and customers who trust a voice on the phone. I did not see what a machine had to say about any of that. Some days I still don't. I said yes to shut the room up, and I have been trying to talk myself into my own reasons ever since."
+
 "You know what I keep thinking about," she said when he finished. "The trailer."
 
 "What trailer?"
@@ -65,3 +69,19 @@ Marcus stood in the kitchen a while after the sound of her car was gone.
 Fifty-four. Somewhere in the last five years, without ever deciding it, he had become a man who did not start things he might be bad at. He dried his hands and hung the towel on the oven door, square, the way it went.
 
 Saying the fear out loud had not made it smaller. It had only made it his.
+
+He did not go to bed.
+
+He sat back down at the kitchen table with the laptop he mostly used for insurance forms and typed the plainest question he had into it. Why is my AI program not working. What came back was consultants and vendors and a man in a blazer promising the demo he had already sat through once. He kept going past the first page, the way Jocelyn always told him to on anything that mattered, and somewhere past the third one he found a short piece with no byline at all, the kind of thing a stranger writes at midnight that nobody shares. It said the job of leadership had quietly doubled. Half of it he already knew, the half he had built Halden on. The other half was new, and it named three plain-sounding things nobody had ever put in a job description: deciding who does the work now that some of the who could be machines, keeping the truth of a business written down somewhere real instead of in people's heads, and learning to give a machine instructions precise enough to act on, which the piece was careful to say was not the same thing as learning a clever way to ask it a favor.
+
+He read it twice. He did not believe a single sentence of it all the way, and he could not put it down.
+
+He pulled the legal pad over and wrote three lines under the day's date, in his own words, because he did not trust anything that had explained itself that easily.
+
+Who in this building could actually run a thing like this, if I asked them to.
+
+What do we have written down, anywhere, about how the work really gets done.
+
+Where does the truth of this company live, if not in somebody's head or a drawer of logins.
+
+He looked at the three lines a long time. He did not have an honest answer to any of them. For the first time since the board meeting, not knowing felt less like a verdict and more like a place to start digging.

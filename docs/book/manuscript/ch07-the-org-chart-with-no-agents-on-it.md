@@ -50,6 +50,8 @@ Priya let the silence sit. When she spoke there was nothing triumphant in it. Sh
 
 "You didn't get a better tool. Your job doubled, and you never staffed the second half. Your org chart has no agents on it."
 
+He thought of the page still folded in his shirt pocket, three lines under a kitchen-table date. Who in this building could actually run a thing like this. He had wanted, driving over, to come back with a name. He had a chart instead, and the chart didn't have one.
+
 "Then tell me what you run," Marcus said. It was the last defense he had, and he spent it. "The platform. The vendor. Give me the name and I'll take it from there."
 
 She rubbed her eyes with the heel of her hand, and for a moment she looked more tired than she had all day.

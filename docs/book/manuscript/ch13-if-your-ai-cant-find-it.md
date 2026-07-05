@@ -52,6 +52,8 @@ Veneer lead times. Dana. Machine rates. The controller, Thursdays. What Brandt w
 
 By noon the page was full. He sat in his truck in his own lot and looked at it, the complete catalogue of what Halden Furnish knew, and it was a list of nine names.
 
+It was the answer to the third line on his kitchen-table page, the one he had least wanted answered. Where does the truth of this company live, if not in somebody's head or a drawer of logins. It lived in nine somebodies, and one whiteboard corner that only made sense to a woman named Sharon.
+
 Ellery had asked him, in April, to point at a line. He finally had a document he could point at. Everything the company knew, on one page, and it was a phone directory, and three of the nine were older than sixty, and one of them was a corner of a whiteboard.
 
 He clipped it to the front of the legal pad, where the login card lived. Then he went back inside and stood a while at the edge of his own floor, watching the work move, all of it real, all of it good, all of it running on a library that walked out the door every night at five and drove home in nine different directions.

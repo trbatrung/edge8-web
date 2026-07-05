@@ -44,6 +44,8 @@ The request came in to Ray, or to Casey if Ray was walking a site, and sat until
 
 Eleven of the fourteen were waiting.
 
+He thought of his second question, folded on the seat beside him. What do we have written down about how the work really gets done. He had an answer now, and it fit in one sentence. Nothing. Not the routing, not the waiting, not the reason any of it waited. Fourteen boxes and not one line of instruction behind any of them, only a name.
+
 Most of the eleven days, drawn honestly, was the job standing in line outside one man's head. The head was brilliant. The line was the business.
 
 He sat in her lot until he had it all down, boxes and arrows and the waiting drawn as waiting. It was ugly, and it was his, and drawing it had taken forty minutes he would once have spent on the phone.
