@@ -82,9 +82,29 @@ const NAV: NavGroup[] = [
 
 export type Brand = { id: string; name: string };
 
+// The three views a user can land in. These are SEPARATE apps: Admin is this
+// /admin console; Team and Manager live in the /team portal. The switcher
+// launches into them rather than re-scoping /admin. `current` marks where we are
+// now; the others are placeholders until per-user view access is wired.
+type View = { key: string; label: string; ico: string; current?: boolean };
+const VIEWS: View[] = [
+  { key: "admin", label: "Admin", ico: "◈", current: true },
+  { key: "manager", label: "Manager", ico: "☰" },
+  { key: "team", label: "Team", ico: "☷" },
+];
+
 function isActive(pathname: string, href: string): boolean {
   if (href === "/admin") return pathname === "/admin" || pathname === "/admin/";
   return pathname === href || pathname.startsWith(`${href}/`);
+}
+
+// No name/profile record yet, so derive a monogram from the email local part:
+// "dave.hajdu@…" -> "DH", "dave@…" -> "DA".
+function initials(email: string): string {
+  const local = (email.split("@")[0] || email).trim();
+  const parts = local.split(/[.\-_]+/).filter(Boolean);
+  const raw = parts.length >= 2 ? parts[0][0] + parts[1][0] : local.slice(0, 2);
+  return raw.toUpperCase();
 }
 
 export function AdminSidebar({
@@ -100,7 +120,9 @@ export function AdminSidebar({
   const router = useRouter();
   const [navOpen, setNavOpen] = useState(false);
   const [brandMenuOpen, setBrandMenuOpen] = useState(false);
+  const [profileMenuOpen, setProfileMenuOpen] = useState(false);
   const [collapsed, setCollapsed] = useState<Record<string, boolean>>({});
+  const userInitials = initials(user.email);
 
   function toggleGroup(label: string) {
     setCollapsed((c) => ({ ...c, [label]: !c[label] }));
@@ -162,13 +184,101 @@ export function AdminSidebar({
 
       <nav className={`admin-sidebar${navOpen ? " is-open" : ""}`} aria-label="Admin">
         <div className="admin-brand">
-          <span className="admin-brand-mark">E8</span>
-          Edge8 OS
+          <span className="admin-brand-lead">
+            <span className="admin-brand-mark">E8</span>
+            Edge8 OS
+          </span>
+          <span className="admin-brand-actions">
+            <button
+              type="button"
+              className="admin-iconbtn"
+              aria-disabled
+              aria-label="Inbox"
+              title="Inbox (coming soon)"
+            >
+              ✉
+            </button>
+            <button
+              type="button"
+              className="admin-avatarbtn"
+              aria-haspopup="menu"
+              aria-expanded={profileMenuOpen}
+              aria-label="Profile and views"
+              onClick={() => {
+                setProfileMenuOpen((v) => !v);
+                setBrandMenuOpen(false);
+              }}
+            >
+              {userInitials}
+            </button>
+          </span>
         </div>
+
+        {profileMenuOpen && (
+          <div className="admin-profilemenu" role="menu" aria-label="Profile and views">
+            <div className="admin-profilemenu-head">
+              <span className="admin-avatarbtn admin-avatarbtn--lg" aria-hidden>
+                {userInitials}
+              </span>
+              <span className="admin-profilemenu-email">{user.email}</span>
+            </div>
+
+            <div className="admin-profilemenu-label">Switch view</div>
+            {VIEWS.map((v) =>
+              v.current ? (
+                <span key={v.key} className="admin-profilemenu-item" role="menuitem" aria-current="true">
+                  <span className="admin-profilemenu-ico" aria-hidden>
+                    {v.ico}
+                  </span>
+                  {v.label}
+                  <span className="admin-profilemenu-here">Current</span>
+                </span>
+              ) : (
+                <span
+                  key={v.key}
+                  className="admin-profilemenu-item is-disabled"
+                  role="menuitem"
+                  aria-disabled
+                  title="Switching views is coming soon"
+                >
+                  <span className="admin-profilemenu-ico" aria-hidden>
+                    {v.ico}
+                  </span>
+                  {v.label}
+                  <span className="admin-nav-badge">soon</span>
+                </span>
+              ),
+            )}
+
+            <div className="admin-profilemenu-sep" />
+
+            <span
+              className="admin-profilemenu-item is-disabled"
+              role="menuitem"
+              aria-disabled
+              title="Coming soon"
+            >
+              <span className="admin-profilemenu-ico" aria-hidden>
+                ☺
+              </span>
+              My profile
+              <span className="admin-nav-badge">soon</span>
+            </span>
+
+            <form action={signOut}>
+              <button type="submit" className="admin-signout admin-profilemenu-signout">
+                Sign out
+              </button>
+            </form>
+          </div>
+        )}
 
         <button
           className="admin-brandbtn"
-          onClick={() => setBrandMenuOpen((v) => !v)}
+          onClick={() => {
+            setBrandMenuOpen((v) => !v);
+            setProfileMenuOpen(false);
+          }}
           aria-expanded={brandMenuOpen}
         >
           <span className="admin-brandbtn-label">
@@ -231,15 +341,6 @@ export function AdminSidebar({
             </div>
             );
           })}
-        </div>
-
-        <div className="admin-foot">
-          <span className="admin-foot-email">{user.email}</span>
-          <form action={signOut}>
-            <button type="submit" className="admin-signout">
-              Sign out
-            </button>
-          </form>
         </div>
       </nav>
     </>
