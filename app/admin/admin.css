@@ -927,3 +927,40 @@ a.mp-kpi:hover { border-color: var(--admin-accent); transform: translateY(-1px);
 .admin-table td.admin-cell-check, .admin-table th.admin-cell-check { width: 34px; text-align: center; padding-right: 0; }
 .admin-table tbody tr.is-selected { background: var(--admin-info-bg); }
 .admin-row-archived td:not(.admin-cell-check) { opacity: 0.5; }
+
+/* Checkboxes: globals.css sets appearance:none on every input, which strips the
+   native checkmark. Restore a visible checked state for all admin checkboxes. */
+.admin-shell input[type="checkbox"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  padding: 0;
+  border: 1.5px solid var(--admin-line);
+  border-radius: 4px;
+  background: var(--admin-surface);
+  cursor: pointer;
+  flex-shrink: 0;
+  display: inline-grid;
+  place-content: center;
+  vertical-align: middle;
+  transition: background var(--transition), border-color var(--transition);
+}
+.admin-shell input[type="checkbox"]::before {
+  content: "";
+  width: 10px;
+  height: 10px;
+  transform: scale(0);
+  transform-origin: center;
+  background: #fff;
+  clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+  transition: transform 0.12s ease;
+}
+.admin-shell input[type="checkbox"]:checked {
+  background: var(--admin-accent);
+  border-color: var(--admin-accent);
+}
+.admin-shell input[type="checkbox"]:checked::before { transform: scale(1); }
+.admin-shell input[type="checkbox"]:hover { border-color: var(--admin-muted); }
+.admin-shell input[type="checkbox"]:focus-visible { outline: 2px solid var(--admin-accent); outline-offset: 1px; }
