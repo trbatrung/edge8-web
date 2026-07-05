@@ -5,6 +5,7 @@ import { PageHead } from "@/components/admin/PageHead";
 import { Badge, statusTone } from "@/components/admin/Badge";
 import { Tabs, type TabDef } from "@/components/admin/Tabs";
 import { PersonEditForm } from "./PersonEditForm";
+import { PersonDangerZone } from "./PersonDangerZone";
 import { PromoteButton } from "./PromoteButton";
 import { formatCents, formatDate, humanize, timeAgo } from "@/lib/admin/format";
 
@@ -283,6 +284,7 @@ export default async function ContactDetailPage({ params }: { params: { id: stri
         sub={person.email}
         action={
           <span style={{ display: "inline-flex", gap: 6, alignItems: "center", flexWrap: "wrap" }}>
+            {person.archived_at && <Badge tone="neutral">Archived</Badge>}
             {person.do_not_contact && <Badge tone="err">Do not contact</Badge>}
             {person.is_team_member && <Badge tone="info">Team</Badge>}
             {person.lifecycle_stage && person.lifecycle_stage !== "none" && (
@@ -320,6 +322,13 @@ export default async function ContactDetailPage({ params }: { params: { id: stri
               <dt>Added</dt>
               <dd>{formatDate(person.created_at)}</dd>
             </dl>
+          </div>
+          <div className="admin-card admin-section-card">
+            <PersonDangerZone
+              personId={person.id}
+              personName={name}
+              archived={!!person.archived_at}
+            />
           </div>
         </div>
 

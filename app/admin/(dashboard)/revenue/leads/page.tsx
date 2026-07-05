@@ -70,6 +70,7 @@ export default async function LeadsPage() {
       )
       .in("lifecycle_stage", ACTIVE_LEAD_STAGES)
       .or(ACTIVE_STATUS_FILTER)
+      .is("archived_at", null)
       .order("lead_sla_due_at", { ascending: true, nullsFirst: false })
       .order("created_at", { ascending: true })
       .limit(200),
@@ -88,6 +89,7 @@ export default async function LeadsPage() {
       .select("id", { count: "exact", head: true })
       .in("lifecycle_stage", ACTIVE_LEAD_STAGES)
       .or(ACTIVE_STATUS_FILTER)
+      .is("archived_at", null)
       .not("lead_sla_due_at", "is", null)
       .lt("lead_sla_due_at", nowIso),
   ]);

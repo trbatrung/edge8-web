@@ -4,7 +4,7 @@ import { PageHead } from "@/components/admin/PageHead";
 import { MetricCard } from "@/components/admin/MetricCard";
 import { formatCents } from "@/lib/admin/format";
 import type { KanbanColumn } from "@/components/admin/KanbanBoard";
-import { DealsBoard, HANDOFF_COLUMN_ID, type DealCard } from "./DealsBoard";
+import { DealsBoard, HANDOFF_COLUMN_ID, type DealCard, type StageOption } from "./DealsBoard";
 
 export const dynamic = "force-dynamic";
 
@@ -37,6 +37,7 @@ type Row = {
   next_step_date: string | null;
   handoff_status: string | null;
   lost_reason: string | null;
+  archived_at: string | null;
   updated_at: string | null;
   people: Embedded<{ full_name: string | null; email: string }>;
   companies: Embedded<{ name: string | null }>;
@@ -54,6 +55,9 @@ export default async function DealsPage() {
 
   const stageList = (stages as Stage[] | null) ?? [];
   const lostStageIds = stageList.filter((s) => s.is_lost).map((s) => s.id);
+  const stageOptions: StageOption[] = stageList
+    .filter((s) => !s.is_won && !s.is_lost)
+    .map((s) => ({ id: s.id, name: s.name }));
 
   const columns: KanbanColumn[] = [
     { id: HANDOFF_COLUMN_ID, label: "New from SDR", accent: "#8b5cf6" },
@@ -68,7 +72,7 @@ export default async function DealsPage() {
   let query = companyOs
     .from("deals")
     .select(
-      "id, title, stage_id, amount_cents, currency, probability, status, expected_close_date, source, person_id, next_step, next_step_date, handoff_status, lost_reason, updated_at, people!person_id(full_name, email), companies(name)",
+      "id, title, stage_id, amount_cents, currency, probability, status, expected_close_date, source, person_id, next_step, next_step_date, handoff_status, lost_reason, archived_at, updated_at, people!person_id(full_name, email), companies(name)",
     )
     .order("created_at", { ascending: false })
     .limit(500);
@@ -98,11 +102,14 @@ export default async function DealsPage() {
       nextStepDate: r.next_step_date,
       handoffStatus: r.handoff_status ?? "none",
       lostReason: r.lost_reason,
+      archivedAt: r.archived_at,
       updatedAt: r.updated_at,
     };
   });
 
-  const openCards = cards.filter((c) => c.status === "open");
+  // KPIs and the board ignore archived deals; the list can opt in to show them.
+  const activeCards = cards.filter((c) => !c.archivedAt);
+  const openCards = activeCards.filter((c) => c.status === "open");
   const openPipeline = openCards.reduce((s, c) => s + (c.amountCents ?? 0), 0);
   const weighted = openCards.reduce(
     (s, c) => s + (c.amountCents ?? 0) * ((c.probability ?? 0) / 100),
@@ -115,7 +122,7 @@ export default async function DealsPage() {
     .filter((c) => c.expectedClose && new Date(c.expectedClose) < monthEnd)
     .reduce((s, c) => s + (c.amountCents ?? 0), 0);
   const noNextStep = openCards.filter((c) => !c.nextStepDate).length;
-  const pendingHandoffs = cards.filter((c) => c.columnId === HANDOFF_COLUMN_ID).length;
+  const pendingHandoffs = activeCards.filter((c) => c.columnId === HANDOFF_COLUMN_ID).length;
 
   return (
     <>
@@ -139,7 +146,12 @@ export default async function DealsPage() {
           sub={noNextStep > 0 ? "open deals silently dying" : "every deal has a next step"}
         />
       </div>
-      <DealsBoard columns={columns} initialCards={cards} lostStageIds={lostStageIds} />
+      <DealsBoard
+        columns={columns}
+        initialCards={cards}
+        lostStageIds={lostStageIds}
+        stageOptions={stageOptions}
+      />
     </>
   );
 }

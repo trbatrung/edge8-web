@@ -4,6 +4,7 @@ import { getActiveBrandId } from "@/lib/admin/brand";
 import { PageHead } from "@/components/admin/PageHead";
 import { DataTable, type Column } from "@/components/admin/DataTable";
 import { Badge } from "@/components/admin/Badge";
+import { ArchivedToggle } from "@/components/admin/ArchivedToggle";
 import { formatDate, humanize } from "@/lib/admin/format";
 import { firstParam, type SearchParamsObj } from "@/lib/admin/url";
 
@@ -23,6 +24,7 @@ type Person = {
   source: string | null;
   do_not_contact: boolean | null;
   is_team_member: boolean | null;
+  archived_at: string | null;
   created_at: string;
 };
 
@@ -36,10 +38,11 @@ export default async function ContactsPage({ searchParams }: { searchParams: Sea
   const sortParam = firstParam(searchParams.sort);
   const sort = sortParam && SORTABLE.has(sortParam) ? sortParam : "created_at";
   const dir = firstParam(searchParams.dir) === "asc" ? "asc" : "desc";
+  const showArchived = firstParam(searchParams.archived) === "1";
 
   const { rows, total, pageSize, error } = await listEntity<Person>(
     "people",
-    "id, full_name, email, phone, persona, source, do_not_contact, is_team_member, created_at",
+    "id, full_name, email, phone, persona, source, do_not_contact, is_team_member, archived_at, created_at",
     {
       page,
       pageSize: PAGE_SIZE,
@@ -47,6 +50,7 @@ export default async function ContactsPage({ searchParams }: { searchParams: Sea
       searchColumns: ["full_name", "email", "phone"],
       sort,
       dir,
+      excludeArchived: !showArchived,
       filters: brandId ? { source_brand_id: brandId } : undefined,
     },
   );
@@ -75,6 +79,7 @@ export default async function ContactsPage({ searchParams }: { searchParams: Sea
       header: "Flags",
       cell: (r) => (
         <span style={{ display: "inline-flex", gap: 4 }}>
+          {r.archived_at && <Badge tone="neutral">Archived</Badge>}
           {r.do_not_contact && <Badge tone="err">Do not contact</Badge>}
           {r.is_team_member && <Badge tone="info">Team</Badge>}
         </span>
@@ -88,7 +93,10 @@ export default async function ContactsPage({ searchParams }: { searchParams: Sea
       <PageHead
         eyebrow="Spine"
         title="Contacts"
-        sub={`${total.toLocaleString()} ${total === 1 ? "person" : "people"} in the Company Database`}
+        sub={`${total.toLocaleString()} ${total === 1 ? "person" : "people"}${showArchived ? " · showing archived" : ""} in the Company Database`}
+        action={
+          <ArchivedToggle basePath="/admin/contacts" searchParams={searchParams} showArchived={showArchived} />
+        }
       />
       {error && (
         <div className="admin-alert admin-alert--err" style={{ marginBottom: 14 }}>

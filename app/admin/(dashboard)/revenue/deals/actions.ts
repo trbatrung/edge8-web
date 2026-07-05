@@ -4,8 +4,11 @@ import { revalidatePath } from "next/cache";
 import { companyOs } from "@/lib/supabase";
 import { requireAdmin } from "@/lib/admin-auth";
 import { recordTransition } from "@/lib/lifecycle";
+import { recordAudit, recordAuditMany } from "@/lib/admin/audit";
+import { archiveRecord, guardedDelete, restoreRecord } from "@/lib/admin/mutations";
 
 type Result = { ok: true } | { ok: false; error: string };
+type BulkResult = { ok: true; message?: string } | { ok: false; error: string };
 
 const LOST_REASONS = new Set([
   "price",
@@ -203,4 +206,177 @@ export async function saveNextStep(
 
   refresh();
   return { ok: true };
+}
+
+// ─── Full deal edit ──────────────────────────────────────────────────────────
+// `amount` is dollars from the form; it's the only place we convert to the
+// integer-cents storage. Only keys present in the patch are written.
+export type DealPatch = {
+  title?: string;
+  amount?: number | null;
+  currency?: string;
+  probability?: number | null;
+  expected_close_date?: string | null;
+  source?: string | null;
+  next_step?: string | null;
+  next_step_date?: string | null;
+};
+
+export async function updateDeal(dealId: string, patch: DealPatch): Promise<Result> {
+  const admin = await requireAdmin();
+  const updates: Record<string, unknown> = {};
+
+  if (patch.title !== undefined) {
+    const t = patch.title.trim();
+    if (!t) return { ok: false, error: "Title can't be empty." };
+    updates.title = t;
+  }
+  if (patch.amount !== undefined) {
+    const amt = patch.amount ?? 0;
+    if (!Number.isFinite(amt) || amt < 0) return { ok: false, error: "Amount must be zero or more." };
+    updates.amount_cents = Math.round(amt * 100);
+  }
+  if (patch.currency !== undefined) {
+    const c = patch.currency.trim().toLowerCase();
+    if (!c) return { ok: false, error: "Currency is required." };
+    updates.currency = c;
+  }
+  if (patch.probability !== undefined) {
+    if (patch.probability == null) updates.probability = null;
+    else {
+      const p = Math.round(patch.probability);
+      if (p < 0 || p > 100) return { ok: false, error: "Probability must be between 0 and 100." };
+      updates.probability = p;
+    }
+  }
+  if (patch.expected_close_date !== undefined) updates.expected_close_date = patch.expected_close_date || null;
+  if (patch.source !== undefined) updates.source = patch.source?.trim() || null;
+  if (patch.next_step !== undefined) updates.next_step = patch.next_step?.trim() || null;
+  if (patch.next_step_date !== undefined) updates.next_step_date = patch.next_step_date || null;
+
+  if (Object.keys(updates).length === 0) return { ok: true };
+
+  const { error } = await companyOs.from("deals").update(updates).eq("id", dealId);
+  if (error) return { ok: false, error: error.message };
+  await recordAudit({ table: "deals", recordId: dealId, operation: "update", actor: admin.email, newData: updates });
+  refresh();
+  return { ok: true };
+}
+
+export async function archiveDeal(dealId: string): Promise<Result> {
+  const admin = await requireAdmin();
+  const r = await archiveRecord("deals", dealId, admin.email);
+  if (r.ok) refresh();
+  return r;
+}
+
+export async function restoreDeal(dealId: string): Promise<Result> {
+  const admin = await requireAdmin();
+  const r = await restoreRecord("deals", dealId, admin.email);
+  if (r.ok) refresh();
+  return r;
+}
+
+export async function deleteDeal(dealId: string): Promise<Result> {
+  const admin = await requireAdmin();
+  const r = await guardedDelete("deals", dealId, admin.email, { via: "deals" });
+  if (r.ok) refresh();
+  return r;
+}
+
+// ─── Bulk (list view multi-select) ───────────────────────────────────────────
+export type BulkDealPatch = {
+  stage_id?: string;
+  probability?: number | null;
+  expected_close_date?: string | null;
+  source?: string | null;
+};
+
+export async function bulkUpdateDeals(ids: string[], patch: BulkDealPatch): Promise<BulkResult> {
+  const admin = await requireAdmin();
+  if (ids.length === 0) return { ok: false, error: "No deals selected." };
+
+  const updates: Record<string, unknown> = {};
+  if (patch.stage_id !== undefined) {
+    const { data: stage, error } = await companyOs
+      .from("pipeline_stages")
+      .select("is_won, is_lost")
+      .eq("id", patch.stage_id)
+      .maybeSingle();
+    if (error || !stage) return { ok: false, error: error?.message ?? "Unknown stage." };
+    if (stage.is_won || stage.is_lost) {
+      return { ok: false, error: "Bulk move is limited to open stages. Close won/lost deals one at a time." };
+    }
+    updates.stage_id = patch.stage_id;
+    updates.status = "open";
+    updates.closed_at = null;
+  }
+  if (patch.probability !== undefined) {
+    if (patch.probability == null) updates.probability = null;
+    else {
+      const p = Math.round(patch.probability);
+      if (p < 0 || p > 100) return { ok: false, error: "Probability must be between 0 and 100." };
+      updates.probability = p;
+    }
+  }
+  if (patch.expected_close_date !== undefined) updates.expected_close_date = patch.expected_close_date || null;
+  if (patch.source !== undefined) updates.source = patch.source?.trim() || null;
+
+  if (Object.keys(updates).length === 0) {
+    return { ok: false, error: "Nothing to change. Fill at least one field." };
+  }
+
+  const { error } = await companyOs.from("deals").update(updates).in("id", ids);
+  if (error) return { ok: false, error: error.message };
+  await recordAuditMany(
+    ids.map((id) => ({ table: "deals", recordId: id, operation: "bulk_update" as const, actor: admin.email, newData: updates })),
+  );
+  refresh();
+  return { ok: true, message: `Updated ${ids.length} deal${ids.length === 1 ? "" : "s"}.` };
+}
+
+export async function bulkArchiveDeals(ids: string[]): Promise<BulkResult> {
+  const admin = await requireAdmin();
+  if (ids.length === 0) return { ok: false, error: "No deals selected." };
+
+  const { error } = await companyOs
+    .from("deals")
+    .update({ archived_at: new Date().toISOString(), archived_by: admin.email })
+    .in("id", ids)
+    .is("archived_at", null);
+  if (error) return { ok: false, error: error.message };
+  await recordAuditMany(
+    ids.map((id) => ({ table: "deals", recordId: id, operation: "bulk_archive" as const, actor: admin.email })),
+  );
+  refresh();
+  return { ok: true, message: `Archived ${ids.length} deal${ids.length === 1 ? "" : "s"}.` };
+}
+
+type BulkDeleteResult =
+  | { ok: true; message?: string; deletedIds: string[] }
+  | { ok: false; error: string };
+
+export async function bulkDeleteDeals(ids: string[]): Promise<BulkDeleteResult> {
+  const admin = await requireAdmin();
+  if (ids.length === 0) return { ok: false, error: "No deals selected." };
+
+  const deletedIds: string[] = [];
+  let blocked = 0;
+  for (const id of ids) {
+    const r = await guardedDelete("deals", id, admin.email, { via: "deals_bulk" });
+    if (r.ok) deletedIds.push(id);
+    else blocked += 1;
+  }
+  refresh();
+  if (deletedIds.length === 0) {
+    return { ok: false, error: `None deleted — ${blocked} still referenced by inquiries or projects. Archive them instead.` };
+  }
+  return {
+    ok: true,
+    deletedIds,
+    message:
+      blocked > 0
+        ? `Deleted ${deletedIds.length}, kept ${blocked} still referenced.`
+        : `Deleted ${deletedIds.length} deal${deletedIds.length === 1 ? "" : "s"}.`,
+  };
 }
