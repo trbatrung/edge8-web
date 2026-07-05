@@ -160,6 +160,16 @@
   padding: 1px 7px;
   border-radius: 10px;
 }
+/* Nested subsection heading inside a nav group (e.g. CRM under Revenue). */
+.admin-nav-subhead {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--admin-sidebar-muted);
+  padding: 8px 10px 2px 12px;
+  user-select: none;
+}
+.admin-nav-link.is-sub { padding-left: 22px; }
 
 .admin-foot {
   border-top: 1px solid rgba(255, 255, 255, 0.08);
