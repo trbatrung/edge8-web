@@ -38,7 +38,7 @@ Then she turned and held the marker out to him.
 
 He took it. He looked for somewhere to start.
 
-Trevor. Trevor was not an agent, Trevor was a man who bought things. The licenses, then, one hundred forty of them. But a license was not an agent either, a license was a key, and a key was not an employee, and he could not have told her which box a seat belonged in, because a seat did not do anything for anybody. The bootcamp. A certificate was not a hire. Nine logins opened in ninety days, and he could not have said what one of the nine did, on which team, toward what, on any given Tuesday.
+Trevor. Trevor was not an agent, Trevor was a man who bought things. The licenses, then, one hundred forty of them. But a license was not an agent either, a license was a key, and a key was not an employee, and he could not have told her which box a seat belonged in, because a seat did not do anything for anybody. The bootcamp. Attendance was not a hire. Nine logins opened in ninety days, and he could not have said what one of the nine did, on which team, toward what, on any given Tuesday.
 
 He went down the chart box by box, the way a man pats every pocket for keys he already knows are lost. His eyes crossed the box that said Ray Delgado and kept moving, quickly, the way a man steps over a gap in a dock.
 

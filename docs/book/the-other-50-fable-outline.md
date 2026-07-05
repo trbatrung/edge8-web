@@ -105,7 +105,7 @@ Teaching happens through events. Every concept has a scene with a cost and a fac
 
 **Ch 1: The number that isn't there.** The board meeting. Ellery lays it bare: $400,000 over eighteen months. A director's salary, a stack of licenses, a company-wide bootcamp, a consultant's final deck, and not one skill the company actually owns. Her line: "We bought the tools everyone said to buy. Either the tools are broken or the leadership is. Which is it?" Marcus defends the spend. The board gives him one quarter.
 
-**Ch 2: The drawer of logins.** Marcus goes looking for "the AI program" and finds there is no program, just a drawer of logins, a stack of licenses, a certificate from the bootcamp, Trevor's latest demo. Everything was bought and nothing was built. There is nothing to point at, and no one who can do a thing the vendors did not hand them. The emptiness is concrete.
+**Ch 2: The drawer of logins.** Marcus goes looking for "the AI program" and finds there is no program, just a drawer of logins, a stack of licenses, a pile of attendance certificates from the bootcamp, Trevor's latest demo. Everything was bought and nothing was built. There is nothing to point at, and no one who can do a thing the vendors did not hand them. The emptiness is concrete.
 
 **Ch 3: Ray's quotes.** We meet Ray Delgado at the sales desk, quoting a complex job by hand the way he has for thirty years, warm and unhurried and beloved. The eleven-day quote is introduced as his, and as sacred. Marcus watches with pride and love and never once imagines touching it. The anchor is set early, and it is a person Marcus would defend to the end.
 
@@ -185,7 +185,7 @@ Opens with a structural seam and a short line back to the fable so every abstrac
 
 3. **Why the money fails: you bought instead of built.** The keystone diagnosis. The default AI investment is three spends, and all three are ways to avoid building the skill.
    - *Tools* buy the capability, so you never build the skill to direct it. You get a drawer of logins.
-   - *Bootcamps* buy knowledge in the abstract, so people learn about AI and come back with a certificate and no reps. Skill is not built in a classroom, it is built on your own workflows, your own information, your own standards.
+   - *Bootcamps* buy knowledge in the abstract. People attend, feel more productive, and come back with no reps and nothing proved, and the founder still cannot tell who has real AI aptitude and who was floundering. Skill is not built in a classroom, it is built on your own workflows, your own information, your own standards. (Hard guardrail: the sneer is attendance without proof, never certification. Certification that requires completing real challenges and proving the skill is the honest exception, and it must never be painted negatively anywhere in the book.)
    - *Consultants* rent the judgment, so when they leave, it leaves with them. You paid for an outcome, not a muscle.
    - *Why the leader cannot delegate this.* The three foundational skills are not technical work. They are leadership judgment: what good looks like, how the work should flow, what matters. Outsourcing them is outsourcing leadership. This is why founders who can build tend to win.
    - *The test: what did you keep?* After the spend, is there a durable skill your company now owns, or did the capability, the knowledge, or the judgment walk out with the tool, the trainer, or the consultant?

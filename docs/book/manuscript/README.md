@@ -2,7 +2,7 @@
 
 Working draft of the fable. Source of truth for cast, beat sheet, and style rules: [the outline](../the-other-50-fable-outline.md). The competing Chapter 1 openings (fable vs memoir) live in [../samples/](../samples/); `ch01` here is the canonical manuscript copy of the fable version.
 
-Hard rules for every chapter: no em or en dashes anywhere. Close third person on Marcus. One sustained scene per chapter, 900 to 2,000 words. Every concept arrives through a scene with a cost and a face. Priya never names a tool and never sells. No magic-wand AI.
+Hard rules for every chapter: no em or en dashes anywhere. Close third person on Marcus. One sustained scene per chapter, 900 to 2,000 words. Every concept arrives through a scene with a cost and a face. Priya never names a tool and never sells. No magic-wand AI. The sneer is attendance without proof, never certification: proof of work (challenges completed, units shipped, an editor's name on every piece) is the honest standard, and certification that requires proving the skill must never be painted negatively.
 
 ## Status
 

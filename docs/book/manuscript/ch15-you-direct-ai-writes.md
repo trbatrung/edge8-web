@@ -30,7 +30,7 @@ The moment never came. He understood every line, because every line was his. Som
 
 The humbling part arrived quietly, after, with the second cold coffee.
 
-No bootcamp could have taught him this morning. Not because the bootcamp was bad, but because the curriculum had been locked in his own head, unwritten, the whole time. The certificate on the heavy stock said FOUNDATIONS OF AI, and the foundation had turned out to be Fenwick, and weather, and what a promise was allowed to stand on, and no one on earth could have handed him that in a hotel ballroom, because it wasn't theirs to hand.
+No bootcamp could have taught him this morning. Not because the bootcamp was bad, but because the curriculum had been locked in his own head, unwritten, the whole time. The certificate on the heavy stock said he had attended FOUNDATIONS OF AI, and the foundation had turned out to be Fenwick, and weather, and what a promise was allowed to stand on, and no one on earth could have handed him that in a hotel ballroom, because it wasn't theirs to hand.
 
 You could buy the shelves. You could not buy the books. He got out the legal pad and wrote that down under the nine names, because it was the closest he had come yet to the sentence he owed Ellery Kwan in July.
 
@@ -46,6 +46,6 @@ Grace read the top page, then looked up at him over the readers she denied weari
 
 "Under what?" Grace asked, pen ready. "Where does it file?"
 
-He thought about the banker's box downstairs, the drawer upstairs, the card, the certificates on heavy stock, eighteen months of paper that ended in paper.
+He thought about the banker's box downstairs, the drawer upstairs, the card, the attendance certificates on heavy stock, eighteen months of paper that ended in paper.
 
 "Start a new drawer," he said.

@@ -58,7 +58,7 @@ That had never happened to him in this room. He reached for the floor instead, t
 
 "The bootcamp trained every employee we have," he said.
 
-"It certified every employee you have. Those are different words and you know it." She turned a page without hurry. "Operational check, then. Your average quote on a complex custom job. Eighteen months ago, what was it?"
+"It seated every employee you have. Nobody had to prove a thing at the end of it. Seated and trained are different words and you know it." She turned a page without hurry. "Operational check, then. Your average quote on a complex custom job. Eighteen months ago, what was it?"
 
 "Eleven days."
 

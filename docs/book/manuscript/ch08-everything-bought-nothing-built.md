@@ -4,7 +4,7 @@ The drive home from Priya's was forty minutes, and Marcus drove it slowly, radio
 
 He thought about Trevor most of the way.
 
-For eighteen months he had been grading Trevor the way you grade a machine that will not run right, patiently, then less patiently, waiting for the output. Somewhere around the county line the grade changed. Trevor had done, faithfully and on schedule, every line of a job description Marcus had signed without reading. Evaluate platforms. He had evaluated platforms; there were four of them. Build the vendor relationships. The vendors loved him. Manage the rollout, run enablement, and the rollout had been managed and the enablement run, and a hundred and fifty certificates said so. The one thing the paper had never asked him to do was build anything into anybody who worked at Halden, and so, in eighteen months, working hard the whole time, he never had.
+For eighteen months he had been grading Trevor the way you grade a machine that will not run right, patiently, then less patiently, waiting for the output. Somewhere around the county line the grade changed. Trevor had done, faithfully and on schedule, every line of a job description Marcus had signed without reading. Evaluate platforms. He had evaluated platforms; there were four of them. Build the vendor relationships. The vendors loved him. Manage the rollout, run enablement, and the rollout had been managed and the enablement run, and a hundred and fifty attendance certificates said so. The one thing the paper had never asked him to do was build anything into anybody who worked at Halden, and so, in eighteen months, working hard the whole time, he never had.
 
 You could not call a man incompetent for finishing the wrong list. Mis-hired, maybe. Mis-briefed, certainly. And the brief was Marcus's.
 
@@ -14,7 +14,7 @@ The story he told boards ended with the Meridian contract. The story started som
 
 Eighteen months ago he had bought four platforms and sent nobody anywhere.
 
-He went down the AI line the way he had gone through Grace's box, and this time he could read it. The licenses were capability, rented by the month, and they sat in a drawer because a rented capability with nobody trained under it is a drawer, whatever the invoice calls it. The bootcamp was knowledge, two days of it, and knowledge without practice had gone home as card stock. And Corrigan had been judgment, somebody else's judgment, hired by the pound, and it drove away in March with everything Halden had paid it to think.
+He went down the AI line the way he had gone through Grace's box, and this time he could read it. The licenses were capability, rented by the month, and they sat in a drawer because a rented capability with nobody trained under it is a drawer, whatever the invoice calls it. The bootcamp was knowledge, two days of it, and everyone had gone home feeling more capable, which was the product. Nobody had been asked to prove anything, so nothing was proved, and eighteen months later he could not have named which five of the hundred and fifty had a real gift for the work, because feeling productive leaves no ledger. And Corrigan had been judgment, somebody else's judgment, hired by the pound, and it drove away in March with everything Halden had paid it to think.
 
 Bought, bought, bought. Nothing built. Not because anyone had failed him. Because building was the one line that had never appeared on any invoice, and he was the only man in the company who could have written it in.
 
