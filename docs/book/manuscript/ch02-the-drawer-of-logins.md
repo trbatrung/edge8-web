@@ -34,7 +34,7 @@ Trevor's hands paused over the keyboard.
 
 Trevor sat with the question. Then he did something none of the software had done all afternoon. He answered it.
 
-"Honestly? The training, whatever people kept. The roadmap, if you count paper." A pause. "And me."
+"Honestly? The training, whatever people kept. A few of them still use the prompt tricks from day one. The roadmap, if you count paper." A pause. "And me."
 
 "And what did I hire you to do?"
 

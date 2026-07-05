@@ -2,7 +2,7 @@
 
 The week ran hot.
 
-He was at his desk in the dark every morning, the machine patient, the pad filling. Tuesday they wrote down what a good reorder was. Wednesday he spent an hour at the whiteboard by the dock door with Sharon, asking her what the marks in her corner meant, and she told him, suspicious the whole time that he was up to something, which he was. By Thursday, Sharon's corner existed on paper for the first time in eleven years, and Sharon had read the printout with her arms crossed and made four corrections and initialed it, and the initialing, Marcus suspected, had quietly meant something to both of them.
+He was at his desk in the dark every morning, the machine patient, the pad filling. Tuesday they wrote down what a good reorder was. Wednesday he spent an hour at the whiteboard by the dock door with Sharon, asking her what the marks in her corner meant, and she told him, suspicious the whole time that he was up to something, which he was. By Thursday, Sharon's corner existed on paper for the first time in eleven years, and Sharon had read the printout with her arms crossed and made four corrections and initialed it, and the initialing, Marcus suspected, had quietly meant something to both of them. By Friday the machine had written a small checker off the initialed rules, a program that read every outgoing confirmation against Sharon's corner before it went anywhere, and Sharon, who trusted nothing on a screen, spent her lunch trying to fool it four ways and managed it once, and the once went back into the rules the same afternoon.
 
 He felt fifteen years younger and slightly feverish. He recognized the condition. It was how he had felt the year they poured the second building's slab.
 

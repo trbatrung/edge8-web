@@ -52,7 +52,15 @@ He looked at the napkin. The hard part had been knowing what he meant. The hard 
 
 "None of it," he said.
 
-"None of it. And no engineer, no bootcamp, and no forty-one-slide deck could have written a word of it, because the material only exists in one place." She pointed the fork at him, briefly, and put it down. "Monday morning, before the floor wakes up. You, that machine you already pay for, and the napkin. Ask it to interview you about the rest. One question at a time. That's the whole assignment. You'll know by nine o'clock whether I'm wrong."
+"None of it. And no engineer, no bootcamp, and no forty-one-slide deck could have written a word of it, because the material only exists in one place." She pointed the fork at him, briefly, and put it down.
+
+"Three skills, Marcus. That's the whole second half, sitting under everything you watched at my shop. Deciding who does what, when some of the who are agents. Workflow design. You started that one in my parking lot, fourteen boxes, eleven of them waiting. Organizing what's true so a person or an agent can find it in seconds. Information architecture. Your nine names are page one of that. And this one." She tapped the napkin. "Writing instructions for machines. And I mean past prompts. The bootcamp did prompts, didn't it. A day on magic words."
+
+"A day and a half."
+
+"A prompt is a favor. You ask nicely and you hope. An instruction is a standard with consequences: workflows, rules, code when it needs to be code. You don't type the code, you direct and the machine writes it, but there is no directing off a cheat sheet." She slid the napkin back across. "Tools come and go. The day the vendors change everything, the three skills are what you still own. Which is why nobody could ever sell them to you."
+
+"Monday morning," she said, "before the floor wakes up. You, that machine you already pay for, and the napkin. Ask it to interview you about the rest. One question at a time. That's the whole assignment. You'll know by nine o'clock whether I'm wrong."
 
 She picked up the check over his objection, which he understood by now was not politeness but policy, and at the register she said the only encouraging thing she would say all day.
 

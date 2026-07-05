@@ -34,6 +34,8 @@ Hard rules for every chapter: no em or en dashes anywhere. Close third person on
 
 ## Continuity notes (established, do not contradict)
 
+- The three foundational skills land as scenes first, then are named once by Priya at the diner (ch14): workflow design (ch09/10), information architecture (ch11 to 13), creating instructions for AI (ch14/15). Instructions go beyond prompts: a prompt asks, an instruction governs (standards, documented workflows, code). The bootcamp's curriculum was prompt engineering (a day and a half of the two days); that contrast is load-bearing. The missing floor is concretely one central repository: a database for the facts that move plus one organized home for files and documented workflows.
+
 - Timeline: April board meeting (one fiscal quarter granted), the Tuesday visit about three weeks later, Ray refused the quoting work in mid-May, the hardest conversation in early June, Ray's capture month and exit at the end of June, the board's return after ninety days in July. Sam's ledger runs from early May (first weeks garbage, per Ch 31).
 - Props and motifs: Grace's printed packet tabbed in yellow, the legal pad and fat black pen, the phone in the truck, the login card with the temporary password, the compressor under the boardroom floor, the long red at Route 9 as Marcus's thinking chamber, pages squared with a thumb.
 - Numbers: $400K over eighteen months (Trevor $200K/yr for 13 months, 140 seats with 9 opened in 90 days, $38K bootcamp plus a stopped floor, Corrigan $62K, a 41-slide deck ending "next steps: continue the journey"). The complex custom quote: eleven days, later two.

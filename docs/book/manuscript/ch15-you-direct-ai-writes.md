@@ -26,7 +26,11 @@ Now write the instructions for an agent that drafts quotes to this standard. It 
 
 The instructions came back, and he read every line, braced for the moment it would leave him behind, the syntax, the technical part, the part that was for other people.
 
-The moment never came. He understood every line, because every line was his. Somewhere in the middle he caught himself reaching for the pen, marking a sentence, sharpening it the way he sharpened contract language, writing NO in a margin that wasn't paper, and he realized what he was doing. He was directing. Something that never got tired was writing. That was the whole of it. That was the entire mystery he had paid four hundred thousand dollars to keep at arm's length.
+The moment never came. He understood every line, because every line was his. Where the instructions needed machinery behind them, the checks, the lookups, a small program to run the verifying against the catalogue, the machine wrote that too, and he read what it wrote the way he read a subcontract. For meaning. The syntax was somebody else's trade, always had been, and it had never once been the point.
+
+Somewhere in the middle he caught himself reaching for the pen, marking a sentence, sharpening it the way he sharpened contract language, writing NO in a margin that wasn't paper, and he realized what he was doing. He was directing. Something that never got tired was writing. That was the whole of it. That was the entire mystery he had paid four hundred thousand dollars to keep at arm's length.
+
+And it was nothing like the cheat sheet. The bootcamp had spent its day and a half on prompts, clever ways to ask a machine for favors, and the cheat sheets had gone home with the certificates and been about as useful. This was a different animal. This was the thing he had been sharpening his whole life without a name for it: definitions, standards, what happens when a fact cannot be verified, who signs. A prompt asked. An instruction governed.
 
 The humbling part arrived quietly, after, with the second cold coffee.
 

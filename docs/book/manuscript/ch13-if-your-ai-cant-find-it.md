@@ -20,7 +20,9 @@ Marcus looked at the corrected draft on his desk, Dana's initials in the margin.
 
 "It doesn't exist."
 
-"If your AI can't find it, it doesn't exist," Priya said. "That's the rule. The whole rule. We say it around here the way some shops say safety first. And the second half, the half that makes it a religion instead of a poster: always be cataloguing. Nothing is ever done being written down, because the truth moves. Kessler was fourteen days once. Somebody has to notice when the truth moves and move the writing with it, forever, and that is the least glamorous sentence I will ever say to you, and it is the entire foundation of everything you watched at my shop."
+"If your AI can't find it, it doesn't exist," Priya said. "That's the rule. The whole rule. We say it around here the way some shops say safety first. And the second half, the half that makes it a religion instead of a poster: always be cataloguing. Nothing is ever done being written down, because the truth moves. Kessler was fourteen days once. Somebody has to notice when the truth moves and move the writing with it, forever, and that is the least glamorous sentence I will ever say to you, and it is the entire foundation of everything you watched at my shop.
+
+"And when I say written down, I don't mean memos in a shared folder. One place, Marcus. One repository for the whole company. A database for the facts that move, prices, lead times, customers, who decides what. One organized home for the files, the drawings, the standards, the workflows drawn the way you drew yours in my parking lot. If a thing isn't on that floor, it is not true at Halden, however many heads it lives in."
 
 Marcus wrote it on the pad. Both halves.
 
