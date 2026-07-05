@@ -210,7 +210,7 @@ export function DealsBoard({
               })()}
             </div>
             {c.columnId === HANDOFF_COLUMN_ID && (
-              <div style={{ display: "flex", gap: 6, marginTop: 8, flexWrap: "wrap" }} onClick={(e) => e.stopPropagation()}>
+              <div className="sap-card-handoff" style={{ display: "flex", gap: 6, marginTop: 8, flexWrap: "wrap" }} onClick={(e) => e.stopPropagation()}>
                 {rejecting === c.id ? (
                   <>
                     <select className="admin-input" style={{ maxWidth: 150, fontSize: 12 }} value={reason} onChange={(e) => setReason(e.target.value)}>
@@ -270,19 +270,111 @@ export function DealsBoard({
         eyebrow={selected ? humanize(selected.status) : ""}
         title={selected?.title || selected?.personName || "Deal"}
       >
-        {selected && <DealDetail card={selected} onSaved={() => router.refresh()} />}
+        {selected && (
+          <DealDetail
+            card={selected}
+            stages={columns.filter((c) => c.id !== HANDOFF_COLUMN_ID)}
+            lostSet={lostSet}
+            onChangeStage={applyMove}
+            onSaved={() => router.refresh()}
+          />
+        )}
       </DetailDrawer>
     </>
   );
 }
 
-function DealDetail({ card, onSaved }: { card: DealCard; onSaved: () => void }) {
+function DealDetail({
+  card,
+  stages,
+  lostSet,
+  onChangeStage,
+  onSaved,
+}: {
+  card: DealCard;
+  stages: KanbanColumn[];
+  lostSet: Set<string>;
+  onChangeStage: (cardId: string, toStageId: string, lostReason?: string) => void;
+  onSaved: () => void;
+}) {
   const [nextStep, setNextStep] = useState(card.nextStep ?? "");
   const [nextStepDate, setNextStepDate] = useState(card.nextStepDate ?? "");
   const [msg, setMsg] = useState<string | null>(null);
+  // Lost stages need a reason before the move commits; mirror the board banner
+  // flow but inline in the drawer so it stays visible above the board backdrop.
+  const [pendingLostStage, setPendingLostStage] = useState<string | null>(null);
+  const [lostReason, setLostReason] = useState("");
+  const pendingHandoff = card.handoffStatus === "pending";
 
   return (
     <>
+      <div style={{ marginBottom: 16 }}>
+        <div className="admin-label" style={{ marginBottom: 6 }}>
+          Stage
+        </div>
+        <select
+          className="admin-input"
+          aria-label="Deal stage"
+          value={pendingLostStage ?? (pendingHandoff ? "" : card.stageId ?? "")}
+          onChange={(e) => {
+            const to = e.target.value;
+            if (!to) return;
+            if (lostSet.has(to)) {
+              setPendingLostStage(to);
+              setLostReason("");
+            } else {
+              setPendingLostStage(null);
+              onChangeStage(card.id, to);
+            }
+          }}
+        >
+          {pendingHandoff && <option value="">Accept into stage…</option>}
+          {stages.map((s) => (
+            <option key={s.id} value={s.id}>
+              {s.label}
+            </option>
+          ))}
+        </select>
+        {pendingHandoff && (
+          <div className="admin-hint" style={{ marginTop: 6 }}>
+            Choosing a stage accepts the SDR handoff.
+          </div>
+        )}
+        {pendingLostStage && (
+          <div style={{ marginTop: 8, display: "flex", flexDirection: "column", gap: 8 }}>
+            <select
+              className="admin-input"
+              aria-label="Lost reason"
+              value={lostReason}
+              onChange={(e) => setLostReason(e.target.value)}
+            >
+              <option value="">Why was this deal lost?</option>
+              {LOST_REASONS.map(([v, l]) => (
+                <option key={v} value={v}>
+                  {l}
+                </option>
+              ))}
+            </select>
+            <div style={{ display: "flex", gap: 8 }}>
+              <button
+                type="button"
+                className="admin-btn admin-btn--danger"
+                disabled={!lostReason}
+                onClick={() => {
+                  onChangeStage(card.id, pendingLostStage, lostReason);
+                  setPendingLostStage(null);
+                }}
+              >
+                Mark lost
+              </button>
+              <button type="button" className="admin-btn" onClick={() => setPendingLostStage(null)}>
+                Cancel
+              </button>
+            </div>
+          </div>
+        )}
+      </div>
+
       <dl className="admin-kv">
         <dt>Status</dt>
         <dd>

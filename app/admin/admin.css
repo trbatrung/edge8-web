@@ -634,6 +634,10 @@ a.mp-kpi:hover { border-color: var(--admin-accent); transform: translateY(-1px);
 .sap-card-title { font-weight: 600; font-size: 13.5px; color: var(--admin-ink); }
 .sap-card-sub { font-size: 12px; color: var(--admin-muted); margin-top: 3px; }
 .sap-card-meta { display: flex; align-items: center; gap: 6px; margin-top: 8px; flex-wrap: wrap; }
+/* Handoff accept/reject controls sit on a draggable card face — keep tap
+   targets at the 44px WCAG 2.5.5 minimum so touch users can hit them. */
+.sap-card-handoff .admin-btn,
+.sap-card-handoff .admin-input { min-height: 44px; }
 
 /* ─── Responsive ──────────────────────────────────── */
 @media (max-width: 880px) {
