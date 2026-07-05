@@ -30,7 +30,7 @@ type TeamMember = {
 
 const one = <T,>(e: T | T[] | null): T | null => (Array.isArray(e) ? e[0] ?? null : e);
 const PAGE_SIZE = 25;
-const SORTABLE = new Set(["start_date", "created_at"]);
+const SORTABLE = new Set(["start_date", "created_at", "employee_number", "employment_type", "work_location", "status"]);
 
 export default async function TeamPage({ searchParams }: { searchParams: SearchParamsObj }) {
   const page = Math.max(1, Number(firstParam(searchParams.page) ?? "1") || 1);
@@ -58,10 +58,10 @@ export default async function TeamPage({ searchParams }: { searchParams: SearchP
         );
       },
     },
-    { key: "employee_number", header: "Employee #", cell: (r) => r.employee_number || <span className="admin-cell-muted">—</span> },
-    { key: "employment_type", header: "Type", cell: (r) => (r.employment_type ? <Badge>{humanize(r.employment_type)}</Badge> : <span className="admin-cell-muted">—</span>) },
-    { key: "work_location", header: "Location", cell: (r) => r.work_location || <span className="admin-cell-muted">—</span> },
-    { key: "status", header: "Status", cell: (r) => (r.status ? <Badge tone={statusTone(r.status)}>{humanize(r.status)}</Badge> : <span className="admin-cell-muted">—</span>) },
+    { key: "employee_number", header: "Employee #", sortable: true, cell: (r) => r.employee_number || <span className="admin-cell-muted">—</span> },
+    { key: "employment_type", header: "Type", sortable: true, cell: (r) => (r.employment_type ? <Badge>{humanize(r.employment_type)}</Badge> : <span className="admin-cell-muted">—</span>) },
+    { key: "work_location", header: "Location", sortable: true, cell: (r) => r.work_location || <span className="admin-cell-muted">—</span> },
+    { key: "status", header: "Status", sortable: true, cell: (r) => (r.status ? <Badge tone={statusTone(r.status)}>{humanize(r.status)}</Badge> : <span className="admin-cell-muted">—</span>) },
     { key: "start_date", header: "Started", sortable: true, cell: (r) => (r.start_date ? formatDate(r.start_date) : <span className="admin-cell-muted">—</span>) },
     {
       key: "portal",

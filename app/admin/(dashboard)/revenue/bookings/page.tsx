@@ -34,7 +34,7 @@ type Booking = {
 
 const one = <T,>(e: T | T[] | null): T | null => (Array.isArray(e) ? e[0] ?? null : e);
 const PAGE_SIZE = 25;
-const SORTABLE = new Set(["start_date", "created_at"]);
+const SORTABLE = new Set(["start_date", "kind", "party_size", "amount_cents", "status", "created_at"]);
 
 export default async function BookingsPage({ searchParams }: { searchParams: SearchParamsObj }) {
   const brandId = getActiveBrandId();
@@ -66,10 +66,11 @@ export default async function BookingsPage({ searchParams }: { searchParams: Sea
       },
     },
     { key: "product", header: "Product", cell: (r) => one(r.products)?.title || <span className="admin-cell-muted">—</span> },
-    { key: "kind", header: "Kind", cell: (r) => (r.kind ? <Badge>{humanize(r.kind)}</Badge> : <span className="admin-cell-muted">—</span>) },
+    { key: "kind", header: "Kind", sortable: true, cell: (r) => (r.kind ? <Badge>{humanize(r.kind)}</Badge> : <span className="admin-cell-muted">—</span>) },
     {
-      key: "dates",
+      key: "start_date",
       header: "Dates",
+      sortable: true,
       cell: (r) =>
         r.start_date ? (
           r.end_date ? `${formatDate(r.start_date)} → ${formatDate(r.end_date)}` : formatDate(r.start_date)
@@ -77,9 +78,9 @@ export default async function BookingsPage({ searchParams }: { searchParams: Sea
           <span className="admin-cell-muted">—</span>
         ),
     },
-    { key: "party_size", header: "Party", cell: (r) => r.party_size ?? <span className="admin-cell-muted">—</span> },
-    { key: "amount_cents", header: "Amount", cell: (r) => formatCents(r.amount_cents, r.currency ?? undefined) },
-    { key: "status", header: "Status", cell: (r) => (r.status ? <Badge tone={statusTone(r.status)}>{humanize(r.status)}</Badge> : <span className="admin-cell-muted">—</span>) },
+    { key: "party_size", header: "Party", sortable: true, cell: (r) => r.party_size ?? <span className="admin-cell-muted">—</span> },
+    { key: "amount_cents", header: "Amount", sortable: true, cell: (r) => formatCents(r.amount_cents, r.currency ?? undefined) },
+    { key: "status", header: "Status", sortable: true, cell: (r) => (r.status ? <Badge tone={statusTone(r.status)}>{humanize(r.status)}</Badge> : <span className="admin-cell-muted">—</span>) },
     { key: "created_at", header: "Added", sortable: true, cell: (r) => formatDate(r.created_at) },
   ];
 

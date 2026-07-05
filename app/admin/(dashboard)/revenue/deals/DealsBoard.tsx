@@ -72,6 +72,44 @@ function idleDays(updatedAt: string | null): number | null {
   return days >= 0 ? days : null;
 }
 
+type ListSort = { key: string; dir: "asc" | "desc" };
+
+function dealSortValue(c: DealCard, key: string, stageLabelMap: Map<string, string>): string | number | null {
+  switch (key) {
+    case "deal":
+      return (c.title || c.personName || c.companyName || "").toLowerCase();
+    case "stage":
+      return c.columnId === HANDOFF_COLUMN_ID ? "new from sdr" : (stageLabelMap.get(c.columnId) ?? "").toLowerCase();
+    case "amount":
+      return c.amountCents;
+    case "prob":
+      return c.probability;
+    case "nextstep":
+      return c.nextStepDate;
+    case "status":
+      return c.status ?? "";
+    default:
+      return null;
+  }
+}
+
+// Client-side sort for the list view. Empty/null values always sort last,
+// regardless of direction, so a click never buries the populated rows.
+function makeDealComparator(sort: ListSort, stageLabelMap: Map<string, string>) {
+  const mul = sort.dir === "desc" ? -1 : 1;
+  return (a: DealCard, b: DealCard) => {
+    const va = dealSortValue(a, sort.key, stageLabelMap);
+    const vb = dealSortValue(b, sort.key, stageLabelMap);
+    const aEmpty = va === null || va === undefined || va === "";
+    const bEmpty = vb === null || vb === undefined || vb === "";
+    if (aEmpty && bEmpty) return 0;
+    if (aEmpty) return 1;
+    if (bEmpty) return -1;
+    const d = typeof va === "number" && typeof vb === "number" ? va - vb : String(va).localeCompare(String(vb));
+    return d * mul;
+  };
+}
+
 function NextStepLine({ card }: { card: DealCard }) {
   if (card.status !== "open") return null;
   if (!card.nextStepDate) {
@@ -105,6 +143,7 @@ export function DealsBoard({
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
   const [showArchived, setShowArchived] = useState(false);
   const [bulkOpen, setBulkOpen] = useState(false);
+  const [listSort, setListSort] = useState<ListSort | null>(null);
   // Board (kanban) is the default; the last-picked view is remembered in
   // localStorage. Init to "board" on both server and first client render to
   // avoid a hydration mismatch, then hydrate the saved choice in an effect.
@@ -134,7 +173,13 @@ export function DealsBoard({
   const activeCards = cards.filter((c) => !c.archivedAt);
   const archivedCards = cards.filter((c) => c.archivedAt);
   const listCards = showArchived ? archivedCards : activeCards;
+  const stageLabelMap = new Map(columns.map((c) => [c.id, c.label]));
+  const sortedListCards = listSort ? [...listCards].sort(makeDealComparator(listSort, stageLabelMap)) : listCards;
   const selected = cards.find((c) => c.id === selectedId) ?? null;
+
+  function sortList(key: string) {
+    setListSort((s) => (s?.key === key ? { key, dir: s.dir === "asc" ? "desc" : "asc" } : { key, dir: "asc" }));
+  }
 
   function patchCard(id: string, patch: Partial<DealCard>) {
     setCards((cs) => cs.map((c) => (c.id === id ? { ...c, ...patch } : c)));
@@ -383,12 +428,14 @@ export function DealsBoard({
       ) : (
         <>
           <DealsList
-            cards={listCards}
+            cards={sortedListCards}
             columns={columns}
             selected={selectedIds}
             onToggle={toggleSelect}
             onToggleAll={toggleSelectAll}
             onRowClick={(c) => setSelectedId(c.id)}
+            sort={listSort}
+            onSort={sortList}
             emptyText={showArchived ? "No archived deals." : "No deals yet."}
           />
 
@@ -865,6 +912,8 @@ function DealsList({
   onToggle,
   onToggleAll,
   onRowClick,
+  sort,
+  onSort,
   emptyText,
 }: {
   cards: DealCard[];
@@ -873,10 +922,21 @@ function DealsList({
   onToggle: (id: string) => void;
   onToggleAll: () => void;
   onRowClick: (card: DealCard) => void;
+  sort: ListSort | null;
+  onSort: (key: string) => void;
   emptyText: string;
 }) {
   const stageLabel = new Map(columns.map((c) => [c.id, c.label]));
   const allSelected = cards.length > 0 && cards.every((c) => selected.has(c.id));
+
+  const sortableTh = (label: string, key: string, align?: "right") => (
+    <th style={align === "right" ? { textAlign: "right" } : undefined}>
+      <button type="button" className="admin-th-sort" onClick={() => onSort(key)}>
+        {label}
+        {sort?.key === key ? (sort.dir === "desc" ? " ↓" : " ↑") : ""}
+      </button>
+    </th>
+  );
 
   return (
     <div className="admin-table-wrap">
@@ -887,12 +947,12 @@ function DealsList({
               <th className="admin-cell-check">
                 <input type="checkbox" aria-label="Select all deals" checked={allSelected} onChange={onToggleAll} />
               </th>
-              <th>Deal</th>
-              <th>Stage</th>
-              <th style={{ textAlign: "right" }}>Amount</th>
-              <th style={{ textAlign: "right" }}>Prob</th>
-              <th>Next step</th>
-              <th>Status</th>
+              {sortableTh("Deal", "deal")}
+              {sortableTh("Stage", "stage")}
+              {sortableTh("Amount", "amount", "right")}
+              {sortableTh("Prob", "prob", "right")}
+              {sortableTh("Next step", "nextstep")}
+              {sortableTh("Status", "status")}
             </tr>
           </thead>
           <tbody>

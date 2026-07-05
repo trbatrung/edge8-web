@@ -29,7 +29,7 @@ type Person = {
 };
 
 const PAGE_SIZE = 25;
-const SORTABLE = new Set(["full_name", "email", "created_at"]);
+const SORTABLE = new Set(["full_name", "email", "phone", "persona", "source", "created_at"]);
 
 export default async function ContactsPage({ searchParams }: { searchParams: SearchParamsObj }) {
   const brandId = getActiveBrandId();
@@ -67,13 +67,14 @@ export default async function ContactsPage({ searchParams }: { searchParams: Sea
       ),
     },
     { key: "email", header: "Email", sortable: true, cell: (r) => <span className="admin-cell-muted">{r.email}</span> },
-    { key: "phone", header: "Phone", cell: (r) => r.phone || <span className="admin-cell-muted">—</span> },
+    { key: "phone", header: "Phone", sortable: true, cell: (r) => r.phone || <span className="admin-cell-muted">—</span> },
     {
       key: "persona",
       header: "Persona",
+      sortable: true,
       cell: (r) => (r.persona ? <Badge>{humanize(r.persona)}</Badge> : <span className="admin-cell-muted">—</span>),
     },
-    { key: "source", header: "Source", cell: (r) => <span className="admin-cell-muted">{r.source || "—"}</span> },
+    { key: "source", header: "Source", sortable: true, cell: (r) => <span className="admin-cell-muted">{r.source || "—"}</span> },
     {
       key: "flags",
       header: "Flags",

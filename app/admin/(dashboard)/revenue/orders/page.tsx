@@ -33,7 +33,7 @@ type Order = {
 
 const one = <T,>(e: T | T[] | null): T | null => (Array.isArray(e) ? e[0] ?? null : e);
 const PAGE_SIZE = 25;
-const SORTABLE = new Set(["amount_cents", "created_at"]);
+const SORTABLE = new Set(["amount_cents", "status", "payment_method", "created_at"]);
 
 export default async function OrdersPage({ searchParams }: { searchParams: SearchParamsObj }) {
   const brandId = getActiveBrandId();
@@ -66,8 +66,8 @@ export default async function OrdersPage({ searchParams }: { searchParams: Searc
     },
     { key: "product", header: "Product", cell: (r) => one(r.products)?.title || <span className="admin-cell-muted">—</span> },
     { key: "amount_cents", header: "Amount", sortable: true, cell: (r) => formatCents(r.amount_cents, r.currency ?? undefined) },
-    { key: "status", header: "Status", cell: (r) => (r.status ? <Badge tone={statusTone(r.status)}>{humanize(r.status)}</Badge> : <span className="admin-cell-muted">—</span>) },
-    { key: "payment_method", header: "Method", cell: (r) => r.payment_method || <span className="admin-cell-muted">—</span> },
+    { key: "status", header: "Status", sortable: true, cell: (r) => (r.status ? <Badge tone={statusTone(r.status)}>{humanize(r.status)}</Badge> : <span className="admin-cell-muted">—</span>) },
+    { key: "payment_method", header: "Method", sortable: true, cell: (r) => r.payment_method || <span className="admin-cell-muted">—</span> },
     { key: "created_at", header: "Added", sortable: true, cell: (r) => formatDate(r.created_at) },
   ];
 

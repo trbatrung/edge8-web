@@ -30,7 +30,7 @@ type Company = {
 };
 
 const PAGE_SIZE = 25;
-const SORTABLE = new Set(["name", "created_at"]);
+const SORTABLE = new Set(["name", "domain", "industry", "size_band", "country", "priority", "created_at"]);
 
 export default async function CompaniesPage({ searchParams }: { searchParams: SearchParamsObj }) {
   const page = Math.max(1, Number(firstParam(searchParams.page) ?? "1") || 1);
@@ -65,13 +65,14 @@ export default async function CompaniesPage({ searchParams }: { searchParams: Se
         </Link>
       ),
     },
-    { key: "domain", header: "Domain", cell: (r) => <span className="admin-cell-muted">{r.domain || "—"}</span> },
-    { key: "industry", header: "Industry", cell: (r) => r.industry || <span className="admin-cell-muted">—</span> },
-    { key: "size_band", header: "Size", cell: (r) => r.size_band || <span className="admin-cell-muted">—</span> },
-    { key: "country", header: "Country", cell: (r) => r.country || <span className="admin-cell-muted">—</span> },
+    { key: "domain", header: "Domain", sortable: true, cell: (r) => <span className="admin-cell-muted">{r.domain || "—"}</span> },
+    { key: "industry", header: "Industry", sortable: true, cell: (r) => r.industry || <span className="admin-cell-muted">—</span> },
+    { key: "size_band", header: "Size", sortable: true, cell: (r) => r.size_band || <span className="admin-cell-muted">—</span> },
+    { key: "country", header: "Country", sortable: true, cell: (r) => r.country || <span className="admin-cell-muted">—</span> },
     {
       key: "priority",
       header: "Priority",
+      sortable: true,
       cell: (r) => (
         <span style={{ display: "inline-flex", gap: 4 }}>
           {r.archived_at && <Badge tone="neutral">Archived</Badge>}
