@@ -25,9 +25,13 @@ function siteOrigin(): string {
 
 // Send the right email for the account's state: no login yet → Supabase invite
 // (creates the auth user, link lets them set a password); existing login →
-// password reset. Both land on /admin/reset-password via the auth callback.
+// password reset. These are generated server-side, so the link comes back via
+// the implicit flow with the session in the URL hash (#access_token=…). Land
+// straight on /admin/reset-password (which reads the hash) — NOT
+// /api/auth/callback, which only handles the PKCE ?code= flow used by the
+// browser-initiated login "forgot password" form.
 async function sendAccessEmail(email: string): Promise<Result> {
-  const redirectTo = `${siteOrigin()}/api/auth/callback?next=/admin/reset-password`;
+  const redirectTo = `${siteOrigin()}/admin/reset-password`;
   const existing = await findAuthUser(email);
   if (existing) {
     const { error } = await supabase.auth.resetPasswordForEmail(email, { redirectTo });
