@@ -7,6 +7,7 @@
   --admin-accent: var(--blue);            /* #287BE8 — inherit brand */
   --admin-accent-strong: var(--blue-bright);
   --admin-sidebar-bg: #04102d;            /* deep navy chrome */
+  --admin-sidebar-strong: #eaf0fb;        /* office headers — the top-rank landmark */
   --admin-sidebar-ink: #c7d2e4;
   --admin-sidebar-muted: #6b7a99;
   --admin-bg: #f7f8fa;
@@ -167,30 +168,46 @@
 .admin-profilemenu-signout { width: 100%; margin-top: 2px; }
 
 .admin-nav { flex: 1; padding: 4px 0 12px; }
-.admin-nav-group { padding: 8px 12px 2px; }
+.admin-nav-group { padding: 4px 12px 2px; }
+/* Office label (L1) — the top-rank landmark: brighter, heavier, sentence case. */
 .admin-nav-grouplabel {
-  font-size: 10.5px;
-  text-transform: uppercase;
-  letter-spacing: 0.7px;
-  color: var(--admin-sidebar-muted);
-  padding: 6px 10px 4px;
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  color: var(--admin-sidebar-strong);
+  padding: 8px 8px 5px 6px;
   user-select: none;
 }
 .admin-nav-grouptoggle {
   display: flex;
   width: 100%;
   align-items: center;
-  justify-content: space-between;
+  gap: 8px;
   background: none;
   border: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0;
   font: inherit;
-  font-size: 10.5px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--admin-sidebar-strong);
   text-align: left;
   cursor: pointer;
-  border-radius: 6px;
+  padding: 8px 8px 5px 6px;
+  margin-top: 6px;
+}
+/* Accent bar anchors each office header. */
+.admin-nav-grouptoggle::before {
+  content: "";
+  flex: none;
+  width: 3px;
+  height: 13px;
+  background: var(--admin-accent);
+  border-radius: 2px;
 }
 .admin-nav-grouptoggle:hover { color: #fff; }
 .admin-nav-caret {
+  margin-left: auto;
   font-size: 9px;
   opacity: 0.7;
   transition: transform var(--transition);
@@ -242,7 +259,12 @@
   border-radius: 6px;
 }
 .admin-nav-subtoggle:hover { color: #fff; }
-.admin-nav-link.is-sub { padding-left: 22px; }
+/* Guide rail binds a system's features (L3) to their eyebrow (L2). */
+.admin-nav-railgroup {
+  margin-left: 16px;
+  border-left: 1.5px solid rgba(255, 255, 255, 0.12);
+}
+.admin-nav-link.is-sub { padding-left: 12px; }
 
 .admin-signout {
   background: transparent;
