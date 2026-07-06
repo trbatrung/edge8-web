@@ -880,6 +880,16 @@ a.mp-kpi:hover { border-color: var(--admin-accent); transform: translateY(-1px);
 .admin-timeoff-preview { align-self: center; font-size: 13px; color: var(--admin-muted); }
 .admin-timeoff-actions { display: flex; gap: 6px; justify-content: flex-end; }
 .admin-btn--sm { padding: 5px 10px; font-size: 12.5px; }
+.admin-import-summary { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 4px; }
+.admin-import-json {
+  margin-top: 8px;
+  padding: 12px;
+  background: var(--admin-muted-bg);
+  border-radius: var(--admin-radius-sm);
+  font-size: 12px;
+  max-height: 480px;
+  overflow: auto;
+}
 
 /* ─── Confirm modal ───────────────────────────────── */
 .admin-modal-backdrop {

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { companyOs } from "@/lib/supabase";
 import { PageHead } from "@/components/admin/PageHead";
 import { MetricCard } from "@/components/admin/MetricCard";
@@ -73,6 +74,11 @@ export default async function TimeOffPage() {
         eyebrow="Operations"
         title="Time Off"
         sub="Request, approve, and track team leave."
+        action={
+          <Link href="/admin/operations/time-off/import" className="admin-btn">
+            Day Off import
+          </Link>
+        }
       />
 
       {error && <div className="admin-alert admin-alert--err">{error}</div>}
