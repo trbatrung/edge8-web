@@ -24,7 +24,8 @@ export default async function ContactDetailPage({ params }: { params: { id: stri
   const data = await getPerson360(params.id);
   if (!data) notFound();
 
-  const { person, inquiries, deals, orders, bookings, candidate, applications, documents, surveyResponses, interactions, meetings, transitions } = data;
+  const { person, inquiries, deals, orders, bookings, candidate, applications, documents, surveyResponses, interactions, meetings, transitions, companies } = data;
+  const primaryCompany = companies.find((c) => c.is_primary) ?? companies[0] ?? null;
   const name = person.full_name || person.preferred_name || person.email;
   const location = [person.city, person.state_province, person.country].filter(Boolean).join(", ");
 
@@ -313,6 +314,17 @@ export default async function ContactDetailPage({ params }: { params: { id: stri
             <dl className="admin-kv">
               <dt>Email</dt>
               <dd>{person.email}</dd>
+              <dt>Company</dt>
+              <dd>
+                {primaryCompany ? (
+                  <Link href={`/admin/revenue/companies/${primaryCompany.company_id}`}>
+                    {primaryCompany.name || "—"}
+                  </Link>
+                ) : (
+                  "—"
+                )}
+                {primaryCompany?.title ? ` · ${primaryCompany.title}` : ""}
+              </dd>
               <dt>Location</dt>
               <dd>{location || "—"}</dd>
               <dt>Timezone</dt>
