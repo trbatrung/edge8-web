@@ -1,13 +1,16 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { createBrowserSupabase } from "@/lib/supabase/browser";
 import { PasswordField } from "@/components/admin/PasswordField";
 
 export function ResetPasswordForm() {
   const router = useRouter();
-  const [supabase] = useState(() => createBrowserSupabase());
+  // Created lazily inside the effect below — in the browser only, never during
+  // the server prerender, where the public Supabase env vars are absent and
+  // createBrowserClient() would throw and fail the build.
+  const clientRef = useRef<ReturnType<typeof createBrowserSupabase> | null>(null);
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -23,6 +26,8 @@ export function ResetPasswordForm() {
   // cookies, which getSession() picks up.
   useEffect(() => {
     let active = true;
+    const supabase = createBrowserSupabase();
+    clientRef.current = supabase;
     const params = new URLSearchParams(window.location.hash.replace(/^#/, ""));
     const accessToken = params.get("access_token");
     const refreshToken = params.get("refresh_token");
@@ -51,7 +56,7 @@ export function ResetPasswordForm() {
     return () => {
       active = false;
     };
-  }, [supabase]);
+  }, []);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -65,6 +70,12 @@ export function ResetPasswordForm() {
     }
     setLoading(true);
     setError(null);
+    const supabase = clientRef.current;
+    if (!supabase) {
+      setError("Open the reset link from your email to set your password.");
+      setLoading(false);
+      return;
+    }
     const { error } = await supabase.auth.updateUser({ password });
     if (error) {
       setError(
