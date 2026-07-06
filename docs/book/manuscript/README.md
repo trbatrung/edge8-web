@@ -2,7 +2,7 @@
 
 Working draft of the fable. Source of truth for cast, beat sheet, and style rules: [the outline](../the-other-50-fable-outline.md). The competing Chapter 1 openings (fable vs memoir) live in [../samples/](../samples/); `ch01` here is the canonical manuscript copy of the fable version.
 
-Hard rules for every chapter: no em or en dashes anywhere. Close third person on Marcus. One sustained scene per chapter, 900 to 2,000 words. Every concept arrives through a scene with a cost and a face. Mai never names a tool and never sells. No magic-wand AI. The sneer is attendance without proof, never certification: proof of work (challenges completed, units shipped, an editor's name on every piece) is the honest standard, and certification that requires proving the skill must never be painted negatively.
+Hard rules for every chapter: no em or en dashes anywhere. Close third person on Marcus. One sustained scene per chapter, 900 to 2,000 words. Every concept arrives through a scene with a cost and a face. Priya never names a tool and never sells. No magic-wand AI. The sneer is attendance without proof, never certification: proof of work (challenges completed, units shipped, an editor's name on every piece) is the honest standard, and certification that requires proving the skill must never be painted negatively.
 
 ## Status
 
@@ -10,7 +10,7 @@ Hard rules for every chapter: no em or en dashes anywhere. Close third person on
 
 - ch01 The number that isn't there
 - ch02 The drawer of logins
-- ch03 Ron's quotes
+- ch03 Ray's quotes
 - ch04 The private admission
 - ch05 The question that lands like a slap
 - ch06 Come watch a Tuesday
@@ -34,9 +34,9 @@ Hard rules for every chapter: no em or en dashes anywhere. Close third person on
 
 ## Continuity notes (established, do not contradict)
 
-- The three foundational skills land as scenes first, then are named once by Mai at the diner (ch14): workflow design (ch09/10), information architecture (ch11 to 13), creating instructions for AI (ch14/15). Instructions go beyond prompts: a prompt asks, an instruction governs (standards, documented workflows, code). The bootcamp's curriculum was prompt engineering (a day and a half of the two days); that contrast is load-bearing. The missing floor is concretely one central repository: a database for the facts that move plus one organized home for files and documented workflows.
+- The three foundational skills land as scenes first, then are named once by Priya at the diner (ch14): workflow design (ch09/10), information architecture (ch11 to 13), creating instructions for AI (ch14/15). Instructions go beyond prompts: a prompt asks, an instruction governs (standards, documented workflows, code). The bootcamp's curriculum was prompt engineering (a day and a half of the two days); that contrast is load-bearing. The missing floor is concretely one central repository: a database for the facts that move plus one organized home for files and documented workflows.
 
-- Timeline: April board meeting (one fiscal quarter granted), the Tuesday visit about three weeks later, Ron refused the quoting work in mid-May, the hardest conversation in early June, Ron's capture month and exit at the end of June, the board's return after ninety days in July. Cham's ledger runs from early May (first weeks garbage, per Ch 31).
+- Timeline: April board meeting (one fiscal quarter granted), the Tuesday visit about three weeks later, Ray refused the quoting work in mid-May, the hardest conversation in early June, Ray's capture month and exit at the end of June, the board's return after ninety days in July. Sam's ledger runs from early May (first weeks garbage, per Ch 31).
 - Props and motifs: Grace's printed packet tabbed in yellow, the legal pad and fat black pen, the phone in the truck, the login card with the temporary password, the compressor under the boardroom floor, the long red at Route 9 as Marcus's thinking chamber, pages squared with a thumb.
-- Numbers: $400K over eighteen months (Steve $200K/yr for 13 months, 140 seats with 9 opened in 90 days, $38K bootcamp plus a stopped floor, Corrigan $62K, a 41-slide deck ending "next steps: continue the journey"). The complex custom quote: eleven days, later two.
-- People: Walt Breen (chair), Bill Foster (ex-operator, ran a plant twelve years), Grace, Steve Marsh, Ron Hale (63, employee number two, wife Marion), Dan Mercer, Cham Ridley, Casey (young inside rep), Mai Bennett (custom metal fabrication two towns over, scheduler Bev), Jocelyn (daughter, hospital foundation), Walter Brandt (medical buildings, the customer later lost), Caldwell County courthouse (Ch 3 quote), Tomas and Dale Pruitt (five-axis school in Cincinnati).
+- Numbers: $400K over eighteen months (Trevor $200K/yr for 13 months, 140 seats with 9 opened in 90 days, $38K bootcamp plus a stopped floor, Corrigan $62K, a 41-slide deck ending "next steps: continue the journey"). The complex custom quote: eleven days, later two.
+- People: Walt Breen (chair), Ellery Kwan (ex-operator, ran a plant twelve years), Grace, Trevor Nash, Ray Delgado (63, employee number two, wife Marion), Dana Whitfield, Sam Ridley, Casey (young inside rep), Priya Okonkwo-Reyes (custom metal fabrication two towns over, scheduler Bev), Jocelyn (daughter, hospital foundation), Walter Brandt (medical buildings, the customer later lost), Caldwell County courthouse (Ch 3 quote), Tomas and Dale Pruitt (five-axis school in Cincinnati).
