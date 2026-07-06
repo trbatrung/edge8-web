@@ -4,7 +4,7 @@ The brochure was on his desk by Wednesday, because Grace was efficient even in t
 
 DIRECTING AI: A STRATEGIC INTENSIVE FOR SENIOR EXECUTIVES. Four days in Scottsdale. A faculty of practitioners. A capstone simulation. Fourteen thousand dollars, not counting the room, and a photograph of men his age in open collars looking capably at a screen.
 
-He read it twice, and caught himself nodding, and the nodding was what scared him. He knew the shape of this decision. It was the shape of every decision in Grace's box downstairs: a check, written at the problem, from a safe distance. He put the brochure face down, which was becoming a habit with documents, and asked Grace to get Priya Okonkwo-Reyes on the phone.
+He read it twice, and caught himself nodding, and the nodding was what scared him. He knew the shape of this decision. It was the shape of every decision in Grace's box downstairs: a check, written at the problem, from a safe distance. He put the brochure face down, which was becoming a habit with documents, and asked Grace to get Mai Bennett on the phone.
 
 She came on at six, with shop noise dying behind her.
 
@@ -16,7 +16,7 @@ There was a pause on the line, and in the pause he could hear her deciding somet
 
 "Nobody," she said.
 
-"Priya."
+"Mai."
 
 "Nobody, Marcus. I built the first of it myself. Nights, at my kitchen table, for the better part of a year, and I was bad at it for months. Then my people built the rest, on their own jobs, because they'd watched me be bad at it and live."
 
@@ -34,7 +34,7 @@ He tried the other doors, one at a time, and she closed them without slamming an
 
 The line was quiet a moment.
 
-"Come watch a Tuesday," Priya said.
+"Come watch a Tuesday," Mai said.
 
 "What?"
 
@@ -54,7 +54,7 @@ He turned the brochure over, looked at the men in the open collars, turned it ba
 
 "Miss what?"
 
-"That's what everybody asks," Priya said, and for the first time in the call she sounded almost amused. "Seven o'clock, Marcus."
+"That's what everybody asks," Mai said, and for the first time in the call she sounded almost amused. "Seven o'clock, Marcus."
 
 She hung up the way shop people hang up, without ceremony.
 
@@ -68,7 +68,7 @@ He thought about it.
 
 "Tell them I'm at a shop two towns over," he said, "watching somebody work."
 
-Thursday morning Trevor appeared in his doorway with a legal pad of his own.
+Thursday morning Steve appeared in his doorway with a legal pad of his own.
 
 "Grace mentioned Tuesday," he said. "The fabricator visit. I think it's a great instinct. Let me build you a brief. Their probable stack, an evaluation rubric, the questions worth asking. And I'm glad to drive out with you and take the notes, so you can stay at altitude."
 
@@ -76,10 +76,10 @@ It was, Marcus thought, exactly the right offer. It was thorough and professiona
 
 "No brief," Marcus said. "No rubric. And it's just me going."
 
-Trevor blinked. "Can I ask what the objective is?"
+Steve blinked. "Can I ask what the objective is?"
 
 Marcus looked at the legal pad in the doorway, and then at his own on the desk, where the login card had sat since the night he finally used the password, square in the middle, waiting for him to decide what it meant.
 
 "I don't know yet," he said. "That's the objective."
 
-He heard how it sounded. Trevor, to his credit, wrote nothing down. He stood there another moment, a man listening for instructions in a language he had been hired to translate, and then he went back down the hall, and Marcus turned the card over once on the pad and left it where it lay.
+He heard how it sounded. Steve, to his credit, wrote nothing down. He stood there another moment, a man listening for instructions in a language he had been hired to translate, and then he went back down the hall, and Marcus turned the card over once on the pad and left it where it lay.

@@ -4,17 +4,17 @@ The box was on his desk by four, and Grace had labeled it, because Grace labeled
 
 Marcus took off his jacket and went through it the way he went through everything, front to back, pen in hand.
 
-The invoices were in order. That was the first thing he noticed, and for half an hour it comforted him. Licenses, four platforms, the renewal dates staggered like crop rotation. The bootcamp, one invoice, net thirty, paid on time. The Corrigan Group, three progress billings and a final. Trevor's offer letter, his relocation, his first-year review, which Marcus had signed and, he could now see, had not read. Twenty-two years of buying machines had taught him how to read paper, and the paper was clean.
+The invoices were in order. That was the first thing he noticed, and for half an hour it comforted him. Licenses, four platforms, the renewal dates staggered like crop rotation. The bootcamp, one invoice, net thirty, paid on time. The Corrigan Group, three progress billings and a final. Steve's offer letter, his relocation, his first-year review, which Marcus had signed and, he could now see, had not read. Twenty-two years of buying machines had taught him how to read paper, and the paper was clean.
 
 It took him until five to name what was bothering him. When Halden bought the five-axis, the paper ended at a machine. You could follow the invoices out of the folder and down the stairs and across the floor, and at the end of them there was a thing, bolted to the concrete, making parts. He kept following this paper and it kept ending in more paper.
 
-At the bottom of the box was a manila envelope of certificates. A hundred and fifty of them, one page each, heavy stock. CERTIFICATE OF ATTENDANCE: FOUNDATIONS OF AI FOR THE MODERN WORKFORCE. He went through the names the way a man goes through old photographs. Tomas. Dana. The two kids in purchasing. Near the middle he found his own. MARCUS VANCE, in a font meant to look like handwriting. He had sat in the back the first morning, taking calls in the hallway through most of it. He did not remember there being a second day. The paper said he had been in the room. It had no way of knowing better, which told him what the other hundred and forty-nine were worth. Nobody had been asked to prove anything at the end of the two days. Nobody had even been asked to stay.
+At the bottom of the box was a manila envelope of certificates. A hundred and fifty of them, one page each, heavy stock. CERTIFICATE OF ATTENDANCE: FOUNDATIONS OF AI FOR THE MODERN WORKFORCE. He went through the names the way a man goes through old photographs. Tomas. Dan. The two kids in purchasing. Near the middle he found his own. MARCUS VANCE, in a font meant to look like handwriting. He had sat in the back the first morning, taking calls in the hallway through most of it. He did not remember there being a second day. The paper said he had been in the room. It had no way of knowing better, which told him what the other hundred and forty-nine were worth. Nobody had been asked to prove anything at the end of the two days. Nobody had even been asked to stay.
 
-Trevor Nash's office was two doors down, and Trevor was in it, because Trevor was always in it, and his screen was always beautiful.
+Steve Marsh's office was two doors down, and Steve was in it, because Steve was always in it, and his screen was always beautiful.
 
 "Marcus. Perfect timing. The new release dropped this morning, you have to see what they did with the workflow builder."
 
-He let Trevor run for a few minutes. It was impressive. It was always impressive: windows sliding into windows, a diagram assembling itself out of nothing, an assistant summarizing a document nobody at Halden had written. Trevor narrated it the way young men narrate sports.
+He let Steve run for a few minutes. It was impressive. It was always impressive: windows sliding into windows, a diagram assembling itself out of nothing, an assistant summarizing a document nobody at Halden had written. Steve narrated it the way young men narrate sports.
 
 "Show me ours," Marcus said.
 
@@ -22,7 +22,7 @@ He let Trevor run for a few minutes. It was impressive. It was always impressive
 
 "The board wants to know what we got for the money. So show me the part that's ours. Our quotes, our purchase orders, our lead times, inside any of this. Whatever we built."
 
-Trevor's hands paused over the keyboard.
+Steve's hands paused over the keyboard.
 
 "The pilot in the spring touched live data. Read-only, but the demo..."
 
@@ -30,9 +30,9 @@ Trevor's hands paused over the keyboard.
 
 "We paused it. There were the IT concerns, and then Corrigan recommended holding the integration until the platform decision was final." None of it was a lie, and none of it was an excuse either. It was a schedule, faithfully kept. "The next phase..."
 
-"Trevor." Marcus said it without any edge, which surprised them both. "If every vendor we pay shut us off tomorrow morning, what would still be here? One thing we could do, us, this building, that we couldn't do eighteen months ago."
+"Steve." Marcus said it without any edge, which surprised them both. "If every vendor we pay shut us off tomorrow morning, what would still be here? One thing we could do, us, this building, that we couldn't do eighteen months ago."
 
-Trevor sat with the question. Then he did something none of the software had done all afternoon. He answered it.
+Steve sat with the question. Then he did something none of the software had done all afternoon. He answered it.
 
 "Honestly? The training, whatever people kept. A few of them still use the prompt tricks from day one. The roadmap, if you count paper." A pause. "And me."
 
@@ -42,11 +42,11 @@ Trevor sat with the question. Then he did something none of the software had don
 
 Marcus waited for the end of the list, the part with Halden in it. An outcome. A number. Anything with a floor under it. The list was over.
 
-"That's the job description," Trevor said quietly. "I wrote it. You signed it."
+"That's the job description," Steve said quietly. "I wrote it. You signed it."
 
 Marcus went back to his office and did not turn on the light. The floor below the window was shutting down, crew by crew, the way it did, needing nothing from him.
 
-He opened the top drawer of his desk. Pens, a folding rule, a lighter he had confiscated from a finisher in 2009. And the card, where it had lived for fourteen months: HALDEN FURNISH, M. VANCE, a username, and a temporary password in Trevor's neat block printing.
+He opened the top drawer of his desk. Pens, a folding rule, a lighter he had confiscated from a finisher in 2009. And the card, where it had lived for fourteen months: HALDEN FURNISH, M. VANCE, a username, and a temporary password in Steve's neat block printing.
 
 The computer sat on the credenza, angled toward Grace's chair, because Grace was the one who used it. Marcus pulled it around, typed the username with two fingers, then the password, and the screen thought about it and let him in.
 

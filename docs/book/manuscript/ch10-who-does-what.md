@@ -1,6 +1,6 @@
 # Chapter 10: Who does what
 
-He was halfway to the truck when he turned around and came back up her stairs, and Priya looked up from her desk as if she had been timing him.
+He was halfway to the truck when he turned around and came back up her stairs, and Mai looked up from her desk as if she had been timing him.
 
 "One more question. The real one."
 
@@ -24,13 +24,13 @@ He was halfway to the truck when he turned around and came back up her stairs, a
 
 "You said that before. That they find something anyway."
 
-"The bad ones guess politely," Priya said. "Politely is the dangerous part. A man who's guessing sounds like he's guessing. An agent that's guessing sounds like a printed page." She looked at him. "Which is why every agent in this building has one rule burned in above every other rule, and a person whose name goes on the output. You design the who. You don't skip the who."
+"The bad ones guess politely," Mai said. "Politely is the dangerous part. A man who's guessing sounds like he's guessing. An agent that's guessing sounds like a printed page." She looked at him. "Which is why every agent in this building has one rule burned in above every other rule, and a person whose name goes on the output. You design the who. You don't skip the who."
 
 Marcus looked at the four boxes a while.
 
 "It's a floor layout," he said slowly. "That's all this is. It's the first year in the building and I'm deciding where the saws go and which bench feeds which bench and who's standing at each one. I've done this."
 
-"You've done this," Priya agreed. "Twenty-two years of it. Nobody at that bootcamp told you that, did they. That the second half of the job would turn out to be the first skill you ever had."
+"You've done this," Mai agreed. "Twenty-two years of it. Nobody at that bootcamp told you that, did they. That the second half of the job would turn out to be the first skill you ever had."
 
 She walked him down herself this time. At the door to the lot she stopped.
 
@@ -40,7 +40,7 @@ He sat in her parking lot with the legal pad against the wheel and did it before
 
 It took fourteen boxes.
 
-The request came in to Ray, or to Casey if Ray was walking a site, and sat until Ray read it. Drawings went out to the floor for a look and came back when they came back. Suppliers got called, and called back, or didn't, and got called again. The folder went to the controller for rates, which meant it waited for Thursday, because rates were a Thursday thing. Somewhere in the second week it came upstairs for his signature and sat in his own inbox, and he wrote HOLD, or FINE, or SHARPEN THIS, and it went back down. Fourteen boxes, and when he was finished he made himself count the ones where work was actually happening, pencil moving, mind engaged, and the ones where the job was simply standing in line, waiting for a particular head to be free.
+The request came in to Ron, or to Casey if Ron was walking a site, and sat until Ron read it. Drawings went out to the floor for a look and came back when they came back. Suppliers got called, and called back, or didn't, and got called again. The folder went to the controller for rates, which meant it waited for Thursday, because rates were a Thursday thing. Somewhere in the second week it came upstairs for his signature and sat in his own inbox, and he wrote HOLD, or FINE, or SHARPEN THIS, and it went back down. Fourteen boxes, and when he was finished he made himself count the ones where work was actually happening, pencil moving, mind engaged, and the ones where the job was simply standing in line, waiting for a particular head to be free.
 
 Eleven of the fourteen were waiting.
 
@@ -50,7 +50,7 @@ Most of the eleven days, drawn honestly, was the job standing in line outside on
 
 He sat in her lot until he had it all down, boxes and arrows and the waiting drawn as waiting. It was ugly, and it was his, and drawing it had taken forty minutes he would once have spent on the phone.
 
-Priya's question from the parking lot of Antonelli's came back to him, the one he had failed in front of her. How much of your week goes to leading the AI. Not buying it. Leading it.
+Mai's question from the parking lot of Antonelli's came back to him, the one he had failed in front of her. How much of your week goes to leading the AI. Not buying it. Leading it.
 
 He looked at the pad against the wheel.
 

@@ -2,19 +2,19 @@
 
 Marcus made the forty-minute drive with three defenses ready.
 
-He had built them the way he built everything that mattered, out loud, alone in the truck at red lights. One: her shop was not his shop. Steel was not walnut, and whatever worked in one would break in the other. Two: she had hired someone. Whatever she had said on the phone, somewhere in that building sat a quiet, expensive person doing the job Trevor had been hired to do, and today he would find them. Three: at the bottom of all of it there would be a product with a name on it, and a thing with a name could be bought. He still had a budget line. For one more quarter, he still had a budget line.
+He had built them the way he built everything that mattered, out loud, alone in the truck at red lights. One: her shop was not his shop. Steel was not walnut, and whatever worked in one would break in the other. Two: she had hired someone. Whatever she had said on the phone, somewhere in that building sat a quiet, expensive person doing the job Steve had been hired to do, and today he would find them. Three: at the bottom of all of it there would be a product with a name on it, and a thing with a name could be bought. He still had a budget line. For one more quarter, he still had a budget line.
 
 By ten in the morning the first two were gone.
 
 The shop was his shop. Smaller, and cut in steel instead of walnut, but the same animal: one-off custom work, hot deadlines, a floor that had grown one bay at a time for twenty years. Even the gray of the walls was the gray of his walls. He had come braced for a showroom and gotten a Tuesday, and he understood, standing in the middle of it, that this was the point.
 
-At seven Priya had walked him to the edge of the morning meeting and said nothing. A scheduler named Bev, sixty if she was a day, ran it off a single sheet in fourteen minutes. Every job, every date, every exception. Twice somebody asked a question, and twice Bev answered it by pointing at a line on the sheet instead of at a person. Halfway through she said, "The agent flagged three purchase orders overnight. Two were real. They're fixed," and nobody looked up, and the meeting moved on. Marcus heard the word the way you hear a stranger's name spoken at a family table.
+At seven Mai had walked him to the edge of the morning meeting and said nothing. A scheduler named Bev, sixty if she was a day, ran it off a single sheet in fourteen minutes. Every job, every date, every exception. Twice somebody asked a question, and twice Bev answered it by pointing at a line on the sheet instead of at a person. Halfway through she said, "The agent flagged three purchase orders overnight. Two were real. They're fixed," and nobody looked up, and the meeting moved on. Marcus heard the word the way you hear a stranger's name spoken at a family table.
 
 At eight he stopped beside a press brake where a screen hung over the bay: the job drawing, the weld spec, the customer's last three changes, all in one place. "Who built this for you?" Marcus asked, and braced for the name of a consultant.
 
 The operator looked confused by the question. "I wrote it," he said. "Took me most of a winter to get it right."
 
-But the thing that undid him was quieter than any of that. In three hours on her floor, nobody asked Priya a question she had to answer from memory. One woman brought her a decision, already made, and left with a nod. At Halden, Marcus could not cross his own floor without collecting five questions, and he had spent twenty-two years calling that being needed.
+But the thing that undid him was quieter than any of that. In three hours on her floor, nobody asked Mai a question she had to answer from memory. One woman brought her a decision, already made, and left with a nod. At Halden, Marcus could not cross his own floor without collecting five questions, and he had spent twenty-two years calling that being needed.
 
 At noon she took him up to her office. A desk, two chairs, a whiteboard running the length of one wall. She wiped the board clean with the side of her fist and picked up a marker.
 
@@ -24,9 +24,9 @@ At noon she took him up to her office. A desk, two chairs, a whiteboard running 
 
 "I want your org chart."
 
-He gave it to her the way he would have given it to a bank. Sales and estimating: "Ray Delgado. It's one desk." Something in his voice put a fence around the name, the tone he used when a customer asked whether the five-axis ever went down. He heard it himself. If Priya heard it, she left it alone, and wrote Ray Delgado in the box.
+He gave it to her the way he would have given it to a bank. Sales and estimating: "Ron Hale. It's one desk." Something in his voice put a fence around the name, the tone he used when a customer asked whether the five-axis ever went down. He heard it himself. If Mai heard it, she left it alone, and wrote Ron Hale in the box.
 
-Operations, Dana Whitfield. Procurement, two buyers. "Who do they go to when a supplier slips?" "Dana." "You said Dana ran operations." "She does." Priya wrote Dana's name a second time and said nothing. HR, two people, drowning. Finance. Drafting. Then the floor: machining, finishing, assembly, shipping, a name over each.
+Operations, Dan Mercer. Procurement, two buyers. "Who do they go to when a supplier slips?" "Dan." "You said Dan ran operations." "He does." Mai wrote Dan's name a second time and said nothing. HR, two people, drowning. Finance. Drafting. Then the floor: machining, finishing, assembly, shipping, a name over each.
 
 She drew fast, and she drew every box twice as wide as the names needed. He put it down to habit.
 
@@ -38,15 +38,15 @@ Then she turned and held the marker out to him.
 
 He took it. He looked for somewhere to start.
 
-Trevor. Trevor was not an agent, Trevor was a man who bought things. The licenses, then, one hundred forty of them. But a license was not an agent either, a license was a key, and a key was not an employee, and he could not have told her which box a seat belonged in, because a seat did not do anything for anybody. The bootcamp. Attendance was not a hire. Nine logins opened in ninety days, and he could not have said what one of the nine did, on which team, toward what, on any given Tuesday.
+Steve. Steve was not an agent, Steve was a man who bought things. The licenses, then, one hundred forty of them. But a license was not an agent either, a license was a key, and a key was not an employee, and he could not have told her which box a seat belonged in, because a seat did not do anything for anybody. The bootcamp. Attendance was not a hire. Nine logins opened in ninety days, and he could not have said what one of the nine did, on which team, toward what, on any given Tuesday.
 
-He went down the chart box by box, the way a man pats every pocket for keys he already knows are lost. His eyes crossed the box that said Ray Delgado and kept moving, quickly, the way a man steps over a gap in a dock.
+He went down the chart box by box, the way a man pats every pocket for keys he already knows are lost. His eyes crossed the box that said Ron Hale and kept moving, quickly, the way a man steps over a gap in a dock.
 
 He did not add one. The wide boxes sat there, each with its empty half, and he understood at last why she had drawn them that way.
 
 He set the marker down on the tray.
 
-Priya let the silence sit. When she spoke there was nothing triumphant in it. She sounded like a woman reading a diagnosis she had once read about herself.
+Mai let the silence sit. When she spoke there was nothing triumphant in it. She sounded like a woman reading a diagnosis she had once read about herself.
 
 "You didn't get a better tool. Your job doubled, and you never staffed the second half. Your org chart has no agents on it."
 
@@ -64,11 +64,11 @@ Then she picked the marker back up and drew one long line under the whole chart,
 
 Marcus looked at the drawing. Two gaps in one picture: the empty half of every box, and the bare floor under all of them, and between the two, everything he had spent eighteen months and four hundred thousand dollars not looking at. Bev's single sheet. The operator's winter. A purchase order fixed overnight by something nobody looked up at. A woman arriving with a decision instead of a question.
 
-"Where do your people go," Priya said quietly, "when they need to know what's true?"
+"Where do your people go," Mai said quietly, "when they need to know what's true?"
 
-"They ask Dana."
+"They ask Dan."
 
-"And when Dana's out?"
+"And when Dan's out?"
 
 "They wait."
 
@@ -80,7 +80,7 @@ There was an argument to make. There was always an argument, he had made them hi
 
 "Can I photograph this?" he asked finally, and reached for a phone that was, as it had been for twenty years, out in the truck.
 
-Priya held out hers. He shook his head, took his legal pad off the chair where it had sat all morning, and copied the whole thing in black pen. Every box, every name, the wide empty halves, the line, the nothing under the line. It took a while. She let him.
+Mai held out hers. He shook his head, took his legal pad off the chair where it had sat all morning, and copied the whole thing in black pen. Every box, every name, the wide empty halves, the line, the nothing under the line. It took a while. She let him.
 
 "What do I owe you for the day?" he asked at the door.
 

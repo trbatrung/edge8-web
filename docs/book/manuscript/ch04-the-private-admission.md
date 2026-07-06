@@ -4,7 +4,7 @@ Jocelyn came out on Sunday, the way she did once a month or so, with bread from 
 
 She ran programs for a hospital foundation in the city, and she talked about it while he cooked. Somewhere in it she mentioned, in passing, that she had spent the drive out dictating donor letters to something on her phone, and that it had drafted all forty by the time she parked, in her voice, and that she had fixed three of them and sent the rest. She said it the way she would have said she stopped for gas. He stood at the stove with his back to her and heard the whole four hundred thousand dollars go by in one sentence.
 
-Over dinner she asked about the board meeting, because Grace talked to her more than either of them admitted, and he gave her the performance. Ellery's folder. The one-quarter ultimatum, delivered the way he delivered it at the club, timed, with the pauses in it. He was good at the story by now. That was the problem with him and stories.
+Over dinner she asked about the board meeting, because Grace talked to her more than either of them admitted, and he gave her the performance. Bill's folder. The one-quarter ultimatum, delivered the way he delivered it at the club, timed, with the pauses in it. He was good at the story by now. That was the problem with him and stories.
 
 Jocelyn did not laugh in any of the places the men at the club had laughed.
 
@@ -16,7 +16,7 @@ Jocelyn did not laugh in any of the places the men at the club had laughed.
 
 He looked at his plate. Then, because it was Jocelyn, and because the kitchen was the one room left where he had never once been a chief executive, he told her the true version. The line that wasn't there. The question about the tools and the leadership. The license report he had laid face down, and the login card in his desk drawer, fourteen months old, with the temporary password that had told the truth about him all along.
 
-And the part he had not said out loud, even to himself, until just now. That he had pulled the same twelve months Ellery pulled, back in March, alone at his desk on a Sunday, because some private, cowardly corner of him needed to know before anyone could ask him in a room. Revenue, flat. Total cost, flat. Eighteen months of spending, and neither number had so much as flinched, and he had known that a month before the board ever opened a folder.
+And the part he had not said out loud, even to himself, until just now. That he had pulled the same twelve months Bill pulled, back in March, alone at his desk on a Sunday, because some private, cowardly corner of him needed to know before anyone could ask him in a room. Revenue, flat. Total cost, flat. Eighteen months of spending, and neither number had so much as flinched, and he had known that a month before the board ever opened a folder.
 
 "I never wanted to do it, Joss." He heard himself say it and did not stop. "Eighteen months ago. Gil and half that table at Antonelli's, needling me about it every month, and then the board, gently at first. I run a business made of people who are good with their hands and customers who trust a voice on the phone. I did not see what a machine had to say about any of that. Some days I still don't. I said yes to shut the room up, and I have been trying to talk myself into my own reasons ever since."
 
