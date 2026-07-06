@@ -26,6 +26,17 @@ const SOURCE = "dayoff";
 const PAGE_LIMIT = 100;
 const EMPLOYEE_BATCH = 5;
 
+// Email domains that share Edge8's Day Off account but are NOT Edge8 staff (e.g.
+// a customer's own employees). Their leave is not ours: skip entirely — no
+// person/team_member creation, no balances, no history. Some of these people may
+// later get external-manager portal access, but that is modeled separately, not
+// as an Edge8 team_member.
+const CUSTOMER_DOMAINS = new Set(["ontargetclinical.com"]);
+
+function isCustomerEmail(email: string): boolean {
+  return CUSTOMER_DOMAINS.has(email.split("@")[1] ?? "");
+}
+
 export type ImportReport = {
   startedAt: string;
   finishedAt?: string;
@@ -37,6 +48,7 @@ export type ImportReport = {
     total: number;
     matched: { dayoffId: number; name: string; email: string; policy: string | null }[];
     created: { dayoffId: number; name: string; email: string; status: string; flaggedEntity: boolean }[];
+    skippedCustomer: { dayoffId: number; name: string; email: string }[];
     unmatchedDayoff: { dayoffId: number; name: string; email: string | null }[];
     unmatchedLocal: { teamMemberId: string; name: string; email: string }[];
     conflicts: string[];
@@ -210,7 +222,7 @@ export async function runDayoffImport(): Promise<Done | Fail> {
     leaveTypes: [],
     statuses: [],
     policies: [],
-    employees: { total: 0, matched: [], created: [], unmatchedDayoff: [], unmatchedLocal: [], conflicts: [] },
+    employees: { total: 0, matched: [], created: [], skippedCustomer: [], unmatchedDayoff: [], unmatchedLocal: [], conflicts: [] },
     requests: { fetched: 0, imported: 0, compOffCredits: 0, markedRemoved: 0, byStatus: {} },
     balances: { adjustmentsWritten: 0, byKind: {}, perEmployee: [] },
     warnings,
@@ -343,6 +355,13 @@ export async function runDayoffImport(): Promise<Done | Fail> {
         continue;
       }
 
+      // Customer-domain accounts (e.g. On Target Clinical) share the Day Off
+      // account but are not Edge8 staff — skip them entirely.
+      if (isCustomerEmail(email)) {
+        report.employees.skippedCustomer.push({ dayoffId: e.EmployeeID, name: e.Name ?? email, email });
+        continue;
+      }
+
       const policyId = e.LeavePolicyName ? policyIdByName.get(e.LeavePolicyName.trim().toLowerCase()) ?? null : null;
       if (e.LeavePolicyName && !policyId) warnings.push(`Employee ${e.Name}: policy "${e.LeavePolicyName}" not found among imported policies`);
 
@@ -393,8 +412,11 @@ export async function runDayoffImport(): Promise<Done | Fail> {
     }
 
     // Capture per-employee data for UNMATCHED Day Off employees too (snapshot
-    // only, no transforms) so nothing dies with the account.
-    for (const e of dayoffEmployees.filter((x) => !memberIdByDayoffId.has(x.EmployeeID))) {
+    // only, no transforms) so nothing dies with the account. Customer-domain
+    // accounts are intentionally excluded — their leave is not ours to capture.
+    for (const e of dayoffEmployees.filter(
+      (x) => !memberIdByDayoffId.has(x.EmployeeID) && !isCustomerEmail((EMAIL_ALIASES[(x.Email ?? "").trim().toLowerCase()] ?? (x.Email ?? "").trim().toLowerCase())),
+    )) {
       try {
         const reqs = await dayoffGet<DayoffRequestsList>(`/api/doc/employees/${e.EmployeeID}/leaveRequests`);
         await snap(`/api/doc/employees/leaveRequests`, { employee: e.EmployeeID, group: "default" }, reqs, String(e.EmployeeID));
