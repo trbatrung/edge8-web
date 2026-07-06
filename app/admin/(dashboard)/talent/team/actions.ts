@@ -65,8 +65,12 @@ export async function inviteToPortal(teamMemberId: string): Promise<Result> {
   if (existing) {
     authUserId = existing.id;
   } else {
+    // Server-side invite → implicit-flow link (session in the URL hash), which
+    // /api/auth/callback can't read (it only handles PKCE ?code=). Land on the
+    // client callback that reads the hash, establishes the session, and hands
+    // off to /team. See app/team/(auth)/callback/page.tsx.
     const { data, error } = await supabase.auth.admin.inviteUserByEmail(email, {
-      redirectTo: `${siteOrigin()}/api/auth/callback?next=/team`,
+      redirectTo: `${siteOrigin()}/team/callback`,
     });
     if (error || !data?.user) return { ok: false, error: error?.message ?? "Invite failed to send." };
     authUserId = data.user.id;
