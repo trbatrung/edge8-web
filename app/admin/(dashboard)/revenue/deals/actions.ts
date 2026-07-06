@@ -32,6 +32,15 @@ function refresh() {
   revalidatePath("/admin/revenue/leads");
 }
 
+// Accept a pasted link and store a canonical URL. Empty → null; a bare host
+// like "docs.google.com/x" gets an https:// scheme so the stored value is
+// always clickable.
+function normalizeUrl(v: string | null | undefined): string | null {
+  const s = (v ?? "").trim();
+  if (!s) return null;
+  return /^https?:\/\//i.test(s) ? s : `https://${s}`;
+}
+
 // When a deal closes, the person's lifecycle follows: won → customer; lost →
 // back to nurture unless they're already a customer or have another open deal.
 async function syncPersonAfterClose(dealId: string, personId: string | null, won: boolean) {
@@ -220,6 +229,8 @@ export type DealPatch = {
   source?: string | null;
   next_step?: string | null;
   next_step_date?: string | null;
+  proposal_url?: string | null;
+  contract_url?: string | null;
 };
 
 export async function updateDeal(dealId: string, patch: DealPatch): Promise<Result> {
@@ -253,6 +264,8 @@ export async function updateDeal(dealId: string, patch: DealPatch): Promise<Resu
   if (patch.source !== undefined) updates.source = patch.source?.trim() || null;
   if (patch.next_step !== undefined) updates.next_step = patch.next_step?.trim() || null;
   if (patch.next_step_date !== undefined) updates.next_step_date = patch.next_step_date || null;
+  if (patch.proposal_url !== undefined) updates.proposal_url = normalizeUrl(patch.proposal_url);
+  if (patch.contract_url !== undefined) updates.contract_url = normalizeUrl(patch.contract_url);
 
   if (Object.keys(updates).length === 0) return { ok: true };
 

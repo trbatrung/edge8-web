@@ -60,15 +60,6 @@ const PROPOSALS: Proposal[] = [
     date: "May 2026",
     href: "/proposals/national-housing/",
   },
-  {
-    client: "Arca Wellness & Longevity",
-    kind: "AI Storefront Proposal",
-    summary:
-      "A custom, AI-built storefront for Arca: Vietnam payments integrated directly, owned end to end, built as a low-risk pilot.",
-    date: "June 2026",
-    href: "/proposals/arca-wellness-proposal.html",
-    note: "Earlier version",
-  },
 ];
 
 export default function ProposalsIndex() {

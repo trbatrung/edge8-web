@@ -35,6 +35,8 @@ type Row = {
   person_id: string | null;
   next_step: string | null;
   next_step_date: string | null;
+  proposal_url: string | null;
+  contract_url: string | null;
   handoff_status: string | null;
   lost_reason: string | null;
   archived_at: string | null;
@@ -72,7 +74,7 @@ export default async function DealsPage() {
   let query = companyOs
     .from("deals")
     .select(
-      "id, title, stage_id, amount_cents, currency, probability, status, expected_close_date, source, person_id, next_step, next_step_date, handoff_status, lost_reason, archived_at, updated_at, people!person_id(full_name, email), companies(name)",
+      "id, title, stage_id, amount_cents, currency, probability, status, expected_close_date, source, person_id, next_step, next_step_date, proposal_url, contract_url, handoff_status, lost_reason, archived_at, updated_at, people!person_id(full_name, email), companies(name)",
     )
     .order("created_at", { ascending: false })
     .limit(500);
@@ -100,6 +102,8 @@ export default async function DealsPage() {
       source: r.source,
       nextStep: r.next_step,
       nextStepDate: r.next_step_date,
+      proposalUrl: r.proposal_url,
+      contractUrl: r.contract_url,
       handoffStatus: r.handoff_status ?? "none",
       lostReason: r.lost_reason,
       archivedAt: r.archived_at,

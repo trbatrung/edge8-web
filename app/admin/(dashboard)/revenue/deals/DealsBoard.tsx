@@ -40,6 +40,8 @@ export type DealCard = {
   source: string | null;
   nextStep: string | null;
   nextStepDate: string | null;
+  proposalUrl: string | null;
+  contractUrl: string | null;
   handoffStatus: string;
   lostReason: string | null;
   archivedAt: string | null;
@@ -581,6 +583,8 @@ function DealDetail({
   const [source, setSource] = useState(card.source ?? "");
   const [nextStep, setNextStep] = useState(card.nextStep ?? "");
   const [nextStepDate, setNextStepDate] = useState(card.nextStepDate ?? "");
+  const [proposalUrl, setProposalUrl] = useState(card.proposalUrl ?? "");
+  const [contractUrl, setContractUrl] = useState(card.contractUrl ?? "");
   const [saving, setSaving] = useState(false);
   const [msg, setMsg] = useState<{ ok: boolean; text: string } | null>(null);
 
@@ -600,6 +604,8 @@ function DealDetail({
       source: source.trim() || null,
       next_step: nextStep.trim() || null,
       next_step_date: nextStepDate || null,
+      proposal_url: proposalUrl.trim() || null,
+      contract_url: contractUrl.trim() || null,
     });
     setSaving(false);
     if (!r.ok) {
@@ -616,6 +622,8 @@ function DealDetail({
       source: source.trim() || null,
       nextStep: nextStep.trim() || null,
       nextStepDate: nextStepDate || null,
+      proposalUrl: proposalUrl.trim() || null,
+      contractUrl: contractUrl.trim() || null,
     });
   }
 
@@ -834,6 +842,14 @@ function DealDetail({
         <div className="admin-field">
           <label className="admin-label">Next step date</label>
           <input className="admin-input" type="date" value={nextStepDate} onChange={(e) => setNextStepDate(e.target.value)} />
+        </div>
+        <div className="admin-field">
+          <label className="admin-label">Proposal link</label>
+          <input className="admin-input" type="url" placeholder="https://…" value={proposalUrl} onChange={(e) => setProposalUrl(e.target.value)} />
+        </div>
+        <div className="admin-field">
+          <label className="admin-label">Contract link</label>
+          <input className="admin-input" type="url" placeholder="https://…" value={contractUrl} onChange={(e) => setContractUrl(e.target.value)} />
         </div>
         <div className="admin-form-actions">
           <button type="submit" className="admin-btn admin-btn--primary" disabled={saving}>
