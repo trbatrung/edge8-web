@@ -4,12 +4,15 @@ import { useState, useTransition } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Badge } from "@/components/admin/Badge";
+import { ConfirmButton } from "@/components/admin/ConfirmButton";
 import { formatDate, humanize } from "@/lib/admin/format";
 import {
   bookMeetingAndHandOff,
+  deleteLeadPerson,
   disqualifyLead,
   logCall,
   markConnected,
+  removeFromQueue,
   saveQualification,
 } from "./actions";
 
@@ -149,6 +152,7 @@ function LeadDetail({
   pending: boolean;
   run: (a: () => Promise<{ ok: true } | { ok: false; error: string }>) => void;
 }) {
+  const router = useRouter();
   const [qual, setQual] = useState(row.qual);
   const [callNote, setCallNote] = useState("");
   const [reason, setReason] = useState("");
@@ -275,6 +279,40 @@ function LeadDetail({
         >
           Disqualify
         </button>
+      </div>
+
+      <div className="admin-danger-zone" style={{ marginTop: 16 }}>
+        <div className="admin-danger-row">
+          <span className="admin-danger-row-text">
+            <strong>Remove from queue</strong> keeps the contact and their history — it just takes them
+            off the SDR queue. <strong>Delete person</strong> erases the record entirely (GDPR) and is
+            blocked if they have orders, bookings or deals.
+          </span>
+          <span style={{ display: "inline-flex", gap: 8, flexShrink: 0 }}>
+            <button
+              type="button"
+              className="admin-btn"
+              disabled={pending}
+              onClick={() => run(() => removeFromQueue(row.id))}
+            >
+              Remove from queue
+            </button>
+            <ConfirmButton
+              label="Delete person"
+              title="Permanently erase this person?"
+              body={
+                <>
+                  This erases <strong>{row.name}</strong> and their linked history under GDPR
+                  right-to-erasure. This cannot be undone.
+                </>
+              }
+              confirmLabel="Erase permanently"
+              typeToConfirm={row.name}
+              onConfirm={() => deleteLeadPerson(row.id)}
+              onDone={() => router.refresh()}
+            />
+          </span>
+        </div>
       </div>
     </div>
   );

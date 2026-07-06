@@ -1,0 +1,30 @@
+import { PageHead } from "@/components/admin/PageHead";
+import { requireAdmin } from "@/lib/admin-auth";
+import { listAdmins } from "@/lib/admin/admins";
+import { AdminsManager } from "./AdminsManager";
+
+export const dynamic = "force-dynamic";
+
+// Settings → Admins. Manages the company_os.admins table that the auth gate
+// (lib/admin-auth.ts) checks on every admin request. Entries that come from
+// the ADMIN_ALLOWLIST env var show up read-only — they are the break-glass
+// fallback and can only be changed on Vercel.
+
+export default async function AdminsPage() {
+  const admin = await requireAdmin();
+  const { rows, error } = await listAdmins();
+
+  return (
+    <>
+      <PageHead
+        eyebrow="Settings"
+        title="Admins"
+        sub="Who can sign in to this console."
+      />
+
+      {error && <div className="admin-alert admin-alert--err">{error}</div>}
+
+      <AdminsManager rows={rows} currentEmail={admin.email} />
+    </>
+  );
+}

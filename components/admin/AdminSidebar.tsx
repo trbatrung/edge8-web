@@ -19,7 +19,7 @@ const isSubsection = (e: NavEntry): e is NavSubsection => "subheading" in e;
 // (L2) inside an Office (L1). Offices are the Four Offices of the Future (Revenue,
 // Talent, Operations, Innovation) plus a Dashboard home and a Settings area;
 // Systems are the products within each office (CRM, Commerce, ATS, People, Time
-// Off, Workplace, ...). Offices collapse; Systems are static subheadings. Rows
+// Off, Workplace, ...). Offices and Systems both collapse. Rows
 // open the shared 360s. See docs/product/four-offices-of-the-future.md.
 const NAV: NavGroup[] = [
   { label: null, items: [{ label: "Dashboard", href: "/admin", ico: "◈", enabled: true }] },
@@ -103,6 +103,12 @@ const NAV: NavGroup[] = [
     collapsible: true,
     items: [
       {
+        subheading: "Access",
+        items: [
+          { label: "Admins", href: "/admin/settings/admins", ico: "⚿", enabled: true },
+        ],
+      },
+      {
         subheading: "Configuration",
         items: [
           { label: "Brands", href: "/admin/settings/brands", ico: "✺" },
@@ -158,8 +164,8 @@ export function AdminSidebar({
   const [collapsed, setCollapsed] = useState<Record<string, boolean>>({});
   const userInitials = initials(user.email);
 
-  function toggleGroup(label: string) {
-    setCollapsed((c) => ({ ...c, [label]: !c[label] }));
+  function toggle(key: string) {
+    setCollapsed((c) => ({ ...c, [key]: !c[key] }));
   }
 
   const activeBrand = brands.find((b) => b.id === activeBrandId) ?? null;
@@ -197,6 +203,29 @@ export function AdminSidebar({
         {item.label}
         <span className="admin-nav-badge">soon</span>
       </span>
+    );
+  }
+
+  function renderSubsection(sub: NavSubsection, groupLabel: string | null) {
+    const key = `${groupLabel ?? ""}/${sub.subheading}`;
+    const subCollapsed = Boolean(collapsed[key]);
+    return (
+      <div key={`sub-${key}`}>
+        <button
+          className="admin-nav-subhead admin-nav-subtoggle"
+          aria-expanded={!subCollapsed}
+          onClick={(e) => {
+            e.stopPropagation();
+            toggle(key);
+          }}
+        >
+          {sub.subheading}
+          <span className={`admin-nav-caret${subCollapsed ? " is-collapsed" : ""}`} aria-hidden>
+            ▾
+          </span>
+        </button>
+        {!subCollapsed && sub.items.map((item) => renderItem(item, true))}
+      </div>
     );
   }
 
@@ -350,7 +379,7 @@ export function AdminSidebar({
                   aria-expanded={!isCollapsed}
                   onClick={(e) => {
                     e.stopPropagation();
-                    toggleGroup(label);
+                    toggle(label);
                   }}
                 >
                   {label}
@@ -363,14 +392,7 @@ export function AdminSidebar({
               )}
               {!isCollapsed &&
               group.items.map((entry) =>
-                isSubsection(entry) ? (
-                  <div key={`sub-${entry.subheading}`}>
-                    <div className="admin-nav-subhead">{entry.subheading}</div>
-                    {entry.items.map((item) => renderItem(item, true))}
-                  </div>
-                ) : (
-                  renderItem(entry, false)
-                ),
+                isSubsection(entry) ? renderSubsection(entry, label) : renderItem(entry, false),
               )}
             </div>
             );

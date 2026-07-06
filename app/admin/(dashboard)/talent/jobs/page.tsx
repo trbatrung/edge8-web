@@ -33,7 +33,7 @@ type JobReq = {
 
 const one = <T,>(e: T | T[] | null): T | null => (Array.isArray(e) ? e[0] ?? null : e);
 const PAGE_SIZE = 25;
-const SORTABLE = new Set(["title", "opened_at", "created_at"]);
+const SORTABLE = new Set(["title", "opened_at", "created_at", "employment_type", "location", "salary_min_cents", "status"]);
 
 function salaryBand(min: number | null, max: number | null, cur: string | null) {
   if (min == null && max == null) return null;
@@ -59,17 +59,18 @@ export default async function JobsPage({ searchParams }: { searchParams: SearchP
   const columns: Column<JobReq>[] = [
     { key: "title", header: "Title", sortable: true, cell: (r) => <Link href={`/admin/talent/jobs/${r.id}`} className="admin-cell-strong">{r.title || "(untitled req)"}</Link> },
     { key: "company", header: "Company", cell: (r) => one(r.companies)?.name || <span className="admin-cell-muted">—</span> },
-    { key: "employment_type", header: "Type", cell: (r) => (r.employment_type ? <Badge>{humanize(r.employment_type)}</Badge> : <span className="admin-cell-muted">—</span>) },
+    { key: "employment_type", header: "Type", sortable: true, cell: (r) => (r.employment_type ? <Badge>{humanize(r.employment_type)}</Badge> : <span className="admin-cell-muted">—</span>) },
     {
       key: "location",
       header: "Location",
+      sortable: true,
       cell: (r) => {
         const parts = [r.location, r.remote_policy ? humanize(r.remote_policy) : null].filter(Boolean);
         return parts.length ? parts.join(" · ") : <span className="admin-cell-muted">—</span>;
       },
     },
-    { key: "salary", header: "Salary", cell: (r) => salaryBand(r.salary_min_cents, r.salary_max_cents, r.currency) || <span className="admin-cell-muted">—</span> },
-    { key: "status", header: "Status", cell: (r) => (r.status ? <Badge tone={statusTone(r.status)}>{humanize(r.status)}</Badge> : <span className="admin-cell-muted">—</span>) },
+    { key: "salary_min_cents", header: "Salary", sortable: true, cell: (r) => salaryBand(r.salary_min_cents, r.salary_max_cents, r.currency) || <span className="admin-cell-muted">—</span> },
+    { key: "status", header: "Status", sortable: true, cell: (r) => (r.status ? <Badge tone={statusTone(r.status)}>{humanize(r.status)}</Badge> : <span className="admin-cell-muted">—</span>) },
     { key: "opened_at", header: "Opened", sortable: true, cell: (r) => (r.opened_at ? formatDate(r.opened_at) : <span className="admin-cell-muted">—</span>) },
   ];
 

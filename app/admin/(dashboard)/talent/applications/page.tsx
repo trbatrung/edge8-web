@@ -35,7 +35,7 @@ type Application = {
 
 const one = <T,>(e: T | T[] | null): T | null => (Array.isArray(e) ? e[0] ?? null : e);
 const PAGE_SIZE = 25;
-const SORTABLE = new Set(["applied_at", "created_at", "rating"]);
+const SORTABLE = new Set(["applied_at", "created_at", "rating", "status", "decided_at"]);
 
 export default async function ApplicationsPage({ searchParams }: { searchParams: SearchParamsObj }) {
   const page = Math.max(1, Number(firstParam(searchParams.page) ?? "1") || 1);
@@ -78,10 +78,10 @@ export default async function ApplicationsPage({ searchParams }: { searchParams:
         ),
     },
     { key: "stage", header: "Stage", cell: (r) => one(r.application_stages)?.name || <span className="admin-cell-muted">—</span> },
-    { key: "status", header: "Status", cell: (r) => (r.status ? <Badge tone={statusTone(r.status)}>{humanize(r.status)}</Badge> : <span className="admin-cell-muted">—</span>) },
+    { key: "status", header: "Status", sortable: true, cell: (r) => (r.status ? <Badge tone={statusTone(r.status)}>{humanize(r.status)}</Badge> : <span className="admin-cell-muted">—</span>) },
     { key: "rating", header: "Rating", sortable: true, cell: (r) => (r.rating != null ? `${r.rating}★` : <span className="admin-cell-muted">—</span>) },
     { key: "applied_at", header: "Applied", sortable: true, cell: (r) => (r.applied_at ? formatDate(r.applied_at) : <span className="admin-cell-muted">—</span>) },
-    { key: "decided_at", header: "Decided", cell: (r) => (r.decided_at ? formatDate(r.decided_at) : <span className="admin-cell-muted">—</span>) },
+    { key: "decided_at", header: "Decided", sortable: true, cell: (r) => (r.decided_at ? formatDate(r.decided_at) : <span className="admin-cell-muted">—</span>) },
   ];
 
   return (
