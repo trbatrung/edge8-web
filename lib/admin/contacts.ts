@@ -47,6 +47,7 @@ export type Person360 = {
   interactions: Array<{ id: string; kind: string | null; subject: string | null; body: string | null; occurred_at: string | null; created_at: string }>;
   meetings: Array<{ id: string; title: string | null; meeting_type: string | null; started_at: string | null; source: string | null }>;
   transitions: Array<{ id: string; from_stage: string | null; to_stage: string | null; from_status: string | null; to_status: string | null; reason: string | null; note: string | null; occurred_at: string }>;
+  companies: Array<{ company_id: string; name: string | null; title: string | null; role: string | null; is_primary: boolean }>;
 };
 
 async function safe<T>(p: PromiseLike<{ data: T[] | null; error: unknown }>): Promise<T[]> {
@@ -59,7 +60,7 @@ export async function getPerson360(id: string): Promise<Person360 | null> {
   if (personRes.error || !personRes.data) return null;
   const person = personRes.data as Person;
 
-  const [inquiries, deals, orders, bookings, candidateRes, documents, surveyResponses, interactions, participantRows, transitions] =
+  const [inquiries, deals, orders, bookings, candidateRes, documents, surveyResponses, interactions, participantRows, transitions, companyLinks] =
     await Promise.all([
       safe(companyOs.from("inquiries").select("id, type, subject, status, source, created_at, deal_id").eq("person_id", id).order("created_at", { ascending: false })),
       safe(companyOs.from("deals").select("id, title, amount_cents, currency, status, stage_id, created_at").eq("person_id", id).order("created_at", { ascending: false })),
@@ -71,6 +72,7 @@ export async function getPerson360(id: string): Promise<Person360 | null> {
       safe(companyOs.from("interactions").select("id, kind, subject, body, occurred_at, created_at").eq("person_id", id).order("occurred_at", { ascending: false }).limit(100)),
       safe(companyOs.from("meeting_participants").select("meetings(id, title, meeting_type, started_at, source)").eq("person_id", id)),
       safe(companyOs.from("lifecycle_transitions").select("id, from_stage, to_stage, from_status, to_status, reason, note, occurred_at").eq("person_id", id).order("occurred_at", { ascending: false }).limit(100)),
+      safe(companyOs.from("person_companies").select("company_id, title, role, is_primary, companies(id, name)").eq("person_id", id).order("is_primary", { ascending: false })),
     ]);
 
   const candidate = candidateRes.data ?? null;
@@ -100,5 +102,10 @@ export async function getPerson360(id: string): Promise<Person360 | null> {
       .flatMap((r) => (Array.isArray(r.meetings) ? r.meetings : r.meetings ? [r.meetings] : []))
       .sort((a, b) => (b.started_at ?? "").localeCompare(a.started_at ?? "")),
     transitions: transitions as Person360["transitions"],
+    companies: (companyLinks as Array<{ company_id: string; title: string | null; role: string | null; is_primary: boolean; companies: { id: string; name: string | null } | Array<{ id: string; name: string | null }> | null }>)
+      .map((l) => {
+        const c = Array.isArray(l.companies) ? l.companies[0] : l.companies;
+        return { company_id: l.company_id, name: c?.name ?? null, title: l.title, role: l.role, is_primary: l.is_primary };
+      }),
   };
 }
