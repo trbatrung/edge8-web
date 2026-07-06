@@ -37,7 +37,7 @@ export function ImportRunner() {
         <div className="admin-card" style={{ marginTop: 20, padding: "18px 20px" }}>
           <h2 className="admin-card-title">Import report — anchor {report.anchorDate}</h2>
           <ul className="admin-import-summary">
-            <li><strong>{report.employees.matched.length + report.employees.created.length}</strong> of {report.employees.total} Day Off employees imported ({report.employees.matched.length} matched, {report.employees.created.length} newly created)</li>
+            <li><strong>{report.employees.matched.length + report.employees.created.length}</strong> of {report.employees.total} Day Off employees imported ({report.employees.matched.length} matched, {report.employees.created.length} newly created, {report.employees.skippedCustomer.length} customer accounts skipped)</li>
             <li><strong>{report.requests.imported}</strong> leave requests imported ({report.requests.compOffCredits} comp-off credits routed to adjustments, {report.requests.markedRemoved} tombstoned)</li>
             <li><strong>{report.balances.adjustmentsWritten}</strong> balance-anchor adjustments written</li>
             <li><strong>{report.policies.length}</strong> policies imported: {report.policies.map((p) => `${p.name} (${p.ruleCount} rules${p.isDefault ? ", default" : ""})`).join(", ")}</li>
