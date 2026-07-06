@@ -2,7 +2,7 @@
 
 Monday he was at his desk at twenty to six, before the first cars, and the office was dark except for the screen, which was patient, which was always patient.
 
-He propped the napkin against the lamp. He typed the seven lines in with two fingers, mistakes and all, and then, feeling like a man talking to an empty room, he typed what Priya had told him to type.
+He propped the napkin against the lamp. He typed the seven lines in with two fingers, mistakes and all, and then, feeling like a man talking to an empty room, he typed what Mai had told him to type.
 
 Interview me about what makes a complex custom quote good at Halden Furnish. One question at a time.
 
@@ -10,7 +10,7 @@ The first question was easy. The second was easy. The third one stopped him with
 
 You wrote, "We price the risk we're taking, not the hours we're spending." Can you give an example of a job where the hours looked fine but the risk was wrong, and who at Halden is allowed to make that call?
 
-Fenwick. It was asking him about Fenwick, and it had never heard of Fenwick. He said the answer out loud first, alone in the dark, the whole story, the margin that looked fine and the architect nobody could pin down and the feeling Ray called weather without calling it anything. Then he typed what he had said, slower, and worse, and the machine asked the next question.
+Fenwick. It was asking him about Fenwick, and it had never heard of Fenwick. He said the answer out loud first, alone in the dark, the whole story, the margin that looked fine and the architect nobody could pin down and the feeling Ron called weather without calling it anything. Then he typed what he had said, slower, and worse, and the machine asked the next question.
 
 If "the feeling" is load-bearing in that decision, what facts is the feeling usually made of? List them even if they seem obvious.
 
@@ -36,7 +36,7 @@ The humbling part arrived quietly, after, with the second cold coffee.
 
 No bootcamp could have taught him this morning. Not because the bootcamp was bad, but because the curriculum had been locked in his own head, unwritten, the whole time. The certificate on the heavy stock said he had attended FOUNDATIONS OF AI, and the foundation had turned out to be Fenwick, and weather, and what a promise was allowed to stand on, and no one on earth could have handed him that in a hotel ballroom, because it wasn't theirs to hand.
 
-You could buy the shelves. You could not buy the books. He got out the legal pad and wrote that down under the nine names, because it was the closest he had come yet to the sentence he owed Ellery Kwan in July.
+You could buy the shelves. You could not buy the books. He got out the legal pad and wrote that down under the nine names, because it was the closest he had come yet to the sentence he owed Bill Foster in July.
 
 He printed both documents, the standard and the instructions, and carried them out to Grace's desk warm.
 
