@@ -1,18 +1,26 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
-// Coarse edge gate for /admin/*: refreshes the Supabase session cookie and
-// bounces unauthenticated requests to the login page. This is defense-in-depth
-// and UX, NOT the security boundary — requireAdmin() in the admin layout and
-// every server action does the authoritative session + allowlist check
-// (middleware cannot gate server actions or RSC data fetches by itself).
+// Coarse edge gate for /admin/* and /team/*: refreshes the Supabase session
+// cookie and bounces unauthenticated requests to the right login page. This is
+// defense-in-depth and UX, NOT the security boundary — requireAdmin() /
+// requireTeamMember() in the layouts and every server action do the authoritative
+// session + authorization check (middleware cannot gate server actions or RSC
+// data fetches by itself).
 export async function middleware(request: NextRequest) {
   const { pathname, search } = request.nextUrl;
 
-  // The login page and auth callback must stay reachable without a session.
-  if (pathname.startsWith("/admin/login") || pathname.startsWith("/api/auth")) {
+  // The login pages and auth callback must stay reachable without a session.
+  if (
+    pathname.startsWith("/admin/login") ||
+    pathname.startsWith("/team/login") ||
+    pathname.startsWith("/api/auth")
+  ) {
     return NextResponse.next({ request });
   }
+
+  // Each surface has its own login page.
+  const loginPath = pathname.startsWith("/team") ? "/team/login" : "/admin/login";
 
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const key = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
@@ -43,7 +51,7 @@ export async function middleware(request: NextRequest) {
 
     if (!user) {
       const loginUrl = request.nextUrl.clone();
-      loginUrl.pathname = "/admin/login";
+      loginUrl.pathname = loginPath;
       loginUrl.search = `?redirect=${encodeURIComponent(pathname + search)}`;
       return NextResponse.redirect(loginUrl);
     }
@@ -51,15 +59,16 @@ export async function middleware(request: NextRequest) {
     return response;
   } catch {
     // Auth backend unreachable or misconfigured: fail safe to the login page
-    // rather than 500-ing all of /admin. requireAdmin() still gates every
-    // server action and RSC data fetch, so this never weakens the boundary.
+    // rather than 500-ing all of /admin or /team. requireAdmin() /
+    // requireTeamMember() still gate every server action and RSC data fetch, so
+    // this never weakens the boundary.
     const loginUrl = request.nextUrl.clone();
-    loginUrl.pathname = "/admin/login";
+    loginUrl.pathname = loginPath;
     loginUrl.search = `?redirect=${encodeURIComponent(pathname + search)}`;
     return NextResponse.redirect(loginUrl);
   }
 }
 
 export const config = {
-  matcher: ["/admin/:path*"],
+  matcher: ["/admin/:path*", "/team/:path*"],
 };

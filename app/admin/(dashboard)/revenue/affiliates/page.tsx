@@ -9,6 +9,11 @@ import { firstParam, type SearchParamsObj } from "@/lib/admin/url";
 
 export const dynamic = "force-dynamic";
 
+export const metadata = {
+  title: "Affiliates",
+  description: "Referral partners and their commissions.",
+};
+
 // Revenue office: affiliate / referral partners. Each links to its person 360.
 type P = { full_name: string | null; email: string };
 type Affiliate = {
@@ -26,7 +31,7 @@ type Affiliate = {
 
 const one = <T,>(e: T | T[] | null): T | null => (Array.isArray(e) ? e[0] ?? null : e);
 const PAGE_SIZE = 25;
-const SORTABLE = new Set(["code", "created_at"]);
+const SORTABLE = new Set(["code", "program_type", "rate", "active", "created_at"]);
 
 export default async function AffiliatesPage({ searchParams }: { searchParams: SearchParamsObj }) {
   const brandId = getActiveBrandId();
@@ -58,10 +63,10 @@ export default async function AffiliatesPage({ searchParams }: { searchParams: S
         );
       },
     },
-    { key: "program_type", header: "Program", cell: (r) => (r.program_type ? <Badge>{humanize(r.program_type)}</Badge> : <span className="admin-cell-muted">—</span>) },
-    { key: "rate", header: "Rate", cell: (r) => (r.rate != null ? String(r.rate) : <span className="admin-cell-muted">—</span>) },
+    { key: "program_type", header: "Program", sortable: true, cell: (r) => (r.program_type ? <Badge>{humanize(r.program_type)}</Badge> : <span className="admin-cell-muted">—</span>) },
+    { key: "rate", header: "Rate", sortable: true, cell: (r) => (r.rate != null ? String(r.rate) : <span className="admin-cell-muted">—</span>) },
     { key: "coupon", header: "Coupon", cell: (r) => r.stripe_coupon_id || <span className="admin-cell-muted">—</span> },
-    { key: "active", header: "Active", cell: (r) => (r.active ? <Badge tone="ok">Active</Badge> : <Badge tone="neutral">Inactive</Badge>) },
+    { key: "active", header: "Active", sortable: true, cell: (r) => (r.active ? <Badge tone="ok">Active</Badge> : <Badge tone="neutral">Inactive</Badge>) },
     { key: "created_at", header: "Added", sortable: true, cell: (r) => formatDate(r.created_at) },
   ];
 

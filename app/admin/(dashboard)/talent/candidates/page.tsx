@@ -8,6 +8,11 @@ import { firstParam, type SearchParamsObj } from "@/lib/admin/url";
 
 export const dynamic = "force-dynamic";
 
+export const metadata = {
+  title: "Candidates",
+  description: "The talent pool and applicant records.",
+};
+
 // Talent office: candidates (persona=job_seeker). Name opens the recruiting
 // Candidate detail; resume links to the signed-URL route handler.
 type P = { full_name: string | null; email: string };
@@ -27,7 +32,7 @@ type Candidate = {
 
 const one = <T,>(e: T | T[] | null): T | null => (Array.isArray(e) ? e[0] ?? null : e);
 const PAGE_SIZE = 25;
-const SORTABLE = new Set(["created_at", "pool_status"]);
+const SORTABLE = new Set(["created_at", "pool_status", "headline", "current_title"]);
 
 export default async function CandidatesPage({ searchParams }: { searchParams: SearchParamsObj }) {
   const page = Math.max(1, Number(firstParam(searchParams.page) ?? "1") || 1);
@@ -55,10 +60,11 @@ export default async function CandidatesPage({ searchParams }: { searchParams: S
         );
       },
     },
-    { key: "headline", header: "Headline", cell: (r) => r.headline || <span className="admin-cell-muted">—</span> },
+    { key: "headline", header: "Headline", sortable: true, cell: (r) => r.headline || <span className="admin-cell-muted">—</span> },
     {
-      key: "current",
+      key: "current_title",
       header: "Current",
+      sortable: true,
       cell: (r) => {
         const co = one(r.companies)?.name;
         const t = r.current_title;

@@ -6,6 +6,11 @@ import { MetricCard } from "@/components/admin/MetricCard";
 // Read counts fresh on every request — this is live operational data.
 export const dynamic = "force-dynamic";
 
+export const metadata = {
+  title: "Dashboard",
+  description: "Company OS home with today's revenue, talent, and operations numbers.",
+};
+
 // Count rows in a table, optionally scoped to the active brand. `head: true`
 // fetches only the count (no rows over the wire).
 async function countRows(

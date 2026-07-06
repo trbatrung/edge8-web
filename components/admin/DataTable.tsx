@@ -27,6 +27,7 @@ export function DataTable<T extends { id?: string | number }>({
   searchParams,
   searchPlaceholder,
   emptyText = "No records.",
+  filterBar,
 }: {
   columns: Column<T>[];
   rows: T[];
@@ -39,6 +40,7 @@ export function DataTable<T extends { id?: string | number }>({
   searchParams: SearchParamsObj;
   searchPlaceholder?: string;
   emptyText?: string;
+  filterBar?: ReactNode;
 }) {
   const totalPages = Math.max(1, Math.ceil(total / pageSize));
   const start = total === 0 ? 0 : (page - 1) * pageSize + 1;
@@ -61,9 +63,11 @@ export function DataTable<T extends { id?: string | number }>({
     <div>
       <div className="admin-toolbar">
         <TableSearch basePath={basePath} searchParams={searchParams} placeholder={searchPlaceholder} />
+        {filterBar}
       </div>
 
       <div className="admin-table-wrap">
+        <div className="admin-table-scroll">
         <table className="admin-table">
           <thead>
             <tr>
@@ -98,6 +102,7 @@ export function DataTable<T extends { id?: string | number }>({
             )}
           </tbody>
         </table>
+        </div>
 
         {total > 0 && (
           <div className="admin-pagination">

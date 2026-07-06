@@ -8,6 +8,11 @@ import { firstParam, type SearchParamsObj } from "@/lib/admin/url";
 
 export const dynamic = "force-dynamic";
 
+export const metadata = {
+  title: "Registrations",
+  description: "Event and program registrations.",
+};
+
 // Revenue office: event registrations. Each links to its person 360 when known.
 type P = { full_name: string | null; email: string };
 type Pr = { title: string | null };
@@ -24,7 +29,7 @@ type Registration = {
 
 const one = <T,>(e: T | T[] | null): T | null => (Array.isArray(e) ? e[0] ?? null : e);
 const PAGE_SIZE = 25;
-const SORTABLE = new Set(["created_at"]);
+const SORTABLE = new Set(["attendee_name", "attendee_email", "status", "created_at"]);
 
 export default async function RegistrationsPage({ searchParams }: { searchParams: SearchParamsObj }) {
   const page = Math.max(1, Number(firstParam(searchParams.page) ?? "1") || 1);
@@ -41,8 +46,9 @@ export default async function RegistrationsPage({ searchParams }: { searchParams
 
   const columns: Column<Registration>[] = [
     {
-      key: "attendee",
+      key: "attendee_name",
       header: "Attendee",
+      sortable: true,
       cell: (r) => {
         const p = one(r.people);
         const label = r.attendee_name || p?.full_name || "View";
@@ -55,9 +61,9 @@ export default async function RegistrationsPage({ searchParams }: { searchParams
         );
       },
     },
-    { key: "email", header: "Email", cell: (r) => <span className="admin-cell-muted">{r.attendee_email || one(r.people)?.email || "—"}</span> },
+    { key: "attendee_email", header: "Email", sortable: true, cell: (r) => <span className="admin-cell-muted">{r.attendee_email || one(r.people)?.email || "—"}</span> },
     { key: "product", header: "Product", cell: (r) => one(r.products)?.title || <span className="admin-cell-muted">—</span> },
-    { key: "status", header: "Status", cell: (r) => (r.status ? <Badge tone={statusTone(r.status)}>{humanize(r.status)}</Badge> : <span className="admin-cell-muted">—</span>) },
+    { key: "status", header: "Status", sortable: true, cell: (r) => (r.status ? <Badge tone={statusTone(r.status)}>{humanize(r.status)}</Badge> : <span className="admin-cell-muted">—</span>) },
     { key: "created_at", header: "Added", sortable: true, cell: (r) => formatDate(r.created_at) },
   ];
 

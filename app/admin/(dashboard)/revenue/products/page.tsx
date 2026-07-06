@@ -8,6 +8,11 @@ import { firstParam, type SearchParamsObj } from "@/lib/admin/url";
 
 export const dynamic = "force-dynamic";
 
+export const metadata = {
+  title: "Products",
+  description: "Sellable products and services.",
+};
+
 // Revenue office: the sellable catalog (events, sprints, memberships).
 type Product = {
   id: string;
@@ -23,7 +28,7 @@ type Product = {
 };
 
 const PAGE_SIZE = 25;
-const SORTABLE = new Set(["title", "amount_cents", "created_at"]);
+const SORTABLE = new Set(["title", "type", "tier", "location", "date_start", "amount_cents", "active", "created_at"]);
 
 export default async function ProductsPage({ searchParams }: { searchParams: SearchParamsObj }) {
   const brandId = getActiveBrandId();
@@ -41,12 +46,12 @@ export default async function ProductsPage({ searchParams }: { searchParams: Sea
 
   const columns: Column<Product>[] = [
     { key: "title", header: "Title", sortable: true, cell: (r) => <span className="admin-cell-strong">{r.title || "(untitled)"}</span> },
-    { key: "type", header: "Type", cell: (r) => (r.type ? <Badge>{humanize(r.type)}</Badge> : <span className="admin-cell-muted">—</span>) },
-    { key: "tier", header: "Tier", cell: (r) => r.tier || <span className="admin-cell-muted">—</span> },
-    { key: "location", header: "Location", cell: (r) => r.location || <span className="admin-cell-muted">—</span> },
-    { key: "date_start", header: "Starts", cell: (r) => (r.date_start ? formatDate(r.date_start) : <span className="admin-cell-muted">—</span>) },
+    { key: "type", header: "Type", sortable: true, cell: (r) => (r.type ? <Badge>{humanize(r.type)}</Badge> : <span className="admin-cell-muted">—</span>) },
+    { key: "tier", header: "Tier", sortable: true, cell: (r) => r.tier || <span className="admin-cell-muted">—</span> },
+    { key: "location", header: "Location", sortable: true, cell: (r) => r.location || <span className="admin-cell-muted">—</span> },
+    { key: "date_start", header: "Starts", sortable: true, cell: (r) => (r.date_start ? formatDate(r.date_start) : <span className="admin-cell-muted">—</span>) },
     { key: "amount_cents", header: "Price", sortable: true, cell: (r) => formatCents(r.amount_cents, r.currency ?? undefined) },
-    { key: "active", header: "Active", cell: (r) => (r.active ? <Badge tone="ok">Active</Badge> : <Badge tone="neutral">Inactive</Badge>) },
+    { key: "active", header: "Active", sortable: true, cell: (r) => (r.active ? <Badge tone="ok">Active</Badge> : <Badge tone="neutral">Inactive</Badge>) },
     { key: "created_at", header: "Added", sortable: true, cell: (r) => formatDate(r.created_at) },
   ];
 

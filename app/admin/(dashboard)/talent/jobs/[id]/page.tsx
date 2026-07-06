@@ -9,6 +9,11 @@ import { JobReqBoard, type AppCard } from "./JobReqBoard";
 
 export const dynamic = "force-dynamic";
 
+export const metadata = {
+  title: "Job requisition",
+  description: "One open role and its applicants.",
+};
+
 const one = <T,>(e: T | T[] | null): T | null => (Array.isArray(e) ? e[0] ?? null : e);
 const STAGE_ACCENT = ["#287BE8", "#6b7194", "#D1458B", "#f59e0b", "#1a9e74", "#9ca3af"];
 

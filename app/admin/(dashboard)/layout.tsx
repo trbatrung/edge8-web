@@ -5,7 +5,8 @@ import { listBrands, getActiveBrandId } from "@/lib/admin/brand";
 import "../admin.css";
 
 export const metadata: Metadata = {
-  title: "Edge8 OS",
+  title: { template: "%s · Edge8 OS", default: "Edge8 OS" },
+  description: "Edge8 Company OS — the internal admin for contacts, revenue, talent, and operations.",
   robots: { index: false, follow: false },
 };
 

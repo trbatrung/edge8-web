@@ -23,7 +23,7 @@ export type InquiryCard = {
 };
 
 const COLUMNS: KanbanColumn[] = [
-  { id: "new_lead", label: "New lead", accent: "#287BE8" },
+  { id: "new_lead", label: "New lead", accent: "var(--admin-accent)" },
   { id: "contacted", label: "Contacted", accent: "#6b7194" },
   { id: "discovery", label: "Discovery", accent: "#D1458B" },
   { id: "proposal", label: "Proposal", accent: "#f59e0b" },
