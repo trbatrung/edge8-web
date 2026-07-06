@@ -1,16 +1,57 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { createBrowserSupabase } from "@/lib/supabase/browser";
 import { PasswordField } from "@/components/admin/PasswordField";
 
 export function ResetPasswordForm() {
   const router = useRouter();
+  const [supabase] = useState(() => createBrowserSupabase());
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [ready, setReady] = useState(false);
+
+  // A recovery session must exist before the password can be changed. Admin
+  // invites/resets are sent server-side, so the link lands here via the
+  // implicit flow with the session in the URL hash (#access_token=…&
+  // refresh_token=…); exchange it, then strip the hash so the tokens don't
+  // linger in the address bar. The browser-initiated "forgot password" flow
+  // instead arrives through /api/auth/callback with the session already in
+  // cookies, which getSession() picks up.
+  useEffect(() => {
+    let active = true;
+    const params = new URLSearchParams(window.location.hash.replace(/^#/, ""));
+    const accessToken = params.get("access_token");
+    const refreshToken = params.get("refresh_token");
+
+    (async () => {
+      if (accessToken && refreshToken) {
+        const { error } = await supabase.auth.setSession({
+          access_token: accessToken,
+          refresh_token: refreshToken,
+        });
+        window.history.replaceState(null, "", window.location.pathname);
+        if (!active) return;
+        if (error) {
+          setError("This reset link is invalid or has expired. Request a new one.");
+          return;
+        }
+        setReady(true);
+        return;
+      }
+      const { data } = await supabase.auth.getSession();
+      if (!active) return;
+      if (data.session) setReady(true);
+      else setError("Open the reset link from your email to set your password.");
+    })();
+
+    return () => {
+      active = false;
+    };
+  }, [supabase]);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -24,7 +65,6 @@ export function ResetPasswordForm() {
     }
     setLoading(true);
     setError(null);
-    const supabase = createBrowserSupabase();
     const { error } = await supabase.auth.updateUser({ password });
     if (error) {
       setError(
@@ -51,7 +91,7 @@ export function ResetPasswordForm() {
         <PasswordField id="confirm-password" value={confirm} onChange={setConfirm} autoComplete="new-password" />
       </div>
       <div className="admin-form-actions">
-        <button type="submit" className="admin-btn admin-btn--primary" disabled={loading}>
+        <button type="submit" className="admin-btn admin-btn--primary" disabled={loading || !ready}>
           {loading ? "Updating…" : "Update password"}
         </button>
       </div>
