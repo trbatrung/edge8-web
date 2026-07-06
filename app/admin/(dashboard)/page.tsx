@@ -57,7 +57,7 @@ export default async function DashboardPage() {
         <MetricCard label="Candidates" value={fmt(candidates)} href="/admin/talent/candidates" />
         <MetricCard label="Applications" value={fmt(applications)} href="/admin/talent/applications" />
         <MetricCard label="Orders" value={fmt(orders)} href="/admin/revenue/orders" />
-        <MetricCard label="Bookings" value={fmt(bookings)} href="/admin/revenue/bookings" />
+        <MetricCard label="AIO Pad" value={fmt(bookings)} href="/admin/revenue/bookings" />
       </div>
 
       <div className="admin-card" style={{ padding: "20px 22px" }}>

@@ -163,7 +163,7 @@ export default async function ContactDetailPage({ params }: { params: { id: stri
     },
     {
       key: "bookings",
-      label: "Bookings",
+      label: "AIO Pad",
       count: bookings.length,
       content: bookings.length === 0 ? (
         <Empty text="No bookings." />

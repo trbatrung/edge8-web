@@ -10,7 +10,7 @@ import { firstParam, type SearchParamsObj } from "@/lib/admin/url";
 export const dynamic = "force-dynamic";
 
 export const metadata = {
-  title: "Bookings",
+  title: "AIO Pad",
   description: "Scheduled bookings and reservations.",
 };
 
@@ -86,7 +86,7 @@ export default async function BookingsPage({ searchParams }: { searchParams: Sea
 
   return (
     <>
-      <PageHead eyebrow="Revenue" title="Bookings" sub={`${total.toLocaleString()} bookings`} />
+      <PageHead eyebrow="Revenue" title="AIO Pad" sub={`${total.toLocaleString()} bookings`} />
       {error && <div className="admin-alert admin-alert--err" style={{ marginBottom: 14 }}>{error}</div>}
       <DataTable columns={columns} rows={rows} total={total} page={page} pageSize={pageSize} sort={sort} dir={dir} basePath="/admin/revenue/bookings" searchParams={searchParams} searchPlaceholder="Search kind…" emptyText="No bookings match." />
     </>
