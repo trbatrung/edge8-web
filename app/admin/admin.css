@@ -385,18 +385,26 @@ a.mp-kpi:hover { border-color: var(--admin-accent); transform: translateY(-1px);
   flex-wrap: wrap;
 }
 .admin-search {
-  flex: 1;
+  flex: 1 1 auto;
   min-width: 220px;
   max-width: 360px;
+  height: 38px;
   display: flex;
+  flex-wrap: nowrap;
   align-items: center;
   gap: 8px;
   background: var(--admin-surface);
   border: 1px solid var(--admin-line);
   border-radius: var(--admin-radius-sm);
-  padding: 8px 12px;
+  padding: 0 12px;
+  box-sizing: border-box;
 }
-.admin-search input { border: 0; outline: 0; width: 100%; font: inherit; font-size: 14px; background: transparent; color: var(--admin-ink); }
+.admin-search:focus-within { border-color: var(--admin-accent); }
+.admin-search-icon { flex: 0 0 auto; width: 16px; height: 16px; color: var(--admin-muted); }
+.admin-search input { flex: 1 1 auto; min-width: 0; border: 0; outline: 0; font: inherit; font-size: 14px; background: transparent; color: var(--admin-ink); }
+.admin-search-clear { flex: 0 0 auto; display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; padding: 0; border: 0; background: transparent; color: var(--admin-muted); cursor: pointer; }
+.admin-search-clear svg { width: 14px; height: 14px; }
+.admin-search-clear:hover { color: var(--admin-ink); }
 .admin-table-wrap {
   background: var(--admin-surface);
   border: 1px solid var(--admin-line);

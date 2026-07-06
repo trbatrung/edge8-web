@@ -33,7 +33,10 @@ export function TableSearch({
         go(value.trim() || null);
       }}
     >
-      <span aria-hidden>⌕</span>
+      <svg className="admin-search-icon" viewBox="0 0 24 24" aria-hidden fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="11" cy="11" r="7" />
+        <line x1="21" y1="21" x2="16.65" y2="16.65" />
+      </svg>
       <input
         value={value}
         onChange={(e) => setValue(e.target.value)}
@@ -43,14 +46,17 @@ export function TableSearch({
       {value && (
         <button
           type="button"
+          className="admin-search-clear"
           aria-label="Clear search"
           onClick={() => {
             setValue("");
             go(null);
           }}
-          style={{ border: 0, background: "transparent", cursor: "pointer", color: "var(--admin-muted)" }}
         >
-          ✕
+          <svg viewBox="0 0 24 24" aria-hidden fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
         </button>
       )}
     </form>
