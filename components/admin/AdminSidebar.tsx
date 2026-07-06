@@ -224,7 +224,11 @@ export function AdminSidebar({
             ▾
           </span>
         </button>
-        {!subCollapsed && sub.items.map((item) => renderItem(item, true))}
+        {!subCollapsed && (
+          <div className="admin-nav-railgroup">
+            {sub.items.map((item) => renderItem(item, true))}
+          </div>
+        )}
       </div>
     );
   }
