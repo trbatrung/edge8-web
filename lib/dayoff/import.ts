@@ -36,6 +36,7 @@ export type ImportReport = {
   employees: {
     total: number;
     matched: { dayoffId: number; name: string; email: string; policy: string | null }[];
+    created: { dayoffId: number; name: string; email: string; status: string; flaggedEntity: boolean }[];
     unmatchedDayoff: { dayoffId: number; name: string; email: string | null }[];
     unmatchedLocal: { teamMemberId: string; name: string; email: string }[];
     conflicts: string[];
@@ -100,8 +101,11 @@ function mapStatus(r: DayoffRequest): string {
 // [RULE] Fan-out, don't default: /employees paginates at 10 by default and can
 // filter by isActive. Fetch unfiltered + explicitly inactive, merge, and assert
 // against the reported Total.
-async function fetchAllEmployees(warnings: string[]): Promise<DayoffEmployee[]> {
+async function fetchAllEmployees(
+  warnings: string[],
+): Promise<{ employees: DayoffEmployee[]; activeIds: Set<number> }> {
   const byId = new Map<number, DayoffEmployee>();
+  const activeIds = new Set<number>();
   let reportedTotal = 0;
   for (const isActive of [undefined, true, false] as const) {
     let page = 1;
@@ -114,7 +118,10 @@ async function fetchAllEmployees(warnings: string[]): Promise<DayoffEmployee[]> 
       await snap("/api/doc/employees", { page, isActive: isActive ?? "all" }, res);
       const rows = res.Results ?? [];
       if (isActive === undefined) reportedTotal = res.Total ?? 0;
-      for (const e of rows) byId.set(e.EmployeeID, e);
+      for (const e of rows) {
+        byId.set(e.EmployeeID, e);
+        if (isActive === true) activeIds.add(e.EmployeeID);
+      }
       if (rows.length < PAGE_LIMIT || page * PAGE_LIMIT >= (res.Total ?? 0)) break;
       page += 1;
     }
@@ -122,7 +129,75 @@ async function fetchAllEmployees(warnings: string[]): Promise<DayoffEmployee[]> 
   if (reportedTotal && byId.size < reportedTotal) {
     warnings.push(`Employee fetch collected ${byId.size} of reported ${reportedTotal}`);
   }
-  return [...byId.values()];
+  return { employees: [...byId.values()], activeIds };
+}
+
+// Legal entities (all current team members are Edge8 AI). Map a created record's
+// entity by email domain; unknown domains (e.g. ontargetclinical.com — a separate
+// company with no matching entity) import under Edge8 AI so history is not lost,
+// but are flagged for review/reassignment rather than silently mislabeled.
+const EDGE8_AI_ENTITY = "b0dd0696-9801-4062-a923-30d6a195c08c";
+const TALENT_EDGE_ENTITY = "996771d6-1ca5-442a-be67-30f05084c33d";
+
+function entityForEmail(email: string): { id: string; flagged: boolean } {
+  const domain = email.split("@")[1] ?? "";
+  if (domain === "edge8.ai" || domain === "edge8.co") return { id: EDGE8_AI_ENTITY, flagged: false };
+  if (domain === "talentedge.io" || domain === "talentedge.ai") return { id: TALENT_EDGE_ENTITY, flagged: false };
+  return { id: EDGE8_AI_ENTITY, flagged: true };
+}
+
+// Find the person by email, or create a minimal employee person record.
+async function resolveOrCreatePerson(
+  email: string,
+  name: string | null,
+  flagged: boolean,
+): Promise<{ id: string } | { error: string }> {
+  const { data: existing } = await companyOs.from("people").select("id").eq("email", email).maybeSingle();
+  if (existing) return { id: existing.id };
+  const { data, error } = await companyOs
+    .from("people")
+    .insert({
+      email,
+      full_name: name,
+      is_team_member: true,
+      persona: "employee",
+      source: "dayoff_import",
+      metadata: { dayoff_import: true, ...(flagged ? { needs_entity_review: true } : {}) },
+    })
+    .select("id")
+    .single();
+  if (error || !data) return { error: error?.message ?? "person insert failed" };
+  return { id: data.id };
+}
+
+// Ensure a team_member exists for this Day Off employee, idempotently. Prefers an
+// existing row (by dayoff_employee_id, then by person) over creating a duplicate.
+async function ensureTeamMember(
+  personId: string,
+  dayoffId: number,
+  email: string,
+  active: boolean,
+  policyId: string | null,
+): Promise<{ id: string } | { error: string }> {
+  const link = policyId ? { dayoff_employee_id: dayoffId, leave_policy_id: policyId } : { dayoff_employee_id: dayoffId };
+
+  const { data: byDayoff } = await companyOs.from("team_members").select("id").eq("dayoff_employee_id", dayoffId).maybeSingle();
+  if (byDayoff) return { id: byDayoff.id };
+
+  const { data: existingTm } = await companyOs.from("team_members").select("id").eq("person_id", personId).limit(1).maybeSingle();
+  if (existingTm) {
+    const { error } = await companyOs.from("team_members").update(link).eq("id", existingTm.id);
+    return error ? { error: error.message } : { id: existingTm.id };
+  }
+
+  const { id: entityId } = entityForEmail(email);
+  const { data, error } = await companyOs
+    .from("team_members")
+    .insert({ person_id: personId, legal_entity_id: entityId, status: active ? "active" : "alumni", ...link })
+    .select("id")
+    .single();
+  if (error || !data) return { error: error?.message ?? "team_member insert failed" };
+  return { id: data.id };
 }
 
 export async function runDayoffImport(): Promise<Done | Fail> {
@@ -135,7 +210,7 @@ export async function runDayoffImport(): Promise<Done | Fail> {
     leaveTypes: [],
     statuses: [],
     policies: [],
-    employees: { total: 0, matched: [], unmatchedDayoff: [], unmatchedLocal: [], conflicts: [] },
+    employees: { total: 0, matched: [], created: [], unmatchedDayoff: [], unmatchedLocal: [], conflicts: [] },
     requests: { fetched: 0, imported: 0, compOffCredits: 0, markedRemoved: 0, byStatus: {} },
     balances: { adjustmentsWritten: 0, byKind: {}, perEmployee: [] },
     warnings,
@@ -239,13 +314,15 @@ export async function runDayoffImport(): Promise<Done | Fail> {
     }
 
     // ---- Employees + matching ---------------------------------------------
-    const dayoffEmployees = await fetchAllEmployees(warnings);
+    // Import EVERYONE in Day Off (active and terminated) — the history is the
+    // point. Match to a team_member by email across ALL statuses; if none exists,
+    // create a minimal person + team_member so the history has somewhere to hang.
+    const { employees: dayoffEmployees, activeIds } = await fetchAllEmployees(warnings);
     report.employees.total = dayoffEmployees.length;
 
     const { data: members, error: mErr } = await companyOs
       .from("team_members")
-      .select("id, status, dayoff_employee_id, people!person_id(id, email, full_name)")
-      .in("status", ["active", "on_leave", "notice", "pre_start"]);
+      .select("id, status, dayoff_employee_id, people!person_id(id, email, full_name)");
     if (mErr) return { ok: false, error: `team_members read: ${mErr.message}` };
     type MemberRow = { id: string; status: string; dayoff_employee_id: number | null; people: { id: string; email: string; full_name: string | null } | { id: string; email: string; full_name: string | null }[] | null };
     const one = <T,>(e: T | T[] | null): T | null => (Array.isArray(e) ? e[0] ?? null : e);
@@ -260,26 +337,47 @@ export async function runDayoffImport(): Promise<Done | Fail> {
     for (const e of dayoffEmployees) {
       const raw = (e.Email ?? "").trim().toLowerCase();
       const email = EMAIL_ALIASES[raw] ?? raw;
-      const local = email ? memberByEmail.get(email) : undefined;
-      if (!local) {
+      if (!email) {
         report.employees.unmatchedDayoff.push({ dayoffId: e.EmployeeID, name: e.Name ?? "?", email: e.Email });
+        warnings.push(`Day Off employee ${e.Name} (${e.EmployeeID}) has no email; cannot import`);
         continue;
       }
-      matchedEmails.add(email);
-      memberIdByDayoffId.set(e.EmployeeID, local.id);
 
       const policyId = e.LeavePolicyName ? policyIdByName.get(e.LeavePolicyName.trim().toLowerCase()) ?? null : null;
       if (e.LeavePolicyName && !policyId) warnings.push(`Employee ${e.Name}: policy "${e.LeavePolicyName}" not found among imported policies`);
 
-      const { error: uErr } = await companyOs
-        .from("team_members")
-        .update({ dayoff_employee_id: e.EmployeeID, ...(policyId ? { leave_policy_id: policyId } : {}) })
-        .eq("id", local.id);
-      if (uErr) {
-        report.employees.conflicts.push(`link ${e.Name} (${e.EmployeeID}) -> ${local.id}: ${uErr.message}`);
+      const local = memberByEmail.get(email);
+      if (local) {
+        matchedEmails.add(email);
+        memberIdByDayoffId.set(e.EmployeeID, local.id);
+        const { error: uErr } = await companyOs
+          .from("team_members")
+          .update({ dayoff_employee_id: e.EmployeeID, ...(policyId ? { leave_policy_id: policyId } : {}) })
+          .eq("id", local.id);
+        if (uErr) {
+          report.employees.conflicts.push(`link ${e.Name} (${e.EmployeeID}) -> ${local.id}: ${uErr.message}`);
+          continue;
+        }
+        report.employees.matched.push({ dayoffId: e.EmployeeID, name: local.name, email: local.email, policy: e.LeavePolicyName });
         continue;
       }
-      report.employees.matched.push({ dayoffId: e.EmployeeID, name: local.name, email: local.email, policy: e.LeavePolicyName });
+
+      // No team_member for this Day Off account: create the records it needs.
+      const active = activeIds.has(e.EmployeeID);
+      const { flagged } = entityForEmail(email);
+      const person = await resolveOrCreatePerson(email, e.Name, flagged);
+      if ("error" in person) {
+        report.employees.conflicts.push(`create person ${email}: ${person.error}`);
+        continue;
+      }
+      const tm = await ensureTeamMember(person.id, e.EmployeeID, email, active, policyId);
+      if ("error" in tm) {
+        report.employees.conflicts.push(`create team_member ${email}: ${tm.error}`);
+        continue;
+      }
+      matchedEmails.add(email);
+      memberIdByDayoffId.set(e.EmployeeID, tm.id);
+      report.employees.created.push({ dayoffId: e.EmployeeID, name: e.Name ?? email, email, status: active ? "active" : "alumni", flaggedEntity: flagged });
     }
     for (const [email, m] of memberByEmail) {
       if (!matchedEmails.has(email)) report.employees.unmatchedLocal.push({ teamMemberId: m.id, name: m.name, email: m.email });

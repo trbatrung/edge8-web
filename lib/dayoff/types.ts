@@ -42,20 +42,28 @@ export const TYPE_NAME_MAP: Record<string, LeaveCategory> = {
 // Pending Approver2, Accepted, Rejected Approver1, Rejected Approver2,
 // Deleted Request, Skipped Step 1, Skipped Step 2. The two "Skipped" statuses
 // are deliberately unmapped (semantics unverified) so they fail closed.
+// NOTE: the /leaveRequestStatuses list spells names WITH spaces ("Deleted
+// Request"), but the value on an actual request is CONCATENATED ("DeletedRequest").
+// Map both forms.
 export const STATUS_NAME_MAP: Record<string, TimeOffStatus> = {
   pending: "requested",
   "pending approver1": "requested",
+  pendingapprover1: "requested",
   "pending approver2": "requested",
+  pendingapprover2: "requested",
   requested: "requested",
   approved: "approved",
   accepted: "approved",
   rejected: "rejected",
   "rejected approver1": "rejected",
+  rejectedapprover1: "rejected",
   "rejected approver2": "rejected",
+  rejectedapprover2: "rejected",
   denied: "rejected",
   cancelled: "cancelled",
   canceled: "cancelled",
   "deleted request": "cancelled",
+  deletedrequest: "cancelled",
   taken: "taken",
 };
 

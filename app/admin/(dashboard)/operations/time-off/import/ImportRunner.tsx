@@ -37,13 +37,24 @@ export function ImportRunner() {
         <div className="admin-card" style={{ marginTop: 20, padding: "18px 20px" }}>
           <h2 className="admin-card-title">Import report — anchor {report.anchorDate}</h2>
           <ul className="admin-import-summary">
-            <li><strong>{report.employees.matched.length}</strong> of {report.employees.total} Day Off employees matched by email</li>
+            <li><strong>{report.employees.matched.length + report.employees.created.length}</strong> of {report.employees.total} Day Off employees imported ({report.employees.matched.length} matched, {report.employees.created.length} newly created)</li>
             <li><strong>{report.requests.imported}</strong> leave requests imported ({report.requests.compOffCredits} comp-off credits routed to adjustments, {report.requests.markedRemoved} tombstoned)</li>
             <li><strong>{report.balances.adjustmentsWritten}</strong> balance-anchor adjustments written</li>
             <li><strong>{report.policies.length}</strong> policies imported: {report.policies.map((p) => `${p.name} (${p.ruleCount} rules${p.isDefault ? ", default" : ""})`).join(", ")}</li>
             <li>{report.snapshots} raw snapshots captured; {report.warnings.length} warnings</li>
           </ul>
 
+          {report.employees.created.length > 0 && (
+            <>
+              <h3 className="admin-card-title" style={{ marginTop: 14 }}>New records created (had no CRM presence)</h3>
+              <ul>{report.employees.created.map((u) => (
+                <li key={u.dayoffId}>
+                  {u.name} — {u.email} ({u.status})
+                  {u.flaggedEntity && <strong style={{ color: "var(--admin-warn-ink)" }}> ⚑ review legal entity</strong>}
+                </li>
+              ))}</ul>
+            </>
+          )}
           {report.employees.unmatchedDayoff.length > 0 && (
             <>
               <h3 className="admin-card-title" style={{ marginTop: 14 }}>Unmatched Day Off employees (snapshot only)</h3>
