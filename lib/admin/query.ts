@@ -12,6 +12,8 @@ export type ListParams = {
   sort?: string;
   dir?: "asc" | "desc";
   filters?: Record<string, string | number | boolean | (string | number)[]>;
+  // For archivable tables (people, companies, deals): hide soft-deleted rows.
+  excludeArchived?: boolean;
 };
 
 export type ListResult<T> = {
@@ -37,6 +39,8 @@ export async function listEntity<T>(
     .range(from, from + pageSize - 1);
 
   if (params.sort) q = q.order(params.sort, { ascending: params.dir !== "desc" });
+
+  if (params.excludeArchived) q = q.is("archived_at", null);
 
   for (const [col, val] of Object.entries(params.filters ?? {})) {
     q = Array.isArray(val) ? q.in(col, val) : q.eq(col, val);

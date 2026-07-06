@@ -30,6 +30,8 @@ export type Person = {
   lifecycle_stage: string;
   lead_status: string | null;
   disqualified_reason: string | null;
+  archived_at: string | null;
+  archived_by: string | null;
 };
 
 export type Person360 = {

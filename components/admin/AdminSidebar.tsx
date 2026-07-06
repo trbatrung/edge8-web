@@ -15,11 +15,12 @@ type NavGroup = { label: string | null; items: NavEntry[]; collapsible?: boolean
 
 const isSubsection = (e: NavEntry): e is NavSubsection => "subheading" in e;
 
-// Organized by the Four Offices of the Future (Revenue, Talent, Operations,
-// Innovation) + a Dashboard home and a Settings/config area. The Revenue office
-// leads with a nested CRM subsection (contact spine + pipeline lenses) above its
-// commerce items. Rows open the one shared Contact 360.
-// See docs/product/four-offices-of-the-future.md.
+// Nested-by-office IA, three levels deep: every feature (L3) lives under a System
+// (L2) inside an Office (L1). Offices are the Four Offices of the Future (Revenue,
+// Talent, Operations, Innovation) plus a Dashboard home and a Settings area;
+// Systems are the products within each office (CRM, Commerce, ATS, People, Time
+// Off, Workplace, ...). Offices and Systems both collapse. Rows
+// open the shared 360s. See docs/product/four-offices-of-the-future.md.
 const NAV: NavGroup[] = [
   { label: null, items: [{ label: "Dashboard", href: "/admin", ico: "◈", enabled: true }] },
   {
@@ -37,45 +38,84 @@ const NAV: NavGroup[] = [
           { label: "Funnel", href: "/admin/revenue/funnel", ico: "▽", enabled: true },
         ],
       },
-      { label: "Products", href: "/admin/revenue/products", ico: "▦", enabled: true },
-      { label: "Orders", href: "/admin/revenue/orders", ico: "⛁", enabled: true },
-      { label: "Bookings", href: "/admin/revenue/bookings", ico: "⌂", enabled: true },
-      { label: "Registrations", href: "/admin/revenue/registrations", ico: "✓", enabled: true },
-      { label: "Affiliates", href: "/admin/revenue/affiliates", ico: "%", enabled: true },
+      {
+        subheading: "Commerce",
+        items: [
+          { label: "Products", href: "/admin/revenue/products", ico: "▦", enabled: true },
+          { label: "Orders", href: "/admin/revenue/orders", ico: "⛁", enabled: true },
+          { label: "Bookings", href: "/admin/revenue/bookings", ico: "⌂", enabled: true },
+          { label: "Registrations", href: "/admin/revenue/registrations", ico: "✓", enabled: true },
+          { label: "Affiliates", href: "/admin/revenue/affiliates", ico: "%", enabled: true },
+        ],
+      },
     ],
   },
   {
     label: "Talent",
     collapsible: true,
     items: [
-      { label: "Candidates", href: "/admin/talent/candidates", ico: "☺", enabled: true },
-      { label: "Applications", href: "/admin/talent/applications", ico: "⇉", enabled: true },
-      { label: "Job Reqs", href: "/admin/talent/jobs", ico: "▤", enabled: true },
-      { label: "Team", href: "/admin/talent/team", ico: "☷", enabled: true },
+      {
+        subheading: "ATS",
+        items: [
+          { label: "Candidates", href: "/admin/talent/candidates", ico: "☺", enabled: true },
+          { label: "Applications", href: "/admin/talent/applications", ico: "⇉", enabled: true },
+          { label: "Job Reqs", href: "/admin/talent/jobs", ico: "▤", enabled: true },
+        ],
+      },
+      {
+        subheading: "People",
+        items: [{ label: "Team", href: "/admin/talent/team", ico: "☷", enabled: true }],
+      },
     ],
   },
   {
     label: "Operations",
     collapsible: true,
     items: [
-      { label: "Time Off", href: "/admin/operations/time-off", ico: "☼", enabled: true },
-      { label: "Vendors", href: "/admin/operations/vendors", ico: "▥" },
-      { label: "Documents", href: "/admin/operations/documents", ico: "⎙" },
-      { label: "Surveys", href: "/admin/operations/surveys", ico: "✎" },
+      {
+        subheading: "Time Off",
+        items: [
+          { label: "Requests", href: "/admin/operations/time-off", ico: "☼", enabled: true },
+        ],
+      },
+      {
+        subheading: "Workplace",
+        items: [
+          { label: "Vendors", href: "/admin/operations/vendors", ico: "▥" },
+          { label: "Documents", href: "/admin/operations/documents", ico: "⎙" },
+          { label: "Surveys", href: "/admin/operations/surveys", ico: "✎" },
+        ],
+      },
     ],
   },
   {
     label: "Innovation",
     collapsible: true,
-    items: [{ label: "Idea backlog", href: "/admin/innovation/ideas", ico: "✦" }],
+    items: [
+      {
+        subheading: "Ideas",
+        items: [{ label: "Idea backlog", href: "/admin/innovation/ideas", ico: "✦" }],
+      },
+    ],
   },
   {
     label: "Settings",
     collapsible: true,
     items: [
-      { label: "Brands", href: "/admin/settings/brands", ico: "✺" },
-      { label: "Legal entities", href: "/admin/settings/legal-entities", ico: "§" },
-      { label: "Pipelines", href: "/admin/settings/pipelines", ico: "⇶" },
+      {
+        subheading: "Access",
+        items: [
+          { label: "Admins", href: "/admin/settings/admins", ico: "⚿", enabled: true },
+        ],
+      },
+      {
+        subheading: "Configuration",
+        items: [
+          { label: "Brands", href: "/admin/settings/brands", ico: "✺" },
+          { label: "Legal entities", href: "/admin/settings/legal-entities", ico: "§" },
+          { label: "Pipelines", href: "/admin/settings/pipelines", ico: "⇶" },
+        ],
+      },
     ],
   },
 ];
@@ -124,8 +164,8 @@ export function AdminSidebar({
   const [collapsed, setCollapsed] = useState<Record<string, boolean>>({});
   const userInitials = initials(user.email);
 
-  function toggleGroup(label: string) {
-    setCollapsed((c) => ({ ...c, [label]: !c[label] }));
+  function toggle(key: string) {
+    setCollapsed((c) => ({ ...c, [key]: !c[key] }));
   }
 
   const activeBrand = brands.find((b) => b.id === activeBrandId) ?? null;
@@ -163,6 +203,29 @@ export function AdminSidebar({
         {item.label}
         <span className="admin-nav-badge">soon</span>
       </span>
+    );
+  }
+
+  function renderSubsection(sub: NavSubsection, groupLabel: string | null) {
+    const key = `${groupLabel ?? ""}/${sub.subheading}`;
+    const subCollapsed = Boolean(collapsed[key]);
+    return (
+      <div key={`sub-${key}`}>
+        <button
+          className="admin-nav-subhead admin-nav-subtoggle"
+          aria-expanded={!subCollapsed}
+          onClick={(e) => {
+            e.stopPropagation();
+            toggle(key);
+          }}
+        >
+          {sub.subheading}
+          <span className={`admin-nav-caret${subCollapsed ? " is-collapsed" : ""}`} aria-hidden>
+            ▾
+          </span>
+        </button>
+        {!subCollapsed && sub.items.map((item) => renderItem(item, true))}
+      </div>
     );
   }
 
@@ -316,7 +379,7 @@ export function AdminSidebar({
                   aria-expanded={!isCollapsed}
                   onClick={(e) => {
                     e.stopPropagation();
-                    toggleGroup(label);
+                    toggle(label);
                   }}
                 >
                   {label}
@@ -329,14 +392,7 @@ export function AdminSidebar({
               )}
               {!isCollapsed &&
               group.items.map((entry) =>
-                isSubsection(entry) ? (
-                  <div key={`sub-${entry.subheading}`}>
-                    <div className="admin-nav-subhead">{entry.subheading}</div>
-                    {entry.items.map((item) => renderItem(item, true))}
-                  </div>
-                ) : (
-                  renderItem(entry, false)
-                ),
+                isSubsection(entry) ? renderSubsection(entry, label) : renderItem(entry, false),
               )}
             </div>
             );

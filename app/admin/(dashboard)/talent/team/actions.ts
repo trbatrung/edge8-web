@@ -48,7 +48,7 @@ export async function inviteToPortal(teamMemberId: string): Promise<Result> {
   const email = (person.email as string).trim().toLowerCase();
 
   // Admins use /admin and get no /team identity, so never provision one.
-  if (isAdminEmail(email)) {
+  if (await isAdminEmail(email)) {
     return { ok: false, error: "This person is an admin. Admins use /admin, not the portal." };
   }
 

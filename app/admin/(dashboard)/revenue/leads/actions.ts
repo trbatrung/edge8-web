@@ -5,6 +5,8 @@ import { companyOs } from "@/lib/supabase";
 import { requireAdmin } from "@/lib/admin-auth";
 import { EDGE8_BRAND_ID } from "@/lib/company-os";
 import { promotePersonToLead, recordTransition } from "@/lib/lifecycle";
+import { recordAudit } from "@/lib/admin/audit";
+import { guardedDelete } from "@/lib/admin/mutations";
 
 type Result = { ok: true } | { ok: false; error: string };
 
@@ -30,6 +32,52 @@ export async function promoteLead(personId: string): Promise<Result> {
   if (!r.ok) return r;
   refresh();
   return { ok: true };
+}
+
+// Safe exit: take the person off the SDR queue (into nurture) without erasing
+// anything. The person stays on /admin/contacts. Distinct from Delete person.
+export async function removeFromQueue(personId: string): Promise<Result> {
+  const admin = await requireAdmin();
+
+  const { data: person, error: pErr } = await companyOs
+    .from("people")
+    .select("lifecycle_stage, lead_status")
+    .eq("id", personId)
+    .maybeSingle();
+  if (pErr || !person) return { ok: false, error: pErr?.message ?? "Person not found." };
+
+  const { error } = await companyOs
+    .from("people")
+    .update({ lead_status: "nurture", lead_sla_due_at: null })
+    .eq("id", personId);
+  if (error) return { ok: false, error: error.message };
+
+  await recordTransition({
+    personId,
+    fromStage: person.lifecycle_stage,
+    toStage: person.lifecycle_stage,
+    fromStatus: person.lead_status,
+    toStatus: "nurture",
+    reason: "removed_from_queue",
+  });
+  await recordAudit({
+    table: "people",
+    recordId: personId,
+    operation: "update",
+    actor: admin.email,
+    context: { action: "removed_from_queue" },
+  });
+  refresh();
+  return { ok: true };
+}
+
+// Destructive: permanently erase the person (GDPR), guarded by the schema's
+// foreign keys. Clearly separated from the safe "remove from queue".
+export async function deleteLeadPerson(personId: string): Promise<Result> {
+  const admin = await requireAdmin();
+  const r = await guardedDelete("people", personId, admin.email, { via: "leads" });
+  if (r.ok) refresh();
+  return r;
 }
 
 // Log an SDR call attempt: an interactions row + attempt counter. First
