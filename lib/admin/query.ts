@@ -11,7 +11,8 @@ export type ListParams = {
   searchColumns?: string[];
   sort?: string;
   dir?: "asc" | "desc";
-  filters?: Record<string, string | number | boolean | (string | number)[]>;
+  // `null` filters to IS NULL (e.g. persona: null for "unset").
+  filters?: Record<string, string | number | boolean | null | (string | number)[]>;
   // For archivable tables (people, companies, deals): hide soft-deleted rows.
   excludeArchived?: boolean;
 };
@@ -43,13 +44,22 @@ export async function listEntity<T>(
   if (params.excludeArchived) q = q.is("archived_at", null);
 
   for (const [col, val] of Object.entries(params.filters ?? {})) {
-    q = Array.isArray(val) ? q.in(col, val) : q.eq(col, val);
+    if (val === null) q = q.is(col, null);
+    else if (Array.isArray(val)) q = q.in(col, val);
+    else q = q.eq(col, val);
   }
 
+  // Tokenized search: split on whitespace and AND the tokens together (each
+  // successive .or() call is ANDed by PostgREST), so "john smith" requires
+  // both tokens rather than matching the literal substring "john smith".
   if (params.search && params.searchColumns?.length) {
-    const term = params.search.replace(/[%,()]/g, " ").trim();
-    if (term) {
-      const or = params.searchColumns.map((c) => `${c}.ilike.%${term}%`).join(",");
+    const tokens = params.search
+      .replace(/[%,()]/g, " ")
+      .trim()
+      .split(/\s+/)
+      .filter(Boolean);
+    for (const token of tokens) {
+      const or = params.searchColumns.map((c) => `${c}.ilike.%${token}%`).join(",");
       q = q.or(or);
     }
   }

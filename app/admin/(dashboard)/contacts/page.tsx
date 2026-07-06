@@ -5,7 +5,8 @@ import { PageHead } from "@/components/admin/PageHead";
 import { DataTable, type Column } from "@/components/admin/DataTable";
 import { Badge } from "@/components/admin/Badge";
 import { ArchivedToggle } from "@/components/admin/ArchivedToggle";
-import { formatDate, humanize } from "@/lib/admin/format";
+import { FilterBar } from "@/components/admin/FilterBar";
+import { formatDate, formatCents, humanize } from "@/lib/admin/format";
 import { firstParam, type SearchParamsObj } from "@/lib/admin/url";
 
 export const dynamic = "force-dynamic";
@@ -26,10 +27,32 @@ type Person = {
   is_team_member: boolean | null;
   archived_at: string | null;
   created_at: string;
+  deal_value_usd_cents: number | null;
+  deal_count: number | null;
 };
 
 const PAGE_SIZE = 25;
-const SORTABLE = new Set(["full_name", "email", "phone", "persona", "source", "created_at"]);
+const SORTABLE = new Set(["full_name", "email", "phone", "persona", "source", "deal_value_usd_cents", "created_at"]);
+
+// Sentinel for "persona is null" — distinct from "" (no filter applied).
+const UNSET = "__unset__";
+
+const PERSONA_OPTIONS = [
+  { value: "job_seeker", label: "Job seeker" },
+  { value: "prospect", label: "Prospect" },
+  { value: "client", label: "Client" },
+  { value: "employee", label: "Employee" },
+  { value: UNSET, label: "Unset" },
+];
+const STAGE_OPTIONS = [
+  { value: "lead", label: "Lead" },
+  { value: "customer", label: "Customer" },
+  { value: "none", label: "None" },
+];
+const TEAM_OPTIONS = [
+  { value: "true", label: "Team only" },
+  { value: "false", label: "Non-team" },
+];
 
 export default async function ContactsPage({ searchParams }: { searchParams: SearchParamsObj }) {
   const brandId = getActiveBrandId();
@@ -40,9 +63,19 @@ export default async function ContactsPage({ searchParams }: { searchParams: Sea
   const dir = firstParam(searchParams.dir) === "asc" ? "asc" : "desc";
   const showArchived = firstParam(searchParams.archived) === "1";
 
+  const personaParam = firstParam(searchParams.persona);
+  const stageParam = firstParam(searchParams.stage);
+  const teamParam = firstParam(searchParams.team);
+
+  const filters: Record<string, string | number | boolean | null> = {};
+  if (brandId) filters.source_brand_id = brandId;
+  if (personaParam) filters.persona = personaParam === UNSET ? null : personaParam;
+  if (stageParam) filters.lifecycle_stage = stageParam;
+  if (teamParam === "true" || teamParam === "false") filters.is_team_member = teamParam === "true";
+
   const { rows, total, pageSize, error } = await listEntity<Person>(
-    "people",
-    "id, full_name, email, phone, persona, source, do_not_contact, is_team_member, archived_at, created_at",
+    "people_with_deals",
+    "id, full_name, email, phone, persona, source, do_not_contact, is_team_member, archived_at, created_at, deal_value_usd_cents, deal_count",
     {
       page,
       pageSize: PAGE_SIZE,
@@ -51,7 +84,7 @@ export default async function ContactsPage({ searchParams }: { searchParams: Sea
       sort,
       dir,
       excludeArchived: !showArchived,
-      filters: brandId ? { source_brand_id: brandId } : undefined,
+      filters,
     },
   );
 
@@ -75,6 +108,13 @@ export default async function ContactsPage({ searchParams }: { searchParams: Sea
       cell: (r) => (r.persona ? <Badge>{humanize(r.persona)}</Badge> : <span className="admin-cell-muted">—</span>),
     },
     { key: "source", header: "Source", sortable: true, cell: (r) => <span className="admin-cell-muted">{r.source || "—"}</span> },
+    {
+      key: "deal_value_usd_cents",
+      header: "Deal value",
+      sortable: true,
+      align: "right",
+      cell: (r) => (r.deal_count ? formatCents(r.deal_value_usd_cents) : <span className="admin-cell-muted">—</span>),
+    },
     {
       key: "flags",
       header: "Flags",
@@ -116,6 +156,17 @@ export default async function ContactsPage({ searchParams }: { searchParams: Sea
         searchParams={searchParams}
         searchPlaceholder="Search name, email, or phone…"
         emptyText="No contacts match."
+        filterBar={
+          <FilterBar
+            basePath="/admin/contacts"
+            searchParams={searchParams}
+            filters={[
+              { key: "persona", label: "Persona", options: PERSONA_OPTIONS },
+              { key: "stage", label: "Stage", options: STAGE_OPTIONS },
+              { key: "team", label: "Team", options: TEAM_OPTIONS },
+            ]}
+          />
+        }
       />
     </>
   );

@@ -6,6 +6,7 @@ import { requireAdmin } from "@/lib/admin-auth";
 import { recordTransition } from "@/lib/lifecycle";
 import { recordAudit, recordAuditMany } from "@/lib/admin/audit";
 import { archiveRecord, guardedDelete, restoreRecord } from "@/lib/admin/mutations";
+import { convertToUsdCents } from "@/lib/admin/fx";
 
 type Result = { ok: true } | { ok: false; error: string };
 type BulkResult = { ok: true; message?: string } | { ok: false; error: string };
@@ -266,6 +267,31 @@ export async function updateDeal(dealId: string, patch: DealPatch): Promise<Resu
   if (patch.next_step_date !== undefined) updates.next_step_date = patch.next_step_date || null;
   if (patch.proposal_url !== undefined) updates.proposal_url = normalizeUrl(patch.proposal_url);
   if (patch.contract_url !== undefined) updates.contract_url = normalizeUrl(patch.contract_url);
+
+  // Reporting/list views always show USD (amount_cents/currency stay the
+  // original transaction). Re-fetch the rate whenever amount or currency
+  // changes; a flaky FX lookup shouldn't block the deal save.
+  if (updates.amount_cents !== undefined || updates.currency !== undefined) {
+    let amountCents = updates.amount_cents as number | undefined;
+    let currency = updates.currency as string | undefined;
+    if (amountCents === undefined || currency === undefined) {
+      const { data: existing } = await companyOs
+        .from("deals")
+        .select("amount_cents, currency")
+        .eq("id", dealId)
+        .maybeSingle();
+      amountCents ??= existing?.amount_cents ?? 0;
+      currency ??= existing?.currency ?? "usd";
+    }
+    try {
+      const fx = await convertToUsdCents(amountCents ?? 0, currency ?? "usd");
+      updates.amount_usd_cents = fx.amountUsdCents;
+      updates.fx_rate = fx.rate;
+      updates.fx_rate_fetched_at = new Date().toISOString();
+    } catch (err) {
+      console.error(`FX conversion failed for deal ${dealId}:`, err);
+    }
+  }
 
   if (Object.keys(updates).length === 0) return { ok: true };
 
