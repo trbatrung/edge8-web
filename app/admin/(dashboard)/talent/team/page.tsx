@@ -14,7 +14,7 @@ export const metadata = {
   description: "Edge8 team members and departments.",
 };
 
-// Talent office: internal team (persona=employee). Name opens the Contact 360.
+// Talent office: internal team (persona=employee). Name opens the Team Member profile.
 type P = { full_name: string | null; email: string; auth_user_id: string | null };
 type TeamMember = {
   id: string;
@@ -51,10 +51,10 @@ export default async function TeamPage({ searchParams }: { searchParams: SearchP
       header: "Name",
       cell: (r) => {
         const p = one(r.people);
-        return r.person_id ? (
-          <Link href={`/admin/contacts/${r.person_id}`} className="admin-cell-strong">{p?.full_name || p?.email || "View"}</Link>
-        ) : (
-          <span className="admin-cell-muted">{p?.email || "—"}</span>
+        return (
+          <Link href={`/admin/talent/team/${r.id}`} className="admin-cell-strong">
+            {p?.full_name || p?.email || "View"}
+          </Link>
         );
       },
     },

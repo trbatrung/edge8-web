@@ -74,3 +74,13 @@ export function countWorkingDays(
 export function formatDays(days: number): string {
   return days === 1 ? "1 day" : `${days} days`;
 }
+
+// Format a synced leave-balance number for the People table: round to at most
+// one decimal and drop a trailing ".0". 12 → "12", 10.15 → "10.2", 13.32 → "13.3".
+export function formatLeaveBalance(value: number | string | null | undefined): string {
+  if (value === null || value === undefined || value === "") return "0";
+  const n = typeof value === "string" ? Number(value) : value;
+  if (!Number.isFinite(n)) return "0";
+  const rounded = Math.round(n * 10) / 10;
+  return Number.isInteger(rounded) ? String(rounded) : rounded.toFixed(1);
+}

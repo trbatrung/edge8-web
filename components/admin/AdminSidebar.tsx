@@ -75,7 +75,8 @@ const NAV: NavGroup[] = [
       {
         subheading: "Time Off",
         items: [
-          { label: "Requests", href: "/admin/operations/time-off", ico: "☼", enabled: true },
+          { label: "Requests", href: "/admin/operations/time-off/requests", ico: "☼", enabled: true },
+          { label: "People", href: "/admin/operations/time-off/people", ico: "☷", enabled: true },
         ],
       },
       {
