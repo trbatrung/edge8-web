@@ -73,3 +73,20 @@ export async function listEntity<T>(
     error: error ? error.message : null,
   };
 }
+
+// Count-only companion to listEntity: applies the same filter semantics but
+// fetches no rows (head: true). Used for segment/tab badges where we want the
+// size of each slice without paging through it.
+export async function countEntity(
+  table: string,
+  filters: ListParams["filters"] = {},
+): Promise<number> {
+  let q = companyOs.from(table).select("*", { count: "exact", head: true });
+  for (const [col, val] of Object.entries(filters ?? {})) {
+    if (val === null) q = q.is(col, null);
+    else if (Array.isArray(val)) q = q.in(col, val);
+    else q = q.eq(col, val);
+  }
+  const { count } = await q;
+  return count ?? 0;
+}

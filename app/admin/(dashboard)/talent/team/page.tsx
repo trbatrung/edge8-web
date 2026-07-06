@@ -1,10 +1,10 @@
 import Link from "next/link";
-import { listEntity } from "@/lib/admin/query";
+import { listEntity, countEntity } from "@/lib/admin/query";
 import { PageHead } from "@/components/admin/PageHead";
 import { DataTable, type Column } from "@/components/admin/DataTable";
 import { Badge, statusTone } from "@/components/admin/Badge";
 import { formatDate, humanize } from "@/lib/admin/format";
-import { firstParam, type SearchParamsObj } from "@/lib/admin/url";
+import { firstParam, mergeQuery, type SearchParamsObj } from "@/lib/admin/url";
 import { InvitePortalButton } from "@/components/admin/InvitePortalButton";
 
 export const dynamic = "force-dynamic";
@@ -32,6 +32,16 @@ const one = <T,>(e: T | T[] | null): T | null => (Array.isArray(e) ? e[0] ?? nul
 const PAGE_SIZE = 25;
 const SORTABLE = new Set(["start_date", "created_at", "employee_number", "employment_type", "work_location", "status"]);
 
+// Segment tabs. `filter` is applied on top of search/sort. Order matters: the
+// first entry is the default when no (or an unknown) ?seg is present.
+type SegKey = "current" | "past" | "contractors" | "all";
+const SEGMENTS: { key: SegKey; label: string; filter: NonNullable<Parameters<typeof countEntity>[1]> }[] = [
+  { key: "current", label: "Current", filter: { status: "active" } },
+  { key: "past", label: "Past", filter: { status: ["terminated", "alumni"] } },
+  { key: "contractors", label: "Contractors", filter: { employment_type: "contract" } },
+  { key: "all", label: "All", filter: {} },
+];
+
 export default async function TeamPage({ searchParams }: { searchParams: SearchParamsObj }) {
   const page = Math.max(1, Number(firstParam(searchParams.page) ?? "1") || 1);
   const q = firstParam(searchParams.q) ?? "";
@@ -39,11 +49,20 @@ export default async function TeamPage({ searchParams }: { searchParams: SearchP
   const sort = sortParam && SORTABLE.has(sortParam) ? sortParam : "created_at";
   const dir = firstParam(searchParams.dir) === "asc" ? "asc" : "desc";
 
-  const { rows, total, pageSize, error } = await listEntity<TeamMember>(
-    "team_members",
-    "id, employee_number, employment_type, work_location, status, start_date, created_at, person_id, people!person_id(full_name, email, auth_user_id)",
-    { page, pageSize: PAGE_SIZE, search: q, searchColumns: ["employee_number"], sort, dir },
-  );
+  const segParam = firstParam(searchParams.seg);
+  const seg = SEGMENTS.find((s) => s.key === segParam) ?? SEGMENTS[0];
+
+  // List the active segment's rows, and (in parallel) count every segment for
+  // its tab badge. Counts reflect the whole segment, independent of the search.
+  const [list, counts] = await Promise.all([
+    listEntity<TeamMember>(
+      "team_members",
+      "id, employee_number, employment_type, work_location, status, start_date, created_at, person_id, people!person_id(full_name, email, auth_user_id)",
+      { page, pageSize: PAGE_SIZE, search: q, searchColumns: ["employee_number"], sort, dir, filters: seg.filter },
+    ),
+    Promise.all(SEGMENTS.map((s) => countEntity("team_members", s.filter))),
+  ]);
+  const { rows, total, pageSize, error } = list;
 
   const columns: Column<TeamMember>[] = [
     {
@@ -77,9 +96,22 @@ export default async function TeamPage({ searchParams }: { searchParams: SearchP
 
   return (
     <>
-      <PageHead eyebrow="Talent" title="Team" sub={`${total.toLocaleString()} team members`} />
+      <PageHead eyebrow="Talent" title="Team" sub={`${total.toLocaleString()} ${total === 1 ? "team member" : "team members"}`} />
       {error && <div className="admin-alert admin-alert--err" style={{ marginBottom: 14 }}>{error}</div>}
-      <DataTable columns={columns} rows={rows} total={total} page={page} pageSize={pageSize} sort={sort} dir={dir} basePath="/admin/talent/team" searchParams={searchParams} searchPlaceholder="Search employee #…" emptyText="No team members match." />
+      <nav className="admin-tabs" role="tablist" aria-label="Team segment">
+        {SEGMENTS.map((s, i) => (
+          <Link
+            key={s.key}
+            role="tab"
+            aria-selected={s.key === seg.key}
+            className={`admin-tab${s.key === seg.key ? " is-active" : ""}`}
+            href={"/admin/talent/team" + mergeQuery(searchParams, { seg: s.key === "current" ? null : s.key, page: 1 })}
+          >
+            {s.label} ({counts[i].toLocaleString()})
+          </Link>
+        ))}
+      </nav>
+      <DataTable columns={columns} rows={rows} total={total} page={page} pageSize={pageSize} sort={sort} dir={dir} basePath="/admin/talent/team" searchParams={searchParams} searchPlaceholder="Search employee #…" emptyText={seg.key === "contractors" ? "No contractors yet." : "No team members match."} />
     </>
   );
 }
