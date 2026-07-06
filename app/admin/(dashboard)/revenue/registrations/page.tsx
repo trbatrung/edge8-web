@@ -9,7 +9,7 @@ import { firstParam, type SearchParamsObj } from "@/lib/admin/url";
 export const dynamic = "force-dynamic";
 
 export const metadata = {
-  title: "Registrations",
+  title: "Retreat",
   description: "Event and program registrations.",
 };
 
@@ -69,7 +69,7 @@ export default async function RegistrationsPage({ searchParams }: { searchParams
 
   return (
     <>
-      <PageHead eyebrow="Revenue" title="Registrations" sub={`${total.toLocaleString()} registrations`} />
+      <PageHead eyebrow="Revenue" title="Retreat" sub={`${total.toLocaleString()} registrations`} />
       {error && <div className="admin-alert admin-alert--err" style={{ marginBottom: 14 }}>{error}</div>}
       <DataTable columns={columns} rows={rows} total={total} page={page} pageSize={pageSize} sort={sort} dir={dir} basePath="/admin/revenue/registrations" searchParams={searchParams} searchPlaceholder="Search attendee…" emptyText="No registrations match." />
     </>

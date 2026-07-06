@@ -30,21 +30,21 @@ const NAV: NavGroup[] = [
       {
         subheading: "CRM",
         items: [
-          { label: "Contacts", href: "/admin/contacts", ico: "⚇", enabled: true },
-          { label: "Leads", href: "/admin/revenue/leads", ico: "◉", enabled: true },
-          { label: "Companies", href: "/admin/revenue/companies", ico: "▣", enabled: true },
-          { label: "Inquiries", href: "/admin/revenue/inquiries", ico: "☰", enabled: true },
-          { label: "Deals", href: "/admin/revenue/deals", ico: "$", enabled: true },
           { label: "Funnel", href: "/admin/revenue/funnel", ico: "▽", enabled: true },
+          { label: "Deals", href: "/admin/revenue/deals", ico: "$", enabled: true },
+          { label: "Leads", href: "/admin/revenue/leads", ico: "◉", enabled: true },
+          { label: "Inquiries", href: "/admin/revenue/inquiries", ico: "☰", enabled: true },
+          { label: "Companies", href: "/admin/revenue/companies", ico: "▣", enabled: true },
+          { label: "Contacts", href: "/admin/contacts", ico: "⚇", enabled: true },
         ],
       },
       {
         subheading: "Commerce",
         items: [
-          { label: "Products", href: "/admin/revenue/products", ico: "▦", enabled: true },
           { label: "Orders", href: "/admin/revenue/orders", ico: "⛁", enabled: true },
-          { label: "Bookings", href: "/admin/revenue/bookings", ico: "⌂", enabled: true },
-          { label: "Registrations", href: "/admin/revenue/registrations", ico: "✓", enabled: true },
+          { label: "AIO Pad", href: "/admin/revenue/bookings", ico: "⌂", enabled: true },
+          { label: "Retreat", href: "/admin/revenue/registrations", ico: "✓", enabled: true },
+          { label: "Products", href: "/admin/revenue/products", ico: "▦", enabled: true },
           { label: "Affiliates", href: "/admin/revenue/affiliates", ico: "%", enabled: true },
         ],
       },
@@ -57,8 +57,8 @@ const NAV: NavGroup[] = [
       {
         subheading: "ATS",
         items: [
-          { label: "Candidates", href: "/admin/talent/candidates", ico: "☺", enabled: true },
           { label: "Applications", href: "/admin/talent/applications", ico: "⇉", enabled: true },
+          { label: "Candidates", href: "/admin/talent/candidates", ico: "☺", enabled: true },
           { label: "Job Reqs", href: "/admin/talent/jobs", ico: "▤", enabled: true },
         ],
       },
