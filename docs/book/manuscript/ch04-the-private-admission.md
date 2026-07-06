@@ -4,7 +4,7 @@ Jocelyn came out on Sunday, the way she did once a month or so, with bread from 
 
 She ran programs for a hospital foundation in the city, and she talked about it while he cooked. Somewhere in it she mentioned, in passing, that she had spent the drive out dictating donor letters to something on her phone, and that it had drafted all forty by the time she parked, in her voice, and that she had fixed three of them and sent the rest. She said it the way she would have said she stopped for gas. He stood at the stove with his back to her and heard the whole four hundred thousand dollars go by in one sentence.
 
-Over dinner she asked about the board meeting, because Grace talked to her more than either of them admitted, and he gave her the performance. Ellery's folder. The one-quarter ultimatum, delivered the way he delivered it at the club, timed, with the pauses in it. He was good at the story by now. That was the problem with him and stories.
+Over dinner she asked about the board meeting, because Grace talked to her more than either of them admitted, and he gave her the performance. Bill's folder. The one-quarter ultimatum, delivered the way he delivered it at the club, timed, with the pauses in it. He was good at the story by now. That was the problem with him and stories.
 
 Jocelyn did not laugh in any of the places the men at the club had laughed.
 

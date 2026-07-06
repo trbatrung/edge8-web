@@ -1,10 +1,10 @@
 # Chapter 8: Everything bought, nothing built
 
-The drive home from Priya's was forty minutes, and Marcus drove it slowly, radio off, the legal pad on the seat beside him with the chart face up. Twenty-two years of his decisions in black pen, and the two kinds of empty.
+The drive home from Mai's was forty minutes, and Marcus drove it slowly, radio off, the legal pad on the seat beside him with the chart face up. Twenty-two years of his decisions in black pen, and the two kinds of empty.
 
-He thought about Trevor most of the way.
+He thought about Steve most of the way.
 
-For eighteen months he had been grading Trevor the way you grade a machine that will not run right, patiently, then less patiently, waiting for the output. Somewhere around the county line the grade changed. Trevor had done, faithfully and on schedule, every line of a job description Marcus had signed without reading. Evaluate platforms. He had evaluated platforms; there were four of them. Build the vendor relationships. The vendors loved him. Manage the rollout, run enablement, and the rollout had been managed and the enablement run, and a hundred and fifty attendance certificates said so. The one thing the paper had never asked him to do was build anything into anybody who worked at Halden, and so, in eighteen months, working hard the whole time, he never had.
+For eighteen months he had been grading Steve the way you grade a machine that will not run right, patiently, then less patiently, waiting for the output. Somewhere around the county line the grade changed. Steve had done, faithfully and on schedule, every line of a job description Marcus had signed without reading. Evaluate platforms. He had evaluated platforms; there were four of them. Build the vendor relationships. The vendors loved him. Manage the rollout, run enablement, and the rollout had been managed and the enablement run, and a hundred and fifty attendance certificates said so. The one thing the paper had never asked him to do was build anything into anybody who worked at Halden, and so, in eighteen months, working hard the whole time, he never had.
 
 You could not call a man incompetent for finishing the wrong list. Mis-hired, maybe. Mis-briefed, certainly. And the brief was Marcus's.
 
@@ -18,7 +18,7 @@ He went down the AI line the way he had gone through Grace's box, and this time 
 
 Bought, bought, bought. Nothing built. Not because anyone had failed him. Because building was the one line that had never appeared on any invoice, and he was the only man in the company who could have written it in.
 
-At Priya's, the morning meeting ran off a sheet her own scheduler had built, and when the woman retired, the sheet would stay. The screen over the press brake had cost a winter of one operator's evenings, and it could not be canceled by a vendor, because there was no vendor, there was only a man who now knew how. Ellery had stood in his boardroom and asked him to name one person who could do one thing a vendor didn't hand them, and he had wanted, badly, to answer her. Three weeks later he finally could. At Priya's shop: all of them, down to the scheduler. At his: not one.
+At Mai's, the morning meeting ran off a sheet her own scheduler had built, and when the woman retired, the sheet would stay. The screen over the press brake had cost a winter of one operator's evenings, and it could not be canceled by a vendor, because there was no vendor, there was only a man who now knew how. Bill had stood in his boardroom and asked him to name one person who could do one thing a vendor didn't hand them, and he had wanted, badly, to answer her. Three weeks later he finally could. At Mai's shop: all of them, down to the scheduler. At his: not one.
 
 Including him. He made himself say that part. Especially him.
 
@@ -30,6 +30,6 @@ The tools hadn't failed. He could say it now without flinching. The tools were n
 
 The light changed. He drove home, and set the legal pad on the kitchen table where he would see it at breakfast, squared to the edge, the chart face up, the empty band waiting under the line.
 
-Priya had told him to look at it in the morning and ask what went there. Not which tool. What was true, and where it lived, and who was going to write it down.
+Mai had told him to look at it in the morning and ask what went there. Not which tool. What was true, and where it lived, and who was going to write it down.
 
 He was fifty-four years old, and tomorrow, in front of people, he was going to be a beginner.
