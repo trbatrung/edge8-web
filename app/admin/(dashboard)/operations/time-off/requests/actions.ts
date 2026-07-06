@@ -10,7 +10,7 @@ type Result = { ok: true } | { ok: false; error: string };
 const LEAVE_TYPE_SET = new Set<string>(LEAVE_TYPES);
 
 function refresh() {
-  revalidatePath("/admin/operations/time-off");
+  revalidatePath("/admin/operations/time-off/requests");
 }
 
 // Resolve the acting admin to a team_members row (via people.email) so we can
