@@ -3405,3 +3405,155 @@ footer {
   .rt-xp-teaser { grid-template-columns: 1fr; gap: 28px; }
   .rt-xp-teaser-media { order: -1; }
 }
+
+/* ════════════════════════════════════════════════════════════════
+   WATCH — /watch video hub (wv-*)
+   Mirrors the blog card system; videos are derived from blog posts.
+   ════════════════════════════════════════════════════════════════ */
+
+/* ─── Hero + Video of the Week ─────────────────────── */
+.wv-hero { background: var(--dark); position: relative; overflow: hidden; padding: 140px 0 80px; }
+.wv-hero::before {
+  content: '';
+  position: absolute;
+  top: -160px; right: -140px;
+  width: 560px; height: 560px;
+  background: radial-gradient(circle, rgba(40,123,232,0.22) 0%, transparent 70%);
+  pointer-events: none;
+}
+.wv-hero-inner { position: relative; z-index: 1; }
+.wv-eyebrow {
+  display: inline-block; font-size: 12px; font-weight: 600; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--mint); margin-bottom: 14px;
+}
+.wv-hero-sub { font-size: 18px; color: rgba(255,255,255,0.7); margin-top: 16px; max-width: 560px; }
+
+.wv-pinned { margin-top: 48px; }
+.wv-pinned-label {
+  display: inline-block; font-size: 12px; font-weight: 600; letter-spacing: 0.1em;
+  text-transform: uppercase; color: rgba(255,255,255,0.85); margin-bottom: 16px;
+}
+.wv-featured-card {
+  width: 100%; text-align: left; cursor: pointer;
+  background: var(--white); border: none; border-radius: var(--radius);
+  overflow: hidden; display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+  transition: var(--transition); font-family: var(--font-body);
+}
+.wv-featured-card:hover { transform: translateY(-2px); box-shadow: 0 4px 24px rgba(16,16,20,0.18); }
+.wv-featured-thumb { position: relative; min-height: 260px; overflow: hidden; }
+.wv-featured-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.wv-featured-body { padding: 36px; display: flex; flex-direction: column; justify-content: center; gap: 10px; }
+.wv-featured-title { font-family: var(--font-display); font-size: clamp(20px, 2.5vw, 28px); font-weight: 500; color: var(--dark); line-height: 1.2; margin-top: 4px; }
+.wv-featured-excerpt { font-size: 14px; color: var(--body-text); line-height: 1.65; }
+.wv-featured-more { font-size: 13px; font-weight: 600; color: var(--blue); display: inline-flex; align-items: center; gap: 6px; margin-top: auto; }
+
+/* Shared chips / meta */
+.wv-cat { display: inline-block; align-self: flex-start; font-size: 10px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: #1a7a5e; background: rgba(111,242,193,0.2); padding: 3px 10px; border-radius: 100px; }
+.wv-date { font-size: 12px; color: var(--grey-mid); margin: 0; }
+
+/* Play badge on any thumbnail */
+.wv-play-badge {
+  position: absolute; inset: 0; margin: auto;
+  width: 60px; height: 60px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(16,16,20,0.55); color: #fff; backdrop-filter: blur(2px);
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+.wv-play-badge svg { margin-left: 3px; }
+.wv-featured-card:hover .wv-play-badge,
+.wv-card:hover .wv-play-badge { background: var(--blue); transform: scale(1.08); }
+
+/* ─── New Videos grid ─────────────────────── */
+.wv-section-head { margin-bottom: 40px; }
+.wv-section-title { font-family: var(--font-display); font-size: 32px; font-weight: 600; color: var(--dark); }
+.wv-section-sub { font-size: 15px; color: var(--body-text); margin-top: 8px; }
+
+.wv-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.wv-card {
+  text-align: left; cursor: pointer; font-family: var(--font-body);
+  text-decoration: none; border-radius: var(--radius); overflow: hidden;
+  background: var(--white); border: 1px solid var(--card-border); padding: 0;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex; flex-direction: column;
+}
+.wv-card:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(16,16,20,0.12); }
+.wv-card-thumb { position: relative; width: 100%; aspect-ratio: 16/9; flex-shrink: 0; overflow: hidden; }
+.wv-card-body { padding: 20px 20px 24px; flex: 1; display: flex; flex-direction: column; gap: 8px; }
+.wv-card-title { font-size: 18px; font-weight: 500; color: var(--dark); line-height: 1.3; margin-top: 4px; }
+
+/* ─── Have an idea? CTA band ─────────────────────── */
+.wv-idea { background: var(--dark); position: relative; overflow: hidden; }
+.wv-idea::before {
+  content: '';
+  position: absolute;
+  bottom: -140px; left: -120px;
+  width: 480px; height: 480px;
+  background: radial-gradient(circle, rgba(111,242,193,0.16) 0%, transparent 70%);
+  pointer-events: none;
+}
+.wv-idea-inner {
+  position: relative; z-index: 1;
+  display: flex; flex-direction: row; align-items: center;
+  justify-content: space-between; gap: 48px; flex-wrap: wrap;
+}
+.wv-idea-badge {
+  display: inline-block; font-size: 12px; font-weight: 600; letter-spacing: 0.08em;
+  color: var(--dark); background: var(--mint); padding: 5px 14px; border-radius: 100px; margin-bottom: 16px;
+}
+.wv-idea-text .section-title { color: var(--white); margin-bottom: 12px; }
+.wv-idea-text p { font-size: 16px; color: rgba(255,255,255,0.75); max-width: 520px; line-height: 1.65; }
+.wv-idea-btns { display: flex; flex-direction: column; gap: 12px; align-items: stretch; }
+.wv-idea-btns .btn { padding: 16px 32px; font-size: 15px; text-align: center; justify-content: center; }
+.wv-btn-ghost { background: transparent; color: #fff; border: 1.5px solid rgba(255,255,255,0.35); }
+.wv-btn-ghost:hover { background: rgba(255,255,255,0.1); }
+
+/* ─── On-site player modal ─────────────────────── */
+.wv-modal-backdrop {
+  position: fixed; inset: 0; z-index: 1000;
+  background: rgba(8,8,11,0.82); backdrop-filter: blur(6px);
+  display: flex; align-items: center; justify-content: center; padding: 24px;
+  animation: wv-fade 0.18s ease;
+}
+@keyframes wv-fade { from { opacity: 0; } to { opacity: 1; } }
+.wv-modal {
+  position: relative; width: 100%; max-width: 960px;
+  background: var(--dark-card); border: 1px solid var(--dark-border);
+  border-radius: var(--radius); overflow: hidden;
+}
+.wv-modal-close {
+  position: absolute; top: 12px; right: 12px; z-index: 3;
+  width: 40px; height: 40px; border-radius: 50%; border: none; cursor: pointer;
+  background: rgba(16,16,20,0.6); color: #fff; font-size: 26px; line-height: 1;
+  display: flex; align-items: center; justify-content: center; transition: background 0.2s ease;
+}
+.wv-modal-close:hover { background: var(--blue); }
+.wv-modal-stage { position: relative; width: 100%; aspect-ratio: 16/9; background: #000; }
+.wv-modal-iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.wv-modal-poster { position: absolute; inset: 0; }
+.wv-modal-poster-overlay {
+  position: absolute; inset: 0; z-index: 1;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px;
+  text-align: center; padding: 24px; background: rgba(8,8,11,0.66);
+}
+.wv-soon-badge {
+  font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--dark); background: var(--mint); padding: 6px 16px; border-radius: 100px;
+}
+.wv-modal-poster-overlay p { color: rgba(255,255,255,0.85); font-size: 15px; max-width: 420px; line-height: 1.6; }
+.wv-modal-meta { padding: 20px 24px 24px; display: flex; flex-direction: column; gap: 8px; }
+.wv-modal-title { font-family: var(--font-display); font-size: 20px; font-weight: 500; color: var(--white); line-height: 1.3; }
+.wv-now-playing { font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--mint); }
+
+/* ─── Responsive ─────────────────────── */
+@media (max-width: 900px) {
+  .wv-grid { grid-template-columns: repeat(2, 1fr); }
+  .wv-featured-card { grid-template-columns: 1fr; }
+  .wv-featured-thumb { min-height: 0; aspect-ratio: 16/9; }
+}
+@media (max-width: 768px) {
+  .wv-idea-inner { flex-direction: column; align-items: center; text-align: center; }
+  .wv-idea-btns { width: 100%; }
+}
+@media (max-width: 560px) {
+  .wv-grid { grid-template-columns: 1fr; }
+}
