@@ -20,8 +20,8 @@ export interface VideoMeta {
 // Curated list, in display order. The 10 most impactful posts, categorized.
 // Pin is chosen by `pinnedSlug` below (not by position), so reordering is safe.
 export const curatedVideos: VideoMeta[] = [
-  { slug: 'why-every-business-needs-a-chief-ai-officer-leadership-trumps-technology', youtubeId: null },
-  { slug: '2026-ai-trends-5-game-changing-shifts-that-will-define-business-success', youtubeId: null },
+  { slug: 'why-every-business-needs-a-chief-ai-officer-leadership-trumps-technology', youtubeId: 'u2p_lBnW4BU' },
+  { slug: '2026-ai-trends-5-game-changing-shifts-that-will-define-business-success', youtubeId: 'zz3ppVLpnzw' },
   { slug: 'the-case-for-ai-co-ceos-and-ai-leadership-why-every-leader-needs-a-digital-decision-partner', youtubeId: null },
   { slug: 'video-3-0-ai-powered-video-communication-for-executives', youtubeId: null },
   { slug: 'turn-your-story-into-a-personal-brand-with-ai-agents-in-just-one-hour', youtubeId: null },
